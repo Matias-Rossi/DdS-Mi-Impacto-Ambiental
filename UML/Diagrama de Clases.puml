@@ -1,0 +1,80 @@
+@startuml DDS
+
+    class Organizacion {
+        razonSocial
+        tipo
+        ubicacionLLegada
+        Areas[]*
+        Miembros[]
+              
+        ubicacion()
+        clasificación()
+        aceptarVinculacion(miembro)
+    }
+
+    class Miembro{
+        nombre
+        apellido
+        tipoDoc
+        numDoc
+        susOrgonazaciones[]
+        susAreas[]*
+
+        registrarTrayecto(ubicacionOrigen,ubicacionLLegada,transporte) 
+        vincular(organizacion)
+    }
+
+    class Administrador{
+        confiugrarParametros(parametro,valor)
+        darAltaorganizacion(organizacion)
+        darDeAltaSectores(unSector, organizacion)
+        darDeAltaTransporte()
+        
+    }
+    abstract MedioDeTransporte{
+        tipo
+    }
+    class vehiculoParticular,{
+        tipo
+        combustible
+
+    }
+    class servicioContratado{
+        tipo
+        
+    }
+    class transportePublico{
+        tipo
+    }
+
+
+    
+
+    class Areas{
+        liquidarSueldo()
+        
+    }
+    class RelMiembroArea{
+        Miembro
+        Organizacion
+        area
+    }
+    
+
+    
+
+
+Organizacion "*"<--"*" Miembro
+MedioDeTransporte "*"<-- Miembro
+Organizacion "*"<-- Administrador
+MedioDeTransporte "*"<-- Administrador
+Miembro "*"<-- Administrador
+Areas "*"<-- Miembro
+Areas "*"<-- Organizacion
+MedioDeTransporte "*"<-- vehiculoParticular
+MedioDeTransporte "*"<-- servicioContratado
+MedioDeTransporte "*"<-- transportePublico
+
+
+
+@enduml
