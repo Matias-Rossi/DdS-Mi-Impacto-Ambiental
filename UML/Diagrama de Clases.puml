@@ -3,9 +3,10 @@
     class Organizacion {
         razonSocial
         tipo
+        clasificacion
         ubicacionLLegada
-        Areas[]*
-        Miembros[]
+        areas[]
+        miembros[]
               
         ubicacion()
         clasificación()
@@ -48,8 +49,6 @@
     }
 
 
-    
-
     class Areas{
         liquidarSueldo()
         
@@ -78,3 +77,43 @@ MedioDeTransporte "*"<-- transportePublico
 
 
 @enduml
+
+
+Entidades:
+
+- Organizacion 
+    -razon solcial
+    -Tipo: Gubernamental, ONG, Empresa, Institución
+    -Ubicacion
+    -Clasificacion: Ministerio, Universidad, Escuela, Empresa del sector primario, Empresa del sector secundario, etc.
+    -Areas
+    -Miembros
+
+
+- Agente sectorial (por ahora no tenemos nada)
+
+
+- Miembro de Org.
+    -nombre
+    -apellido
+    -tipo y nro Documento
+    -sus Organizaciones
+    -sus Areas
+    -Trayectos[]
+    
+-Trayecto (Tenemos duda de esto)
+    -tramos[]
+    
+
+-Tramo
+    -origen
+    -destino
+    -medioDeTransporte
+
+Entidades secundarias:
+
+
+-Administrador
+
+-MedioDeTransporte
+    -tipo 
