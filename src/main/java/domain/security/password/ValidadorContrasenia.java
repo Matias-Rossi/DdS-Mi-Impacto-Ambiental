@@ -7,7 +7,10 @@ import java.util.List;
 public class ValidadorContrasenia {
   private List<Validador> validadores = Arrays.asList(
       new ValidadorContraseniaFrecuente(),
-      new ValidadorContraseniaConMayuscula()
+      new ValidadorContraseniaConMayuscula(),
+      new ValidadorContraseniaConMinuscula(),
+      new ValidadorContraseniaLongitud(),
+      new ValidadorContraseniaConNumero()
       //TODO Agregar el resto de las verificaciones
   );
 
