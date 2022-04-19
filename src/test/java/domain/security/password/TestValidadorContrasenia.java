@@ -1,41 +1,48 @@
 package domain.security.password;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestValidadorContrasenia {
+  private static ValidadorContrasenia vc;
+
+  @BeforeEach
+  public void init() {
+    vc = new ValidadorContrasenia();
+  }
 
   @Test
+  @DisplayName("Contrasenia es válida")
   public void contraseniaValida() {
-    ValidadorContrasenia vc = new ValidadorContrasenia();
     assertTrue(vc.esContraseniaValida("disenioDeSistemas13"));
   }
 
   @Test
+  @DisplayName("Contrasenia no tiene mayúscula")
   public void contraseniaSinMayuscula() {
-    ValidadorContrasenia vc = new ValidadorContrasenia();
     assertFalse(vc.esContraseniaValida("disenodesistemas13"));
   }
 
   @Test
+  @DisplayName("Contrasenia no tiene minúscula")
   public void contraseniaSinMinuscula() {
-    ValidadorContrasenia vc = new ValidadorContrasenia();
     assertFalse(vc.esContraseniaValida("DISENIODESISTEMAS13"));
   }
 
   @Test
+  @DisplayName("Contrasenia no tiene número")
   public void contraseniaSinNumero() {
-    ValidadorContrasenia vc = new ValidadorContrasenia();
     assertFalse(vc.esContraseniaValida("disenioDeSistemas"));
   }
 
   @Test
+  @DisplayName("Contrasenia es muy corta")
   public void contraseniaCorta() {
-    ValidadorContrasenia vc = new ValidadorContrasenia();
     assertFalse(vc.esContraseniaValida("aB1"));
   }
-
 
 }
