@@ -11,7 +11,6 @@ public class ValidadorContrasenia {
       new ValidadorContraseniaConMinuscula(),
       new ValidadorContraseniaLongitud(),
       new ValidadorContraseniaConNumero()
-      //TODO Agregar el resto de las verificaciones
   );
 
   public boolean esContraseniaValida(String contrasenia) {
