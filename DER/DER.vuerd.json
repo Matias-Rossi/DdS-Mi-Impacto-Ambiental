@@ -3,13 +3,13 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -975.6124999999987,
-    "scrollLeft": -383.1999999999999,
-    "zoomLevel": 0.9,
+    "scrollTop": -562.6666666666653,
+    "scrollLeft": -430.00000000000085,
+    "zoomLevel": 0.3,
     "show": {
       "tableComment": false,
       "columnComment": false,
-      "columnDataType": false,
+      "columnDataType": true,
       "columnDefault": false,
       "columnAutoIncrement": false,
       "columnPrimaryKey": true,
@@ -49,7 +49,7 @@
           {
             "name": "Razón Social",
             "comment": "",
-            "dataType": "",
+            "dataType": "String",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -72,7 +72,7 @@
           {
             "name": "Tipo",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoOrg(ENUM)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -87,7 +87,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 98.03091430664062,
               "widthDefault": 60
             },
             "id": "cc71f2a6-4cce-428c-8fa6-218742a66edf"
@@ -95,7 +95,7 @@
           {
             "name": "Sectores",
             "comment": "",
-            "dataType": "",
+            "dataType": "List[Area(Class)]",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -110,7 +110,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 98.79786682128906,
               "widthDefault": 60
             },
             "id": "3a7303e9-687f-4ce8-bfea-05af906b42a2"
@@ -118,7 +118,7 @@
           {
             "name": "Localizacion ID (Organzacion)",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -137,13 +137,36 @@
               "widthDefault": 60
             },
             "id": "98ac2e06-edc9-4431-8c25-4834d8964592"
+          },
+          {
+            "name": "Clasificación",
+            "comment": "",
+            "dataType": "ClassOrg(Class)",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 77.2958984375,
+              "widthComment": 60,
+              "widthDataType": 95.82087707519531,
+              "widthDefault": 60
+            },
+            "id": "65157001-4ae5-4235-b916-58f86451693f"
           }
         ],
         "ui": {
           "active": false,
-          "left": 0,
-          "top": 509.3338,
-          "zIndex": 688,
+          "left": 24.8892,
+          "top": 503.1111,
+          "zIndex": 77,
           "widthName": 82.96391296386719,
           "widthComment": 60
         },
@@ -157,7 +180,7 @@
           {
             "name": "Tipo Doc",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoDoc(Enum)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -172,7 +195,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 95.28791809082031,
               "widthDefault": 60
             },
             "id": "5477c0a7-d471-4df4-96f2-bb9aaf0078b4"
@@ -180,7 +203,7 @@
           {
             "name": "Num Doc",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -203,7 +226,7 @@
           {
             "name": "Nombre",
             "comment": "",
-            "dataType": "",
+            "dataType": "String",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -226,7 +249,7 @@
           {
             "name": "Apellido",
             "comment": "",
-            "dataType": "",
+            "dataType": "String",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -249,7 +272,7 @@
           {
             "name": "Localizacion ID (Casa)",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -274,7 +297,7 @@
           "active": false,
           "left": 690.8,
           "top": 334.4,
-          "zIndex": 685,
+          "zIndex": 92,
           "widthName": 60,
           "widthComment": 60
         },
@@ -288,7 +311,7 @@
           {
             "name": "Sector",
             "comment": "",
-            "dataType": "",
+            "dataType": "Area(Class)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -303,7 +326,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 69.15791320800781,
               "widthDefault": 60
             },
             "id": "f326a175-6d07-45f1-b706-5bedd02c498e"
@@ -311,7 +334,7 @@
           {
             "name": "Num Doc",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -334,7 +357,7 @@
           {
             "name": "Razón Social",
             "comment": "",
-            "dataType": "",
+            "dataType": "String",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -357,7 +380,7 @@
           {
             "name": "Tipo Doc",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoDoc(Enum)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -372,7 +395,7 @@
               "pfk": false,
               "widthName": 60,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 95.28791809082031,
               "widthDefault": 60
             },
             "id": "74793294-907c-4fd7-99e2-eafa96c9e8c7"
@@ -380,9 +403,9 @@
         ],
         "ui": {
           "active": false,
-          "left": 414.3559,
-          "top": 428.3113,
-          "zIndex": 683,
+          "left": 344.756,
+          "top": 284.3113,
+          "zIndex": 313,
           "widthName": 60,
           "widthComment": 60
         },
@@ -396,7 +419,7 @@
           {
             "name": "ID Tramo",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -419,7 +442,7 @@
           {
             "name": "ID Trayecto (Trayecto)",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -438,36 +461,13 @@
               "widthDefault": 60
             },
             "id": "39182cab-4e2d-4089-807c-90d975ad9021"
-          },
-          {
-            "name": "MT",
-            "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "19068095-f59c-4c05-8e76-a2125be566e5"
           }
         ],
         "ui": {
           "active": false,
-          "left": 1008.567,
-          "top": 899.9991,
-          "zIndex": 943,
+          "left": 932.4781,
+          "top": 947.9989,
+          "zIndex": 309,
           "widthName": 60,
           "widthComment": 60
         },
@@ -481,7 +481,7 @@
           {
             "name": "ID Trayecto",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -504,7 +504,7 @@
           {
             "name": "Tipo Doc (Miembro)",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoDoc(Enum)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -519,7 +519,7 @@
               "pfk": false,
               "widthName": 122.19786071777344,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 95.28791809082031,
               "widthDefault": 60
             },
             "id": "37494f13-4def-4d33-b6d7-2301ad1a291c"
@@ -527,7 +527,7 @@
           {
             "name": "Num Doc (Miembro)",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -550,7 +550,7 @@
           {
             "name": "Localizacion ID (Origen)",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -573,7 +573,7 @@
           {
             "name": "Localizacion ID (Destino)",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -592,27 +592,11 @@
               "widthDefault": 60
             },
             "id": "7e6e07b9-563f-429b-992d-a4525b1e2206"
-          }
-        ],
-        "ui": {
-          "active": false,
-          "left": 883.2454,
-          "top": 648.4891,
-          "zIndex": 689,
-          "widthName": 60,
-          "widthComment": 60
-        },
-        "visible": true,
-        "id": "7d01ec12-148d-4f41-b4d1-65e6e4a7da88"
-      },
-      {
-        "name": "Localizacion",
-        "comment": "",
-        "columns": [
+          },
           {
-            "name": "Ubicación",
+            "name": "Descripción",
             "comment": "",
-            "dataType": "",
+            "dataType": "String",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -625,7 +609,46 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 61.8779296875,
+              "widthName": 73.49989318847656,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "80de8ffd-2709-438c-92dc-4e0088feb8c8"
+          }
+        ],
+        "ui": {
+          "active": false,
+          "left": 1063.6454,
+          "top": 576.4891,
+          "zIndex": 104,
+          "widthName": 60,
+          "widthComment": 60
+        },
+        "visible": true,
+        "id": "7d01ec12-148d-4f41-b4d1-65e6e4a7da88"
+      },
+      {
+        "name": "Ubicación",
+        "comment": "",
+        "columns": [
+          {
+            "name": "Calle",
+            "comment": "",
+            "dataType": "String",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
               "widthComment": 60,
               "widthDataType": 60,
               "widthDefault": 60
@@ -635,7 +658,7 @@
           {
             "name": "Localizacion ID",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -654,27 +677,119 @@
               "widthDefault": 60
             },
             "id": "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
+          },
+          {
+            "name": "Numeración",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 77.29592895507812,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "fc7d2f96-0a17-40d6-b72e-cf7887c116ad"
+          },
+          {
+            "name": "CODPostal",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 66.89593505859375,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "af5cb7db-e60e-43a8-bd8f-b6b509a6d5ca"
+          },
+          {
+            "name": "Provincia",
+            "comment": "",
+            "dataType": "String",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "42fea88f-188f-4923-bd9a-625eed056e8e"
+          },
+          {
+            "name": "Localidad",
+            "comment": "",
+            "dataType": "String",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": false
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": false,
+              "pfk": false,
+              "widthName": 60.20094299316406,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "7ff2b837-121b-44fc-9137-275527926922"
           }
         ],
         "ui": {
           "active": false,
-          "left": 514.6666,
-          "top": 598.9349,
-          "zIndex": 686,
-          "widthName": 75.81390380859375,
+          "left": 513.3338,
+          "top": 527.8238,
+          "zIndex": 302,
+          "widthName": 61.8779296875,
           "widthComment": 60
         },
         "visible": true,
         "id": "d0c8e7a2-c230-476f-9486-1fed36b54826"
       },
       {
-        "name": "Tipo Transporte Particular",
+        "name": "Viaje en Medio Transporte Particular",
         "comment": "",
         "columns": [
           {
             "name": "Tipo Transporte Particular",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoTransporteParticular(Enum)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -689,7 +804,7 @@
               "pfk": false,
               "widthName": 160.56080627441406,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 197.0518035888672,
               "widthDefault": 60
             },
             "id": "f2b884e8-2f9a-4b77-8e69-c8b3f876ee1f"
@@ -697,7 +812,7 @@
           {
             "name": "Tipo Combustible",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoCombustible(Enum)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -712,61 +827,15 @@
               "pfk": false,
               "widthName": 109.0418701171875,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 148.91285705566406,
               "widthDefault": 60
             },
             "id": "27fc62bc-a78b-416d-8429-73445d8b17c2"
           },
           {
-            "name": "Inicio",
+            "name": "ID Tramo",
             "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "6891ae57-5425-42c9-8267-61f41cb194d0"
-          },
-          {
-            "name": "LLegada",
-            "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "2844fdd1-2b9d-431b-97c3-250334edec27"
-          },
-          {
-            "name": "MT",
-            "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -784,28 +853,74 @@
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "e0aa2bf7-a9a7-43e3-ad84-c73253f717ae"
+            "id": "d1dfb76f-9a76-4403-ab7f-ab50f6f6217e"
+          },
+          {
+            "name": "Localizacion ID(Inicio)",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 134.1448211669922,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "b74f98f4-71af-42fa-a887-2cee7ae20787"
+          },
+          {
+            "name": "Localizacion ID(Llegada)",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 148.96482849121094,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "225b29df-9055-4db9-9780-9e42b759d425"
           }
         ],
         "ui": {
           "active": false,
-          "left": 486.6116,
-          "top": 1464.4456,
-          "zIndex": 974,
-          "widthName": 160.56080627441406,
+          "left": 343.5447,
+          "top": 1084.1339,
+          "zIndex": 312,
+          "widthName": 223.71470642089844,
           "widthComment": 60
         },
         "visible": true,
         "id": "b20fe506-0d56-4fb0-a0d8-acd114d4f50c"
       },
       {
-        "name": "Tipo Transporte Servicio Contratado",
+        "name": "Viaje en Medio Transporte Servicio Contratado",
         "comment": "",
         "columns": [
           {
             "name": "Tipo Transporte Servicio Contratado",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoTransporteContratado(Class)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -820,61 +935,15 @@
               "pfk": false,
               "widthName": 221.38772583007812,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 203.1097869873047,
               "widthDefault": 60
             },
             "id": "92462cfd-f367-4d7e-8bc7-f0dbd5e8a4d2"
           },
           {
-            "name": "Inicio",
+            "name": "ID Tramo",
             "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "44438e08-3016-495a-a549-3d23c9ca079d"
-          },
-          {
-            "name": "LLegada",
-            "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "7c219370-31a3-4cb3-9eda-bb330f6eb21f"
-          },
-          {
-            "name": "MT",
-            "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -892,28 +961,74 @@
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "38ca60b9-98a2-4b2b-930c-0bc172959f9b"
+            "id": "96284c9a-5dc4-4888-b2ea-d9747c28c2a3"
+          },
+          {
+            "name": "Localizacion ID(Inicio)",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 134.1448211669922,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "9e466bbc-cbe6-488e-bcfd-d01007bce0a5"
+          },
+          {
+            "name": "Localizacion ID(Llegada)",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 148.96482849121094,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "b4102446-30f8-46ab-9845-ac054a0c46b0"
           }
         ],
         "ui": {
           "active": false,
-          "left": 162.311,
-          "top": 1182.413,
-          "zIndex": 975,
-          "widthName": 221.38772583007812,
+          "left": 0,
+          "top": 757.6571,
+          "zIndex": 311,
+          "widthName": 284.5416259765625,
           "widthComment": 60
         },
         "visible": true,
         "id": "8932df53-9e87-4a20-b342-de8d1e0176c8"
       },
       {
-        "name": "Paradas",
+        "name": "Medios de Transporte Público",
         "comment": "",
         "columns": [
           {
             "name": "Num par",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -934,32 +1049,9 @@
             "id": "ceafb259-f91a-483d-ae4a-723dcfa91f38"
           },
           {
-            "name": "Dir",
-            "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "43800993-377f-4d71-aab1-7c8344400e2a"
-          },
-          {
             "name": "Tipo Transporte Público",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoTransportePúblico(Class)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -974,7 +1066,7 @@
               "pfk": false,
               "widthName": 146.40382385253906,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 178.7607879638672,
               "widthDefault": 60
             },
             "id": "0b343c8b-d059-44f8-86bf-aabe7ca21c84"
@@ -982,7 +1074,7 @@
           {
             "name": "Línea",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1001,27 +1093,50 @@
               "widthDefault": 60
             },
             "id": "a30d59e6-e844-480e-923a-8ab044296d41"
+          },
+          {
+            "name": "Localizacion ID",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 93.09088134765625,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "e92eae46-d9df-463e-89ca-c8feb96d9cab"
           }
         ],
         "ui": {
           "active": false,
-          "left": 1082.3668,
-          "top": 1416.4243,
-          "zIndex": 978,
-          "widthName": 60,
+          "left": 1335.9666,
+          "top": 806.7793,
+          "zIndex": 308,
+          "widthName": 183.23277282714844,
           "widthComment": 60
         },
         "visible": true,
         "id": "336d5cb8-bc9c-4a8b-be5d-3c0e70105031"
       },
       {
-        "name": "Medio de Transporte Público",
+        "name": "Viaje en Medio de Transporte Público",
         "comment": "",
         "columns": [
           {
             "name": "Num par (Inicio)",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1044,7 +1159,7 @@
           {
             "name": "Num par (Fin)",
             "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1067,30 +1182,7 @@
           {
             "name": "ID Tramo",
             "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "cbf9b092-0d10-4917-baa7-e78538499a86"
-          },
-          {
-            "name": "MT",
-            "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1108,67 +1200,28 @@
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "5d1d41d3-8912-4174-9199-f2f2f6d06c9c"
+            "id": "58e0ab9d-137b-4956-a38b-708c79cdadb9"
           }
         ],
         "ui": {
           "active": false,
-          "left": 1071.6888,
-          "top": 1171.08,
-          "zIndex": 949,
-          "widthName": 177.0057830810547,
+          "left": 1471.3332,
+          "top": 1161.0353,
+          "zIndex": 304,
+          "widthName": 228.2646942138672,
           "widthComment": 60
         },
         "visible": true,
         "id": "8220eef4-2c29-4127-a45c-f62613a2bd75"
       },
       {
-        "name": "Medio De Transporte",
-        "comment": "",
-        "columns": [
-          {
-            "name": "MT",
-            "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": true,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": true,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "772771a5-6c93-4a10-b41d-cc429c3fdc18"
-          }
-        ],
-        "ui": {
-          "active": false,
-          "left": 829.6437,
-          "top": 1072.858,
-          "zIndex": 973,
-          "widthName": 130.41384887695312,
-          "widthComment": 60
-        },
-        "visible": true,
-        "id": "3db63dd1-bef7-4db0-ba59-5c806f89e5c6"
-      },
-      {
-        "name": "Medio de Transporte Ecológico",
+        "name": "Viaje en Medio de Transporte Ecológico",
         "comment": "",
         "columns": [
           {
             "name": "Tipo medio de Transporte Ecológico",
             "comment": "",
-            "dataType": "",
+            "dataType": "TipoTransporteEcológico(Enum)",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1183,61 +1236,15 @@
               "pfk": false,
               "widthName": 220.49072265625,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 196.1938018798828,
               "widthDefault": 60
             },
             "id": "1c078326-a3f3-47f0-b5c7-dca5ce6e0b50"
           },
           {
-            "name": "Inicio",
+            "name": "ID Tramo",
             "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "58234cad-eb78-4178-a605-3265e8f9ec01"
-          },
-          {
-            "name": "Llegada",
-            "comment": "",
-            "dataType": "",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": false
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": false,
-              "pfk": false,
-              "widthName": 60,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "04416704-810a-4f42-b560-209615833be1"
-          },
-          {
-            "name": "MT",
-            "comment": "",
-            "dataType": "",
+            "dataType": "Int",
             "default": "",
             "option": {
               "autoIncrement": false,
@@ -1255,15 +1262,61 @@
               "widthDataType": 60,
               "widthDefault": 60
             },
-            "id": "1f351238-abbc-4a2f-b727-8db83e10a85e"
+            "id": "f3462609-1b69-45c1-aa32-99398bb5b4ce"
+          },
+          {
+            "name": "Localizacion ID(Inicio)",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 134.1448211669922,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "a7883d40-aa56-4b8d-b717-3cfd531c0af3"
+          },
+          {
+            "name": "Localizacion ID(Llegada)",
+            "comment": "",
+            "dataType": "Int",
+            "default": "",
+            "option": {
+              "autoIncrement": false,
+              "primaryKey": false,
+              "unique": false,
+              "notNull": true
+            },
+            "ui": {
+              "active": false,
+              "pk": false,
+              "fk": true,
+              "pfk": false,
+              "widthName": 148.96482849121094,
+              "widthComment": 60,
+              "widthDataType": 60,
+              "widthDefault": 60
+            },
+            "id": "bcfe0072-f1a4-4369-93de-0054d91041e4"
           }
         ],
         "ui": {
           "active": false,
-          "left": 750.5333,
-          "top": 1362.1016,
-          "zIndex": 958,
-          "widthName": 190.3047637939453,
+          "left": 894.9778,
+          "top": 1172.4128,
+          "zIndex": 310,
+          "widthName": 241.5636749267578,
           "widthComment": 60
         },
         "visible": true,
@@ -1288,7 +1341,7 @@
             "51a9db7c-fb8a-4c95-b3d8-78e06658a9cf"
           ],
           "x": 690.8,
-          "y": 420.15,
+          "y": 463.025,
           "direction": "left"
         },
         "end": {
@@ -1297,8 +1350,8 @@
             "74793294-907c-4fd7-99e2-eafa96c9e8c7",
             "84985506-7a7b-47ad-b730-7db8158362ba"
           ],
-          "x": 545.3668100341797,
-          "y": 503.8113,
+          "x": 576.054828125,
+          "y": 359.8113,
           "direction": "right"
         },
         "constraintName": "fk_miembro_to_puesto",
@@ -1314,8 +1367,8 @@
           "columnIds": [
             "68a8bbf3-9466-44c4-893b-9a39221078f0"
           ],
-          "x": 234.8807830810547,
-          "y": 547.0838,
+          "x": 363.56784990234377,
+          "y": 631.7361000000001,
           "direction": "right"
         },
         "end": {
@@ -1323,9 +1376,9 @@
           "columnIds": [
             "07e448f7-277f-4e25-b705-849abfb2b085"
           ],
-          "x": 414.3559,
-          "y": 503.8113,
-          "direction": "left"
+          "x": 460.4054140625,
+          "y": 435.3113,
+          "direction": "bottom"
         },
         "constraintName": "fk_organizacion_to_puesto",
         "visible": true,
@@ -1341,9 +1394,9 @@
             "5477c0a7-d471-4df4-96f2-bb9aaf0078b4",
             "51a9db7c-fb8a-4c95-b3d8-78e06658a9cf"
           ],
-          "x": 830.5248764038085,
-          "y": 505.9,
-          "direction": "bottom"
+          "x": 977.3877532958984,
+          "y": 420.15,
+          "direction": "right"
         },
         "end": {
           "tableId": "7d01ec12-148d-4f41-b4d1-65e6e4a7da88",
@@ -1351,9 +1404,9 @@
             "37494f13-4def-4d33-b6d7-2301ad1a291c",
             "25a6cdec-c0b8-4973-ab21-07136b7d3cf5"
           ],
-          "x": 985.3782964233399,
-          "y": 648.4891,
-          "direction": "top"
+          "x": 1063.6454,
+          "y": 608.4891,
+          "direction": "left"
         },
         "constraintName": "fk_miembro_to_trayecto",
         "visible": true,
@@ -1368,8 +1421,8 @@
           "columnIds": [
             "d7b2609c-f4c1-475f-9d5b-8fac185e73cd"
           ],
-          "x": 985.3782964233399,
-          "y": 819.9891,
+          "x": 1215.92225546875,
+          "y": 768.4891,
           "direction": "bottom"
         },
         "end": {
@@ -1377,9 +1430,9 @@
           "columnIds": [
             "39182cab-4e2d-4089-807c-90d975ad9021"
           ],
-          "x": 1102.0354219360352,
-          "y": 899.9991,
-          "direction": "top"
+          "x": 1184.4149438720704,
+          "y": 975.4989,
+          "direction": "right"
         },
         "constraintName": "fk_trayecto_to_tramo",
         "visible": true,
@@ -1394,8 +1447,8 @@
           "columnIds": [
             "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
           ],
-          "x": 514.6666,
-          "y": 653.9349,
+          "x": 513.3338,
+          "y": 623.8238,
           "direction": "left"
         },
         "end": {
@@ -1403,8 +1456,8 @@
           "columnIds": [
             "98ac2e06-edc9-4431-8c25-4834d8964592"
           ],
-          "x": 234.8807830810547,
-          "y": 622.5838,
+          "x": 363.56784990234377,
+          "y": 545.9861000000001,
           "direction": "right"
         },
         "constraintName": "fk_localizacion_to_organizacion",
@@ -1420,18 +1473,18 @@
           "columnIds": [
             "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
           ],
-          "x": 660.7574813476563,
-          "y": 617.2682333333332,
-          "direction": "right"
+          "x": 618.8792406738281,
+          "y": 527.8238,
+          "direction": "top"
         },
         "end": {
           "tableId": "cb67199d-a024-4b5a-98d6-ac37fc357854",
           "columnIds": [
             "83d72e02-f923-4ca9-8d1d-fb4e5798dbf9"
           ],
-          "x": 737.3749588012695,
-          "y": 505.9,
-          "direction": "bottom"
+          "x": 690.8,
+          "y": 377.275,
+          "direction": "left"
         },
         "constraintName": "fk_localizacion_to_miembro",
         "visible": true,
@@ -1446,8 +1499,8 @@
           "columnIds": [
             "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
           ],
-          "x": 660.7574813476563,
-          "y": 653.9348999999999,
+          "x": 724.4246813476562,
+          "y": 559.8238,
           "direction": "right"
         },
         "end": {
@@ -1455,8 +1508,8 @@
           "columnIds": [
             "06d8e1e9-db68-486a-a865-b52ed552e14e"
           ],
-          "x": 883.2454,
-          "y": 691.3641,
+          "x": 1063.6454,
+          "y": 672.4891,
           "direction": "left"
         },
         "constraintName": "fk_localizacion_to_trayecto",
@@ -1472,8 +1525,8 @@
           "columnIds": [
             "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
           ],
-          "x": 660.7574813476563,
-          "y": 690.6015666666665,
+          "x": 724.4246813476562,
+          "y": 623.8238,
           "direction": "right"
         },
         "end": {
@@ -1481,8 +1534,8 @@
           "columnIds": [
             "7e6e07b9-563f-429b-992d-a4525b1e2206"
           ],
-          "x": 883.2454,
-          "y": 777.1141,
+          "x": 1063.6454,
+          "y": 736.4891,
           "direction": "left"
         },
         "constraintName": "fk_localizacion_to_trayecto",
@@ -1498,18 +1551,18 @@
           "columnIds": [
             "ceafb259-f91a-483d-ae4a-723dcfa91f38"
           ],
-          "x": 1132.2177559631348,
-          "y": 1416.4243,
-          "direction": "top"
+          "x": 1431.7577529541015,
+          "y": 957.7793,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "8220eef4-2c29-4127-a45c-f62613a2bd75",
           "columnIds": [
             "4b973b0a-8c34-4c35-95bf-269132c47dbe"
           ],
-          "x": 1122.6902457702636,
-          "y": 1322.08,
-          "direction": "bottom"
+          "x": 1662.7817206604004,
+          "y": 1161.0353,
+          "direction": "top"
         },
         "constraintName": "fk_paradas_to_..",
         "visible": true,
@@ -1524,18 +1577,18 @@
           "columnIds": [
             "ceafb259-f91a-483d-ae4a-723dcfa91f38"
           ],
-          "x": 1231.9196678894043,
-          "y": 1416.4243,
-          "direction": "top"
+          "x": 1623.3400588623047,
+          "y": 957.7793,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "8220eef4-2c29-4127-a45c-f62613a2bd75",
           "columnIds": [
             "660ac6cd-7fa4-477d-a542-d897789523c6"
           ],
-          "x": 1224.693137310791,
-          "y": 1322.08,
-          "direction": "bottom"
+          "x": 1535.1493735534668,
+          "y": 1161.0353,
+          "direction": "top"
         },
         "constraintName": "fk_paradas_to_..",
         "visible": true,
@@ -1546,130 +1599,286 @@
         "relationshipType": "OneOnly",
         "startRelationshipType": "Dash",
         "start": {
-          "tableId": "3db63dd1-bef7-4db0-ba59-5c806f89e5c6",
-          "columnIds": [
-            "772771a5-6c93-4a10-b41d-cc429c3fdc18"
-          ],
-          "x": 987.0575488769531,
-          "y": 1095.233,
-          "direction": "right"
-        },
-        "end": {
           "tableId": "a11a734e-c66a-4174-bbd9-6224416ca09c",
           "columnIds": [
-            "19068095-f59c-4c05-8e76-a2125be566e5"
+            "e5bcfb73-a6cd-43ca-84af-bec8688acb40"
           ],
-          "x": 1102.0354219360352,
-          "y": 1030.4991,
-          "direction": "bottom"
-        },
-        "constraintName": "fk_medio de transporte_to_tramo",
-        "visible": true,
-        "id": "995c0742-ff7c-4ee5-a115-d14698b4f213"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroOne",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "3db63dd1-bef7-4db0-ba59-5c806f89e5c6",
-          "columnIds": [
-            "772771a5-6c93-4a10-b41d-cc429c3fdc18"
-          ],
-          "x": 987.0575488769531,
-          "y": 1139.983,
-          "direction": "right"
-        },
-        "end": {
-          "tableId": "8220eef4-2c29-4127-a45c-f62613a2bd75",
-          "columnIds": [
-            "5d1d41d3-8912-4174-9199-f2f2f6d06c9c"
-          ],
-          "x": 1071.6888,
-          "y": 1246.58,
-          "direction": "left"
-        },
-        "constraintName": "fk_medio de transporte_to_medio de transporte público",
-        "visible": true,
-        "id": "1cde60bf-b392-473e-8767-125e1fd89c9a"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroOne",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "3db63dd1-bef7-4db0-ba59-5c806f89e5c6",
-          "columnIds": [
-            "772771a5-6c93-4a10-b41d-cc429c3fdc18"
-          ],
-          "x": 908.3506244384765,
-          "y": 1162.358,
-          "direction": "bottom"
-        },
-        "end": {
-          "tableId": "6620e314-2927-478d-8c0d-46ace2781a42",
-          "columnIds": [
-            "1f351238-abbc-4a2f-b727-8db83e10a85e"
-          ],
-          "x": 887.278661328125,
-          "y": 1362.1016,
-          "direction": "top"
-        },
-        "constraintName": "fk_medio de transporte_to_medio de transporte ecológico",
-        "visible": true,
-        "id": "7d27f947-0378-4702-ac49-6ecaa215c011"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroOne",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "3db63dd1-bef7-4db0-ba59-5c806f89e5c6",
-          "columnIds": [
-            "772771a5-6c93-4a10-b41d-cc429c3fdc18"
-          ],
-          "x": 829.6437,
-          "y": 1095.233,
+          "x": 932.4781,
+          "y": 1030.4989,
           "direction": "left"
         },
         "end": {
           "tableId": "8932df53-9e87-4a20-b342-de8d1e0176c8",
           "columnIds": [
-            "38ca60b9-98a2-4b2b-930c-0bc172959f9b"
+            "96284c9a-5dc4-4888-b2ea-d9747c28c2a3"
           ],
-          "x": 436.69872583007816,
-          "y": 1257.913,
+          "x": 482.4975128173828,
+          "y": 883.4904333333335,
           "direction": "right"
         },
-        "constraintName": "fk_medio de transporte_to_tipo transporte servicio contratado",
+        "constraintName": "fk_tramo_to_viaje en medio transporte servicio contratado",
         "visible": true,
-        "id": "f86e9a22-f77a-4b89-b560-53412b02eaa5"
+        "id": "914a4d81-7cd3-4a3a-91f4-6c81283231bf"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "a11a734e-c66a-4174-bbd9-6224416ca09c",
+          "columnIds": [
+            "e5bcfb73-a6cd-43ca-84af-bec8688acb40"
+          ],
+          "x": 932.4781,
+          "y": 975.4989,
+          "direction": "left"
+        },
+        "end": {
+          "tableId": "b20fe506-0d56-4fb0-a0d8-acd114d4f50c",
+          "columnIds": [
+            "d1dfb76f-9a76-4403-ab7f-ab50f6f6217e"
+          ],
+          "x": 759.1573098632812,
+          "y": 1169.8839,
+          "direction": "right"
+        },
+        "constraintName": "fk_tramo_to_viaje en medio transporte particular",
+        "visible": true,
+        "id": "b4b50f45-ae12-497f-a543-08d8e7c20c84"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "a11a734e-c66a-4174-bbd9-6224416ca09c",
+          "columnIds": [
+            "e5bcfb73-a6cd-43ca-84af-bec8688acb40"
+          ],
+          "x": 1184.4149438720704,
+          "y": 1030.4989,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "8220eef4-2c29-4127-a45c-f62613a2bd75",
+          "columnIds": [
+            "58e0ab9d-137b-4956-a38b-708c79cdadb9"
+          ],
+          "x": 1471.3332,
+          "y": 1226.2853,
+          "direction": "left"
+        },
+        "constraintName": "fk_tramo_to_viaje en medio de transporte público",
+        "visible": true,
+        "id": "a2b9ef27-54af-47c1-9fa0-73df7b03bb43"
+      },
+      {
+        "identification": false,
+        "relationshipType": "OneOnly",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "a11a734e-c66a-4174-bbd9-6224416ca09c",
+          "columnIds": [
+            "e5bcfb73-a6cd-43ca-84af-bec8688acb40"
+          ],
+          "x": 1058.4465219360352,
+          "y": 1057.9989,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "6620e314-2927-478d-8c0d-46ace2781a42",
+          "columnIds": [
+            "f3462609-1b69-45c1-aa32-99398bb5b4ce"
+          ],
+          "x": 1132.3200622680665,
+          "y": 1172.4128,
+          "direction": "top"
+        },
+        "constraintName": "fk_tramo_to_viaje en medio de transporte ecológico",
+        "visible": true,
+        "id": "e16079ac-5100-4bac-9e3f-8d5d0e6641d1"
       },
       {
         "identification": false,
         "relationshipType": "ZeroOne",
         "startRelationshipType": "Dash",
         "start": {
-          "tableId": "3db63dd1-bef7-4db0-ba59-5c806f89e5c6",
+          "tableId": "d0c8e7a2-c230-476f-9486-1fed36b54826",
           "columnIds": [
-            "772771a5-6c93-4a10-b41d-cc429c3fdc18"
+            "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
           ],
-          "x": 829.6437,
-          "y": 1139.983,
-          "direction": "left"
+          "x": 530.9247067789713,
+          "y": 719.8238,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "8932df53-9e87-4a20-b342-de8d1e0176c8",
+          "columnIds": [
+            "9e466bbc-cbe6-488e-bcfd-d01007bce0a5"
+          ],
+          "x": 482.4975128173828,
+          "y": 782.8237666666668,
+          "direction": "right"
+        },
+        "constraintName": "fk_ubicación_to_viaje en medio transporte servicio contratado",
+        "visible": true,
+        "id": "e873dd68-cdc7-4b7f-b52c-a3411733515a"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "d0c8e7a2-c230-476f-9486-1fed36b54826",
+          "columnIds": [
+            "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
+          ],
+          "x": 566.1065203369141,
+          "y": 719.8238,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "8932df53-9e87-4a20-b342-de8d1e0176c8",
+          "columnIds": [
+            "b4102446-30f8-46ab-9845-ac054a0c46b0"
+          ],
+          "x": 482.4975128173828,
+          "y": 833.1571000000001,
+          "direction": "right"
+        },
+        "constraintName": "fk_ubicación_to_viaje en medio transporte servicio contratado",
+        "visible": true,
+        "id": "ce86c05f-2d64-4b28-81a0-2c77a1a5a5ad"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "d0c8e7a2-c230-476f-9486-1fed36b54826",
+          "columnIds": [
+            "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
+          ],
+          "x": 601.2883338948568,
+          "y": 719.8238,
+          "direction": "bottom"
         },
         "end": {
           "tableId": "b20fe506-0d56-4fb0-a0d8-acd114d4f50c",
           "columnIds": [
-            "e0aa2bf7-a9a7-43e3-ad84-c73253f717ae"
+            "b74f98f4-71af-42fa-a887-2cee7ae20787"
           ],
-          "x": 593.392003137207,
-          "y": 1464.4456,
+          "x": 447.4478524658203,
+          "y": 1084.1339,
           "direction": "top"
         },
-        "constraintName": "fk_medio de transporte_to_tipo transporte particular",
+        "constraintName": "fk_ubicación_to_viaje en medio transporte particular",
         "visible": true,
-        "id": "e0ada3bf-748e-4328-aac9-2768375a615f"
+        "id": "49768dc6-5e94-4fd4-84d2-1f04403ca95e"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "d0c8e7a2-c230-476f-9486-1fed36b54826",
+          "columnIds": [
+            "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
+          ],
+          "x": 636.4701474527996,
+          "y": 719.8238,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "b20fe506-0d56-4fb0-a0d8-acd114d4f50c",
+          "columnIds": [
+            "225b29df-9055-4db9-9780-9e42b759d425"
+          ],
+          "x": 655.2541573974609,
+          "y": 1084.1339,
+          "direction": "top"
+        },
+        "constraintName": "fk_ubicación_to_viaje en medio transporte particular",
+        "visible": true,
+        "id": "f18dcec7-151c-4eaa-8b5c-a272daa1e3b2"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "d0c8e7a2-c230-476f-9486-1fed36b54826",
+          "columnIds": [
+            "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
+          ],
+          "x": 671.6519610107423,
+          "y": 719.8238,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "6620e314-2927-478d-8c0d-46ace2781a42",
+          "columnIds": [
+            "a7883d40-aa56-4b8d-b717-3cfd531c0af3"
+          ],
+          "x": 894.9778,
+          "y": 1285.6628,
+          "direction": "left"
+        },
+        "constraintName": "fk_ubicación_to_viaje en medio de transporte ecológico",
+        "visible": true,
+        "id": "3de4ce7c-173e-469d-b41a-1492af08bf78"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "d0c8e7a2-c230-476f-9486-1fed36b54826",
+          "columnIds": [
+            "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
+          ],
+          "x": 706.833774568685,
+          "y": 719.8238,
+          "direction": "bottom"
+        },
+        "end": {
+          "tableId": "6620e314-2927-478d-8c0d-46ace2781a42",
+          "columnIds": [
+            "bcfe0072-f1a4-4369-93de-0054d91041e4"
+          ],
+          "x": 894.9778,
+          "y": 1210.1628,
+          "direction": "left"
+        },
+        "constraintName": "fk_ubicación_to_viaje en medio de transporte ecológico",
+        "visible": true,
+        "id": "07a0cebd-3366-4406-9736-c0776a30b6d0"
+      },
+      {
+        "identification": false,
+        "relationshipType": "ZeroOne",
+        "startRelationshipType": "Dash",
+        "start": {
+          "tableId": "d0c8e7a2-c230-476f-9486-1fed36b54826",
+          "columnIds": [
+            "1e07ac15-6a25-4b0c-9b5a-9f425be4aab2"
+          ],
+          "x": 724.4246813476562,
+          "y": 687.8238,
+          "direction": "right"
+        },
+        "end": {
+          "tableId": "336d5cb8-bc9c-4a8b-be5d-3c0e70105031",
+          "columnIds": [
+            "e92eae46-d9df-463e-89ca-c8feb96d9cab"
+          ],
+          "x": 1335.9666,
+          "y": 882.2793,
+          "direction": "left"
+        },
+        "constraintName": "fk_ubicación_to_medios de transporte público",
+        "visible": true,
+        "id": "b2d63ce4-7e1e-4784-8e31-3b073d1fef1c"
       }
     ]
   }
