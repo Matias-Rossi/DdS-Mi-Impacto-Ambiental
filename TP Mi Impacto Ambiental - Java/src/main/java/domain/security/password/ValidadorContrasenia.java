@@ -1,24 +1,48 @@
-package domain.security.password;
+package main.java.domain.security.password;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 
 public class ValidadorContrasenia {
-  private List<Validador> validadores = Arrays.asList(
-      new ValidadorContraseniaFrecuente(),
-      new ValidadorContraseniaConMayuscula(),
-      new ValidadorContraseniaConMinuscula(),
-      new ValidadorContraseniaLongitud(),
-      new ValidadorContraseniaConNumero()
+  static public ValidadorCriterioDecorator completo = new ValidadorCriterioMayuscula(
+      new ValidadorCriterioLongitud(
+          new ValidadorCriterioFrecuente(
+              new ValidadorCriterioNumero(
+                  new ValidadorCriterioMinuscula(
+                      new ValidadorCriterioBase()
+                  )
+              )
+          )
+      )
   );
 
-  public boolean esContraseniaValida(String contrasenia) {
-    for(Validador val : validadores) {
-      if(!val.validar(contrasenia)) return false;
+  //TODO Para fines de testing (desp sacar)
+  public static void main(String[] args) throws IOException {
+    System.out.print("Ingrese una contrasenia: ");
+    BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
+    String contrasenia = lector.readLine();
+
+    final boolean resultadoValidaciones = completo.validar(contrasenia);
+
+    if(resultadoValidaciones) {
+      System.out.println("Contrasenia valida");
+    } else {
+      System.out.println("Contrasenia invalida");
     }
-    return true;
+        
   }
 
+  public boolean validar(String contrasenia, ValidadorCriterio criterio){
+    final boolean resultadoValidaciones = criterio.validar(contrasenia);
 
+    if(resultadoValidaciones) {
+      System.out.println("Contrasenia valida");
+    } else {
+      System.out.println("Contrasenia invalida");
+    }
+
+    return resultadoValidaciones;
+  }
 }

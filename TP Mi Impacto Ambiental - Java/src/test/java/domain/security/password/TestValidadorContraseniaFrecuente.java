@@ -1,21 +1,25 @@
-package domain.security.password;
+package test.java.domain.security.password;
 
-import org.junit.jupiter.api.Test;
+import main.java.domain.security.password.ValidadorContrasenia;
+import main.java.domain.security.password.ValidadorCriterio;
+import main.java.domain.security.password.ValidadorCriterioBase;
+import main.java.domain.security.password.ValidadorCriterioFrecuente;
+import org.testng.annotations.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestValidadorContraseniaFrecuente {
+  private final ValidadorCriterio vcf = new ValidadorCriterioFrecuente(new ValidadorCriterioBase());
+  private final ValidadorContrasenia vc = new ValidadorContrasenia();
 
   @Test
   public void contraseniaValida() {
-    ValidadorContraseniaFrecuente vcf = new ValidadorContraseniaFrecuente();  //Hacer uno unico para los 2 tests?
-    assertTrue(vcf.validar("contraseniaParaDiseñoDeSistemas"));
+    assertTrue(vc.validar("contraseniaParaDiseñoDeSistemas", vcf));
   }
 
   @Test
   public void contraseniaInvalida() {
-    ValidadorContraseniaFrecuente vcf = new ValidadorContraseniaFrecuente();
-    assertFalse(vcf.validar("johnny1"));
+    assertFalse(vc.validar("johnny1", vcf));
   }
 }
