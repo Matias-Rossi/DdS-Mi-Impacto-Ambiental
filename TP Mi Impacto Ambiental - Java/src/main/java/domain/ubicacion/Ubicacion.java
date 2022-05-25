@@ -5,5 +5,6 @@ public class Ubicacion {
     private Integer numeracion;
     private Integer codPostal;
     private Provincia provincia;
+    private String municipalidad;
     private String localidad;
 }

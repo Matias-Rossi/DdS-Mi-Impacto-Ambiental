@@ -18,6 +18,8 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
+
+
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
@@ -33,6 +35,12 @@
       <scope>provided</scope>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>5.2.2</version>
+    </dependency>
 
   </dependencies>
 

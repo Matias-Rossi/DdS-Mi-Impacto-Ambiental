@@ -8,24 +8,19 @@ public class Organizacion{
     private List<Area> areas;
     private Clasificacion clasificacion;
     private Ubicacion ubicacion;
-    private List<Miembro> miembrosPendientes;
+    private Importador moduloImportador;
+    private domain.perfil.Organizacion Organizacion;  //TODO ver que onda this.organizacion
 
-    public void darAltaArea(Area nuevaArea){
+    public void darAltaArea(String nombreArea){
+        Area nuevaArea = new Area(nombreArea, this.Organizacion );
         this.areas.add(nuevaArea);
-    }
-
-    public void aceptarEmpleado(Area area, Miembro nuevoMiembro){
-        area.agregarMiembro(nuevoMiembro);
-        //TODO como sacar de miembros pendientes al nuevo miembro
-    }
-
-    public void solicituAceptacion(Miembro miembro){
-        this.miembrosPendientes.add(miembro);
     }
 
     public double calcularHC(){
         return 1.0;
+    }
+    public void cargarMediciones(String nombreArchivo){
+        moduloImportador.importarDatos(nombreArchivo);
 
     }
 }
-

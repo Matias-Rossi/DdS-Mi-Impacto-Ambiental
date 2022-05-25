@@ -6,20 +6,25 @@ public class Miembro {
     private TipoDocumento tipoDocumento;
     private Integer numeroDocumento;
     private List<Area> areas;
-    //TODO private list<Troyacto> trayectos;
+    private domain.perfil.Miembro Miembro; //TODO ver que onda con el Miembro
+    //TODO private list<Trayecto> trayectos;
+    //TODO private list<Tramos> tramosCompartidosAAceptar;
 
-
-    public void darseAltaEnOrganizacion(Organizacion nuevaOrg){ //Falta agregar el area, como realaciono el empleado con el area??
-        nuevaOrg.solicituAceptacion(this.Miembro);
+    public void darseAltaEnOrganizacion(Area area){
+        area.agregarAMiembroPendiente(this.Miembro);
     }
 
     public double calcularHC(){
+        //TODO calcularHC
         return 1.0;
-
     }
 
     public Organizacion decirOrganizacion(Area area){
-        return area.getOrganizacion(); //TODO corregir encapsulamiento
-
+        return area.getOrganizacion(); //TODO consultar si es necesario que el miembro diga su organizacion, si lo evitamos mejoramos el encapsulamiento
     }
+
+    //public void gestionarTramosCompartidos(Tramo  tramosCompartido, Trayecto miTrayecto ){
+        //TODO gestionarTramosCompartidos
+    //}
+
 }
