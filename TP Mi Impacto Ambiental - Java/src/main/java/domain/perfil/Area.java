@@ -1,5 +1,7 @@
 package domain.perfil;
 
+import java.util.List;
+
 public class Area {
     private String nombre;
     private Organizacion organizacion;

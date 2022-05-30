@@ -1,5 +1,7 @@
 package domain.perfil;
 
+import java.util.List;
+
 public class Miembro {
     private String nombre;
     private String apellido;

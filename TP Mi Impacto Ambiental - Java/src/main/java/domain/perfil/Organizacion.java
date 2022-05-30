@@ -2,6 +2,8 @@ package domain.perfil;
 
 import domain.ubicacion.Ubicacion;
 
+import java.util.List;
+
 public class Organizacion{
     private String razonSocial;
     private Tipo tipo;
@@ -20,7 +22,7 @@ public class Organizacion{
         return 1.0;
     }
     public void cargarMediciones(String nombreArchivo){
-        moduloImportador.importarDatos(nombreArchivo);
+        Importador.importarDatos(nombreArchivo);
 
     }
 }
