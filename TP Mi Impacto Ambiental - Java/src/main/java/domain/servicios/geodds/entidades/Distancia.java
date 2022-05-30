@@ -6,10 +6,10 @@ public class Distancia {
   @Getter
   private double valor;
   @Getter
-  private String distancia;
+  private String unidad;
 
 
   public String texto() {
-    return valor + " " + distancia;
+    return valor + " " + unidad;
   }
 }
