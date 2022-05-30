@@ -4,7 +4,7 @@ import main.java.domain.security.password.ValidadorContrasenia;
 import main.java.domain.security.password.ValidadorCriterio;
 import main.java.domain.security.password.ValidadorCriterioBase;
 import main.java.domain.security.password.ValidadorCriterioFrecuente;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
