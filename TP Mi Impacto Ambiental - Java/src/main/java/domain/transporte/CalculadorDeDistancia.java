@@ -1,2 +1,4 @@
-package domain.transporte;public interface CalculadorDeDistancia {
+package domain.transporte;
+public interface CalculadorDeDistancia {
+    private float calcularDistancia( Ubicacion inicio , Ubicacion final ){}
 }
