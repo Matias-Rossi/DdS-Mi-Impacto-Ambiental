@@ -1,2 +1,4 @@
-package domain.transporte;public class TipoTransporteContratado {
+package domain.transporte;
+public class TipoTransporteContratado{
+    private string tipo;
 }

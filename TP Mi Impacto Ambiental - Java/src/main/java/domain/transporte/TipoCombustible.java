@@ -1,2 +1,7 @@
-package domain.transporte;public enum TipoCombustible {
+package domain.transporte;
+public enum TipoCombustible{
+    GNC,
+    NAFTA,
+    ELECTRICO,
+    GASOIL;
 }
