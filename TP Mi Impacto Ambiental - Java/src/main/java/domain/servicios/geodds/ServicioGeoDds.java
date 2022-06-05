@@ -11,9 +11,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import static java.net.URLEncoder.encode;
@@ -21,6 +23,7 @@ import static java.net.URLEncoder.encode;
 public class ServicioGeoDds implements CalculadorDeDistancia {
   private static ServicioGeoDds instancia = null;
   private static final String urlAPI = "https://ddstpa.com.ar/api/";
+  private static String token;
   private final Retrofit retrofit;
 
   private ServicioGeoDds() {
@@ -28,9 +31,22 @@ public class ServicioGeoDds implements CalculadorDeDistancia {
         .baseUrl(urlAPI)
         .addConverterFactory(GsonConverterFactory.create())
         .build();
+
+    Properties prop = new Properties();
+    ClassLoader loader = Thread.currentThread().getContextClassLoader();
+    InputStream stream = loader.getResourceAsStream("tokens.properties");
+    try {
+      prop.load(stream);
+      token = "Bearer ".concat(prop.getProperty("geoDdsToken"));
+    } catch(IOException e) {
+      token = "";
+    }
+
+
+
   }
 
-  public static ServicioGeoDds getInstancia() {
+  public static ServicioGeoDds getInstancia() throws IOException {
     if(instancia == null) {
       instancia = new ServicioGeoDds();
     }
@@ -39,7 +55,7 @@ public class ServicioGeoDds implements CalculadorDeDistancia {
 
   public List<Provincia> listadoProvincias() throws IOException {
     GeoDdsAPI geoDdsAPI = this.retrofit.create(GeoDdsAPI.class);
-    Call<List<Provincia>> requestProvinciasArgentinas = geoDdsAPI.getProvincias();
+    Call<List<Provincia>> requestProvinciasArgentinas = geoDdsAPI.getProvincias(token);
     Response<List<Provincia>> responseProvinciasArgentinas = requestProvinciasArgentinas.execute();
     return responseProvinciasArgentinas.body();
   }
@@ -51,7 +67,7 @@ public class ServicioGeoDds implements CalculadorDeDistancia {
 
   public List<Municipio> listadoMunicipios(int idProvincia) throws IOException {
     GeoDdsAPI geoDdsAPI = this.retrofit.create(GeoDdsAPI.class);
-    Call<List<Municipio>> requestMunicipiosArgentinas = geoDdsAPI.getMunicipios(idProvincia);
+    Call<List<Municipio>> requestMunicipiosArgentinas = geoDdsAPI.getMunicipios(token, idProvincia);
     Response<List<Municipio>> responseMunicipiosArgentinas = requestMunicipiosArgentinas.execute();
     return responseMunicipiosArgentinas.body();
   }
@@ -63,7 +79,7 @@ public class ServicioGeoDds implements CalculadorDeDistancia {
 
   public List<Localidad> listadoLocalidades(int idMunicipio) throws IOException {
     GeoDdsAPI geoDdsAPI = this.retrofit.create(GeoDdsAPI.class);
-    Call<List<Localidad>> requestLocalidadesArgentinas = geoDdsAPI.getLocalidades(idMunicipio);
+    Call<List<Localidad>> requestLocalidadesArgentinas = geoDdsAPI.getLocalidades(token, idMunicipio);
     Response<List<Localidad>> responseLocalidadesArgentinas = requestLocalidadesArgentinas.execute();
     return responseLocalidadesArgentinas.body();
   }
@@ -87,7 +103,7 @@ public class ServicioGeoDds implements CalculadorDeDistancia {
     calleDestino = encode(calleDestino, "UTF-8");
 
     GeoDdsAPI geoDdsAPI = this.retrofit.create(GeoDdsAPI.class);
-    Call<Distancia> requestDistancia = geoDdsAPI.getDistancia(localidadOrigenId, calleOrigen, alturaOrigen, localidadDestinoId, calleDestino, alturaDestino);
+    Call<Distancia> requestDistancia = geoDdsAPI.getDistancia(token, localidadOrigenId, calleOrigen, alturaOrigen, localidadDestinoId, calleDestino, alturaDestino);
     Response<Distancia> responseDistancia = requestDistancia.execute();
     return responseDistancia.body();
   }
@@ -98,7 +114,7 @@ public class ServicioGeoDds implements CalculadorDeDistancia {
     return mapLocalidades(idMunicipio).get(loc.toUpperCase(Locale.ROOT));
   }
 
-  public Distancia distanciaEntrePuntos(Ubicacion origen, Ubicacion destino) throws IOException {
+  public Distancia getDistanciaEntrePuntos(Ubicacion origen, Ubicacion destino) throws IOException {
     int idLocalidadOrigen = getIdLocalidad(
         origen.getProvincia().toString().toUpperCase(Locale.ROOT),
         origen.getMunicipalidad().toUpperCase(Locale.ROOT),
@@ -119,7 +135,7 @@ public class ServicioGeoDds implements CalculadorDeDistancia {
   }
 
   public double calcularDistancia(Ubicacion origen, Ubicacion destino) throws IOException {
-    return distanciaEntrePuntos(origen, destino).getValor();
+    return getDistanciaEntrePuntos(origen, destino).getValor();
   }
 
 }

@@ -28,3 +28,10 @@ target/**
 # IJ files
 *.iml
 .idea/**
+TP Mi Impacto Ambiental - Java/src/main/resources/tokens.properties
+
+TP Mi Impacto Ambiental - Java/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+
+TP Mi Impacto Ambiental - Java/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+
+TP Mi Impacto Ambiental - Java/target/classes/domain/security/password/10k-most-common.txt
