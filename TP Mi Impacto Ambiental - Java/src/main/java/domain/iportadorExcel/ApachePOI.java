@@ -17,18 +17,16 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import static domain.iportadorExcel.TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
 
 public class ApachePOI {
-  //public static List <ActividadBase> listaDeFilas = new ArrayList<ActividadBase>();
   static DataFormatter formatter = new DataFormatter();
 
-  public static void main(String[] args){
+  public static void importarCargas(String path){
     try{
 
-      FileInputStream f = new FileInputStream( "C:/Users/pedro/OneDrive/Escritorio/file/fechas.xlsx");
-      XSSFWorkbook libro = new XSSFWorkbook(f);
-      XSSFSheet hoja = libro.getSheetAt(0);
+      FileInputStream excellFile = new FileInputStream( path);
+      XSSFWorkbook excell = new XSSFWorkbook(excellFile);
+      XSSFSheet hoja = excell.getSheetAt(0);
       Iterator<Row> filas = hoja.iterator();
       Iterator<Cell> celdas;
-
       Row fila;
       Cell celda;
 
@@ -111,7 +109,7 @@ public class ApachePOI {
 
         listaDeCargas.add(cargaSegunActividad);
       }
-      f.close();
+      excellFile.close();
     } catch (
         IOException ex){
       System.out.println(ex.getMessage());

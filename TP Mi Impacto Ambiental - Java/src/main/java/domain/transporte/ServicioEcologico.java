@@ -11,6 +11,7 @@ public class ServicioEcologico {
         return calculadorAdapter.calcularDistancia(inicio,fin);
     }
 
+    public TipoTransporte decirTipoTransporte() {return TipoTransporte.TIPO_ECOLOGICO;}
     private int indiceHC(){
         return 1;
     }

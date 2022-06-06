@@ -12,6 +12,7 @@ public class TransportePublico implements Transporte {
         return 1;
     }
 
+    public TipoTransporte decirTipoTransporte() {return TipoTransporte.TIPO_PUBLICO;}
     @Override
     public double calcularDistancia(Ubicacion inicio, Ubicacion fin) {
 

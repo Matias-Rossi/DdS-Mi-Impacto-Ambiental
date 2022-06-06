@@ -8,4 +8,7 @@ public class ActividadGenerica extends ActividadBase implements CargaSegunActivi
     this.valor = valor;
     this.tipoConsumo=tipoConsumo;
   }
+  public double calcularHC(){
+    return 2;
+  }
 }

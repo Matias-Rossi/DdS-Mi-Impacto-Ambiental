@@ -10,6 +10,8 @@ public class ServicioContratado {
         return calculadorAdapter.calcularDistancia(inicio,fin);
     }
 
+    public TipoTransporte decirTipoTransporte() {return TipoTransporte.TIPO_CONTRATADO;}
+
     private int indiceHC(){
         return 1;
     }

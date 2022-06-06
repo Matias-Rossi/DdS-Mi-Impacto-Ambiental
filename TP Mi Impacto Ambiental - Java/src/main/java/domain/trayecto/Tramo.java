@@ -1,6 +1,7 @@
 package domain.trayecto;
 
 import domain.perfil.Miembro;
+import domain.transporte.TipoTransporte;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
 
@@ -20,7 +21,9 @@ public class Tramo {
         return this.HCAdapterAdapter.calcularHC();
     }
     private void compartirTramo(Miembro miembro){
-        miembro.recibirSolicitud(this);
+        if ((medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_CONTRATADO) || (medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_PARTICULAR)){
+            miembro.recibirSolicitud(this);
+        }else System.err.println("ESTE TRANSPORTE NO PUEDE SER COMPARTIDO");
     }
     public void sumarIntegrante(){
         this.integrantes++;

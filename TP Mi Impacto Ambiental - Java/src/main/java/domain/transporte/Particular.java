@@ -11,6 +11,7 @@ public class Particular {
         return calculadorAdapter.calcularDistancia(inicio, fin);
     }
 
+    public TipoTransporte decirTipoTransporte() {return TipoTransporte.TIPO_PARTICULAR;}
     private int indiceHC(){
         return 1;
     }

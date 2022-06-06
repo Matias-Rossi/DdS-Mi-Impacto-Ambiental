@@ -13,4 +13,7 @@ public class ActividadLogistica  extends ActividadBase implements CargaSegunActi
     this.distanciaMediaRecorrida = distanciaMediaRecorrida;
     this.pesoTotalTransportado =  pesoTotalTransportado;
   }
+  public double calcularHC(){
+    return 1;
+  }
 }
