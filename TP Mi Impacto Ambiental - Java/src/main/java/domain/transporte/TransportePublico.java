@@ -1,13 +1,21 @@
 package domain.transporte;
+
+import domain.ubicacion.Ubicacion;
+
 public class TransportePublico implements Transporte {
     private TransportePublico tipo;
     private Linea linea;
+    private CalculadorDeDistancia calculadorAdapter;
 
     public int indiceHC(){
 
         return 1;
     }
-    public int calcularDistancia(Ubicacion inicio,Ubicacion fin){
-        linea.calcularDistancia(inicio,fin);
+
+    @Override
+    public double calcularDistancia(Ubicacion inicio, Ubicacion fin) {
+
+        return calculadorAdapter.calcularDistancia(inicio, fin);
     }
+
 }

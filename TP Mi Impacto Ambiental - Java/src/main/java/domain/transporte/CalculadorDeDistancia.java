@@ -1,4 +1,7 @@
 package domain.transporte;
+
+import domain.ubicacion.Ubicacion;
+
 public interface CalculadorDeDistancia {
-    private float calcularDistancia( Ubicacion inicio , Ubicacion final ){}
+    public double calcularDistancia(Ubicacion origen, Ubicacion destino);
 }

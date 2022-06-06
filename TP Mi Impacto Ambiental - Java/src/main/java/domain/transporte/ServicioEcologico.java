@@ -1,11 +1,14 @@
 package domain.transporte;
-]public class ServicioEcologico {
+
+import domain.ubicacion.Ubicacion;
+
+public class ServicioEcologico {
     private TipoEcologico tipo;
 
     private CalculadorDeDistancia calculadorAdapter;
 
-    public float calcularDistancia(Ubicacion inicio, Ubicacion fin){
-        calculadorAdapter.calcularDistancia(incio,fin);
+    public double calcularDistancia(Ubicacion inicio, Ubicacion fin){
+        return calculadorAdapter.calcularDistancia(inicio,fin);
     }
 
     private int indiceHC(){

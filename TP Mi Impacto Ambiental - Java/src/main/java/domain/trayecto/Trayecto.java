@@ -4,6 +4,8 @@ import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
 import org.apache.commons.collections4.iterators.ArrayListIterator;
 
+import java.util.List;
+
 public class Trayecto {
     private String descripcion;
     private List<Tramo> tramos;

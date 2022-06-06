@@ -3,6 +3,8 @@ package domain.perfil;
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;
 
+import java.util.List;
+
 public class Miembro {
     private String nombre;
     private String apellido;
@@ -11,7 +13,7 @@ public class Miembro {
     private List<Area> areas;
     private domain.perfil.Miembro Miembro; //TODO ver que onda con el Miembro
     private List<Trayecto> trayectos;
-    private list<Tramos> tramosCompartidosAAceptar;
+    private List<Tramo> tramosCompartidosAAceptar;
 
     public void darseAltaEnOrganizacion(Area area){
         area.agregarAMiembroPendiente(this.Miembro);
@@ -39,6 +41,8 @@ public class Miembro {
     }
 
     private Trayecto generarTrayecto(String descripcion){
-        trayectos.add(new Trayecto(descripcion));
+        Trayecto nuevoTrayecto = new Trayecto(descripcion);
+        trayectos.add(nuevoTrayecto);
+        return nuevoTrayecto;
     }
 }
