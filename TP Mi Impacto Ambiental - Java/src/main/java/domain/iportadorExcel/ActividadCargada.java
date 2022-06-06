@@ -1,5 +1,5 @@
 package domain.iportadorExcel;
 
-public interface CargaSegunActividad {
+public interface ActividadCargada {
     public double calcularHC();
 }

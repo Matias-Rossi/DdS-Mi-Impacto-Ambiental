@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.apache.poi.ddf.NullEscherSerializationListener;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -19,10 +17,12 @@ import static domain.iportadorExcel.TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESID
 public class ApachePOI {
   static DataFormatter formatter = new DataFormatter();
 
-  public static void importarCargas(String path){
-    try{
+  public static List<ActividadCargada> importarCargas(String path) {
+    int cantidadDeValoresDeLogistica = 4;
+    List<ActividadCargada> listaDeCargas = null;
+    try {
 
-      FileInputStream excellFile = new FileInputStream( path);
+      FileInputStream excellFile = new FileInputStream(path);
       XSSFWorkbook excell = new XSSFWorkbook(excellFile);
       XSSFSheet hoja = excell.getSheetAt(0);
       Iterator<Row> filas = hoja.iterator();
@@ -32,22 +32,21 @@ public class ApachePOI {
 
       TipoActividad valorTipoActividad;
       TipoConsumo valorTipoConsumo;
-      double valor=0;
+      double valor = 0;
       TipoPeriodicidad valorTipoPeriodicidad;
       String valorPeriodoDeImputacion;
-      TipoProductoTransportado valorTipoProductoTransportado=null;
-      TipoTransporteUtilizado valorTipoTransporteUtilizado=null;
-      double valorDistanciaMedia=0;
-      double valorPesoTotal=0;
-      CargaSegunActividad cargaSegunActividad;
-      List<CargaSegunActividad> listaDeCargas=new ArrayList<CargaSegunActividad>();
-
+      TipoProductoTransportado valorTipoProductoTransportado = null;
+      TipoTransporteUtilizado valorTipoTransporteUtilizado = null;
+      double valorDistanciaMedia = 0;
+      double valorPesoTotal = 0;
+      ActividadCargada actividadCargada;
+      listaDeCargas = new ArrayList<ActividadCargada>();
 
 
       filas.next();
       filas.next();
 
-      while(filas.hasNext()){
+      while (filas.hasNext()) {
         fila = filas.next();
         celdas = fila.cellIterator();
 
@@ -57,39 +56,39 @@ public class ApachePOI {
         celda = celdas.next();
         valorTipoConsumo = TipoConsumo.valueOf(celda.getStringCellValue());
 
-        if(valorTipoActividad==LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS){
-          for (int n=0;n<4;n++){
+        if (valorTipoActividad == LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS) {
+          for (int n = 0; n < cantidadDeValoresDeLogistica; n++) {
             celda = celdas.next();
-            switch (valorTipoConsumo){
-              case PRODUCTO_TRANSPORTADO:{
-                valorTipoProductoTransportado=TipoProductoTransportado.valueOf(celda.getStringCellValue());
+            switch (valorTipoConsumo) {
+              case PRODUCTO_TRANSPORTADO: {
+                valorTipoProductoTransportado = TipoProductoTransportado.valueOf(celda.getStringCellValue());
                 break;
               }
-              case MEDIO_DE_TRANSPORTE:{
-                valorTipoTransporteUtilizado=TipoTransporteUtilizado.valueOf(celda.getStringCellValue());
+              case MEDIO_DE_TRANSPORTE: {
+                valorTipoTransporteUtilizado = TipoTransporteUtilizado.valueOf(celda.getStringCellValue());
                 break;
               }
-              case DISTANCIA_MEDIA:{
-                valorDistanciaMedia=celda.getNumericCellValue();
+              case DISTANCIA_MEDIA: {
+                valorDistanciaMedia = celda.getNumericCellValue();
                 break;
               }
-              case PESO_TOTAL:{
-                valorPesoTotal=celda.getNumericCellValue();
+              case PESO_TOTAL: {
+                valorPesoTotal = celda.getNumericCellValue();
                 break;
               }
               default: {
                 break;
               }
             }
-            if(n<3){
-              fila=filas.next();
+            if (n < cantidadDeValoresDeLogistica - 1) {
+              fila = filas.next();
               celdas = fila.cellIterator();
               celda = celdas.next();
               celda = celdas.next();
               valorTipoConsumo = TipoConsumo.valueOf(celda.getStringCellValue());
             }
           }
-        }else{
+        } else {
           celda = celdas.next();
           valor = celda.getNumericCellValue();
         }
@@ -98,23 +97,24 @@ public class ApachePOI {
         celda = celdas.next();
         valorTipoPeriodicidad = TipoPeriodicidad.valueOf(celda.getStringCellValue());
 
+
         celda = celdas.next();
         valorPeriodoDeImputacion = formatter.formatCellValue(celda);
 
 
-        if(valorTipoActividad==LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS)
-          cargaSegunActividad=new ActividadLogistica(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, valorTipoPeriodicidad, valorPeriodoDeImputacion);
-          else
-            cargaSegunActividad=new ActividadGenerica(valorTipoActividad,valorTipoConsumo,valor,valorTipoPeriodicidad,valorPeriodoDeImputacion);
+        if (valorTipoActividad == LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS)
+          actividadCargada = new ActividadLogisticaCargada(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, valorTipoPeriodicidad, valorPeriodoDeImputacion);
+        else
+          actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, valorTipoPeriodicidad, valorPeriodoDeImputacion);
 
-        listaDeCargas.add(cargaSegunActividad);
+        listaDeCargas.add(actividadCargada);
+
       }
       excellFile.close();
     } catch (
-        IOException ex){
+            IOException ex) {
       System.out.println(ex.getMessage());
     }
+    return listaDeCargas;
   }
-
-
 }

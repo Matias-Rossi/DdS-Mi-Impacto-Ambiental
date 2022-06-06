@@ -1,13 +1,13 @@
 package domain.perfil;
 
-import domain.iportadorExcel.CargaSegunActividad;
+import domain.iportadorExcel.ActividadCargada;
 import domain.ubicacion.Ubicacion;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Organizacion{
-    private List<CargaSegunActividad> actividadesCargadas= new ArrayList<CargaSegunActividad>();
+    private List<ActividadCargada> actividadesCargadas= new ArrayList<ActividadCargada>();
     private String razonSocial;
     private Tipo tipo;
     private List<Area> areas= new ArrayList<Area>();
