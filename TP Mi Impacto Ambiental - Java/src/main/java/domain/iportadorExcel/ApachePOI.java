@@ -94,10 +94,6 @@ public class ApachePOI {
         }else{
           celda = celdas.next();
           valor = celda.getNumericCellValue();
-          valorTipoProductoTransportado = null;
-          valorTipoTransporteUtilizado = null;
-          valorDistanciaMedia = 0;
-          valorPesoTotal = 0;
         }
 
 

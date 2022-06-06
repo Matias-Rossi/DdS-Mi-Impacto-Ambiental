@@ -6,6 +6,8 @@ public abstract class ActividadBase {
   this.actividad=actividad;
   this.periodicidad=periodicidad;
   this.periodicidadDeImputacion=periodicidadDeImputacion;
+  System.out.println("SE CREA UNA CLASE");
+  System.out.println(actividad);
   }
   private TipoActividad actividad;
   private TipoPeriodicidad periodicidad;
