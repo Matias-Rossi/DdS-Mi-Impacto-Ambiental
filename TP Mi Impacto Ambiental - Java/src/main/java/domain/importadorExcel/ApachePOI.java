@@ -17,9 +17,9 @@ import static domain.importadorExcel.TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESI
 public class ApachePOI {
   static DataFormatter formatter = new DataFormatter();
 
-  public static List<ActividadCargada> importarCargas(String path) {
+  public static List<ActividadBase> importarCargas(String path) {
     int cantidadDeValoresDeLogistica = 4;
-    List<ActividadCargada> listaDeCargas = null;
+    List<ActividadBase> listaDeCargas = null;
     try {
 
       FileInputStream excellFile = new FileInputStream(path);
@@ -39,8 +39,8 @@ public class ApachePOI {
       TipoTransporteUtilizado valorTipoTransporteUtilizado = null;
       double valorDistanciaMedia = 0;
       double valorPesoTotal = 0;
-      ActividadCargada actividadCargada;
-      listaDeCargas = new ArrayList<ActividadCargada>();
+      ActividadBase actividadCargada;
+      listaDeCargas = new ArrayList<ActividadBase>();
 
 
       filas.next();
@@ -107,7 +107,10 @@ public class ApachePOI {
         else
           actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, valorTipoPeriodicidad, valorPeriodoDeImputacion);
 
+
         listaDeCargas.add(actividadCargada);
+
+
 
       }
       excellFile.close();
@@ -115,6 +118,6 @@ public class ApachePOI {
             IOException ex) {
       System.out.println(ex.getMessage());
     }
-    return listaDeCargas;
+   return listaDeCargas;
   }
 }

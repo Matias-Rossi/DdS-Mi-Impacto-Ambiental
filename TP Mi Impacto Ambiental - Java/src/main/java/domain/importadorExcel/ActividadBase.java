@@ -12,4 +12,8 @@ public abstract class ActividadBase {
   private TipoActividad actividad;
   private TipoPeriodicidad periodicidad;
   private String periodicidadDeImputacion;
+
+  public double calcularHC(){
+    return 0;
+  }
 }

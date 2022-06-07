@@ -1,6 +1,6 @@
 package domain.importadorExcel;
 
-public class ActividadLogisticaCargada extends ActividadBase implements ActividadCargada {
+public class ActividadLogisticaCargada extends ActividadBase {
 
   TipoProductoTransportado tipoProductoTransportado;
   TipoTransporteUtilizado medioDeTransporte;
@@ -18,7 +18,10 @@ public class ActividadLogisticaCargada extends ActividadBase implements Activida
     System.out.println(pesoTotalTransportado);
 
   }
+
+  @Override
   public double calcularHC(){
     return 1;
   }
+
 }

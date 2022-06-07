@@ -1,6 +1,6 @@
 package domain.importadorExcel;
 
-public class ActividadGenericaCargada extends ActividadBase implements ActividadCargada {
+public class ActividadGenericaCargada extends ActividadBase {
   double valor;
   TipoConsumo tipoConsumo;
   public ActividadGenericaCargada(TipoActividad tipoActividad, TipoConsumo tipoConsumo, double valor, TipoPeriodicidad tipoPeriodicidad, String periodicidadDeImputacion) {
@@ -10,6 +10,8 @@ public class ActividadGenericaCargada extends ActividadBase implements Actividad
     System.out.println(valor);
     System.out.println(tipoConsumo);
   }
+
+  @Override
   public double calcularHC(){
     return 2;
   }
