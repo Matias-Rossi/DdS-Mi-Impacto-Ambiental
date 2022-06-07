@@ -1,4 +1,4 @@
-package main.java.domain.security.password;
+package domain.security.password;
 
 public abstract class ValidadorCriterioDecorator implements ValidadorCriterio{
   protected ValidadorCriterio tempValidador;

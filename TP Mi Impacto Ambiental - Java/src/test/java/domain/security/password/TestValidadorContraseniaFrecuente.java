@@ -1,9 +1,9 @@
-package test.java.domain.security.password;
+package domain.security.password;
 
-import main.java.domain.security.password.ValidadorContrasenia;
-import main.java.domain.security.password.ValidadorCriterio;
-import main.java.domain.security.password.ValidadorCriterioBase;
-import main.java.domain.security.password.ValidadorCriterioFrecuente;
+import domain.security.password.ValidadorContrasenia;
+import domain.security.password.ValidadorCriterio;
+import domain.security.password.ValidadorCriterioBase;
+import domain.security.password.ValidadorCriterioFrecuente;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -1,10 +1,6 @@
-package main.java.domain.security.password;
+package domain.security.password;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class ValidadorCriterioFrecuente extends ValidadorCriterioDecorator {
 
@@ -15,15 +11,26 @@ public class ValidadorCriterioFrecuente extends ValidadorCriterioDecorator {
 
   @Override
   public boolean validar(String contrasenia) {
-    
+
     //Intenta abrir archivo de contrasenias, si falla retorna false
     FileInputStream fstream;
+    String PATH_A_CONTRASENIAS = null; //TODO: Pasarlo al .properties
     try {
-      String PATH_A_CONTRASENIAS = "TP Mi Impacto Ambiental - Java/src/main/java/domain/security/password/10k-most-common.txt";
+      PATH_A_CONTRASENIAS = "src/main/resources/10k-most-common.txt";
       fstream = new FileInputStream(PATH_A_CONTRASENIAS);
     } catch (FileNotFoundException e) {
       e.printStackTrace();
       System.out.println("Error comprobando fortaleza de la contrasenia");
+
+      File f = new File(PATH_A_CONTRASENIAS);
+      if(!f.exists()) {
+        System.out.println("El archivo no existe");
+      } else {
+        if(!f.canRead()) {
+          System.out.println("El archivo no puede ser leido");
+        }
+      }
+
       tempValidador.validar(contrasenia);
       return false;
     }
@@ -31,7 +38,7 @@ public class ValidadorCriterioFrecuente extends ValidadorCriterioDecorator {
 
     //Lectura linea a linea de contrasenias del archivo especificado en PATH_A_CONTRASENIAS
     String linea;
-    while(true) {
+    while (true) {
       try {
         if ((linea = br.readLine()) != null) {
           //Buscando coincidencias

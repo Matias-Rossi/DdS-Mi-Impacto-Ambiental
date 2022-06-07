@@ -1,4 +1,4 @@
-package main.java.domain.security.password;
+package domain.security.password;
 
 import java.io.BufferedReader;
 import java.io.IOException;

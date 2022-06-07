@@ -1,6 +1,6 @@
-package test.java.domain.security.password;
+package domain.security.password;
 
-import main.java.domain.security.password.ValidadorContrasenia;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
