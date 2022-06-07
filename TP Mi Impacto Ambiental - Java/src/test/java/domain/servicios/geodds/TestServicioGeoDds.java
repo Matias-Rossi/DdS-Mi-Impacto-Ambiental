@@ -13,6 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestServicioGeoDds {
+
   @Test
   public void testProvincias() throws IOException {
     List<Provincia> provincias = ServicioGeoDds.getInstancia().listadoProvincias();
@@ -66,4 +67,5 @@ public class TestServicioGeoDds {
     );
     assertEquals("KM", distancia.getUnidad());
   }
+
 }

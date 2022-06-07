@@ -12,11 +12,6 @@ public class ActividadLogisticaCargada extends ActividadBase {
     this.medioDeTransporte = tipoTransporteUtilizado;
     this.distanciaMediaRecorrida = distanciaMediaRecorrida;
     this.pesoTotalTransportado =  pesoTotalTransportado;
-    System.out.println(tipoProductoTransportado);
-    System.out.println(tipoTransporteUtilizado);
-    System.out.println(distanciaMediaRecorrida);
-    System.out.println(pesoTotalTransportado);
-
   }
 
   @Override

@@ -7,8 +7,6 @@ public class ActividadGenericaCargada extends ActividadBase {
     super(tipoActividad,tipoPeriodicidad,periodicidadDeImputacion);
     this.valor = valor;
     this.tipoConsumo=tipoConsumo;
-    System.out.println(valor);
-    System.out.println(tipoConsumo);
   }
 
   @Override

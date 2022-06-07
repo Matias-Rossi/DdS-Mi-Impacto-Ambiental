@@ -5,7 +5,7 @@ import java.util.List;
 public class Area {
     private String nombre;
     private Organizacion organizacion;
-    private List<Miembro> miembros;
+    private List<Miembro> miembros ;
     private List<Miembro> miembrosPendientes;
 
     public Area(String nombreArea, Organizacion nombreOrganizacion) {

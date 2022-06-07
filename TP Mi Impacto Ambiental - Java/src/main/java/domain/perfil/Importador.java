@@ -8,9 +8,9 @@ import java.util.List;
 
 
 public interface Importador {
-    static List<ActividadBase> importarDatos(String nombreArchivo){
-        List<ActividadBase> lista = Collections.<ActividadBase>emptyList();
-        ApachePOI.importarCargas(nombreArchivo);
-        return lista;
-    };
+    List<ActividadBase> importarDatos(String nombreArchivo);//{
+        //List<ActividadBase> lista = Collections.<ActividadBase>emptyList();
+        //ApachePOI.importarCargas(nombreArchivo);
+        //return lista;
+    //};
 }

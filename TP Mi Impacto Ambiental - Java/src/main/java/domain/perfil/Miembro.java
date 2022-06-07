@@ -2,7 +2,9 @@ package domain.perfil;
 
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;
+import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Miembro {
@@ -10,13 +12,20 @@ public class Miembro {
     private String apellido;
     private TipoDocumento tipoDocumento;
     private Integer numeroDocumento;
-    private List<Area> areas;
-    private domain.perfil.Miembro Miembro; //TODO ver que onda con el Miembro
-    private List<Trayecto> trayectos;
-    private List<Tramo> tramosCompartidosAAceptar;
+    private List<Area> areas = new ArrayList<Area>();
+    private List<Trayecto> trayectos = new ArrayList<Trayecto>();
+    @Getter
+    private List<Tramo> tramosCompartidosAAceptar = new ArrayList<Tramo>();
+
+    Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, Integer numeroDocumento) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+    }
 
     public void darseAltaEnOrganizacion(Area area){
-        area.agregarAMiembroPendiente(this.Miembro);
+        area.agregarAMiembroPendiente(this);
     }
 
     public double calcularHC(){
@@ -40,7 +49,7 @@ public class Miembro {
         //en caso de que sea rechazado no lo va a hacer nada
     }
 
-    private Trayecto generarTrayecto(String descripcion){
+    public Trayecto generarTrayecto(String descripcion){
         Trayecto nuevoTrayecto = new Trayecto(descripcion);
         trayectos.add(nuevoTrayecto);
         return nuevoTrayecto;

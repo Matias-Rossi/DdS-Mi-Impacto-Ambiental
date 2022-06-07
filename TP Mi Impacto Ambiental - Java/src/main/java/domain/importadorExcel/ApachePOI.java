@@ -6,16 +6,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import domain.perfil.Importador;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ApachePOI {
+public class ApachePOI implements Importador {
   static DataFormatter formatter = new DataFormatter();
 
-  public static List<ActividadBase> importarCargas(String path) {
+  public List<ActividadBase> importarDatos(String path) {
     int cantidadDeValoresDeLogistica = 4;
     List<ActividadBase> listaDeCargas = null;
     try {

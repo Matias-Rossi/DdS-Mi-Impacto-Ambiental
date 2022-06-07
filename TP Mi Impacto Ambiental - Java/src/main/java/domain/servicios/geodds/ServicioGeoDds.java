@@ -20,7 +20,8 @@ import java.util.stream.Collectors;
 
 import static java.net.URLEncoder.encode;
 
-public class ServicioGeoDds implements CalculadorDeDistancia {
+//Singleton
+public class ServicioGeoDds implements domain.transporte.CalculadorDeDistancia {
   private static ServicioGeoDds instancia = null;
   private static final String urlAPI = "https://ddstpa.com.ar/api/";
   private static String token;
