@@ -41,3 +41,5 @@ TP Mi Impacto Ambiental - Java/target/classes/tokens.properties
 TP Mi Impacto Ambiental - Java/target/surefire-reports/
 
 TP Mi Impacto Ambiental - Java/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/
+
+*.exec
