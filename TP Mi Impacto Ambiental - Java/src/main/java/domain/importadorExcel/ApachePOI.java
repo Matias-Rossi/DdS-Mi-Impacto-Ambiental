@@ -12,8 +12,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import static domain.importadorExcel.TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
-
 public class ApachePOI {
   static DataFormatter formatter = new DataFormatter();
 
@@ -56,7 +54,7 @@ public class ApachePOI {
         celda = celdas.next();
         valorTipoConsumo = TipoConsumo.valueOf(celda.getStringCellValue());
 
-        if (valorTipoActividad == LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS) {
+        if (valorTipoActividad == TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS) {
           for (int n = 0; n < cantidadDeValoresDeLogistica; n++) {
             celda = celdas.next();
             switch (valorTipoConsumo) {
@@ -102,7 +100,7 @@ public class ApachePOI {
         valorPeriodoDeImputacion = formatter.formatCellValue(celda);
 
 
-        if (valorTipoActividad == LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS)
+        if (valorTipoActividad == TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS)
           actividadCargada = new ActividadLogisticaCargada(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, valorTipoPeriodicidad, valorPeriodoDeImputacion);
         else
           actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, valorTipoPeriodicidad, valorPeriodoDeImputacion);
