@@ -1,4 +1,4 @@
-package domain.iportadorExcel;
+package domain.importadorExcel;
 
 import java.util.*;
 import java.io.FileInputStream;
@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import static domain.iportadorExcel.TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
+import static domain.importadorExcel.TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
 
 public class ApachePOI {
   static DataFormatter formatter = new DataFormatter();

@@ -1,4 +1,4 @@
-package domain.iportadorExcel;
+package domain.importadorExcel;
 
 public class ActividadLogisticaCargada extends ActividadBase implements ActividadCargada {
 

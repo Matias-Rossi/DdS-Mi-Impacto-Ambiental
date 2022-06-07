@@ -1,4 +1,4 @@
-package domain.iportadorExcel;
+package domain.importadorExcel;
 
 public enum TipoActividad {
   COMBUSTION_FIJA,

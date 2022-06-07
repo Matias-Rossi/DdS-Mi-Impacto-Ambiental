@@ -1,6 +1,6 @@
 package domain.perfil;
 
-import domain.iportadorExcel.ActividadCargada;
+import domain.importadorExcel.ActividadCargada;
 import domain.ubicacion.Ubicacion;
 
 import java.util.ArrayList;

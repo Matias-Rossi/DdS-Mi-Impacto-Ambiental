@@ -1,7 +1,7 @@
 package domain.perfil;
 
-import domain.iportadorExcel.ApachePOI;
-import domain.iportadorExcel.ActividadCargada;
+import domain.importadorExcel.ApachePOI;
+import domain.importadorExcel.ActividadCargada;
 
 import java.util.Collections;
 import java.util.List;
