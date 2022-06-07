@@ -19,7 +19,7 @@ public class Trayecto {
     }
 
     public void aniadirNuevoTramo(Ubicacion salida, Ubicacion llegada, Transporte transporte){
-        this.agregarTramo(new Tramo(salida,llegada,transporte));
+        this.agregarTramo(new Tramo(salida, llegada, transporte));
     }
 
     public void agregarTramo(Tramo tramo){

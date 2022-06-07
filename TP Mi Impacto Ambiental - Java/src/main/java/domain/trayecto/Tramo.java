@@ -6,7 +6,7 @@ import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
 
 public class Tramo {
-    public Tramo(Ubicacion partida,Ubicacion llegada, Transporte transporte){
+    public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte){
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
