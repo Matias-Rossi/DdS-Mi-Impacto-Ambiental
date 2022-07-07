@@ -3,8 +3,8 @@ package domain.importadorExcel;
 public class ActividadGenericaCargada extends ActividadBase {
   double valor;
   TipoConsumo tipoConsumo;
-  public ActividadGenericaCargada(TipoActividad tipoActividad, TipoConsumo tipoConsumo, double valor, TipoPeriodicidad tipoPeriodicidad, String periodicidadDeImputacion) {
-    super(tipoActividad,tipoPeriodicidad,periodicidadDeImputacion);
+  public ActividadGenericaCargada(TipoActividad tipoActividad, TipoConsumo tipoConsumo, double valor, Integer anio, Integer mes) {
+    super(tipoActividad,anio,mes);
     this.valor = valor;
     this.tipoConsumo=tipoConsumo;
   }

@@ -6,6 +6,8 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Organizacion{
     @Getter
@@ -27,7 +29,19 @@ public class Organizacion{
         this.areas.add(nuevaArea);
     }
 
-    public double calcularHC(){
+    public double calcularHC(Integer anio,Integer mes){
+        return this.calcularHCConsumos(anio,mes)+this.calcularHCViajes(anio,mes);
+    }
+    private double calcularHCConsumos(Integer anio,Integer mes){
+        Stream<ActividadBase> filtrada;
+        filtrada=actividadesCargadas.stream().filter(e->e.delAnio(anio));
+        if(mes!=0){
+            filtrada=filtrada.filter(e->e.delMes(mes));
+        }
+        List<Double> mapped = filtrada.map(e->e.calcularHC()).collect(Collectors.toList());
+        return mapped.stream().reduce(0.0, (a, b) ->a+b);
+    }
+    private double calcularHCViajes(Integer anio,Integer mes){
         return 1.0;
     }
 
