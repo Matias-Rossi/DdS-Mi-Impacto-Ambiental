@@ -20,7 +20,6 @@ public class ApachePOI implements Importador {
     int cantidadDeValoresDeLogistica = 4;
     List<ActividadBase> listaDeCargas = null;
     try {
-
       FileInputStream excellFile = new FileInputStream(path);
       XSSFWorkbook excell = new XSSFWorkbook(excellFile);
       XSSFSheet hoja = excell.getSheetAt(0);
@@ -29,6 +28,8 @@ public class ApachePOI implements Importador {
       Row fila;
       Cell celda;
 
+      Integer anio;
+      Integer mes;
       TipoActividad valorTipoActividad;
       TipoConsumo valorTipoConsumo;
       double valor = 0;
@@ -101,10 +102,15 @@ public class ApachePOI implements Importador {
         valorPeriodoDeImputacion = formatter.formatCellValue(celda);
 
 
+        anio = this.obtenerAnio(valorPeriodoDeImputacion);
+        mes = this.obtenerMes(valorPeriodoDeImputacion,valorTipoPeriodicidad);
+
+
+
         if (valorTipoActividad == TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS)
-          actividadCargada = new ActividadLogisticaCargada(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, valorTipoPeriodicidad, valorPeriodoDeImputacion);
+          actividadCargada = new ActividadLogisticaCargada(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes);
         else
-          actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, valorTipoPeriodicidad, valorPeriodoDeImputacion);
+          actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, anio, mes);
 
 
         listaDeCargas.add(actividadCargada);
@@ -118,5 +124,13 @@ public class ApachePOI implements Importador {
       System.out.println(ex.getMessage());
     }
    return listaDeCargas;
+  }
+  private Integer obtenerAnio(String fecha){
+    return Integer.parseInt(fecha.substring(fecha.length()-4,fecha.length()));
+  }
+  private Integer obtenerMes(String fecha,TipoPeriodicidad periodo){
+    if(periodo==TipoPeriodicidad.ANUAL){
+      return 0;
+    }else return Integer.parseInt(fecha.substring(0,2));
   }
 }

@@ -6,8 +6,8 @@ public class ActividadLogisticaCargada extends ActividadBase {
   TipoTransporteUtilizado medioDeTransporte;
   double distanciaMediaRecorrida;
   double pesoTotalTransportado;
-  public ActividadLogisticaCargada(TipoActividad tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoTransporteUtilizado tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, TipoPeriodicidad tipoPeriodicidad, String periodicidadDeImputacion) {
-    super(tipoActividad,tipoPeriodicidad,periodicidadDeImputacion);
+  public ActividadLogisticaCargada(TipoActividad tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoTransporteUtilizado tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, Integer anio, Integer mes) {
+    super(tipoActividad,anio,mes);
     this.tipoProductoTransportado = tipoProductoTransportado;
     this.medioDeTransporte = tipoTransporteUtilizado;
     this.distanciaMediaRecorrida = distanciaMediaRecorrida;
