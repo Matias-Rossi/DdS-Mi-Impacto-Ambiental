@@ -1,9 +1,11 @@
 package domain.perfil;
 
 import domain.importadorExcel.ActividadBase;
+import domain.notificaciones.Contacto;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +21,8 @@ public class Organizacion{
     private Ubicacion ubicacion;
     private Importador moduloImportador;
     private domain.perfil.Organizacion Organizacion;  //TODO ver que onda this.organizacion
+    @Getter
+    private List<Contacto> contactos = new ArrayList<Contacto>();
 
     public Organizacion(Importador moduloImportador) {
         this.moduloImportador = moduloImportador;
@@ -47,5 +51,10 @@ public class Organizacion{
 
     public void cargarMediciones(String nombreArchivo){
         actividadesCargadas.addAll(moduloImportador.importarDatos(nombreArchivo));
+    }
+
+    public void agregarContacto(String telefono, String email){
+        Contacto nuevoContacto = new Contacto(telefono, email);
+        this.contactos.add(nuevoContacto);
     }
 }
