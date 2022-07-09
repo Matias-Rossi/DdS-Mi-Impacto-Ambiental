@@ -1,17 +1,19 @@
 package domain.importadorExcel;
 
 import domain.calculadorHC.DatoDeActividad;
+import domain.calculadorHC.TipoActividadDA;
+import domain.calculadorHC.TipoConsumoDA;
 
 public abstract class ActividadBase {
 
-  public ActividadBase(TipoActividad actividad,Integer anio, Integer mes ){
+  public ActividadBase(TipoActividadDA actividad, Integer anio, Integer mes ){
   this.actividad=actividad;
   this.anio=anio;
   this.mes=mes;
   System.out.println("SE CREA UNA CLASE");
   System.out.println(actividad);
   }
-  private TipoActividad actividad;
+  private TipoActividadDA actividad;
   private Integer anio;
   private Integer mes;
 
@@ -25,7 +27,7 @@ public abstract class ActividadBase {
     return 0;
   }
 
-  public DatoDeActividad generarDatoDeActividad() {
+  public DatoDeActividad generarDatoDeActividad(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, double valor) {
     return null;
   }
 

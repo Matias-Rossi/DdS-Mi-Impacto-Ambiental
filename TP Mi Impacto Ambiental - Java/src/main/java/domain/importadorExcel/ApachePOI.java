@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import domain.calculadorHC.TipoActividadDA;
+import domain.calculadorHC.TipoConsumoDA;
 import domain.perfil.Importador;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -30,13 +32,13 @@ public class ApachePOI implements Importador {
 
       Integer anio;
       Integer mes;
-      TipoActividad valorTipoActividad;
-      TipoConsumo valorTipoConsumo;
+      TipoActividadDA valorTipoActividad;
+      TipoConsumoDA valorTipoConsumo;
       double valor = 0;
       TipoPeriodicidad valorTipoPeriodicidad;
       String valorPeriodoDeImputacion;
       TipoProductoTransportado valorTipoProductoTransportado = null;
-      TipoTransporteUtilizado valorTipoTransporteUtilizado = null;
+      TipoConsumoDA valorTipoTransporteUtilizado = null;
       double valorDistanciaMedia = 0;
       double valorPesoTotal = 0;
       ActividadBase actividadCargada;
@@ -52,11 +54,11 @@ public class ApachePOI implements Importador {
 
         celda = celdas.next();
 
-        valorTipoActividad = TipoActividad.valueOf(celda.getStringCellValue());
+        valorTipoActividad = TipoActividadDA.valueOf(celda.getStringCellValue());
         celda = celdas.next();
-        valorTipoConsumo = TipoConsumo.valueOf(celda.getStringCellValue());
+        valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
 
-        if (valorTipoActividad == TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS) {
+        if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS) {
           for (int n = 0; n < cantidadDeValoresDeLogistica; n++) {
             celda = celdas.next();
             switch (valorTipoConsumo) {
@@ -65,7 +67,7 @@ public class ApachePOI implements Importador {
                 break;
               }
               case MEDIO_DE_TRANSPORTE: {
-                valorTipoTransporteUtilizado = TipoTransporteUtilizado.valueOf(celda.getStringCellValue());
+                valorTipoTransporteUtilizado = TipoConsumoDA.valueOf(celda.getStringCellValue());
                 break;
               }
               case DISTANCIA_MEDIA: {
@@ -85,7 +87,7 @@ public class ApachePOI implements Importador {
               celdas = fila.cellIterator();
               celda = celdas.next();
               celda = celdas.next();
-              valorTipoConsumo = TipoConsumo.valueOf(celda.getStringCellValue());
+              valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
             }
           }
         } else {
@@ -107,7 +109,7 @@ public class ApachePOI implements Importador {
 
 
 
-        if (valorTipoActividad == TipoActividad.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS)
+        if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS)
           actividadCargada = new ActividadLogisticaCargada(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes);
         else
           actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, anio, mes);
