@@ -19,4 +19,7 @@ public class ActividadLogisticaCargada extends ActividadBase {
     return 1;
   }
 
+  //@Override
+  //public DatoDeActividad generarDatoDeActividad() { }
+
 }

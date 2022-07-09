@@ -1,5 +1,8 @@
 package domain.importadorExcel;
 
+import domain.calculadorHC.DatoDeActividad;
+import domain.perfil.Tipo;
+
 public class ActividadGenericaCargada extends ActividadBase {
   double valor;
   TipoConsumo tipoConsumo;
@@ -13,4 +16,7 @@ public class ActividadGenericaCargada extends ActividadBase {
   public double calcularHC(){
     return 2;
   }
+
+  //@Override
+  //public DatoDeActividad generarDatoDeActividad() { }
 }

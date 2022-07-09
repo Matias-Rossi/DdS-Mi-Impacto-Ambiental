@@ -1,5 +1,7 @@
 package domain.importadorExcel;
 
+import domain.calculadorHC.DatoDeActividad;
+
 public abstract class ActividadBase {
 
   public ActividadBase(TipoActividad actividad,Integer anio, Integer mes ){
@@ -22,4 +24,10 @@ public abstract class ActividadBase {
   public double calcularHC(){
     return 0;
   }
+
+  public DatoDeActividad generarDatoDeActividad() {
+    return null;
+  }
+
+
 }

@@ -100,7 +100,7 @@ public class ApachePOI implements Importador {
 
         celda = celdas.next();
         valorPeriodoDeImputacion = formatter.formatCellValue(celda);
-
+        System.out.println(valorPeriodoDeImputacion);
 
         anio = this.obtenerAnio(valorPeriodoDeImputacion);
         mes = this.obtenerMes(valorPeriodoDeImputacion,valorTipoPeriodicidad);
