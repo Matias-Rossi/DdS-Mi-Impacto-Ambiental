@@ -1,5 +1,6 @@
 package domain.importadorExcel;
 
+import domain.calculadorHC.CalculadorDeHC;
 import domain.calculadorHC.DatoDeActividad;
 import domain.calculadorHC.TipoActividadDA;
 import domain.calculadorHC.TipoConsumoDA;
@@ -11,6 +12,8 @@ public class ActividadLogisticaCargada extends ActividadBase {
   double distanciaMediaRecorrida;
   double pesoTotalTransportado;
   double varianzaDistanciaYPeso = 0.5;
+  CalculadorDeHC calculadorDeHC;
+
   public ActividadLogisticaCargada(TipoActividadDA tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoConsumoDA tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, Integer anio, Integer mes) {
     super(tipoActividad,anio,mes);
     this.tipoProductoTransportado = tipoProductoTransportado;
@@ -22,6 +25,7 @@ public class ActividadLogisticaCargada extends ActividadBase {
 
   @Override
   public double calcularHC(){
+    calculadorDeHC
     return 1;
   }
 

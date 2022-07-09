@@ -40,9 +40,9 @@ public class Organizacion{
         Stream<ActividadBase> filtrada;
         filtrada=actividadesCargadas.stream().filter(e->e.delAnio(anio));
         if(mes!=0){
-            filtrada=filtrada.filter(e->e.delMes(mes));
+            filtrada=filtrada.filter(e->e.delMes(mes) || e.delMes(0));
         }
-        List<Double> mapped = filtrada.map(e->e.calcularHC()).collect(Collectors.toList());
+        List<Double> mapped = filtrada.map(e->e.calcularHC()).collect(Collectors.toList());//TODO lo de dividir por 12
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
     private double calcularHCViajes(Integer anio,Integer mes){

@@ -33,7 +33,7 @@ public class ApachePOI implements Importador {
       Integer anio;
       Integer mes;
       TipoActividadDA valorTipoActividad;
-      TipoConsumoDA valorTipoConsumo;
+      TipoLogistica valorTipoConsumo;
       double valor = 0;
       TipoPeriodicidad valorTipoPeriodicidad;
       String valorPeriodoDeImputacion;
@@ -56,7 +56,7 @@ public class ApachePOI implements Importador {
 
         valorTipoActividad = TipoActividadDA.valueOf(celda.getStringCellValue());
         celda = celdas.next();
-        valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
+        valorTipoConsumo = TipoLogistica.valueOf(celda.getStringCellValue());
 
         if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS) {
           for (int n = 0; n < cantidadDeValoresDeLogistica; n++) {
@@ -87,7 +87,7 @@ public class ApachePOI implements Importador {
               celdas = fila.cellIterator();
               celda = celdas.next();
               celda = celdas.next();
-              valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
+              valorTipoConsumo = TipoLogistica.valueOf(celda.getStringCellValue());
             }
           }
         } else {

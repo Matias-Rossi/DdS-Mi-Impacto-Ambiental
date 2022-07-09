@@ -5,7 +5,9 @@ public class CalculadorDeHC {
 
     private List<FactorDeEmision> factoresDeEmision;
 
-    public static double calcularHC(ActividadesEmisorasCO2 actividades){
+    public static double calcularHC(DatoDeActividad actividades){
+        FactorDeEmision factorDeEmision = this.asignarFactorDeEmision(actividades.getTipoconsumoDA(),actividades.getTipoActividadDA())
+
         return 1.0;
     }
 
