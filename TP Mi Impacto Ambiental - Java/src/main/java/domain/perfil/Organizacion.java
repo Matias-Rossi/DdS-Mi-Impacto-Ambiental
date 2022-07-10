@@ -24,7 +24,11 @@ public class Organizacion{
     @Getter
     private List<Contacto> contactos = new ArrayList<Contacto>();
 
-    public Organizacion(Importador moduloImportador) {
+    public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion) {
+        this.ubicacion=ubicacion;
+        this.razonSocial=razonSocial;
+        this.tipo=tipo;
+        this.clasificacion=clasificacion;
         this.moduloImportador = moduloImportador;
     }
 

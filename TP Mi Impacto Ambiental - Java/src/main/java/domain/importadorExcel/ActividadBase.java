@@ -12,8 +12,6 @@ public abstract class ActividadBase {
   this.consumo=consumo;
   this.anio=anio;
   this.mes=mes;
-  System.out.println("SE CREA UNA CLASE");
-  System.out.println(actividad);
   }
   private TipoActividadDA tipoActividadDA;
   private TipoConsumoDA consumo;

@@ -39,6 +39,7 @@ public class ApachePOI implements Importador {
       Integer mes;
       TipoActividadDA valorTipoActividad;
       TipoConsumoDA valorTipoConsumo;
+      IndiceLogistica valorIndiceLogistica;
       double valor = 0;
       TipoPeriodicidad valorTipoPeriodicidad;
       String valorPeriodoDeImputacion;
@@ -61,12 +62,15 @@ public class ApachePOI implements Importador {
 
         valorTipoActividad = TipoActividadDA.valueOf(celda.getStringCellValue());
         celda = celdas.next();
-        valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
+
 
         if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS) {
+          valorTipoConsumo = TipoConsumoDA.UTILITARIO_LIVIANO;
+          valorTipoProductoTransportado = TipoProductoTransportado.INSUMOS;
           for (int n = 0; n < cantidadDeValoresDeLogistica; n++) {
+            valorIndiceLogistica = IndiceLogistica.valueOf(celda.getStringCellValue());
             celda = celdas.next();
-            switch (valorTipoConsumo) {
+            switch (valorIndiceLogistica) {
               case PRODUCTO_TRANSPORTADO: {
                 valorTipoProductoTransportado = TipoProductoTransportado.valueOf(celda.getStringCellValue());
                 break;
@@ -92,10 +96,11 @@ public class ApachePOI implements Importador {
               celdas = fila.cellIterator();
               celdas.next();
               celda = celdas.next();
-              valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
+
             }
           }
         } else {
+          valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
           celda = celdas.next();
           valor = celda.getNumericCellValue();
         }
@@ -107,7 +112,6 @@ public class ApachePOI implements Importador {
 
         celda = celdas.next();
         valorPeriodoDeImputacion = formatter.formatCellValue(celda);
-        System.out.println(valorPeriodoDeImputacion);
 
         anio = this.obtenerAnio(valorPeriodoDeImputacion);
         mes = this.obtenerMes(valorPeriodoDeImputacion,valorTipoPeriodicidad);
@@ -116,6 +120,7 @@ public class ApachePOI implements Importador {
 
         if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS){
           actividadCargada = new ActividadLogisticaCargada(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes);
+
         }else
           actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, anio, mes);
 

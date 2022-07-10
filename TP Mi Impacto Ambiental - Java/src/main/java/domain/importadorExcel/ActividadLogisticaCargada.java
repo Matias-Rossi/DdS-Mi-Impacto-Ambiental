@@ -19,6 +19,14 @@ public class ActividadLogisticaCargada extends ActividadBase {
 
   public ActividadLogisticaCargada(TipoActividadDA tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoConsumoDA tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, Integer anio, Integer mes) {
     super(tipoActividad,tipoTransporteUtilizado,anio,mes);
+    System.out.println("SE CREA UNA CLASE");
+    System.out.println(tipoActividad);
+    System.out.println(tipoProductoTransportado);
+    System.out.println(tipoTransporteUtilizado);
+    System.out.println(distanciaMediaRecorrida);
+    System.out.println(pesoTotalTransportado);
+    System.out.println(anio);
+    System.out.println(mes);
     this.tipoProductoTransportado = tipoProductoTransportado;
     this.distanciaMediaRecorrida = distanciaMediaRecorrida;
     this.pesoTotalTransportado =  pesoTotalTransportado;
