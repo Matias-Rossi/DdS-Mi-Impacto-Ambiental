@@ -1,5 +1,6 @@
 package domain.perfil;
 
+import domain.calculadorHC.CalculadorDeHC;
 import domain.importadorExcel.ActividadBase;
 import domain.notificaciones.Contacto;
 import domain.ubicacion.Ubicacion;
@@ -20,7 +21,7 @@ public class Organizacion{
     private Clasificacion clasificacion;
     private Ubicacion ubicacion;
     private Importador moduloImportador;
-    private domain.perfil.Organizacion Organizacion;  //TODO ver que onda this.organizacion
+    private domain.perfil.Organizacion Organizacion;
     @Getter
     private List<Contacto> contactos = new ArrayList<Contacto>();
 
@@ -49,8 +50,8 @@ public class Organizacion{
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
 
-    public void cargarMediciones(String nombreArchivo){
-        actividadesCargadas.addAll(moduloImportador.importarDatos(nombreArchivo));
+    public void cargarMediciones(String nombreArchivo, CalculadorDeHC calculadorDeHC){
+        actividadesCargadas.addAll(moduloImportador.importarDatos(nombreArchivo,calculadorDeHC));
     }
 
     public void agregarContacto(String telefono, String email){

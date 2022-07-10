@@ -7,11 +7,12 @@ import domain.calculadorHC.TipoConsumoDA;
 
 public abstract class ActividadBase {
 
-  public ActividadBase(TipoActividadDA actividad, TipoConsumoDA consumo, Integer anio, Integer mes ){
-  this.tipoActividadDA=actividad;
-  this.consumo=consumo;
-  this.anio=anio;
-  this.mes=mes;
+  public ActividadBase(CalculadorDeHC calculadorDeHC,TipoActividadDA actividad, TipoConsumoDA consumo, Integer anio, Integer mes ){
+  this.calculadorDeHC = calculadorDeHC;
+  this.tipoActividadDA = actividad;
+  this.consumo = consumo;
+  this.anio = anio;
+  this.mes = mes;
   }
   private TipoActividadDA tipoActividadDA;
   private TipoConsumoDA consumo;

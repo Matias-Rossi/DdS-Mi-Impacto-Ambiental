@@ -35,5 +35,7 @@ public class ServicioContratado implements Transporte  {
     public TipoConsumoDA tipoConsumoDA(){
         return TipoConsumoDA.SERVICIO_CONTRATADO_BASE;
     }
-
+    public TipoTransporte decirTipoTransporte(){
+        return TipoTransporte.TIPO_CONTRATADO;
+    }
 }

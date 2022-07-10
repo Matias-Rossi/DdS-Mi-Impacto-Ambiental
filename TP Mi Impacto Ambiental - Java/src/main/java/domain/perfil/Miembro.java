@@ -29,9 +29,12 @@ public class Miembro {
         area.agregarAMiembroPendiente(this);
     }
 
-    public double calcularHC(Integer anio,Integer mes){
-        List<Double> mapped = trayectos.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());
+    public double calcularHC(Integer anio,Integer mes,Organizacion organizacion){
+        List<Double> mapped = trayectos.stream().map(e->e.calcularHC(anio,mes,organizacion)).collect(Collectors.toList());
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
+    }
+    public double calcularHCPorcentual(Integer anio,Integer mes,Area area){
+        return (this.calcularHC(anio,mes,this.decirOrganizacion(area))/this.decirOrganizacion(area).calcularHC(anio,mes))*100;
     }
 
     public Organizacion decirOrganizacion(Area area){

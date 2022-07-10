@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import domain.calculadorHC.CalculadorDeHC;
 import domain.calculadorHC.TipoActividadDA;
 import domain.calculadorHC.TipoConsumoDA;
 import domain.perfil.Importador;
@@ -19,11 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ApachePOI implements Importador {
   static DataFormatter formatter = new DataFormatter();
 
-  public static void main(String[]args){
-    ApachePOI apache = new ApachePOI();
-    apache.importarDatos("C:/Users/pedro/Downloads/fechas.xlsx");
-  }
-  public List<ActividadBase> importarDatos(String path) {
+  public List<ActividadBase> importarDatos(String path, CalculadorDeHC calculadorDeHC) {
     int cantidadDeValoresDeLogistica = 4;
     List<ActividadBase> listaDeCargas = null;
     try {
@@ -119,10 +116,10 @@ public class ApachePOI implements Importador {
 
 
         if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS){
-          actividadCargada = new ActividadLogisticaCargada(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes);
+          actividadCargada = new ActividadLogisticaCargada(calculadorDeHC,valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes);
 
         }else
-          actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, anio, mes);
+          actividadCargada = new ActividadGenericaCargada(calculadorDeHC,valorTipoActividad, valorTipoConsumo, valor, anio, mes);
 
 
         listaDeCargas.add(actividadCargada);

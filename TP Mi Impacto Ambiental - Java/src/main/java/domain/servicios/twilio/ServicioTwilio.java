@@ -16,10 +16,11 @@ import java.math.BigDecimal;
 import java.util.Properties;
 
 import domain.notificaciones.Contacto;
+import domain.notificaciones.GestorNotificaciones;
 import domain.notificaciones.Notificacion;
 import domain.notificaciones.PreferenciasContacto;
 
-public class ServicioTwilio {
+public class ServicioTwilio implements GestorNotificaciones {
   public static String ACCOUNT_SID;
 
   public static String AUTH_TOKEN;
@@ -27,7 +28,7 @@ public class ServicioTwilio {
   public static String EMAIL_FROM;
 
 
-  ServicioTwilio() {
+  public ServicioTwilio() {
     Properties prop = new Properties();
     ClassLoader loader = Thread.currentThread().getContextClassLoader();
     InputStream stream = loader.getResourceAsStream("tokens.properties");

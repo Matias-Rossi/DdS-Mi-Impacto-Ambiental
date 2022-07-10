@@ -9,7 +9,8 @@ import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 
 public class Tramo implements ActividadesEmisorasCO2 {
-    public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte){
+    public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte,CalculadorDeHC calculadorDeHC){
+        this.calculadorDeHC = calculadorDeHC;
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
@@ -21,6 +22,8 @@ public class Tramo implements ActividadesEmisorasCO2 {
     @Getter
     private int integrantes = 1;
     double valorDA = this.getDistancia() * medioDeTransporte.consumoDeTransoporte() ;
+
+
 
     public double calcularHC(){
         return calculadorDeHC.calcularHC( generarDatoDeActividad(medioDeTransporte.tipoDeActividadDA() , medioDeTransporte.tipoConsumoDA(),this.valorDA ) )/this.integrantes ;
