@@ -1,7 +1,7 @@
 package domain.notificaciones;
 
 public interface GestorNotificaciones {
-  void enviarWhatsapp(Notificacion notificacion, String telefono);
-  void enviarEmail(Notificacion notificacion, String asunto, String contenido);
-  void enviarNotificacion(Contacto contacto, Notificacion notificacion);
+  Boolean enviarWhatsapp(String telefono, String mensaje);
+  Boolean enviarEmail(String destinatario, String asunto, String contenido);
+  Boolean enviarNotificacion(Contacto contacto, Notificacion notificacion);
 }

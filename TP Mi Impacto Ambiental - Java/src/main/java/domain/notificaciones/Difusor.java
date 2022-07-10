@@ -3,6 +3,8 @@ package domain.notificaciones;
 import domain.perfil.Organizacion;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
+import org.quartz.JobKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +33,11 @@ public class Difusor implements Job {
     difundirNotificacion(new Notificacion("Mi Impacto Ambiental - Actualización de Guía de Recomendaciones", "<Enlace al contenido>"));
   }
 
-  public void execute(JobExecutionContext jobExecutionContext) {
+
+  @Override
+  public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    JobKey jobKey = jobExecutionContext.getJobDetail().getKey();
+    System.out.println("Difundiendo recomendaciones");
     difundirRecomendaciones();
   }
 }

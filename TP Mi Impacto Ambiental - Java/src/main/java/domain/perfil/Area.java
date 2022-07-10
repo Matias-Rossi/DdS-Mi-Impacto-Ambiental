@@ -31,9 +31,12 @@ public class Area {
         this.miembrosPendientes.add(nuevoMiembro);
     }
 
+    public double calcularHCporMiembro(Integer anio,Integer mes){
+        return this.calcularHC(anio,mes)/this.miembros.size();
+    }
     public double calcularHC(Integer anio, Integer mes){
 
-        List<Double> mapped = miembros.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());
+        List<Double> mapped = miembros.stream().map(e->e.calcularHC(anio,mes,this.organizacion)).collect(Collectors.toList());
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
 

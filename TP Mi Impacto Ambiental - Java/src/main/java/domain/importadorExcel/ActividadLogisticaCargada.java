@@ -15,11 +15,11 @@ public class ActividadLogisticaCargada extends ActividadBase {
   private double varianzaDistanciaYPeso = 0.5;
   public double valorDA = distanciaMediaRecorrida * pesoTotalTransportado * varianzaDistanciaYPeso;
 
-  CalculadorDeHC calculadorDeHC;
 
-  public ActividadLogisticaCargada(TipoActividadDA tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoConsumoDA tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, Integer anio, Integer mes) {
-    super(tipoActividad,tipoTransporteUtilizado,anio,mes);
+  public ActividadLogisticaCargada(CalculadorDeHC calculadorDeHC,TipoActividadDA tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoConsumoDA tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, Integer anio, Integer mes) {
+    super(calculadorDeHC,tipoActividad,tipoTransporteUtilizado,anio,mes);
     System.out.println("SE CREA UNA CLASE");
+    System.out.println(calculadorDeHC);
     System.out.println(tipoActividad);
     System.out.println(tipoProductoTransportado);
     System.out.println(tipoTransporteUtilizado);

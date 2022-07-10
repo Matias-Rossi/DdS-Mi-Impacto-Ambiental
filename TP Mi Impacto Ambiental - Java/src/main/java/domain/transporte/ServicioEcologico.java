@@ -36,6 +36,8 @@ public class ServicioEcologico implements Transporte{
     public TipoConsumoDA tipoConsumoDA(){
         return TipoConsumoDA.SERVICIO_ECOLOGICO_BASE;
     }
-
+    public TipoTransporte decirTipoTransporte(){
+        return TipoTransporte.TIPO_ECOLOGICO;
+    }
 
 }

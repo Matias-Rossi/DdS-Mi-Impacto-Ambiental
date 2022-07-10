@@ -5,6 +5,7 @@ public class FactorDeEmision {
   private TipoConsumoDA tipoConsumo;
   private double factorEmision;
 
+
   public FactorDeEmision(TipoActividadDA tipoDeActividad, TipoConsumoDA tipoDeConsumo, double factorEmision) {
     this.tipoActividad = tipoDeActividad;
     this.tipoConsumo = tipoDeConsumo;
@@ -22,5 +23,10 @@ public class FactorDeEmision {
   public double getFactorEmision() {
     return factorEmision;
   }
+
+  public void setFactorEmision(double nuevoFactor){
+    this.factorEmision = nuevoFactor;
+  }
+
 }
 

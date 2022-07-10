@@ -21,7 +21,6 @@ public class TransportePublico implements Transporte {
 
 
 
-    public TipoTransporte decirTipoTransporte() {return TipoTransporte.TIPO_PUBLICO;}
     //@Override
     public double calcularDistancia(Ubicacion inicio, Ubicacion fin) {
         try {
@@ -39,8 +38,19 @@ public class TransportePublico implements Transporte {
         return TipoActividadDA.TRANSPORTE_PUBLICO;
     }
     public TipoConsumoDA tipoConsumoDA(){
-
-        return this.tipo;
+        if(this.tipo == TipoTransportePublico.COLECTIVO) {
+            return TipoConsumoDA.COLECTIVO_BASE;
+        }
+        if(this.tipo == TipoTransportePublico.SUBTE) {
+            return TipoConsumoDA.SUBTE_BASE;
+        }
+        if(this.tipo == TipoTransportePublico.TREN) {
+            return TipoConsumoDA.TREN_BASE;
+        }
+        return null;
+    }
+    public TipoTransporte decirTipoTransporte(){
+        return TipoTransporte.TIPO_PUBLICO;
     }
 
 }

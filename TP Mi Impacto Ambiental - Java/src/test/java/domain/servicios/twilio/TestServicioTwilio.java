@@ -1,7 +1,15 @@
 package domain.servicios.twilio;
 
+import domain.importadorExcel.ApachePOI;
 import domain.notificaciones.Contacto;
+import domain.notificaciones.Difusor;
+import domain.notificaciones.GestorNotificaciones;
 import domain.notificaciones.Notificacion;
+import domain.perfil.Clasificacion;
+import domain.perfil.Organizacion;
+import domain.perfil.Tipo;
+import domain.ubicacion.Provincia;
+import domain.ubicacion.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -9,6 +17,34 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class TestServicioTwilio {
+
+  @Test
+  public void testDifusor() {
+    //ATENCIÓN: este test incurre un gasto en la cuenta vinculada de Twilio
+    GestorNotificaciones gestorNotificaciones = new ServicioTwilio();
+    Difusor difusor = new Difusor(gestorNotificaciones);
+
+    Organizacion org = new Organizacion(
+            new ApachePOI(),
+            new Ubicacion(
+                    Provincia.Buenos_Aires,
+                    "a",
+                    "b",
+                    "c",
+                    "d",
+                    1
+            ),
+            "apache inc",
+            Tipo.EMPRESA,
+            new Clasificacion("dasdsa")
+    );
+    org.agregarContacto("+" + obtenerNumeroTelefonico(), obtenerEmail());
+
+    difusor.agregarOrganizacion(org);
+
+    difusor.difundirRecomendaciones();
+
+  }
 
   @Test
   public void testWhatsapp() {
