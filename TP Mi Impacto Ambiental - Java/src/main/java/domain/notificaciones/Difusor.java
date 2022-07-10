@@ -1,13 +1,15 @@
 package domain.notificaciones;
 
 import domain.perfil.Organizacion;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Difusor {
+public class Difusor implements Job {
   private List<Organizacion> organizaciones = new ArrayList<Organizacion>();
-  private GestorNotificaciones gestorNotificaciones; //TODO Agregar Twilio
+  private GestorNotificaciones gestorNotificaciones;
 
   public Difusor(GestorNotificaciones gestorNotificaciones) {
     this.gestorNotificaciones = gestorNotificaciones;
@@ -23,5 +25,13 @@ public class Difusor {
         this.gestorNotificaciones.enviarNotificacion(contacto, notificacion);
       });
     });
+  }
+
+  public void difundirRecomendaciones() {
+    difundirNotificacion(new Notificacion("Mi Impacto Ambiental - Actualización de Guía de Recomendaciones", "<Enlace al contenido>"));
+  }
+
+  public void execute(JobExecutionContext jobExecutionContext) {
+    difundirRecomendaciones();
   }
 }
