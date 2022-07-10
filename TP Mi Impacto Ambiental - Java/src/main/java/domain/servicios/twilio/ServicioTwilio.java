@@ -1,9 +1,13 @@
 package domain.servicios.twilio;
 
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
 import com.twilio.Twilio;
 import com.twilio.converter.Promoter;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import com.sendgrid.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,9 +20,11 @@ import domain.notificaciones.Notificacion;
 import domain.notificaciones.PreferenciasContacto;
 
 public class ServicioTwilio {
-  public static String ACCOUNT_SID = "ACceaa4ede1fcae384e661b5b2327c60b6";
+  public static String ACCOUNT_SID;
 
   public static String AUTH_TOKEN;
+  public static String SENDGRID_API_KEY;
+  public static String EMAIL_FROM;
 
 
   ServicioTwilio() {
@@ -28,33 +34,62 @@ public class ServicioTwilio {
     try {
       prop.load(stream);
       AUTH_TOKEN = prop.getProperty("twilioToken");
+      ACCOUNT_SID = prop.getProperty("twilioAccountSid");
+      SENDGRID_API_KEY = prop.getProperty("sendGridToken");
+      EMAIL_FROM = prop.getProperty("emailTestsFrom");
     } catch(IOException e) {
       AUTH_TOKEN = "";
+      ACCOUNT_SID = "";
+      SENDGRID_API_KEY = "";
+      EMAIL_FROM = "";
     }
     Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
   }
 
 
-  public  void enviarWhatsapp(String telefono, String mensaje) {
+  public Boolean enviarWhatsapp(String telefono, String mensaje) {
     Message message = Message.creator(
-            new com.twilio.type.PhoneNumber("whatsapp:" + telefono),
-            new com.twilio.type.PhoneNumber("whatsapp:+17406392786"),
+            //TODO actualmente envía SMS, para enviar WhatsApp agregar "whatsapp:" antes del número
+            new com.twilio.type.PhoneNumber("" + telefono),
+            new com.twilio.type.PhoneNumber("+17406392786"),
             mensaje)
         .create();
+    return message.getErrorCode() == null;
   }
-  public  void enviarEmail(String email, String asunto, String contenido) {
-    //TODO
+  public Boolean enviarEmail(String destinatario, String asunto, String contenido) {
+    Email from = new Email(EMAIL_FROM);
+    String subject = asunto;
+    Email to = new Email(destinatario);
+    Content content = new Content("text/plain", contenido);
+    Mail mail = new Mail(from, subject, to, content);
+
+    SendGrid sg = new SendGrid(SENDGRID_API_KEY);
+    Request request = new Request();
+    try {
+      request.setMethod(Method.POST);
+      request.setEndpoint("mail/send");
+      request.setBody(mail.build());
+      Response response = sg.api(request);
+      System.out.println(response.getStatusCode());
+      System.out.println(response.getBody());
+      System.out.println(response.getHeaders());
+      return response.getStatusCode() < 300;
+    } catch (IOException ex) {
+      System.out.println("Error al enviar email");
+      return false;
+    }
   }
 
-  public void enviarNotificacion(Contacto contacto, Notificacion notificacion) {
+  public Boolean enviarNotificacion(Contacto contacto, Notificacion notificacion) {
     //TODO hay que mejorar como esta planteado esto
     if (contacto.getPreferenciasContacto() == PreferenciasContacto.WHATSAPP) {
-      enviarWhatsapp(contacto.getTelefono(), notificacion.formatoWhatsapp());
+      return enviarWhatsapp(contacto.getTelefono(), notificacion.formatoWhatsapp());
     } else if (contacto.getPreferenciasContacto() == PreferenciasContacto.EMAIL) {
-      enviarEmail(contacto.getEmail(), notificacion.getAsunto(), notificacion.getContenido());
+      return enviarEmail(contacto.getEmail(), notificacion.getAsunto(), notificacion.getContenido());
     } else {
-      enviarWhatsapp(contacto.getTelefono(), notificacion.formatoWhatsapp());
-      enviarEmail(contacto.getEmail(), notificacion.getAsunto(), notificacion.getContenido());
+      Boolean exitoWpp = enviarWhatsapp(contacto.getTelefono(), notificacion.formatoWhatsapp());
+      Boolean exitoEmail = enviarEmail(contacto.getEmail(), notificacion.getAsunto(), notificacion.getContenido());
+      return exitoEmail && exitoWpp;
     }
   }
 }
