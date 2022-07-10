@@ -25,8 +25,6 @@ public class Itinerario {
 
     JobDetail job = newJob(Difusor.class)
         .withIdentity("myJob", "group1") // name "myJob", group "group1"
-        .usingJobData("jobSays", "Hello World!")
-        .usingJobData("myFloatValue", 3.141f)
         .build();
 
     sched.scheduleJob(job, trigger);
