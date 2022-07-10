@@ -4,7 +4,8 @@ import domain.ubicacion.Ubicacion;
 
 import java.io.IOException;
 
-public class Particular implements Transporte {
+public class Particular  {
+
     private TipoParticular tipo;
     private TipoCombustible combustible;
     private CalculadorDeDistancia calculadorAdapter;
@@ -28,4 +29,5 @@ public class Particular implements Transporte {
     public int indiceHC(){
         return 1;
     }
+
 }

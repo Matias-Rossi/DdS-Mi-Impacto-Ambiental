@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Miembro {
     private String nombre;
@@ -28,9 +29,9 @@ public class Miembro {
         area.agregarAMiembroPendiente(this);
     }
 
-    public double calcularHC(){
-        //TODO calcularHC
-        return 1.0;
+    public double calcularHC(Integer anio,Integer mes){
+        List<Double> mapped = trayectos.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());
+        return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
 
     public Organizacion decirOrganizacion(Area area){
@@ -49,8 +50,8 @@ public class Miembro {
         //en caso de que sea rechazado no lo va a hacer nada
     }
 
-    public Trayecto generarTrayecto(String descripcion){
-        Trayecto nuevoTrayecto = new Trayecto(descripcion);
+    public Trayecto generarTrayecto(String descripcion,List<Organizacion> organizaciones,Integer anio, Integer semestre, Integer diasAlMes){
+        Trayecto nuevoTrayecto = new Trayecto(descripcion,organizaciones,diasAlMes,anio,semestre);
         trayectos.add(nuevoTrayecto);
         return nuevoTrayecto;
     }

@@ -4,7 +4,7 @@ import domain.ubicacion.Ubicacion;
 
 import java.io.IOException;
 
-public class TransportePublico implements Transporte {
+public class TransportePublico  {
     private TransportePublico tipo;
     private Linea linea;
     private CalculadorDeDistancia calculadorAdapter;
@@ -21,7 +21,7 @@ public class TransportePublico implements Transporte {
     }
 
     public TipoTransporte decirTipoTransporte() {return TipoTransporte.TIPO_PUBLICO;}
-    @Override
+    //@Override
     public double calcularDistancia(Ubicacion inicio, Ubicacion fin) {
         try {
             return calculadorAdapter.calcularDistancia(inicio, fin);

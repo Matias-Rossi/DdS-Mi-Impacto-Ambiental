@@ -1,24 +1,24 @@
 package domain.calculadorHC;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CalculadorDeHC {
 
-    private List<FactorDeEmision> factoresDeEmision;
+    private  List<FactorDeEmision> factoresDeEmision = new ArrayList<FactorDeEmision>();
 
-    public static double calcularHC(DatoDeActividad actividades){
-        FactorDeEmision factorDeEmision = this.asignarFactorDeEmision(actividades.getTipoconsumoDA(),actividades.getTipoActividadDA())
+    public double calcularHC(DatoDeActividad actividad){
+        FactorDeEmision factorDeEmision = devolverFactorDeEmision(actividad.getTipoconsumoDA(),actividad.getTipoActividadDA());
 
-        return 1.0;
+        return factorDeEmision.getFactorEmision() * actividad.getDA();
     }
 
-    public FactorDeEmision asignarFactorDeEmision(TipoConsumoDA consumo, TipoActividadDA actividad) {
+    public FactorDeEmision devolverFactorDeEmision(TipoConsumoDA consumo, TipoActividadDA actividad) {
         return factoresDeEmision.stream()
                 .filter(factor -> factor.getTipoConsumo().equals(consumo) && factor.getTipoActividad().equals(actividad))
                 .findFirst()
                 .orElse(null);
-
     }
 
-    }
+}
 
 

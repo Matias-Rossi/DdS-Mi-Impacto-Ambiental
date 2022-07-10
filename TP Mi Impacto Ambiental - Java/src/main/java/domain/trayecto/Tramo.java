@@ -1,12 +1,14 @@
 package domain.trayecto;
 
+import domain.calculadorHC.*;
+import domain.calculadorHC.ActividadesEmisorasCO2;
 import domain.perfil.Miembro;
 import domain.transporte.TipoTransporte;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 
-public class Tramo {
+public class Tramo implements ActividadesEmisorasCO2 {
     public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte){
         this.partida = partida;
         this.llegada = llegada;
@@ -15,12 +17,14 @@ public class Tramo {
     private Ubicacion partida;
     private Ubicacion llegada;
     private Transporte medioDeTransporte;
-    private HCadapter HCAdapterAdapter;
+    private CalculadorDeHC calculadorDeHC;
     @Getter
     private int integrantes = 1;
+    double valorDA = this.getDistancia() * medioDeTransporte.consumoDeTransoporte() ;
 
-    private double calcularHC(){
-        return this.HCAdapterAdapter.calcularHC();
+    public double calcularHC(){
+        return calculadorDeHC.calcularHC( generarDatoDeActividad(medioDeTransporte.tipoDeActividadDA() , medioDeTransporte.tipoConsumoDA(),this.valorDA ) )/this.integrantes ;
+
     }
     public void compartirTramo(Miembro miembro){
         if ((medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_CONTRATADO) || (medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_PARTICULAR)){
@@ -35,4 +39,7 @@ public class Tramo {
         return medioDeTransporte.calcularDistancia(partida, llegada);
     }
 
+    public DatoDeActividad generarDatoDeActividad(TipoActividadDA tipoActividadDA , TipoConsumoDA tipoConsumo, double valorDA) {
+        return new DatoDeActividad(tipoActividadDA, tipoConsumo, valorDA);
+    }
 }

@@ -15,9 +15,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+
 public class ApachePOI implements Importador {
   static DataFormatter formatter = new DataFormatter();
 
+  public static void main(String[]args){
+    ApachePOI apache = new ApachePOI();
+    apache.importarDatos("C:/Users/pedro/Downloads/fechas.xlsx");
+  }
   public List<ActividadBase> importarDatos(String path) {
     int cantidadDeValoresDeLogistica = 4;
     List<ActividadBase> listaDeCargas = null;
@@ -33,7 +38,7 @@ public class ApachePOI implements Importador {
       Integer anio;
       Integer mes;
       TipoActividadDA valorTipoActividad;
-      TipoLogistica valorTipoConsumo;
+      TipoConsumoDA valorTipoConsumo;
       double valor = 0;
       TipoPeriodicidad valorTipoPeriodicidad;
       String valorPeriodoDeImputacion;
@@ -56,7 +61,7 @@ public class ApachePOI implements Importador {
 
         valorTipoActividad = TipoActividadDA.valueOf(celda.getStringCellValue());
         celda = celdas.next();
-        valorTipoConsumo = TipoLogistica.valueOf(celda.getStringCellValue());
+        valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
 
         if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS) {
           for (int n = 0; n < cantidadDeValoresDeLogistica; n++) {
@@ -85,9 +90,9 @@ public class ApachePOI implements Importador {
             if (n < cantidadDeValoresDeLogistica - 1) {
               fila = filas.next();
               celdas = fila.cellIterator();
+              celdas.next();
               celda = celdas.next();
-              celda = celdas.next();
-              valorTipoConsumo = TipoLogistica.valueOf(celda.getStringCellValue());
+              valorTipoConsumo = TipoConsumoDA.valueOf(celda.getStringCellValue());
             }
           }
         } else {
@@ -109,9 +114,9 @@ public class ApachePOI implements Importador {
 
 
 
-        if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS)
+        if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS){
           actividadCargada = new ActividadLogisticaCargada(valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes);
-        else
+        }else
           actividadCargada = new ActividadGenericaCargada(valorTipoActividad, valorTipoConsumo, valor, anio, mes);
 
 

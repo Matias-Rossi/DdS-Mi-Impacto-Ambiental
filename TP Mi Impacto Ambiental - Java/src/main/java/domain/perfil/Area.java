@@ -1,6 +1,7 @@
 package domain.perfil;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Area {
     private String nombre;
@@ -30,9 +31,10 @@ public class Area {
         this.miembrosPendientes.add(nuevoMiembro);
     }
 
-    public int calcularHC(){
-        //TODO calcularHC
-        return 1;
+    public double calcularHC(Integer anio, Integer mes){
+
+        List<Double> mapped = miembros.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());
+        return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
 
 }

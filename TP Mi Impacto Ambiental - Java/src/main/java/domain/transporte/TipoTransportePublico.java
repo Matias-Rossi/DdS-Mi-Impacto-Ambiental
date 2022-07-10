@@ -1,5 +1,5 @@
 package domain.transporte;
-public enum TipoTransportePublico {
+public enum TipoTransportePublico{
     TREN,
     SUBTE,
     COLECTIVO;
