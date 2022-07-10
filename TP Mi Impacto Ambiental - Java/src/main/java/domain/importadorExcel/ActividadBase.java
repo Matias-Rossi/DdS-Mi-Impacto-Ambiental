@@ -29,10 +29,10 @@ public abstract class ActividadBase {
   }
 
   public double calcularHC(Integer anio,Integer mes) {
-    double HC = calculadorDeHC.calcularHC(generarDatoDeActividad(this.tipoActividadDA,this.consumo, this.valorDA));
-    if(anio!=this.anio) return 0;
-    if(mes==0 || this.mes==mes) return HC;
-    if(this.mes==0) return HC/12;
+    double HC =this.calculadorDeHC.calcularHC(this.generarDatoDeActividad(this.tipoActividadDA,this.consumo, this.valorDA));
+    if(!this.delAnio(anio)) return 0;
+    if(mes==0 || this.delMes(mes)) return HC;
+    if(this.delMes(0)) return HC/12;
     return 0;
   }
 

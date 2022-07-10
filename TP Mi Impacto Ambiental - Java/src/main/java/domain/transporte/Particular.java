@@ -26,8 +26,6 @@ public class Particular  {
     }
 
     public TipoTransporte decirTipoTransporte() {return TipoTransporte.TIPO_PARTICULAR;}
-    public int indiceHC(){
-        return 1;
-    }
+
 
 }

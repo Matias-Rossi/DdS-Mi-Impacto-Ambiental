@@ -43,16 +43,6 @@ public class Organizacion{
     private double calcularHCConsumos(Integer anio,Integer mes){
         List<Double> mapped = actividadesCargadas.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());//TODO lo de dividir por 12
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
-        /*
-        Stream<ActividadBase> filtrada;
-        filtrada=actividadesCargadas.stream().filter(e->e.delAnio(anio));
-        if(mes!=0){
-            Stream<ActividadBase> filtradaAnuales=filtrada.filter(e->e.delMes(0));
-            filtrada=filtrada.filter(e->e.delMes(mes) || e.delMes(0));
-        }
-        List<Double> mapped = filtrada.map(e->e.calcularHC()).collect(Collectors.toList());//TODO lo de dividir por 12
-        return mapped.stream().reduce(0.0, (a, b) ->a+b);
-         */
     }
     private double calcularHCViajes(Integer anio,Integer mes){
         List<Double> mapped = areas.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());

@@ -1,18 +1,21 @@
 package domain.transporte;
 
+import domain.calculadorHC.TipoActividadDA;
+import domain.calculadorHC.TipoConsumoDA;
 import domain.ubicacion.Ubicacion;
 
 import java.io.IOException;
 
-public class ServicioEcologico {
+public class ServicioEcologico implements Transporte{
     private TipoEcologico tipo;
     private CalculadorDeDistancia calculadorAdapter;
+    private double consumoXKm;
 
-    public ServicioEcologico(TipoEcologico tipo, CalculadorDeDistancia calculadorAdapter){
+    public ServicioEcologico(TipoEcologico tipo, CalculadorDeDistancia calculadorAdapter,double consumoXKm ){
         this.tipo= tipo;
         this.calculadorAdapter = calculadorAdapter;
+        this.consumoXKm = consumoXKm;
     }
-
 
 
     public double calcularDistancia(Ubicacion inicio, Ubicacion fin){
@@ -24,10 +27,15 @@ public class ServicioEcologico {
         return 0;
     }
 
-    public TipoTransporte decirTipoTransporte() {return TipoTransporte.TIPO_ECOLOGICO;}
-
-    private int indiceHC(){
-        return 1;
+    public double consumoDeTransoporte(){
+        return consumoXKm;
     }
+    public TipoActividadDA tipoDeActividadDA(){
+        return TipoActividadDA.SERVICIO_ECOLOGICO;
+    }
+    public TipoConsumoDA tipoConsumoDA(){
+        return TipoConsumoDA.SERVICIO_ECOLOGICO_BASE;
+    }
+
 
 }
