@@ -1,2 +1,4 @@
 geoDdsToken = <TokenSinSignosDeMayorMenor>
 ruta_excel = <RutaExcel>
+twilioToken = <TokenSinSignos>
+numero_celular_tests = <Número telefónico sin signos>
