@@ -1,2 +1,8 @@
 geoDdsToken = <TokenSinSignosDeMayorMenor>
 ruta_excel = <RutaExcel>
+twilioToken = <TokenSinSignos>
+numeroCelularTests = <Número telefónico sin signos>
+twilioAccountSid = <SID cuenta Twilio>
+sendGridToken = <Token>
+emailTestsFrom = <Mail origen>
+emailTestsTo = <Mail destinatario>
