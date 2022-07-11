@@ -6,18 +6,13 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.JobKey;
 
-public class ClasePrueba implements Job {
+public class ObservadorRecomendaciones implements Job {
     private static GestorNotificaciones gestorNotificaciones = new ServicioTwilio();
-    private static Difusor difusor;
-
-    public ClasePrueba() {
-        difusor = new Difusor(gestorNotificaciones);
-    }
+    private static Difusor difusor = new Difusor(gestorNotificaciones);
 
     @Override
     public void execute(JobExecutionContext jce) throws JobExecutionException {
         JobKey jobKey = jce.getJobDetail().getKey();
-        System.out.println("Funciona!");
         difusor.difundirRecomendaciones();
     }
 }
