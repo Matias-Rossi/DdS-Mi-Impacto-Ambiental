@@ -20,8 +20,11 @@ public class Contacto {
       if(email != null) {
         this.preferenciasContacto = PreferenciasContacto.TODOS;
       }
-    } else {
+    } else if (email != null) {
       this.preferenciasContacto = PreferenciasContacto.EMAIL;
+    } else {
+      throw new IllegalArgumentException("No se puede crear un contacto sin telefono ni email");
+
     }
   }
 }
