@@ -21,16 +21,16 @@ public class Tramo implements ActividadesEmisorasCO2 {
     private CalculadorDeHC calculadorDeHC;
     @Getter
     private int integrantes = 1;
-    double valorDA = this.getDistancia() * medioDeTransporte.consumoDeTransoporte() ;
+
 
 
 
     public double calcularHC(){
-        return calculadorDeHC.calcularHC( generarDatoDeActividad(medioDeTransporte.tipoDeActividadDA() , medioDeTransporte.tipoConsumoDA(),this.valorDA ) )/this.integrantes ;
+        return calculadorDeHC.calcularHC( generarDatoDeActividad() )/this.integrantes ;
 
     }
     public void compartirTramo(Miembro miembro){
-        if ((medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_CONTRATADO) || (medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_PARTICULAR)){
+        if ((this.medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_CONTRATADO) || (this.medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_PARTICULAR)){
             miembro.recibirSolicitud(this);
         }else System.err.println("ESTE TRANSPORTE NO PUEDE SER COMPARTIDO");
     }
@@ -39,10 +39,12 @@ public class Tramo implements ActividadesEmisorasCO2 {
     }
 
     public double getDistancia() {
-        return medioDeTransporte.calcularDistancia(partida, llegada);
+        return this.medioDeTransporte.calcularDistancia(partida, llegada);
     }
-
-    public DatoDeActividad generarDatoDeActividad(TipoActividadDA tipoActividadDA , TipoConsumoDA tipoConsumo, double valorDA) {
-        return new DatoDeActividad(tipoActividadDA, tipoConsumo, valorDA);
+    public double valorDA(){
+        return this.getDistancia() * this.medioDeTransporte.consumoDeTransoporte();
+    }
+    public DatoDeActividad generarDatoDeActividad() {
+        return new DatoDeActividad(this.medioDeTransporte.tipoDeActividadDA(), this.medioDeTransporte.tipoConsumoDA(), valorDA());
     }
 }
