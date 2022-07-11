@@ -3,6 +3,7 @@ package domain.notificaciones;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TestContacto {
   @Test
@@ -21,6 +22,13 @@ public class TestContacto {
   public void testContactoPreferenciaWhatsapp() {
     Contacto contacto = new Contacto("123456789", null);
     assertEquals(PreferenciasContacto.WHATSAPP, contacto.getPreferenciasContacto());
+  }
+
+  @Test
+  public void testContactoNulo() {
+    Exception excep = assertThrows(IllegalArgumentException.class, () -> {
+      new Contacto(null, null);
+    });
   }
 }
 
