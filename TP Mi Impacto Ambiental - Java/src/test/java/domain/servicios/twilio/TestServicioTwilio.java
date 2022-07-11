@@ -1,10 +1,7 @@
 package domain.servicios.twilio;
 
 import domain.importadorExcel.ApachePOI;
-import domain.notificaciones.Contacto;
-import domain.notificaciones.Difusor;
-import domain.notificaciones.GestorNotificaciones;
-import domain.notificaciones.Notificacion;
+import domain.notificaciones.*;
 import domain.perfil.Clasificacion;
 import domain.perfil.Organizacion;
 import domain.perfil.Tipo;
