@@ -4,6 +4,7 @@ import domain.perfil.Clasificacion;
 import domain.perfil.Importador;
 import domain.perfil.Organizacion;
 import domain.perfil.Tipo;
+import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +16,16 @@ public class MunicipiosODepartamentos {
     Provincia provincia;
     private String municipioOLocalidad;
 
-    public void crearOrganizacion(Organizacion organizacion,Importador moduloImportador,String razonSocial,Tipo tipo, Clasificacion clasificacion,String loc,String cp,String cal,int num){
+    public Organizacion crearOrganizacion(Importador moduloImportador,String razonSocial,Tipo tipo, Clasificacion clasificacion,String loc,String cp,String cal,int num){
         Ubicacion ubicacion=new Ubicacion(this.provincia,this.municipioOLocalidad,loc,cp,cal,num);
-        organizaciones.add(new Organizacion(moduloImportador,ubicacion,razonSocial,tipo,clasificacion));
+        Organizacion org = new Organizacion(moduloImportador,ubicacion,razonSocial,tipo,clasificacion);
+        organizaciones.add(org);
+        return org;
     }
 
-    public MunicipiosODepartamentos(Provincia provincia){
+    public MunicipiosODepartamentos(Provincia provincia,String municipioOLocalidad){
         this.provincia=provincia;
+        this.municipioOLocalidad=municipioOLocalidad;
     }
     public double calcularHC(Integer anio, Integer mes){
         List<Double> mapped = organizaciones.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());

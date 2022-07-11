@@ -22,10 +22,14 @@ public class Area {
         this.organizacion = organizacion;
     }
 
-    public void agregarMiembro(Miembro nuevoMiembro){
-        this.miembros.add(nuevoMiembro);
+    public void gestionarMiembrosPendientes(Integer indice, boolean respuesta){
+        Miembro miembroAAniadir = this.miembrosPendientes.get(indice);
+        this.miembrosPendientes.remove(miembroAAniadir);
+        if(respuesta){
+            miembroAAniadir.aniadirArea(this);
+            this.miembros.add(miembroAAniadir);
+        }
     }
-
 
     public void agregarAMiembroPendiente(Miembro nuevoMiembro){
         this.miembrosPendientes.add(nuevoMiembro);

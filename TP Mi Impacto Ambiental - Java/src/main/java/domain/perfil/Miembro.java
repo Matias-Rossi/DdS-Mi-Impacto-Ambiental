@@ -18,13 +18,16 @@ public class Miembro {
     @Getter
     private List<Tramo> tramosCompartidosAAceptar = new ArrayList<Tramo>();
 
-    Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, Integer numeroDocumento) {
+    public Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, Integer numeroDocumento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
     }
 
+    public void aniadirArea(Area area){
+        this.areas.add(area);
+    }
     public void darseAltaEnOrganizacion(Area area){
         area.agregarAMiembroPendiente(this);
     }

@@ -33,9 +33,10 @@ public class Organizacion{
         this.moduloImportador = moduloImportador;
     }
 
-    public void darAltaArea(String nombreArea){
+    public Area darAltaArea(String nombreArea){
         Area nuevaArea = new Area(nombreArea, this.Organizacion );
         this.areas.add(nuevaArea);
+        return nuevaArea;
     }
 
     public double calcularHC(Integer anio,Integer mes){

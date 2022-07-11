@@ -9,8 +9,10 @@ public class Provincias {
     private Provincia provincia;
     List<MunicipiosODepartamentos> municipiosODepartamentos = new ArrayList<>();
 
-    public void crearMunicipio(MunicipiosODepartamentos municipiosODepartamentos){
-        this.municipiosODepartamentos.add(new MunicipiosODepartamentos(this.provincia));
+    public MunicipiosODepartamentos crearMunicipio(String municipioNombre){
+        MunicipiosODepartamentos muni = new MunicipiosODepartamentos(this.provincia,municipioNombre);
+        this.municipiosODepartamentos.add(muni);
+        return muni;
     }
 
     public Provincias(Provincia provincia){
