@@ -22,7 +22,7 @@ public class Particular implements Transporte {
 
     public double calcularDistancia(Ubicacion inicio, Ubicacion fin){
         try {
-            return calculadorAdapter.calcularDistancia(inicio, fin);
+            return this.calculadorAdapter.calcularDistancia(inicio, fin);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -32,7 +32,7 @@ public class Particular implements Transporte {
         return this.consumoXKm;
     }
     public TipoActividadDA tipoDeActividadDA(){
-        return TipoActividadDA.TRANSPORTE_PUBLICO;
+        return TipoActividadDA.TRANSPORTE_PARTICULAR;
     }
     public TipoConsumoDA tipoConsumoDA(){
         if(this.tipo == TipoParticular.AUTO){

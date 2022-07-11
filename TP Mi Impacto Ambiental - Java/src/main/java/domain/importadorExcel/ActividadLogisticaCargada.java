@@ -10,26 +10,19 @@ public class ActividadLogisticaCargada extends ActividadBase {
   public TipoProductoTransportado tipoProductoTransportado;
   public TipoConsumoDA medioDeTransporte;
   public TipoActividadDA tipoActividad;
-  private double distanciaMediaRecorrida;
-  private double pesoTotalTransportado;
-  private double varianzaDistanciaYPeso = 0.5;
-  public double valorDA = distanciaMediaRecorrida * pesoTotalTransportado * varianzaDistanciaYPeso;
+  private static double distanciaMediaRecorrida;
+  private static double pesoTotalTransportado;
+  private static VaraianzaLogistica varianzaDistanciaYPeso;
+  public static double valorDA;
 
 
-  public ActividadLogisticaCargada(CalculadorDeHC calculadorDeHC,TipoActividadDA tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoConsumoDA tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, Integer anio, Integer mes) {
-    super(calculadorDeHC,tipoActividad,tipoTransporteUtilizado,anio,mes);
-    System.out.println("SE CREA UNA CLASE");
-    System.out.println(calculadorDeHC);
-    System.out.println(tipoActividad);
-    System.out.println(tipoProductoTransportado);
-    System.out.println(tipoTransporteUtilizado);
-    System.out.println(distanciaMediaRecorrida);
-    System.out.println(pesoTotalTransportado);
-    System.out.println(anio);
-    System.out.println(mes);
+  public ActividadLogisticaCargada(CalculadorDeHC calculadorDeHC,TipoActividadDA tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoConsumoDA tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, Integer anio, Integer mes,VaraianzaLogistica varianzaLogistica) {
+    super(calculadorDeHC,tipoActividad,tipoTransporteUtilizado,anio,mes, distanciaMediaRecorrida * pesoTotalTransportado * varianzaLogistica.getVaraianzaLogistica());
     this.tipoProductoTransportado = tipoProductoTransportado;
     this.distanciaMediaRecorrida = distanciaMediaRecorrida;
     this.pesoTotalTransportado =  pesoTotalTransportado;
+    this.varianzaDistanciaYPeso = varianzaLogistica;
+    this.valorDA = distanciaMediaRecorrida * pesoTotalTransportado * varianzaDistanciaYPeso.getVaraianzaLogistica() ;
   }
 
 }

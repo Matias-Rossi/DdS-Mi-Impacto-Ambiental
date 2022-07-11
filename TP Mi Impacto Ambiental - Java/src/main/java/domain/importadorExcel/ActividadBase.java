@@ -7,12 +7,14 @@ import domain.calculadorHC.TipoConsumoDA;
 
 public abstract class ActividadBase {
 
-  public ActividadBase(CalculadorDeHC calculadorDeHC,TipoActividadDA actividad, TipoConsumoDA consumo, Integer anio, Integer mes ){
+  public ActividadBase(CalculadorDeHC calculadorDeHC,TipoActividadDA actividad, TipoConsumoDA consumo, Integer anio, Integer mes,double  valorDA){
   this.calculadorDeHC = calculadorDeHC;
   this.tipoActividadDA = actividad;
   this.consumo = consumo;
   this.anio = anio;
   this.mes = mes;
+  this.valorDA = valorDA;
+
   }
   private TipoActividadDA tipoActividadDA;
   private TipoConsumoDA consumo;
@@ -22,23 +24,26 @@ public abstract class ActividadBase {
   CalculadorDeHC calculadorDeHC;
 
 
-  public boolean delMes(Integer mes){
-    return mes==this.mes;
+  public boolean delMes(Integer mesAProbar){
+    return mesAProbar.equals(this.mes);
   }
-  public boolean delAnio(Integer anio){
-    return anio==this.anio;
+  public boolean delAnio(Integer anioAProbar){
+    return anioAProbar.equals(this.anio);
   }
 
   public double calcularHC(Integer anio,Integer mes) {
-    double HC =this.calculadorDeHC.calcularHC(this.generarDatoDeActividad(this.tipoActividadDA,this.consumo, this.valorDA));
+    double HC =this.calculadorDeHC.calcularHC(this.generarDatoDeActividad());
     if(!this.delAnio(anio)) return 0;
+
     if(mes==0 || this.delMes(mes)) return HC;
-    if(this.delMes(0)) return HC/12;
+
+    if(this.delMes(0)) return HC / 12;
+
     return 0;
   }
 
-  public DatoDeActividad generarDatoDeActividad(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, double valorDA) {
-    return new DatoDeActividad(tipoActividad, tipoConsumo, valorDA);
+  public DatoDeActividad generarDatoDeActividad() {
+    return new DatoDeActividad(this.tipoActividadDA, this.consumo, this.valorDA);
   }
 
 

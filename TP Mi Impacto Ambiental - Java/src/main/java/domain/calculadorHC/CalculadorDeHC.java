@@ -18,7 +18,10 @@ public class CalculadorDeHC {
                 .findFirst()
                 .orElse(null);
     }
+    public void agregarFactorDeEmision(FactorDeEmision factorDeEmision){
+        factoresDeEmision.add(factorDeEmision);
 
+    }
 }
 
 

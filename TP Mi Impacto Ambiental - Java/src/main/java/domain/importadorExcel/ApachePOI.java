@@ -42,8 +42,8 @@ public class ApachePOI implements Importador {
       String valorPeriodoDeImputacion;
       TipoProductoTransportado valorTipoProductoTransportado = null;
       TipoConsumoDA valorTipoTransporteUtilizado = null;
-      double valorDistanciaMedia = 0;
-      double valorPesoTotal = 0;
+      double valorDistanciaMedia = 0.0;
+      double valorPesoTotal = 0.0;
       ActividadBase actividadCargada;
       listaDeCargas = new ArrayList<ActividadBase>();
 
@@ -116,7 +116,7 @@ public class ApachePOI implements Importador {
 
 
         if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS){
-          actividadCargada = new ActividadLogisticaCargada(calculadorDeHC,valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes);
+          actividadCargada = new ActividadLogisticaCargada(calculadorDeHC,valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes,new VaraianzaLogistica(0.5));
 
         }else
           actividadCargada = new ActividadGenericaCargada(calculadorDeHC,valorTipoActividad, valorTipoConsumo, valor, anio, mes);
