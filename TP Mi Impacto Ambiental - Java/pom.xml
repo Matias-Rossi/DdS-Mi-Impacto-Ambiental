@@ -97,11 +97,7 @@
       <artifactId>backport-util-concurrent</artifactId>
       <version>3.1</version>
     </dependency>
-    <dependency>
-      <groupId>ar.edu.utn.frba.dds</groupId>
-      <artifactId>ejercicio</artifactId>
-      <version>1.0-SNAPSHOT</version>
-    </dependency>
+
 
 
   </dependencies>
