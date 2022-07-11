@@ -37,13 +37,18 @@ public class TestMiembro {
                 "calle falsa",
                 123
         );
-        Clasificacion clasificacionTest = new Clasificacion("dasdsa");
-        Organizacion organizacionTest = new Organizacion(importadorApache, ubicacionTest, "testSA", Tipo.EMPRESA, clasificacionTest);
-        List<Organizacion> organizacionesTest = new ArrayList<Organizacion>();
-        organizacionesTest.add(organizacionTest);
+
+    Clasificacion clasificacionTest = new Clasificacion("dasdsa");
+    Organizacion organizacionTest = new Organizacion(importadorApache, ubicacionTest, "testSA", Tipo.EMPRESA, clasificacionTest);
+    List<Organizacion> organizacionesTest = new ArrayList<Organizacion>();
+    organizacionesTest.add(organizacionTest);
+
+    List<Integer> indices = new ArrayList<>();
+    indices.add(0);
+
         //
     Miembro miembro = new Miembro("Persona",  "Falsa", TipoDocumento.DNI, 12345789);
-    Trayecto trayectoTest = miembro.generarTrayecto("Trayecto prueba", organizacionesTest,2022,1,20 );
+    Trayecto trayectoTest = miembro.generarTrayecto("Trayecto prueba", indices,2022,1,20 );
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
     Ubicacion ubicacion1 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa1", 124);
     Ubicacion ubicacion2 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa2", 125);
@@ -77,9 +82,13 @@ public class TestMiembro {
       Organizacion organizacionTest = new Organizacion(importadorApache, ubicacionTest, "testSA", Tipo.EMPRESA, clasificacionTest);
       List<Organizacion> organizacionesTest = new ArrayList<Organizacion>();
       organizacionesTest.add(organizacionTest);
-    Miembro miembroCompartido = new Miembro("PersonaCompartida",  "Falsa", TipoDocumento.DNI, 987654321);
 
-    Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", organizacionesTest,2022,1,20 );
+      List<Integer> indices = new ArrayList<>();
+      indices.add(0);
+
+      Miembro miembroCompartido = new Miembro("PersonaCompartida",  "Falsa", TipoDocumento.DNI, 987654321);
+
+    Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", indices,2022,1,20 );
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
     Transporte trans = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5); //TODO Ver si explota
 
@@ -87,7 +96,7 @@ public class TestMiembro {
     tramoCompartido.compartirTramo(miembroCompartido);
 
     assertTrue(miembroCompartido.getTramosCompartidosAAceptar().size() == 1 );
-    miembroCompartido.gestionarTramosCompartidos(tramoCompartido, trayectoTest, true);
+    miembroCompartido.gestionarTramosCompartidos(0, 0, true);
     assertTrue(tramoCompartido.getIntegrantes() == 2 );
   }
 }

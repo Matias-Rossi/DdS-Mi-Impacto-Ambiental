@@ -52,11 +52,13 @@ public class Trayecto {
         this.diasAlMes = diasAlMes;
     }
 
-    public void aniadirNuevoTramo(Ubicacion salida, Ubicacion llegada, Transporte transporte, CalculadorDeHC calculadorDeHC){
-        this.agregarTramo(new Tramo(salida, llegada, transporte, calculadorDeHC));
+    public Tramo aniadirNuevoTramo(Ubicacion salida, Ubicacion llegada, Transporte transporte, CalculadorDeHC calculadorDeHC){
+        Tramo nuevoTramo = new Tramo(salida, llegada, transporte, calculadorDeHC);
+        this.agregarIntegranteATramo(nuevoTramo);
+        return  nuevoTramo;
     }
 
-    public void agregarTramo(Tramo tramo){
+    public void agregarIntegranteATramo(Tramo tramo){
         this.tramos.add(tramo);
         tramo.sumarIntegrante();
     }

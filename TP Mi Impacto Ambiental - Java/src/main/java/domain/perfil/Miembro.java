@@ -48,15 +48,19 @@ public class Miembro {
         this.tramosCompartidosAAceptar.add(tramo);
     }
 
-    public void gestionarTramosCompartidos(Tramo tramoCompartido, Trayecto miTrayecto, boolean respuesta ){
+    public void gestionarTramosCompartidos(Integer indiceSolicitud, Integer indiceTrayecto, boolean respuesta ){
+        Tramo tramoCompartido = tramosCompartidosAAceptar.get(indiceSolicitud);
+        Trayecto trayectoParaTramo = trayectos.get(indiceTrayecto);
         this.tramosCompartidosAAceptar.remove(tramoCompartido);
         if(respuesta) {
-            miTrayecto.agregarTramo(tramoCompartido);
+            trayectoParaTramo.agregarIntegranteATramo(tramoCompartido);
         }
         //en caso de que sea rechazado no lo va a hacer nada
     }
 
-    public Trayecto generarTrayecto(String descripcion,List<Organizacion> organizaciones,Integer anio, Integer semestre, Integer diasAlMes){
+    public Trayecto generarTrayecto(String descripcion,List<Integer> indicesOrganizaciones,Integer anio, Integer semestre, Integer diasAlMes){
+        List<Organizacion> organizaciones = new ArrayList<Organizacion>();
+        indicesOrganizaciones.forEach(e->organizaciones.add(this.decirOrganizacion(this.areas.get(e))));
         Trayecto nuevoTrayecto = new Trayecto(descripcion,organizaciones,diasAlMes,anio,semestre);
         trayectos.add(nuevoTrayecto);
         return nuevoTrayecto;

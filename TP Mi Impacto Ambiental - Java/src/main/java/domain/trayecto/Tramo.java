@@ -20,7 +20,7 @@ public class Tramo implements ActividadesEmisorasCO2 {
     private Transporte medioDeTransporte;
     private CalculadorDeHC calculadorDeHC;
     @Getter
-    private int integrantes = 1;
+    private int integrantes = 0;
 
 
 
