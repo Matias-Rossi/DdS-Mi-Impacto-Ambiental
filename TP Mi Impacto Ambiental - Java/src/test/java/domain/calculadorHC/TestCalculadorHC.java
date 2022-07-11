@@ -120,17 +120,17 @@ public class TestCalculadorHC {
     @Test
     @DisplayName("Test Calcular HC")
     public void testCalculadorHC(){
-    FactorDeEmision factorDeEmisionTest1 = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PUBLICO, TipoConsumoDA.SUBTE_BASE,0.5);
-    FactorDeEmision factorDeEmisionTest2 = new FactorDeEmision(TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoConsumoDA.CAMION_DE_CARGA,0.2);
-    DatoDeActividad datoDeActividadTest1 = new DatoDeActividad(TipoActividadDA.TRANSPORTE_PUBLICO, TipoConsumoDA.SUBTE_BASE, 200);
-    DatoDeActividad datoDeActividadTest2 = new DatoDeActividad(TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoConsumoDA.CAMION_DE_CARGA, 1000);
-    CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
+        FactorDeEmision factorDeEmisionTest1 = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PUBLICO, TipoConsumoDA.SUBTE_BASE,0.5);
+        FactorDeEmision factorDeEmisionTest2 = new FactorDeEmision(TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoConsumoDA.CAMION_DE_CARGA,0.2);
+        DatoDeActividad datoDeActividadTest1 = new DatoDeActividad(TipoActividadDA.TRANSPORTE_PUBLICO, TipoConsumoDA.SUBTE_BASE, 200);
+        DatoDeActividad datoDeActividadTest2 = new DatoDeActividad(TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoConsumoDA.CAMION_DE_CARGA, 1000);
+        CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
 
-    calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest1);
-    calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest2);
+        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest1);
+        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest2);
 
-    assertTrue(calculadorDeHCTest.calcularHC(datoDeActividadTest1) == 100);
-    assertTrue(calculadorDeHCTest.calcularHC(datoDeActividadTest2) == 200);
+        assertTrue(calculadorDeHCTest.calcularHC(datoDeActividadTest1) == 100);
+        assertTrue(calculadorDeHCTest.calcularHC(datoDeActividadTest2) == 200);
 
     }
     @Test

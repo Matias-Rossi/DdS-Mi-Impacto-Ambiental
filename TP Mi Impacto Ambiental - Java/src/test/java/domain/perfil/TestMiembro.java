@@ -40,14 +40,16 @@ public class TestMiembro {
 
     Clasificacion clasificacionTest = new Clasificacion("dasdsa");
     Organizacion organizacionTest = new Organizacion(importadorApache, ubicacionTest, "testSA", Tipo.EMPRESA, clasificacionTest);
-    List<Organizacion> organizacionesTest = new ArrayList<Organizacion>();
-    organizacionesTest.add(organizacionTest);
+    Area area = organizacionTest.darAltaArea("arita");
 
     List<Integer> indices = new ArrayList<>();
     indices.add(0);
 
         //
     Miembro miembro = new Miembro("Persona",  "Falsa", TipoDocumento.DNI, 12345789);
+    miembro.darseAltaEnOrganizacion(area);
+    area.gestionarMiembrosPendientes(0,true);
+
     Trayecto trayectoTest = miembro.generarTrayecto("Trayecto prueba", indices,2022,1,20 );
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
     Ubicacion ubicacion1 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa1", 124);
@@ -69,6 +71,7 @@ public class TestMiembro {
   @Test
   @DisplayName("Test trayecto compartido")
   public void testCompartido() throws IOException {
+    CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
       Importador importadorApache = new ApachePOI();
       Ubicacion ubicacionTest = new Ubicacion(
               domain.ubicacion.Provincia.Buenos_Aires,
@@ -80,19 +83,22 @@ public class TestMiembro {
       );
       Clasificacion clasificacionTest = new Clasificacion("dasdsa");
       Organizacion organizacionTest = new Organizacion(importadorApache, ubicacionTest, "testSA", Tipo.EMPRESA, clasificacionTest);
-      List<Organizacion> organizacionesTest = new ArrayList<Organizacion>();
-      organizacionesTest.add(organizacionTest);
 
-      List<Integer> indices = new ArrayList<>();
-      indices.add(0);
+      Area area = organizacionTest.darAltaArea("arita");
 
-      Miembro miembroCompartido = new Miembro("PersonaCompartida",  "Falsa", TipoDocumento.DNI, 987654321);
 
-    Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", indices,2022,1,20 );
+
+    List<Integer> indices = new ArrayList<>();
+    indices.add(0);
+    Miembro miembroCompartido = new Miembro("PersonaCompartida",  "Falsa", TipoDocumento.DNI, 987654321);
+    miembroCompartido.darseAltaEnOrganizacion(area);
+    area.gestionarMiembrosPendientes(0,true);
+
+    Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", indices ,2022,1,20 );
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
     Transporte trans = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5); //TODO Ver si explota
 
-    Tramo tramoCompartido = new Tramo(ubicacion, ubicacion, trans,new CalculadorDeHC());
+    Tramo tramoCompartido = trayectoTest.aniadirNuevoTramo(ubicacion,ubicacion,trans,calculadorDeHCTest);
     tramoCompartido.compartirTramo(miembroCompartido);
 
     assertTrue(miembroCompartido.getTramosCompartidosAAceptar().size() == 1 );

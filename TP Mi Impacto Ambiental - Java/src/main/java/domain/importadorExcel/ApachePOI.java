@@ -22,7 +22,7 @@ public class ApachePOI implements Importador {
 
   public List<ActividadBase> importarDatos(String path, CalculadorDeHC calculadorDeHC) {
     int cantidadDeValoresDeLogistica = 4;
-    List<ActividadBase> listaDeCargas = null;
+    List<ActividadBase> listaDeCargas = new ArrayList<>();
     try {
       FileInputStream excellFile = new FileInputStream(path);
       XSSFWorkbook excell = new XSSFWorkbook(excellFile);

@@ -1,13 +1,14 @@
 package domain.perfil;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Area {
     private String nombre;
     private Organizacion organizacion;
-    private List<Miembro> miembros ;
-    private List<Miembro> miembrosPendientes;
+    private List<Miembro> miembros = new ArrayList<>();
+    private List<Miembro> miembrosPendientes = new ArrayList<>();
 
     public Area(String nombreArea, Organizacion nombreOrganizacion) {
         this.nombre = nombreArea;
