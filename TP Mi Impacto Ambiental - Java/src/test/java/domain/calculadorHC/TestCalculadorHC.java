@@ -274,6 +274,81 @@ public class TestCalculadorHC {
 
 
   }
+    @Test
+    @DisplayName("Test Calcular HC por Area")
+    public void testCalculadorHCPorArea() throws IOException{
+
+        Importador moduloImportadorTest = new ApachePOI();
+        CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
+        Clasificacion clasificacion = new Clasificacion("Ministerio");
+        Provincias Cordoba = new Provincias(Provincia.Cordoba);
+        MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
+        Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
+        Area RRHH = organizacionEj.darAltaArea("RRHH");
+        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Juan.darseAltaEnOrganizacion(RRHH);
+        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
+        List<Integer> indices = new ArrayList<>();
+        indices.add(0);
+        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+
+        Ubicacion ubicacionSalida = new Ubicacion(
+            domain.ubicacion.Provincia.Buenos_Aires,
+            "Bragado",
+            "Bragado",
+            "C1234",
+            "calle falsa",
+            120
+        );
+        Ubicacion ubicacionllegada = new Ubicacion(
+            domain.ubicacion.Provincia.Buenos_Aires,
+            "Bragado",
+            "Bragado",
+            "C1234",
+            "calle falsa",
+            121
+        );
+
+        FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
+        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
+
+        Transporte autoDeJuan = new Particular(TipoParticular.AUTO, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia(), 0.5);
+        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+
+
+        assertTrue(Juan.calcularHCPorcentual(2022, 8, RRHH) > 0);
+        Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Juan2.darseAltaEnOrganizacion(RRHH);
+        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
+        List<Integer> indices2 = new ArrayList<>();
+        indices2.add(0);
+        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+
+        Ubicacion ubicacionSalida2 = new Ubicacion(
+            domain.ubicacion.Provincia.Buenos_Aires,
+            "Bragado",
+            "Bragado",
+            "C1234",
+            "calle falsa",
+            120
+        );
+        Ubicacion ubicacionllegada2 = new Ubicacion(
+            domain.ubicacion.Provincia.Buenos_Aires,
+            "Bragado",
+            "Bragado",
+            "C1234",
+            "calle falsa",
+            121
+        );
+
+
+        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+
+        assertTrue(RRHH.calcularHC(2022, 8) > 0);
+        assertTrue(RRHH.calcularHCporMiembro(2022, 8) > 0);
+
+
+    }
 
     @Test
     @DisplayName("Test Calcular HC por Municipio")
