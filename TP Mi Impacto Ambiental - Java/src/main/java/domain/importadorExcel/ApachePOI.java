@@ -56,7 +56,6 @@ public class ApachePOI implements Importador {
         celdas = fila.cellIterator();
 
         celda = celdas.next();
-
         valorTipoActividad = TipoActividadDA.valueOf(celda.getStringCellValue());
         celda = celdas.next();
 

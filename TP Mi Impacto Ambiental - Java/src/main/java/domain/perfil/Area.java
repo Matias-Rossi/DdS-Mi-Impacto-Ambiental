@@ -1,11 +1,14 @@
 package domain.perfil;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Area {
-    private String nombre;
+    @Getter
+    public String nombre;
     private Organizacion organizacion;
     private List<Miembro> miembros = new ArrayList<>();
     private List<Miembro> miembrosPendientes = new ArrayList<>();
@@ -16,11 +19,7 @@ public class Area {
     }
 
     public Organizacion getOrganizacion() {
-        return organizacion;
-    }
-
-    public void setOrganizacion(Organizacion organizacion) {
-        this.organizacion = organizacion;
+        return this.organizacion;
     }
 
     public void gestionarMiembrosPendientes(Integer indice, boolean respuesta){

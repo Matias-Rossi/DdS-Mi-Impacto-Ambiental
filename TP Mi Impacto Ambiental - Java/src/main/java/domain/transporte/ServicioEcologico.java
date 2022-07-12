@@ -30,7 +30,7 @@ public class ServicioEcologico implements Transporte{
     public double consumoDeTransoporte(){
         return consumoXKm;
     }
-    public TipoActividadDA tipoDeActividadDA(){
+    public TipoActividadDA tipoActividadDA(){
         return TipoActividadDA.SERVICIO_ECOLOGICO;
     }
     public TipoConsumoDA tipoConsumoDA(){

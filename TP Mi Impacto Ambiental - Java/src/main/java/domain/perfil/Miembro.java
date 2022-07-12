@@ -14,6 +14,7 @@ public class Miembro {
     private TipoDocumento tipoDocumento;
     private Integer numeroDocumento;
     private List<Area> areas = new ArrayList<Area>();
+
     private List<Trayecto> trayectos = new ArrayList<Trayecto>();
     @Getter
     private List<Tramo> tramosCompartidosAAceptar = new ArrayList<Tramo>();

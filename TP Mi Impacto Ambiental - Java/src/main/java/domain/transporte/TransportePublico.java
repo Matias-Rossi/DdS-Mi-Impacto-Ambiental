@@ -34,7 +34,7 @@ public class TransportePublico implements Transporte {
     public double consumoDeTransoporte(){
         return consumoPercapitaXKm;
     }
-    public TipoActividadDA tipoDeActividadDA(){
+    public TipoActividadDA tipoActividadDA(){
         return TipoActividadDA.TRANSPORTE_PUBLICO;
     }
     public TipoConsumoDA tipoConsumoDA(){

@@ -4,12 +4,12 @@ import java.util.List;
 
 public class CalculadorDeHC {
 
-    private  List<FactorDeEmision> factoresDeEmision = new ArrayList<FactorDeEmision>();
+    private  List<FactorDeEmision> factoresDeEmision = new ArrayList<>();
 
     public double calcularHC(DatoDeActividad actividad){
         FactorDeEmision factorDeEmision = devolverFactorDeEmision(actividad.getTipoconsumoDA(),actividad.getTipoActividadDA());
-
-        return factorDeEmision.getFactorEmision() * actividad.getDA();
+        if (factorDeEmision == null) return 0;
+            else return factorDeEmision.getFactorEmision() * actividad.getDA();
     }
 
     public FactorDeEmision devolverFactorDeEmision(TipoConsumoDA consumo, TipoActividadDA actividad) {

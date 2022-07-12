@@ -82,7 +82,7 @@ public class ServicioTwilio implements GestorNotificaciones {
   }
 
   public Boolean enviarNotificacion(Contacto contacto, Notificacion notificacion) {
-    //TODO hay que mejorar como esta planteado esto
+    //hay que mejorar como esta planteado esto
     if (contacto.getPreferenciasContacto() == PreferenciasContacto.WHATSAPP) {
       return enviarWhatsapp(contacto.getTelefono(), notificacion.formatoWhatsapp());
     } else if (contacto.getPreferenciasContacto() == PreferenciasContacto.EMAIL) {

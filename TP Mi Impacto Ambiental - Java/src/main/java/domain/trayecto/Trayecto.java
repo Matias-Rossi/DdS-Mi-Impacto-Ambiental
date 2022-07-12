@@ -4,6 +4,7 @@ import domain.calculadorHC.CalculadorDeHC;
 import domain.perfil.Organizacion;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
+import lombok.Getter;
 //import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Trayecto {
 
     private String descripcion;
     private List<Organizacion> organizaciones = new ArrayList<>();
+    @Getter
     private List<Tramo> tramos = new ArrayList<Tramo>();
 /*
     private Ubicacion fin(){
@@ -30,16 +32,15 @@ public class Trayecto {
  */
     public double calcularHC(Integer anio, Integer mes, Organizacion organizacion)
     {
-        if((!this.organizaciones.contains(organizacion)) || anio!=this.anio) return 0;
+        if((!this.organizaciones.contains(organizacion)) || !anio.equals(this.anio))return 0;
 
         List<Double> mapped = tramos.stream().map(e->e.calcularHC()).collect(Collectors.toList());
         double HCdiario = (mapped.stream().reduce(0.0, (a, b) ->a+b))/organizaciones.size();
         double HCxMes = HCdiario*diasAlMes;
         Integer inicioSem = (this.semestre-1)*6;
         Integer finSem = this.semestre*6;
-        if(mes==0) return HCxMes*6;
-        if(inicioSem<mes && mes<=finSem*6) return HCxMes;
-
+        if(mes.equals(0)) return HCxMes*6;
+        if(inicioSem<mes && mes<=finSem*6)return HCxMes;
         return 0;
     }
 

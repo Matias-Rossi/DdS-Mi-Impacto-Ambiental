@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public class Organizacion{
     @Getter
-    private List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
+    public List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
     private String razonSocial;
     private Tipo tipo;
     private List<Area> areas= new ArrayList<Area>();
@@ -34,7 +34,7 @@ public class Organizacion{
     }
 
     public Area darAltaArea(String nombreArea){
-        Area nuevaArea = new Area(nombreArea, this.Organizacion );
+        Area nuevaArea = new Area(nombreArea, this );
         this.areas.add(nuevaArea);
         return nuevaArea;
     }
@@ -43,7 +43,7 @@ public class Organizacion{
         return this.calcularHCConsumos(anio,mes)+this.calcularHCViajes(anio,mes);
     }
     private double calcularHCConsumos(Integer anio,Integer mes){
-        List<Double> mapped = actividadesCargadas.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());//TODO lo de dividir por 12
+        List<Double> mapped = actividadesCargadas.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
     private double calcularHCViajes(Integer anio,Integer mes){

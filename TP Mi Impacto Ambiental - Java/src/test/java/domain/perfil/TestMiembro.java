@@ -17,11 +17,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
-
-
-
-//Test temporal
 public class TestMiembro {
   @Test
   @DisplayName("Test Distancia De Trayecto")
@@ -54,9 +49,9 @@ public class TestMiembro {
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
     Ubicacion ubicacion1 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa1", 124);
     Ubicacion ubicacion2 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa2", 125);
-    Transporte trans = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5); //TODO Ver si explota
-    Transporte trans2 = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.4); //TODO Ver si explota
-    Transporte trans3 = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.3); //TODO Ver si explota
+    Transporte trans = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
+    Transporte trans2 = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.4);
+    Transporte trans3 = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.3);
     CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
     trayectoTest.aniadirNuevoTramo(ubicacion, ubicacion, trans ,calculadorDeHCTest);
     trayectoTest.aniadirNuevoTramo(ubicacion1, ubicacion, trans2,calculadorDeHCTest);
@@ -96,7 +91,7 @@ public class TestMiembro {
 
     Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", indices ,2022,1,20 );
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
-    Transporte trans = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5); //TODO Ver si explota
+    Transporte trans = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
 
     Tramo tramoCompartido = trayectoTest.aniadirNuevoTramo(ubicacion,ubicacion,trans,calculadorDeHCTest);
     tramoCompartido.compartirTramo(miembroCompartido);
@@ -105,6 +100,7 @@ public class TestMiembro {
     miembroCompartido.gestionarTramosCompartidos(0, 0, true);
     assertTrue(tramoCompartido.getIntegrantes() == 2 );
   }
+
 }
 
 

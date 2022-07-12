@@ -9,7 +9,7 @@ public interface Transporte {
     //TODO hacer que los transportes implementen Transporte
     public TipoTransporte decirTipoTransporte();
     public double consumoDeTransoporte();
-    public TipoActividadDA tipoDeActividadDA();
+    public TipoActividadDA tipoActividadDA();
     public TipoConsumoDA tipoConsumoDA();
     public double calcularDistancia(Ubicacion inicio, Ubicacion fin);
 }

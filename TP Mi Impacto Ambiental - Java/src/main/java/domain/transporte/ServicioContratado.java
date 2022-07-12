@@ -29,7 +29,7 @@ public class ServicioContratado implements Transporte  {
     public double consumoDeTransoporte(){
         return this.consumoXKm;
     }
-    public TipoActividadDA tipoDeActividadDA(){
+    public TipoActividadDA tipoActividadDA(){
         return TipoActividadDA.SERVICIO_CONTRATADO;
     }
     public TipoConsumoDA tipoConsumoDA(){

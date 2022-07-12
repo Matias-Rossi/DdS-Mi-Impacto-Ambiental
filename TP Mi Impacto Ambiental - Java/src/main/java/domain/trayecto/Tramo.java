@@ -17,29 +17,25 @@ public class Tramo implements ActividadesEmisorasCO2 {
     }
     private Ubicacion partida;
     private Ubicacion llegada;
-    private Transporte medioDeTransporte;
+    @Getter
+    public Transporte medioDeTransporte;
     private CalculadorDeHC calculadorDeHC;
     @Getter
-    private int integrantes = 0;
-
-
-
-
-
+    public int integrantes = 0;
 
     public double calcularHC(){
-        return calculadorDeHC.calcularHC( generarDatoDeActividad() )/this.integrantes ;
-
+        return calculadorDeHC.calcularHC( this.generarDatoDeActividad() )/ this.integrantes ;
     }
+
     public void compartirTramo(Miembro miembro){
         if ((this.medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_CONTRATADO) || (this.medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_PARTICULAR)){
             miembro.recibirSolicitud(this);
         }else System.err.println("ESTE TRANSPORTE NO PUEDE SER COMPARTIDO");
     }
+
     public void sumarIntegrante(){
         this.integrantes++;
     }
-
     public double getDistancia() {
         return this.medioDeTransporte.calcularDistancia(partida, llegada);
     }
@@ -47,6 +43,6 @@ public class Tramo implements ActividadesEmisorasCO2 {
         return this.getDistancia() * this.medioDeTransporte.consumoDeTransoporte();
     }
     public DatoDeActividad generarDatoDeActividad() {
-        return new DatoDeActividad(this.medioDeTransporte.tipoDeActividadDA(), this.medioDeTransporte.tipoConsumoDA(), valorDA());
+        return new DatoDeActividad(this.medioDeTransporte.tipoActividadDA(), this.medioDeTransporte.tipoConsumoDA(), this.valorDA());
     }
 }
