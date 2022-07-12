@@ -14,6 +14,7 @@ public class Tramo implements ActividadesEmisorasCO2 {
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
+        this.distancia = transporte.calcularDistancia(partida, llegada); ;
     }
     private Ubicacion partida;
     private Ubicacion llegada;
@@ -22,6 +23,7 @@ public class Tramo implements ActividadesEmisorasCO2 {
     private CalculadorDeHC calculadorDeHC;
     @Getter
     public int integrantes = 0;
+    public double distancia;
 
     public double calcularHC(){
         return calculadorDeHC.calcularHC( this.generarDatoDeActividad() )/ this.integrantes ;
@@ -37,10 +39,10 @@ public class Tramo implements ActividadesEmisorasCO2 {
         this.integrantes++;
     }
     public double getDistancia() {
-        return this.medioDeTransporte.calcularDistancia(partida, llegada);
+        return this.distancia;
     }
     public double valorDA(){
-        return this.getDistancia() * this.medioDeTransporte.consumoDeTransoporte();
+        return this.distancia * this.medioDeTransporte.consumoDeTransoporte();
     }
     public DatoDeActividad generarDatoDeActividad() {
         return new DatoDeActividad(this.medioDeTransporte.tipoActividadDA(), this.medioDeTransporte.tipoConsumoDA(), this.valorDA());
