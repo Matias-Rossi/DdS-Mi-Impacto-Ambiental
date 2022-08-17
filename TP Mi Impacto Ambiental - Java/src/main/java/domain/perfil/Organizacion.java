@@ -6,25 +6,42 @@ import domain.notificaciones.Contacto;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 
+import javax.persistence.*;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
+@Entity
+@Table(name = "organizaciones")
 public class Organizacion{
+    @Id
+    @GeneratedValue
+    private int id;
     @Getter
+    @Transient
     public List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
+    @Column(name = "razonSocial")
     private String razonSocial;
+
+    @Transient
     private Tipo tipo;
+    @Transient
     private List<Area> areas= new ArrayList<Area>();
+    @Transient
     private Clasificacion clasificacion;
+    @Transient
     private Ubicacion ubicacion;
+    @Transient
     private Importador moduloImportador;
+    @Transient
     private domain.perfil.Organizacion Organizacion;
+    @Transient
     @Getter
     private List<Contacto> contactos = new ArrayList<Contacto>();
 
+    public Organizacion(){
+    }
     public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion) {
         this.ubicacion=ubicacion;
         this.razonSocial=razonSocial;
