@@ -1,21 +1,32 @@
 package domain.perfil;
 
+import domain.persistenceExtend.EntidadPersistente;
 import lombok.Getter;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-public class Area {
+@Entity
+@Table(name = "areas")
+public class Area extends EntidadPersistente {
     @Getter
     public String nombre;
+    @ManyToOne
+    @JoinColumn(name = "organizaciones_id", referencedColumnName = "id")
     private Organizacion organizacion;
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Miembro> miembros = new ArrayList<>();
+    @Transient
     private List<Miembro> miembrosPendientes = new ArrayList<>();
 
     public Area(String nombreArea, Organizacion nombreOrganizacion) {
         this.nombre = nombreArea;
         this.organizacion = nombreOrganizacion;
+    }
+
+    public Area() {
+
     }
 
     public Organizacion getOrganizacion() {

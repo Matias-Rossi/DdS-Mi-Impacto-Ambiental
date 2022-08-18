@@ -3,6 +3,7 @@ package domain.perfil;
 import domain.calculadorHC.CalculadorDeHC;
 import domain.importadorExcel.ActividadBase;
 import domain.notificaciones.Contacto;
+import domain.persistenceExtend.EntidadPersistente;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 
@@ -14,21 +15,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 @Entity
 @Table(name = "organizaciones")
-public class Organizacion{
-    @Id
-    @GeneratedValue
-    private int id;
+public class Organizacion extends EntidadPersistente {
     @Getter
     @Transient
     public List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
     @Column(name = "razonSocial")
     private String razonSocial;
 
-    @Transient
+    @Column(name = "tipo")
     private Tipo tipo;
-    @Transient
+    @OneToMany(mappedBy = "id", cascade = {CascadeType.ALL})
     private List<Area> areas= new ArrayList<Area>();
-    @Transient
+    @ManyToOne
+    @JoinColumn(name = "clasificaciones_id", referencedColumnName = "id")
     private Clasificacion clasificacion;
     @Transient
     private Ubicacion ubicacion;

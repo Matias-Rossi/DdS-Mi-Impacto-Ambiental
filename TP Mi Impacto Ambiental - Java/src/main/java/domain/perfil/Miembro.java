@@ -1,22 +1,33 @@
 package domain.perfil;
 
+import domain.persistenceExtend.EntidadPersistente;
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;
 import lombok.Getter;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Miembro {
+@Entity
+@Table(name = "miembros")
+public class Miembro extends EntidadPersistente {
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "apellido")
     private String apellido;
+    @Column(name = "tipoDoc")
     private TipoDocumento tipoDocumento;
+    @Column(name = "numeroDoc")
     private Integer numeroDocumento;
+    @ManyToMany
     private List<Area> areas = new ArrayList<Area>();
 
+    @Transient
     private List<Trayecto> trayectos = new ArrayList<Trayecto>();
     @Getter
+    @Transient
     private List<Tramo> tramosCompartidosAAceptar = new ArrayList<Tramo>();
 
     public Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, Integer numeroDocumento) {
@@ -24,6 +35,10 @@ public class Miembro {
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
+    }
+
+    public Miembro() {
+
     }
 
     public void aniadirArea(Area area){
