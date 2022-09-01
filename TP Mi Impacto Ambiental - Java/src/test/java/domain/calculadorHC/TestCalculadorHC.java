@@ -25,7 +25,7 @@ import static domain.perfil.Tipo.ONG;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestCalculadorHC {
-
+/*
     @Test
     @DisplayName("Test Calcular HC")
     public void testCalculadorHC(){
@@ -498,6 +498,6 @@ public class TestCalculadorHC {
         assertTrue(Cordoba.calcularHC(2022, 8) > 0);
 
     }
-
+*/
 
 }

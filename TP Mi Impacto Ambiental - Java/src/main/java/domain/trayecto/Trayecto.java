@@ -2,23 +2,37 @@ package domain.trayecto;
 
 import domain.calculadorHC.CalculadorDeHC;
 import domain.perfil.Organizacion;
+import domain.persistenceExtend.EntidadPersistente;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 //import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-public class Trayecto {
+@Entity
+@Table(name = "trayectos")
+public class Trayecto extends EntidadPersistente {
+    @Column(name = "anio")
     private Integer anio;
+    @Column(name = "semestre")
     private Integer semestre;
+    @Column(name = "diasAlMes")
     private  Integer diasAlMes;
-
+    @Column(name = "descripcion")
     private String descripcion;
+    @ManyToMany
+    @JoinTable(name = "trayectos_organizaciones",
+            joinColumns = @JoinColumn(name = "trayecto_id"),
+            inverseJoinColumns = @JoinColumn(name = "organizacion_id"))
     private List<Organizacion> organizaciones = new ArrayList<>();
     @Getter
+    @ManyToMany
+    @JoinTable(name = "trayectos_tramos",
+            joinColumns = @JoinColumn(name = "trayecto_id"),
+            inverseJoinColumns = @JoinColumn(name = "tramo_id"))
     private List<Tramo> tramos = new ArrayList<Tramo>();
 /*
     private Ubicacion fin(){

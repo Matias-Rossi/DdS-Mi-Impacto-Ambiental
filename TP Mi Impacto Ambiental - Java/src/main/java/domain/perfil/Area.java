@@ -11,14 +11,19 @@ import java.util.stream.Collectors;
 @Table(name = "areas")
 public class Area extends EntidadPersistente {
     @Getter
+    @Column(name = "nombre")
     public String nombre;
     @ManyToOne
     @JoinColumn(name = "organizaciones_id", referencedColumnName = "id")
     private Organizacion organizacion;
+    /*
     @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Miembro> miembros = new ArrayList<>();
     @Transient
     private List<Miembro> miembrosPendientes = new ArrayList<>();
+*/
+    @OneToMany
+    private  List<Solicitud> solicitudes = new ArrayList<>();
 
     public Area(String nombreArea, Organizacion nombreOrganizacion) {
         this.nombre = nombreArea;
@@ -33,25 +38,25 @@ public class Area extends EntidadPersistente {
         return this.organizacion;
     }
 
-    public void gestionarMiembrosPendientes(Integer indice, boolean respuesta){
-        Miembro miembroAAniadir = this.miembrosPendientes.get(indice);
-        this.miembrosPendientes.remove(miembroAAniadir);
-        if(respuesta){
-            miembroAAniadir.aniadirArea(this);
-            this.miembros.add(miembroAAniadir);
-        }
+    public void gestionarMiembrosPendientes(Solicitud solicitud, SolicitudEstado estado) {
+        solicitud.setEstado(estado);
     }
 
-    public void agregarAMiembroPendiente(Miembro nuevoMiembro){
-        this.miembrosPendientes.add(nuevoMiembro);
+    public void agregarAMiembroPendiente(Solicitud solicitud){
+
+        this.solicitudes.add(solicitud);
     }
 
     public double calcularHCporMiembro(Integer anio,Integer mes){
-        return this.calcularHC(anio,mes)/this.miembros.size();
+        return this.calcularHC(anio,mes)/this.miembrosActuales().size();
+    }
+
+    private List<Solicitud> miembrosActuales(){
+        return this.solicitudes.stream().filter(solicitud -> solicitud.getEstado() == SolicitudEstado.ACEPTADA).collect(Collectors.toList());
     }
     public double calcularHC(Integer anio, Integer mes){
 
-        List<Double> mapped = miembros.stream().map(e->e.calcularHC(anio,mes,this.organizacion)).collect(Collectors.toList());
+        List<Double> mapped = solicitudes.stream().map(e->e.calcularHC(anio,mes,this.organizacion)).collect(Collectors.toList());
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
 

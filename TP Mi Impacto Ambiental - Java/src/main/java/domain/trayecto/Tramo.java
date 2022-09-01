@@ -8,7 +8,22 @@ import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 
-public class Tramo implements ActividadesEmisorasCO2 {
+import javax.persistence.*;
+
+@Entity
+@Table
+public class Tramo implements ActividadesEmisorasCO2{
+    @Id
+    @GeneratedValue
+    private int id;
+
+    public Tramo() {
+
+    }
+
+    public int getId() {
+        return id;
+    }
     public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte,CalculadorDeHC calculadorDeHC){
         this.calculadorDeHC = calculadorDeHC;
         this.partida = partida;
@@ -16,13 +31,20 @@ public class Tramo implements ActividadesEmisorasCO2 {
         this.medioDeTransporte = transporte;
         this.distancia = transporte.calcularDistancia(partida, llegada); ;
     }
+    @Transient
     private Ubicacion partida;
+    @Transient
     private Ubicacion llegada;
     @Getter
+    @ManyToOne
+    @JoinColumn(name = "organizaciones_id", referencedColumnName = "id")
     public Transporte medioDeTransporte;
+    @Transient
     private CalculadorDeHC calculadorDeHC;
     @Getter
+    @Column(name = "cant_integrantes")
     public int integrantes = 0;
+    @Column(name = "distancia")
     public double distancia;
 
     public double calcularHC(){

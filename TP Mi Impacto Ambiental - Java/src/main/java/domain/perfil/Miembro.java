@@ -13,21 +13,34 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "miembros")
 public class Miembro extends EntidadPersistente {
+
+    @Column(name = "mail")
+    private String mail;
+
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "apellido")
     private String apellido;
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipoDoc")
     private TipoDocumento tipoDocumento;
     @Column(name = "numeroDoc")
     private Integer numeroDocumento;
+    /*
     @ManyToMany
     private List<Area> areas = new ArrayList<Area>();
-
-    @Transient
+*/
+    @OneToMany
+    private List<Solicitud> solicitudes = new ArrayList<>();
+    @OneToMany
     private List<Trayecto> trayectos = new ArrayList<Trayecto>();
     @Getter
-    @Transient
+    @ManyToMany
+    @JoinTable(
+            name = "tramos_a_aceptar_por_miembro",
+            joinColumns = @JoinColumn(name = "miembros_id"),
+            inverseJoinColumns = @JoinColumn(name = "areas_id")
+    )
     private List<Tramo> tramosCompartidosAAceptar = new ArrayList<Tramo>();
 
     public Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, Integer numeroDocumento) {
@@ -40,12 +53,12 @@ public class Miembro extends EntidadPersistente {
     public Miembro() {
 
     }
-
+/*
     public void aniadirArea(Area area){
         this.areas.add(area);
-    }
+    }*/
     public void darseAltaEnOrganizacion(Area area){
-        area.agregarAMiembroPendiente(this);
+        this.solicitudes.add(new Solicitud(this,area));
     }
 
     public double calcularHC(Integer anio,Integer mes,Organizacion organizacion){
@@ -74,9 +87,7 @@ public class Miembro extends EntidadPersistente {
         //en caso de que sea rechazado no lo va a hacer nada
     }
 
-    public Trayecto generarTrayecto(String descripcion,List<Integer> indicesOrganizaciones,Integer anio, Integer semestre, Integer diasAlMes){
-        List<Organizacion> organizaciones = new ArrayList<Organizacion>();
-        indicesOrganizaciones.forEach(e->organizaciones.add(this.decirOrganizacion(this.areas.get(e))));
+    public Trayecto generarTrayecto(String descripcion,List<Organizacion> organizaciones,Integer anio, Integer semestre, Integer diasAlMes){
         Trayecto nuevoTrayecto = new Trayecto(descripcion,organizaciones,diasAlMes,anio,semestre);
         trayectos.add(nuevoTrayecto);
         return nuevoTrayecto;
