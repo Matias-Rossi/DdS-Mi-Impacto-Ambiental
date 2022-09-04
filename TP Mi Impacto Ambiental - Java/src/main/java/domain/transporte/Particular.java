@@ -4,50 +4,49 @@ import domain.calculadorHC.TipoActividadDA;
 import domain.calculadorHC.TipoConsumoDA;
 import domain.ubicacion.Ubicacion;
 
+import javax.persistence.*;
 import java.io.IOException;
 
-public class Particular implements Transporte {
+@Entity
+@DiscriminatorValue("Particular")
+public class Particular extends Transporte {
 
-    private TipoParticular tipo;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_combustible")
     private TipoCombustible combustible;
-    private CalculadorDeDistancia calculadorAdapter;
-    private double consumoXKm;
 
-    public Particular(TipoParticular tipo, TipoCombustible combustible, CalculadorDeDistancia calculadorAdapter,double consumoXKm) {
-        this.tipo = tipo;
+    public TipoTransporte tipoTransporte(){
+        return TipoTransporte.TIPO_PARTICULAR;
+    }
+
+    public Particular(SubTipoTransporte subTipoTransporte, TipoCombustible combustible, CalculadorDeDistancia calculadorAdapter,double consumoXKm) {
+        super(consumoXKm,calculadorAdapter,subTipoTransporte);
         this.combustible = combustible;
-        this.calculadorAdapter = calculadorAdapter;
-        this.consumoXKm = consumoXKm;
     }
 
-    public double calcularDistancia(Ubicacion inicio, Ubicacion fin){
-        try {
-            return this.calculadorAdapter.calcularDistancia(inicio, fin);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return 0;
+    public Particular() {
+
     }
-    public double consumoDeTransoporte(){
-        return this.consumoXKm;
-    }
+
     public TipoActividadDA tipoActividadDA(){
         return TipoActividadDA.TRANSPORTE_PARTICULAR;
     }
+
+
     public TipoConsumoDA tipoConsumoDA(){
-        if(this.tipo == TipoParticular.AUTO){
+        if(this.subTipoTransporte.getNombre() == "AUTO"){
             if(this.combustible == TipoCombustible.ELECTRICO) return TipoConsumoDA.AUTO_ELECTRICO;
             if(this.combustible == TipoCombustible.GASOIL) return TipoConsumoDA.AUTO_GASOIL;
             if(this.combustible == TipoCombustible.GNC) return TipoConsumoDA.AUTO_GNC;
             if(this.combustible == TipoCombustible.NAFTA) return TipoConsumoDA.AUTO_NAFTA;
         }
-        if(this.tipo == TipoParticular.CAMIONETA){
+        if(this.subTipoTransporte.getNombre() == "CAMIONETA"){
             if(this.combustible == TipoCombustible.ELECTRICO) return TipoConsumoDA.CAMIONETA_ELECTRICO;
             if(this.combustible == TipoCombustible.GASOIL) return TipoConsumoDA.CAMIONETA_GASOIL;
             if(this.combustible == TipoCombustible.GNC) return TipoConsumoDA.CAMIONETA_GNC;
             if(this.combustible == TipoCombustible.NAFTA) return TipoConsumoDA.CAMIONETA_NAFTA;
         }
-        if(this.tipo == TipoParticular.MOTO){
+        if(this.subTipoTransporte.getNombre() == "MOTO"){
             if(this.combustible == TipoCombustible.ELECTRICO) return TipoConsumoDA.MOTO_ELECTRICO;
             if(this.combustible == TipoCombustible.GASOIL) return TipoConsumoDA.MOTO_GASOIL;
             if(this.combustible == TipoCombustible.GNC) return TipoConsumoDA.MOTO_GNC;
@@ -55,7 +54,7 @@ public class Particular implements Transporte {
         }
         return null;
     }
-    public TipoTransporte decirTipoTransporte(){
+    /*public TipoTransporte decirTipoTransporte(){
         return TipoTransporte.TIPO_PARTICULAR;
-    }
+    }*/
 }

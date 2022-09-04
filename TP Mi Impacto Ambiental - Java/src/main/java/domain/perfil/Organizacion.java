@@ -17,7 +17,7 @@ import java.util.stream.Stream;
 @Table(name = "organizaciones")
 public class Organizacion extends EntidadPersistente {
     @Getter
-    @Transient
+    @OneToMany(mappedBy = "organizacion",cascade = javax.persistence.CascadeType.ALL,fetch = javax.persistence.FetchType.LAZY)
     public List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
     @Column(name = "razonSocial")
     private String razonSocial;
@@ -29,14 +29,14 @@ public class Organizacion extends EntidadPersistente {
     @ManyToOne
     @JoinColumn(name = "clasificaciones_id", referencedColumnName = "id")
     private Clasificacion clasificacion;
-    @Transient
+    @OneToOne(cascade = javax.persistence.CascadeType.ALL)
+    @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     private Ubicacion ubicacion;
     @Transient
     private Importador moduloImportador;
-    @Transient
-    private domain.perfil.Organizacion Organizacion;
-    @Transient
+
     @Getter
+    @OneToMany(mappedBy = "organizacion",cascade = javax.persistence.CascadeType.ALL,fetch = javax.persistence.FetchType.LAZY)
     private List<Contacto> contactos = new ArrayList<Contacto>();
 
     public Organizacion(){
@@ -68,11 +68,11 @@ public class Organizacion extends EntidadPersistente {
     }
 
     public void cargarMediciones(String nombreArchivo, CalculadorDeHC calculadorDeHC){
-        actividadesCargadas.addAll(moduloImportador.importarDatos(nombreArchivo,calculadorDeHC));
+        actividadesCargadas.addAll(moduloImportador.importarDatos(nombreArchivo,calculadorDeHC,this));
     }
 
     public void agregarContacto(String telefono, String email){
-        Contacto nuevoContacto = new Contacto(telefono, email);
+        Contacto nuevoContacto = new Contacto(telefono, email,null);
         this.contactos.add(nuevoContacto);
     }
 }

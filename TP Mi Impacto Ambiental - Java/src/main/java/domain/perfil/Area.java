@@ -22,7 +22,7 @@ public class Area extends EntidadPersistente {
     @Transient
     private List<Miembro> miembrosPendientes = new ArrayList<>();
 */
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "area")
     private  List<Solicitud> solicitudes = new ArrayList<>();
 
     public Area(String nombreArea, Organizacion nombreOrganizacion) {

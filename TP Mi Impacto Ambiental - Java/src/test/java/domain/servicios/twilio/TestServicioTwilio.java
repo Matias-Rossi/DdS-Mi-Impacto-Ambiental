@@ -48,7 +48,7 @@ public class TestServicioTwilio {
     //ATENCIÓN: este test incurre un gasto en la cuenta vinculada de Twilio
     String tel = obtenerNumeroTelefonico();
     ServicioTwilio servicioTwilio = new ServicioTwilio();
-    Contacto contacto = new Contacto("+" + tel, null);
+    Contacto contacto = new Contacto("+" + tel, null,null);
     Notificacion notificacion = new Notificacion("Test asunto", "Test contenido");
     servicioTwilio.enviarNotificacion(contacto, notificacion);
     assert(true);
@@ -59,7 +59,7 @@ public class TestServicioTwilio {
     //ATENCIÓN: este test incurre un gasto en la cuenta vinculada de SendGrid
     String email = obtenerEmail();
     ServicioTwilio servicioTwilio = new ServicioTwilio();
-    Contacto contacto = new Contacto(null, email);
+    Contacto contacto = new Contacto(null, email,null);
     Notificacion notificacion = new Notificacion("Mi Impacto Ambiental - Actualización de Guía de Recomendaciones", "<Enlace al contenido>");
     Boolean exito = servicioTwilio.enviarNotificacion(contacto, notificacion);
     assert(exito);

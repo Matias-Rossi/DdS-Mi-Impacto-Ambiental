@@ -11,7 +11,7 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "tramos")
 public class Tramo implements ActividadesEmisorasCO2{
     @Id
     @GeneratedValue
@@ -31,13 +31,20 @@ public class Tramo implements ActividadesEmisorasCO2{
         this.medioDeTransporte = transporte;
         this.distancia = transporte.calcularDistancia(partida, llegada); ;
     }
-    @Transient
+    @OneToOne(cascade = javax.persistence.CascadeType.ALL)
+    @JoinColumn(name = "ubicacion_partida_id", referencedColumnName = "id")
     private Ubicacion partida;
-    @Transient
+    @OneToOne(cascade = javax.persistence.CascadeType.ALL)
+    @JoinColumn(name = "ubicacion_llegada_id", referencedColumnName = "id")
     private Ubicacion llegada;
     @Getter
+    /*
     @ManyToOne
-    @JoinColumn(name = "organizaciones_id", referencedColumnName = "id")
+    @JoinColumn(name = "medioDeTransportes_id", referencedColumnName = "id")
+
+     */
+    @ManyToOne
+    @JoinColumn(name = "medioDeTransportes_id", referencedColumnName = "id")
     public Transporte medioDeTransporte;
     @Transient
     private CalculadorDeHC calculadorDeHC;
@@ -52,7 +59,7 @@ public class Tramo implements ActividadesEmisorasCO2{
     }
 
     public void compartirTramo(Miembro miembro){
-        if ((this.medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_CONTRATADO) || (this.medioDeTransporte.decirTipoTransporte() == TipoTransporte.TIPO_PARTICULAR)){
+        if ((this.medioDeTransporte.tipoTransporte() == TipoTransporte.TIPO_CONTRATADO) || (this.medioDeTransporte.tipoTransporte() == TipoTransporte.TIPO_PARTICULAR)){
             miembro.recibirSolicitud(this);
         }else System.err.println("ESTE TRANSPORTE NO PUEDE SER COMPARTIDO");
     }
@@ -64,7 +71,7 @@ public class Tramo implements ActividadesEmisorasCO2{
         return this.distancia;
     }
     public double valorDA(){
-        return this.distancia * this.medioDeTransporte.consumoDeTransoporte();
+        return this.distancia * this.medioDeTransporte.getConsumoXKm();
     }
     public DatoDeActividad generarDatoDeActividad() {
         return new DatoDeActividad(this.medioDeTransporte.tipoActividadDA(), this.medioDeTransporte.tipoConsumoDA(), this.valorDA());

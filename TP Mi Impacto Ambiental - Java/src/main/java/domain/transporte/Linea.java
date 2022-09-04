@@ -1,12 +1,20 @@
 package domain.transporte;
 
 
+import domain.persistenceExtend.EntidadPersistente;
 import domain.ubicacion.Ubicacion;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.List;
-
-public class Linea {
+@Entity
+@Table(name = "lineas")
+public class Linea extends EntidadPersistente {
+    @Column(name = "nombre")
     private String nombre;
+    @OneToMany(mappedBy = "linea",cascade = javax.persistence.CascadeType.ALL,fetch = javax.persistence.FetchType.LAZY)
     private List<Parada> paradas;
 
     private Parada obtenerParadaDeUbicacion(List<Parada> paradas, Ubicacion ubicacion) {

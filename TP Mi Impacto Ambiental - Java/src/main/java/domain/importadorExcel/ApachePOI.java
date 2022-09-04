@@ -10,6 +10,7 @@ import domain.calculadorHC.CalculadorDeHC;
 import domain.calculadorHC.TipoActividadDA;
 import domain.calculadorHC.TipoConsumoDA;
 import domain.perfil.Importador;
+import domain.perfil.Organizacion;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
@@ -20,7 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ApachePOI implements Importador {
   static DataFormatter formatter = new DataFormatter();
 
-  public List<ActividadBase> importarDatos(String path, CalculadorDeHC calculadorDeHC) {
+  public List<ActividadBase> importarDatos(String path, CalculadorDeHC calculadorDeHC, Organizacion organizacion) {
     int cantidadDeValoresDeLogistica = 4;
     List<ActividadBase> listaDeCargas = new ArrayList<>();
     try {
@@ -115,10 +116,10 @@ public class ApachePOI implements Importador {
 
 
         if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS){
-          actividadCargada = new ActividadLogisticaCargada(calculadorDeHC,valorTipoActividad, valorTipoProductoTransportado, valorTipoTransporteUtilizado, valorDistanciaMedia, valorPesoTotal, anio, mes,new VaraianzaLogistica(0.5));
+          actividadCargada = new ActividadBase(calculadorDeHC,valorTipoActividad, valorTipoTransporteUtilizado, anio, mes,valorDistanciaMedia, valorPesoTotal,new VaraianzaLogistica(0.5),valorTipoProductoTransportado);
 
         }else
-          actividadCargada = new ActividadGenericaCargada(calculadorDeHC,valorTipoActividad, valorTipoConsumo, valor, anio, mes);
+          actividadCargada = new ActividadBase(calculadorDeHC,valorTipoActividad, valorTipoConsumo, anio, mes, valor);
 
 
         listaDeCargas.add(actividadCargada);

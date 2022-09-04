@@ -46,9 +46,9 @@ public class TestMiembro {/*
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
     Ubicacion ubicacion1 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa1", 124);
     Ubicacion ubicacion2 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa2", 125);
-    Transporte trans = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
-    Transporte trans2 = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.4);
-    Transporte trans3 = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.3);
+    Transporte trans = new Particular(, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
+    Transporte trans2 = new Particular(, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.4);
+    Transporte trans3 = new Particular(, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.3);
     CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
     trayectoTest.aniadirNuevoTramo(ubicacion, ubicacion, trans ,calculadorDeHCTest);
     trayectoTest.aniadirNuevoTramo(ubicacion1, ubicacion, trans2,calculadorDeHCTest);
@@ -88,7 +88,7 @@ public class TestMiembro {/*
 
     Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", indices ,2022,1,20 );
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
-    Transporte trans = new Particular(TipoParticular.AUTO, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
+    Transporte trans = new Particular(, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
 
     Tramo tramoCompartido = trayectoTest.aniadirNuevoTramo(ubicacion,ubicacion,trans,calculadorDeHCTest);
     tramoCompartido.compartirTramo(miembroCompartido);

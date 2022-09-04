@@ -17,7 +17,7 @@ public class Solicitud extends EntidadPersistente {
 
 
     @ManyToOne
-    @JoinColumn(name = "area_id")
+    @JoinColumn(name = "area_id", referencedColumnName = "id")
     private Area area;
 
     public Area getArea() {

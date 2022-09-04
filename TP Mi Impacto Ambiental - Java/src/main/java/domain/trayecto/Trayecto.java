@@ -1,6 +1,7 @@
 package domain.trayecto;
 
 import domain.calculadorHC.CalculadorDeHC;
+import domain.perfil.Miembro;
 import domain.perfil.Organizacion;
 import domain.persistenceExtend.EntidadPersistente;
 import domain.transporte.Transporte;
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "trayectos")
 public class Trayecto extends EntidadPersistente {
+    @ManyToOne()
+    @JoinColumn(name = "miembro_id", referencedColumnName = "id")
+    private Miembro miembro;
     @Column(name = "anio")
     private Integer anio;
     @Column(name = "semestre")
@@ -58,7 +62,8 @@ public class Trayecto extends EntidadPersistente {
         return 0;
     }
 
-    public Trayecto(String descripcion, List<Organizacion> organizaciones, Integer diasAlMes,Integer anio,Integer semestre){
+    public Trayecto(String descripcion, List<Organizacion> organizaciones, Integer diasAlMes,Integer anio,Integer semestre,Miembro miembro){
+        this.miembro = miembro;
         this.diasAlMes = diasAlMes;
         this.anio = anio;
         this.semestre = semestre;

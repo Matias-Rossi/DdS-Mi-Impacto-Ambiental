@@ -6,7 +6,6 @@ import domain.perfil.*;
 import domain.servicios.geodds.ServicioGeoDds;
 import domain.transporte.Particular;
 import domain.transporte.TipoCombustible;
-import domain.transporte.TipoParticular;
 import domain.transporte.Transporte;
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;

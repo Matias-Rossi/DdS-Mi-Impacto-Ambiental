@@ -13,16 +13,12 @@ public class ActividadLogisticaCargada extends ActividadBase {
   private static double distanciaMediaRecorrida;
   private static double pesoTotalTransportado;
   private static VaraianzaLogistica varianzaDistanciaYPeso;
-  public static double valorDA;
-
-
   public ActividadLogisticaCargada(CalculadorDeHC calculadorDeHC,TipoActividadDA tipoActividad, TipoProductoTransportado tipoProductoTransportado, TipoConsumoDA tipoTransporteUtilizado, double distanciaMediaRecorrida, double pesoTotalTransportado, Integer anio, Integer mes,VaraianzaLogistica varianzaLogistica) {
     super(calculadorDeHC,tipoActividad,tipoTransporteUtilizado,anio,mes, distanciaMediaRecorrida * pesoTotalTransportado * varianzaLogistica.getVaraianzaLogistica());
     this.tipoProductoTransportado = tipoProductoTransportado;
     this.distanciaMediaRecorrida = distanciaMediaRecorrida;
     this.pesoTotalTransportado =  pesoTotalTransportado;
     this.varianzaDistanciaYPeso = varianzaLogistica;
-    this.valorDA = distanciaMediaRecorrida * pesoTotalTransportado * varianzaDistanciaYPeso.getVaraianzaLogistica() ;
   }
 
 }
