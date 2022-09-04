@@ -1,8 +1,21 @@
 package domain.calculadorHC;
 
-public class FactorDeEmision {
+import domain.persistenceExtend.EntidadPersistente;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "factoresDeEmision")
+public class FactorDeEmision extends EntidadPersistente {
+  @Transient
+  private CalculadorDeHC calculadorDeHC;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipoActividad")
   private TipoActividadDA tipoActividad;
+  @Enumerated(EnumType.STRING)
+  @Column(name = "tipoConsumo")
   private TipoConsumoDA tipoConsumo;
+  @Column(name = "factor")
   private double factorEmision;
 
 
@@ -10,6 +23,11 @@ public class FactorDeEmision {
     this.tipoActividad = tipoDeActividad;
     this.tipoConsumo = tipoDeConsumo;
     this.factorEmision = factorEmision;
+    this.calculadorDeHC = CalculadorDeHC.getInstance();
+  }
+
+  public FactorDeEmision() {
+
   }
 
   public TipoActividadDA getTipoActividad() {

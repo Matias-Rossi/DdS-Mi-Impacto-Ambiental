@@ -21,7 +21,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ApachePOI implements Importador {
   static DataFormatter formatter = new DataFormatter();
 
-  public List<ActividadBase> importarDatos(String path, CalculadorDeHC calculadorDeHC, Organizacion organizacion) {
+  public List<ActividadBase> importarDatos(String path, Organizacion organizacion) {
     int cantidadDeValoresDeLogistica = 4;
     List<ActividadBase> listaDeCargas = new ArrayList<>();
     try {
@@ -116,10 +116,10 @@ public class ApachePOI implements Importador {
 
 
         if (valorTipoActividad == TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS){
-          actividadCargada = new ActividadBase(calculadorDeHC,valorTipoActividad, valorTipoTransporteUtilizado, anio, mes,valorDistanciaMedia, valorPesoTotal,new VaraianzaLogistica(0.5),valorTipoProductoTransportado);
+          actividadCargada = new ActividadBase(valorTipoActividad, valorTipoTransporteUtilizado, anio, mes,valorDistanciaMedia, valorPesoTotal,new VaraianzaLogistica(0.5),valorTipoProductoTransportado);
 
         }else
-          actividadCargada = new ActividadBase(calculadorDeHC,valorTipoActividad, valorTipoConsumo, anio, mes, valor);
+          actividadCargada = new ActividadBase(valorTipoActividad, valorTipoConsumo, anio, mes, valor);
 
 
         listaDeCargas.add(actividadCargada);

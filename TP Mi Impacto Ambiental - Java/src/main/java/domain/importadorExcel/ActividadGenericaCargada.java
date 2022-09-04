@@ -7,8 +7,8 @@ import domain.calculadorHC.TipoConsumoDA;
 import domain.perfil.Tipo;
 
 public class ActividadGenericaCargada extends ActividadBase {
-  public ActividadGenericaCargada(CalculadorDeHC calculadorDeHC,TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, double valorDA, Integer anio, Integer mes) {
-    super(calculadorDeHC,tipoActividad,tipoConsumo,anio,mes,valorDA);
+  public ActividadGenericaCargada(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, double valorDA, Integer anio, Integer mes) {
+    super(tipoActividad,tipoConsumo,anio,mes,valorDA);
   }
 
   }

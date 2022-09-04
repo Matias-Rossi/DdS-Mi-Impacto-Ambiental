@@ -24,8 +24,7 @@ public class Tramo implements ActividadesEmisorasCO2{
     public int getId() {
         return id;
     }
-    public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte,CalculadorDeHC calculadorDeHC){
-        this.calculadorDeHC = calculadorDeHC;
+    public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte){
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
@@ -46,8 +45,6 @@ public class Tramo implements ActividadesEmisorasCO2{
     @ManyToOne
     @JoinColumn(name = "medioDeTransportes_id", referencedColumnName = "id")
     public Transporte medioDeTransporte;
-    @Transient
-    private CalculadorDeHC calculadorDeHC;
     @Getter
     @Column(name = "cant_integrantes")
     public int integrantes = 0;
@@ -55,7 +52,7 @@ public class Tramo implements ActividadesEmisorasCO2{
     public double distancia;
 
     public double calcularHC(){
-        return calculadorDeHC.calcularHC( this.generarDatoDeActividad() )/ this.integrantes ;
+        return CalculadorDeHC.getInstance().calcularHC( this.generarDatoDeActividad() )/ this.integrantes ;
     }
 
     public void compartirTramo(Miembro miembro){

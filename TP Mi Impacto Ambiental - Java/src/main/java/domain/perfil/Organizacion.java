@@ -67,8 +67,8 @@ public class Organizacion extends EntidadPersistente {
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
 
-    public void cargarMediciones(String nombreArchivo, CalculadorDeHC calculadorDeHC){
-        actividadesCargadas.addAll(moduloImportador.importarDatos(nombreArchivo,calculadorDeHC,this));
+    public void cargarMediciones(String nombreArchivo){
+        actividadesCargadas.addAll(moduloImportador.importarDatos(nombreArchivo,this));
     }
 
     public void agregarContacto(String telefono, String email){

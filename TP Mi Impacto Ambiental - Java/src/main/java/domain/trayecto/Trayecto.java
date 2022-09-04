@@ -72,8 +72,8 @@ public class Trayecto extends EntidadPersistente {
         this.diasAlMes = diasAlMes;
     }
 
-    public Tramo aniadirNuevoTramo(Ubicacion salida, Ubicacion llegada, Transporte transporte, CalculadorDeHC calculadorDeHC){
-        Tramo nuevoTramo = new Tramo(salida, llegada, transporte, calculadorDeHC);
+    public Tramo aniadirNuevoTramo(Ubicacion salida, Ubicacion llegada, Transporte transporte){
+        Tramo nuevoTramo = new Tramo(salida, llegada, transporte);
         this.agregarIntegranteATramo(nuevoTramo);
         return  nuevoTramo;
     }

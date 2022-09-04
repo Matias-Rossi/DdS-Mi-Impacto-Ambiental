@@ -2,7 +2,16 @@ package domain.calculadorHC;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculadorDeHC {
+public final class CalculadorDeHC {
+
+    private static CalculadorDeHC instance;
+
+    public static CalculadorDeHC getInstance() {
+        if (instance == null) {
+            instance = new CalculadorDeHC();
+        }
+        return instance;
+    }
 
     private  List<FactorDeEmision> factoresDeEmision = new ArrayList<>();
 
@@ -18,9 +27,8 @@ public class CalculadorDeHC {
                 .findFirst()
                 .orElse(null);
     }
-    public void agregarFactorDeEmision(FactorDeEmision factorDeEmision){
-        factoresDeEmision.add(factorDeEmision);
-
+    public void nuevoFactorDeEmision(TipoConsumoDA consumo, TipoActividadDA actividad, double factor) {
+            factoresDeEmision.add(new FactorDeEmision(actividad,consumo,factor));
     }
 }
 

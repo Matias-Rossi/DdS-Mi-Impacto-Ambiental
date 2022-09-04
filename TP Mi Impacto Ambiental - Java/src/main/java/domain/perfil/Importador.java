@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public interface Importador {
-    List<ActividadBase> importarDatos(String nombreArchivo, CalculadorDeHC calculadorDeHC,Organizacion organizacion);//{
+    List<ActividadBase> importarDatos(String nombreArchivo, Organizacion organizacion);//{
         //List<ActividadBase> lista = Collections.<ActividadBase>emptyList();
         //ApachePOI.importarCargas(nombreArchivo);
         //return lista;

@@ -28,8 +28,7 @@ public class TestApachePOI {
     );
     Clasificacion clasificacionTest = new Clasificacion("dasdsa");
     Organizacion organizacionTest = new Organizacion(importadorApache, ubicacionTest, "testSA", Tipo.EMPRESA, clasificacionTest);
-    CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
-    organizacionTest.cargarMediciones("src/test/java/domain/importadorExcel/fechas.xlsx",calculadorDeHCTest);
+    organizacionTest.cargarMediciones("src/test/java/domain/importadorExcel/fechas.xlsx");
     assertTrue(organizacionTest.getActividadesCargadas().size() == 5);
   }
 
