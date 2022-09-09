@@ -10,28 +10,28 @@ import domain.persistenceExtend.EntidadPersistente;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "actividadesBases")
+@Table(name = "actividades_bases")
 public class ActividadBase extends EntidadPersistente {
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "tipoProductoTransportado")
+  @Column(name = "tipo_producto_transportado")
   public TipoProductoTransportado tipoProductoTransportado;
-  @Column(name = "distanciaMediaRecorrida")
-  private static double distanciaMediaRecorrida;
-  @Column(name = "pesoTotalTransportado")
-  private static double pesoTotalTransportado;
+  @Column(name = "distancia_media_recorrida")
+  private double distanciaMediaRecorrida;
+  @Column(name = "peso_total_transportado")
+  private double pesoTotalTransportado;
   @Embedded
-  private static VaraianzaLogistica varianzaDistanciaYPeso;
+  private VaraianzaLogistica varianzaDistanciaYPeso;
   @ManyToOne
   @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
   private Organizacion organizacion;
   @Enumerated(EnumType.STRING)
-  @Column(name = "tipoActividad")
+  @Column(name = "tipo_actividad")
   private TipoActividadDA tipoActividadDA;
   @Enumerated(EnumType.STRING)
-  @Column(name = "tipoConsumo")
+  @Column(name = "tipo_consumo")
   private TipoConsumoDA consumo;
-  @Column(name = "valorDA")
+  @Column(name = "valor_da")
   private double valorDA;
   @Column(name = "anio")
   private Integer anio;

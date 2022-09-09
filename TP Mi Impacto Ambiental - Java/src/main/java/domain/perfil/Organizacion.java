@@ -19,7 +19,7 @@ public class Organizacion extends EntidadPersistente {
     @Getter
     @OneToMany(mappedBy = "organizacion",cascade = javax.persistence.CascadeType.ALL,fetch = javax.persistence.FetchType.LAZY)
     public List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
-    @Column(name = "razonSocial")
+    @Column(name = "razon_social")
     private String razonSocial;
 
     @Column(name = "tipo")

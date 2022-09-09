@@ -5,7 +5,7 @@ import domain.persistenceExtend.EntidadPersistente;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "factoresDeEmision")
+@Table(name = "factores_de_emision")
 public class FactorDeEmision extends EntidadPersistente {
   @Transient
   private CalculadorDeHC calculadorDeHC;

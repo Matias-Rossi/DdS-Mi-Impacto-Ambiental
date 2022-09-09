@@ -30,9 +30,9 @@ public class Miembro extends EntidadPersistente {
     @Column(name = "apellido")
     private String apellido;
     @Enumerated(EnumType.STRING)
-    @Column(name = "tipoDoc")
+    @Column(name = "tipo_doc")
     private TipoDocumento tipoDocumento;
-    @Column(name = "numeroDoc")
+    @Column(name = "numero_doc")
     private Integer numeroDocumento;
     /*
     @ManyToMany
