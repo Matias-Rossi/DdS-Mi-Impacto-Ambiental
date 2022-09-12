@@ -3,6 +3,8 @@ package domain.importadorExcel;
 import domain.calculadorHC.*;
 import domain.perfil.Organizacion;
 import domain.persistenceExtend.EntidadPersistente;
+import domain.reportes.Periodo;
+import domain.reportes.Reportes;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -74,14 +76,22 @@ public class ActividadBase extends EntidadPersistente {
     return anioAProbar.equals(this.anio);
   }
 
-  public double calcularHC(Integer anio,Integer mes) {
+  public double calcularHC(Integer anio,Integer mes,Organizacion organizacion){
     if(this.factorDeEmision==null) actualizarFE();
     double HC =CalculadorDeHC.getInstance().calcularHC(this.factorDeEmision,this.valorDA);
     if(!this.delAnio(anio)) return 0;
 
-    if(mes==0 || this.delMes(mes)) return HC;
+    if(mes==0 || this.delMes(mes)) {
+      Reportes reporte = new Reportes(this.tipoActividadDA, this.consumo, this.anio, /*this.mes*/null, HC, organizacion);
+      //TODO parsear el mes
+      return HC;
+    }
 
-    if(this.delMes(0)) return HC / 12;
+    if(this.delMes(0)) {
+      Reportes reporte = new Reportes(this.tipoActividadDA, this.consumo, this.anio, Periodo.Anual, HC/12, organizacion);
+      return HC / 12;
+    }
+
 
     return 0;
   }
