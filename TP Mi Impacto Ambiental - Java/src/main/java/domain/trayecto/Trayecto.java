@@ -38,16 +38,21 @@ public class Trayecto extends EntidadPersistente {
             joinColumns = @JoinColumn(name = "trayecto_id"),
             inverseJoinColumns = @JoinColumn(name = "tramo_id"))
     private List<Tramo> tramos = new ArrayList<Tramo>();
-/*
-    private Ubicacion fin(){
-        return (this.tramos.get(this.tramos.size()-1)).destino();
+
+    public Trayecto() {
+
     }
 
-    private Ubicacion inicio(){
-        return (this.tramos.get(0)).origen();
-    }
+    /*
+        private Ubicacion fin(){
+            return (this.tramos.get(this.tramos.size()-1)).destino();
+        }
 
- */
+        private Ubicacion inicio(){
+            return (this.tramos.get(0)).origen();
+        }
+
+     */
     public double calcularHC(Integer anio, Integer mes, Organizacion organizacion)
     {
         if((!this.organizaciones.contains(organizacion)) || !anio.equals(this.anio))return 0;
