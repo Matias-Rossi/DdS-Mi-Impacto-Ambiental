@@ -16,6 +16,8 @@ public class Provincias extends EntidadPersistente {
     @Enumerated(EnumType.STRING)
     @Column(name = "provincia")
     private Provincia provincia;
+
+    @Getter
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "provincia")
     List<MunicipiosODepartamentos> municipiosODepartamentos = new ArrayList<>();
 

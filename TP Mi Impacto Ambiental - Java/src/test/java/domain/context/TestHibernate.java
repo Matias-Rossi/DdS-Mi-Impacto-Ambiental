@@ -53,4 +53,11 @@ public class TestHibernate {
         Tramo tramo =trayecto.aniadirNuevoTramo(salida,llegada,particular);
         EntityManagerHelper.persist(bsAs);
     }
+    @Test
+    public void traerHidratacion(){
+        Provincias bsas= (Provincias) EntityManagerHelper.createQuery("from Provincias where provincia = 'Buenos_Aires'");
+
+        MunicipiosODepartamentos vdp = (MunicipiosODepartamentos) EntityManagerHelper.createQuery("from MunicipiosODepartamentos where municipioOLocalidad ='vdp'");
+        assertEquals("vdp",vdp.getMunicipioOLocalidad());
+    }
 }
