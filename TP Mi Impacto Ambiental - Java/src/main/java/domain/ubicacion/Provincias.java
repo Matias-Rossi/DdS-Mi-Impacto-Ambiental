@@ -1,16 +1,30 @@
 package domain.ubicacion;
 
+import domain.persistenceExtend.EntidadPersistente;
+import lombok.Getter;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Provincias {
+@Entity
+@Table(name = "provincias")
+public class Provincias extends EntidadPersistente {
 
+    @Getter
+    @Enumerated
+    @Column(name = "provincia")
     private Provincia provincia;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "provincia")
     List<MunicipiosODepartamentos> municipiosODepartamentos = new ArrayList<>();
 
+    public Provincias() {
+
+    }
+
     public MunicipiosODepartamentos crearMunicipio(String municipioNombre){
-        MunicipiosODepartamentos muni = new MunicipiosODepartamentos(this.provincia,municipioNombre);
+        MunicipiosODepartamentos muni = new MunicipiosODepartamentos(this,municipioNombre);
         this.municipiosODepartamentos.add(muni);
         return muni;
     }

@@ -67,16 +67,14 @@ public class TestCalculadorHC {
         SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
         Transporte transporteTest = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
         Ubicacion ubicacionTest1 = new Ubicacion(
-                domain.ubicacion.Provincia.Buenos_Aires,
-                "Bragado",
+                null,
                 "Bragado",
                 "C1234",
                 "calle falsa",
                 123
         );
         Ubicacion ubicacionTest2 = new Ubicacion(
-                domain.ubicacion.Provincia.Buenos_Aires,
-                "Bragado",
+                null,
                 "Bragado",
                 "C1234",
                 "calle falsa",
@@ -110,8 +108,7 @@ public class TestCalculadorHC {
         Importador moduloImportadorTest = new ApachePOI();
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         Ubicacion ubicacionTest1 = new Ubicacion(
-                domain.ubicacion.Provincia.Buenos_Aires,
-                "Bragado",
+                null,
                 "Bragado",
                 "C1234",
                 "calle falsa",
@@ -157,8 +154,7 @@ public class TestCalculadorHC {
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
         Ubicacion ubicacionCasaJuan = new Ubicacion(
-                domain.ubicacion.Provincia.Buenos_Aires,
-                "Bragado",
+                null,
                 "Bragado",
                 "C1234",
                 "calle falsa",
@@ -173,16 +169,14 @@ public class TestCalculadorHC {
         Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
         Ubicacion ubicacionSalida = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             120
         );
         Ubicacion ubicacionllegada = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -215,8 +209,7 @@ public class TestCalculadorHC {
     Area RRHH = organizacionEj.darAltaArea("RRHH");
 
     Ubicacion ubicacionCasaJuan = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -231,16 +224,14 @@ public class TestCalculadorHC {
     Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
     Ubicacion ubicacionSalida = new Ubicacion(
-        domain.ubicacion.Provincia.Buenos_Aires,
-        "Bragado",
+        null,
         "Bragado",
         "C1234",
         "calle falsa",
         120
     );
     Ubicacion ubicacionllegada = new Ubicacion(
-        domain.ubicacion.Provincia.Buenos_Aires,
-        "Bragado",
+        null,
         "Bragado",
         "C1234",
         "calle falsa",
@@ -264,16 +255,14 @@ public class TestCalculadorHC {
         Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", organizacionesTests2, 2022, 2, 20);
 
         Ubicacion ubicacionSalida2 = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             120
         );
         Ubicacion ubicacionllegada2 = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -302,8 +291,7 @@ public class TestCalculadorHC {
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
         Ubicacion ubicacionCasaJuan = new Ubicacion(
-                domain.ubicacion.Provincia.Buenos_Aires,
-                "Bragado",
+                null,
                 "Bragado",
                 "C1234",
                 "calle falsa",
@@ -317,16 +305,14 @@ public class TestCalculadorHC {
         Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
         Ubicacion ubicacionSalida = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             120
         );
         Ubicacion ubicacionllegada = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -349,16 +335,14 @@ public class TestCalculadorHC {
         Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", organizacionesTests2, 2022, 2, 20);
 
         Ubicacion ubicacionSalida2 = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             120
         );
         Ubicacion ubicacionllegada2 = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -386,8 +370,7 @@ public class TestCalculadorHC {
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
         Ubicacion ubicacionCasaJuan = new Ubicacion(
-                domain.ubicacion.Provincia.Buenos_Aires,
-                "Bragado",
+                null,
                 "Bragado",
                 "C1234",
                 "calle falsa",
@@ -401,16 +384,14 @@ public class TestCalculadorHC {
         Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
         Ubicacion ubicacionSalida = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             120
         );
         Ubicacion ubicacionllegada = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -433,16 +414,14 @@ public class TestCalculadorHC {
         Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", organizacionesTests2, 2022, 2, 20);
 
         Ubicacion ubicacionSalida2 = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             120
         );
         Ubicacion ubicacionllegada2 = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -469,8 +448,7 @@ public class TestCalculadorHC {
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
         Ubicacion ubicacionCasaJuan = new Ubicacion(
-                domain.ubicacion.Provincia.Buenos_Aires,
-                "Bragado",
+                null,
                 "Bragado",
                 "C1234",
                 "calle falsa",
@@ -484,16 +462,14 @@ public class TestCalculadorHC {
         Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
         Ubicacion ubicacionSalida = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             120
         );
         Ubicacion ubicacionllegada = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -516,16 +492,14 @@ public class TestCalculadorHC {
         Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", organizacionesTests2, 2022, 2, 20);
 
         Ubicacion ubicacionSalida2 = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             120
         );
         Ubicacion ubicacionllegada2 = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",

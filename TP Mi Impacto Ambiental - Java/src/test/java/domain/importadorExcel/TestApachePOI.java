@@ -19,8 +19,7 @@ public class TestApachePOI {
   public void testApachePoi() {
     Importador importadorApache = new ApachePOI();
     Ubicacion ubicacionTest = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",

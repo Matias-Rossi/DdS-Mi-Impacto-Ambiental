@@ -25,8 +25,7 @@ public class TestMiembro {
         //Generar Organizacion y su Lista
         Importador importadorApache = new ApachePOI();
         Ubicacion ubicacionTest = new Ubicacion(
-                domain.ubicacion.Provincia.Buenos_Aires,
-                "Bragado",
+                null,
                 "Bragado",
                 "C1234",
                 "calle falsa",
@@ -38,8 +37,7 @@ public class TestMiembro {
     Area area = organizacionTest.darAltaArea("arita");
 
       Ubicacion casaMiembro = new Ubicacion(
-              domain.ubicacion.Provincia.Buenos_Aires,
-              "Bragado",
+              null,
               "Bragado",
               "C1234",
               "calle falsa",
@@ -51,9 +49,9 @@ public class TestMiembro {
     List<Organizacion> organizacionesTest = new ArrayList<>();
     organizacionesTest.add(organizacionTest);
     Trayecto trayectoTest = miembro.generarTrayecto("Trayecto prueba", organizacionesTest,2022,1,20 );
-    Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
-    Ubicacion ubicacion1 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa1", 124);
-    Ubicacion ubicacion2 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa2", 125);
+    Ubicacion ubicacion = new Ubicacion(null, "Chivilcoy", "C1234", "Calle falsa", 123);
+    Ubicacion ubicacion1 = new Ubicacion(null, "Chivilcoy", "C1234", "Calle falsa1", 124);
+    Ubicacion ubicacion2 = new Ubicacion(null, "Chivilcoy", "C1234", "Calle falsa2", 125);
 
     SubTipoTransporte unAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO" ) ;
     Transporte trans = new Particular(unAuto, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
@@ -76,8 +74,7 @@ public class TestMiembro {
     CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
       Importador importadorApache = new ApachePOI();
       Ubicacion ubicacionTest = new Ubicacion(
-              domain.ubicacion.Provincia.Buenos_Aires,
-              "Bragado",
+              null,
               "Bragado",
               "C1234",
               "calle falsa",
@@ -94,8 +91,7 @@ public class TestMiembro {
       organizacionesTest.add(organizacionTest);
 
     Ubicacion casaMiembro = new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -106,7 +102,7 @@ public class TestMiembro {
     area.gestionarMiembrosPendientes(miembroCompartido.solicitudes.get(0),SolicitudEstado.ACEPTADA);
 
     Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", organizacionesTest ,2022,1,20 );
-    Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
+    Ubicacion ubicacion = new Ubicacion(null, "Chivilcoy", "C1234", "Calle falsa", 123);
       SubTipoTransporte unAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO" ) ;
       Transporte trans = new Particular(unAuto, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
 

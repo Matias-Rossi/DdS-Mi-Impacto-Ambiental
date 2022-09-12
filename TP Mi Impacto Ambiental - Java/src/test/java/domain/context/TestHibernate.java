@@ -20,4 +20,8 @@ public class TestHibernate {
         FactorDeEmision fac =CalculadorDeHC.getInstance().devolverFactorDeEmision(dato);
         assertEquals(0.5,fac.getFactorEmision());
     }
+    @Test
+    public void pruebasHidratacion(){
+
+    }
 }

@@ -49,16 +49,14 @@ public class TestServicioGeoDds {
   public void testDistanciaUbicacion() throws IOException {
     Distancia distancia = ServicioGeoDds.getInstancia().getDistanciaEntrePuntos(
         new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Bragado",
+            null,
             "Bragado",
             "C1234",
             "calle falsa",
             123
         ),
         new Ubicacion(
-            domain.ubicacion.Provincia.Buenos_Aires,
-            "Chivilcoy",
+            null,
             "Chivilcoy",
             "C5678",
             "falso",

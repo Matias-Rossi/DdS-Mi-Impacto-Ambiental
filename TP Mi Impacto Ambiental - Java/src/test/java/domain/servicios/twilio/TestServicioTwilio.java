@@ -24,8 +24,7 @@ public class TestServicioTwilio {
     Organizacion org = new Organizacion(
             new ApachePOI(),
             new Ubicacion(
-                    Provincia.Buenos_Aires,
-                    "a",
+                    null,
                     "b",
                     "c",
                     "d",

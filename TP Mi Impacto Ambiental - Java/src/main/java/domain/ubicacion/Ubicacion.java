@@ -3,10 +3,7 @@ package domain.ubicacion;
 import domain.persistenceExtend.EntidadPersistente;
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ubicaciones")
@@ -20,27 +17,30 @@ public class Ubicacion extends EntidadPersistente {
     @Getter
     @Column(name = "codPostal")
     private String codPostal;
+
     @Getter
     @Enumerated(javax.persistence.EnumType.STRING)
     @Column(name = "provincia")
     private Provincia provincia;
     @Getter
-    @Column(name = "municipalidad")
-    private String municipalidad;
+    @ManyToOne
+    @JoinColumn(name = "municipio_id", referencedColumnName = "id")
+    private MunicipiosODepartamentos municipalidad;
     @Getter
     @Column(name = "localidad")
     private String localidad;
 
-    public Ubicacion(Provincia prov, String mun, String loc, String cp, String cal, int num) {
-        provincia = prov;
-        municipalidad = mun;
-        localidad = loc;
-        codPostal = cp;
-        calle = cal;
-        numeracion = num;
+    public Ubicacion(MunicipiosODepartamentos mun, String loc, String cp, String cal, int num) {
+        this.provincia = mun.getProvincia();
+        this.municipalidad = mun;
+        this.localidad = loc;
+        this.codPostal = cp;
+        this.calle = cal;
+        this.numeracion = num;
     }
 
     public Ubicacion() {
 
     }
+
 }

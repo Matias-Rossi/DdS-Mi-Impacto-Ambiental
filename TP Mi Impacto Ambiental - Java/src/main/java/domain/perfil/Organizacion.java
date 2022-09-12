@@ -4,6 +4,7 @@ import domain.calculadorHC.CalculadorDeHC;
 import domain.importadorExcel.ActividadBase;
 import domain.notificaciones.Contacto;
 import domain.persistenceExtend.EntidadPersistente;
+import domain.ubicacion.MunicipiosODepartamentos;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 
@@ -16,6 +17,9 @@ import java.util.stream.Stream;
 @Entity
 @Table(name = "organizaciones")
 public class Organizacion extends EntidadPersistente {
+    @ManyToOne
+    @JoinColumn(name = "municipio_id", referencedColumnName = "id")
+    private MunicipiosODepartamentos municipioODepartamento;
     @Getter
     @OneToMany(mappedBy = "organizacion",cascade = javax.persistence.CascadeType.ALL,fetch = javax.persistence.FetchType.LAZY)
     public List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
@@ -47,6 +51,7 @@ public class Organizacion extends EntidadPersistente {
         this.tipo=tipo;
         this.clasificacion=clasificacion;
         this.moduloImportador = moduloImportador;
+        this.municipioODepartamento=ubicacion.getMunicipalidad();
     }
 
     public Area darAltaArea(String nombreArea){

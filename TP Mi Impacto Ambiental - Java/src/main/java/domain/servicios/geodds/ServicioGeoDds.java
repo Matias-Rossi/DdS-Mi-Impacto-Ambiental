@@ -118,14 +118,14 @@ public class ServicioGeoDds implements domain.transporte.CalculadorDeDistancia {
   public Distancia getDistanciaEntrePuntos(Ubicacion origen, Ubicacion destino) throws IOException {
     int idLocalidadOrigen = getIdLocalidad(
         origen.getProvincia().toString().toUpperCase(Locale.ROOT),
-        origen.getMunicipalidad().toUpperCase(Locale.ROOT),
+        origen.getMunicipalidad().getMunicipioOLocalidad().toUpperCase(Locale.ROOT),
         origen.getLocalidad().toUpperCase(Locale.ROOT)
     );
 
     int idLocalidadDestino = getIdLocalidad(
         origen.getProvincia().toString().toUpperCase(Locale.ROOT),
-        origen.getMunicipalidad(),
-        origen.getLocalidad()
+        origen.getMunicipalidad().getMunicipioOLocalidad().toUpperCase(Locale.ROOT),
+        origen.getLocalidad().toUpperCase(Locale.ROOT)
     );
 
     return distanciaEntrePuntos(
