@@ -29,7 +29,7 @@ public class Tramo implements ActividadesEmisorasCO2{
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
-        //this.distancia = transporte.calcularDistancia(partida, llegada); ;
+        this.distancia = transporte.calcularDistancia(partida, llegada); ;
     }
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "ubicacion_partida_id", referencedColumnName = "id")
@@ -55,7 +55,6 @@ public class Tramo implements ActividadesEmisorasCO2{
 
     @Setter
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-
     @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
     private FactorDeEmision factorDeEmision;
 
