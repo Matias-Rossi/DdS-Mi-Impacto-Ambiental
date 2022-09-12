@@ -7,6 +7,7 @@ import domain.transporte.TipoTransporte;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -51,6 +52,8 @@ public class Tramo implements ActividadesEmisorasCO2{
     @Column(name = "distancia")
     public double distancia;
 
+    @Getter
+    @Setter
     @ManyToOne
     @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
     private FactorDeEmision factorDeEmision;

@@ -3,6 +3,8 @@ package domain.importadorExcel;
 import domain.calculadorHC.*;
 import domain.perfil.Organizacion;
 import domain.persistenceExtend.EntidadPersistente;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -35,6 +37,8 @@ public class ActividadBase extends EntidadPersistente {
   @Column(name = "mes")
   private Integer mes;
 
+  @Getter
+  @Setter
   @ManyToOne
   @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
   private FactorDeEmision factorDeEmision;
