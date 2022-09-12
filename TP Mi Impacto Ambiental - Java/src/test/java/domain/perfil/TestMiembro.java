@@ -17,7 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TestMiembro {/*
+public class TestMiembro {
   @Test
   @DisplayName("Test Distancia De Trayecto")
 
@@ -37,22 +37,32 @@ public class TestMiembro {/*
     Organizacion organizacionTest = new Organizacion(importadorApache, ubicacionTest, "testSA", Tipo.EMPRESA, clasificacionTest);
     Area area = organizacionTest.darAltaArea("arita");
 
-        //
-    Miembro miembro = new Miembro("Persona",  "Falsa", TipoDocumento.DNI, 12345789);
+      Ubicacion casaMiembro = new Ubicacion(
+              domain.ubicacion.Provincia.Buenos_Aires,
+              "Bragado",
+              "Bragado",
+              "C1234",
+              "calle falsa",
+              123
+      );
+    Miembro miembro = new Miembro("Persona",  "Falsa", TipoDocumento.DNI, 12345789,casaMiembro, "1234", "1234@1234");
     miembro.darseAltaEnOrganizacion(area);
-    area.gestionarMiembrosPendientes(area,SolicitudEstado.ACEPTADA);
-
-    Trayecto trayectoTest = miembro.generarTrayecto("Trayecto prueba", organizacionTest,2022,1,20 );
+    area.gestionarMiembrosPendientes(miembro.solicitudes.get(0),SolicitudEstado.ACEPTADA);
+    List<Organizacion> organizacionesTest = new ArrayList<>();
+    organizacionesTest.add(organizacionTest);
+    Trayecto trayectoTest = miembro.generarTrayecto("Trayecto prueba", organizacionesTest,2022,1,20 );
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
     Ubicacion ubicacion1 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa1", 124);
     Ubicacion ubicacion2 = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa2", 125);
-    Transporte trans = new Particular(, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
-    Transporte trans2 = new Particular(, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.4);
-    Transporte trans3 = new Particular(, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.3);
+
+    SubTipoTransporte unAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO" ) ;
+    Transporte trans = new Particular(unAuto, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
+    Transporte trans2 = new Particular(unAuto, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.4);
+    Transporte trans3 = new Particular(unAuto, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.3);
     CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
-    trayectoTest.aniadirNuevoTramo(ubicacion, ubicacion, trans ,calculadorDeHCTest);
-    trayectoTest.aniadirNuevoTramo(ubicacion1, ubicacion, trans2,calculadorDeHCTest);
-    trayectoTest.aniadirNuevoTramo(ubicacion2, ubicacion, trans3,calculadorDeHCTest);
+    trayectoTest.aniadirNuevoTramo(ubicacion, ubicacion, trans );
+    trayectoTest.aniadirNuevoTramo(ubicacion1, ubicacion, trans2);
+    trayectoTest.aniadirNuevoTramo(ubicacion2, ubicacion, trans3);
 
     double distancia = trayectoTest.calcularDistanciaTotal();
     System.out.print(distancia);
@@ -80,24 +90,34 @@ public class TestMiembro {/*
 
 
 
-    List<Integer> indices = new ArrayList<>();
-    indices.add(0);
-    Miembro miembroCompartido = new Miembro("PersonaCompartida",  "Falsa", TipoDocumento.DNI, 987654321);
+      List<Organizacion> organizacionesTest = new ArrayList<>();
+      organizacionesTest.add(organizacionTest);
+
+    Ubicacion casaMiembro = new Ubicacion(
+            domain.ubicacion.Provincia.Buenos_Aires,
+            "Bragado",
+            "Bragado",
+            "C1234",
+            "calle falsa",
+            123
+    );
+    Miembro miembroCompartido = new Miembro("PersonaCompartida",  "Falsa", TipoDocumento.DNI, 987654321,casaMiembro, "1234", "1234@1234");
     miembroCompartido.darseAltaEnOrganizacion(area);
-    area.gestionarMiembrosPendientes(0,true);
+    area.gestionarMiembrosPendientes(miembroCompartido.solicitudes.get(0),SolicitudEstado.ACEPTADA);
 
-    Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", indices ,2022,1,20 );
+    Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", organizacionesTest ,2022,1,20 );
     Ubicacion ubicacion = new Ubicacion(Provincia.Buenos_Aires, "Chivilcoy", "Chivilcoy", "C1234", "Calle falsa", 123);
-    Transporte trans = new Particular(, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
+      SubTipoTransporte unAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO" ) ;
+      Transporte trans = new Particular(unAuto, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
 
-    Tramo tramoCompartido = trayectoTest.aniadirNuevoTramo(ubicacion,ubicacion,trans,calculadorDeHCTest);
+    Tramo tramoCompartido = trayectoTest.aniadirNuevoTramo(ubicacion,ubicacion,trans);
     tramoCompartido.compartirTramo(miembroCompartido);
 
     assertTrue(miembroCompartido.getTramosCompartidosAAceptar().size() == 1 );
-    miembroCompartido.gestionarTramosCompartidos(0, 0, true);
+    miembroCompartido.gestionarTramosCompartidos(tramoCompartido, trayectoTest, true);
     assertTrue(tramoCompartido.getIntegrantes() == 2 );
   }
-*/
+
 }
 
 
