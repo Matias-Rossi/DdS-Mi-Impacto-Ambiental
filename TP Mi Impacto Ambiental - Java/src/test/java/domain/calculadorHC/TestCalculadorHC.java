@@ -32,11 +32,10 @@ public class TestCalculadorHC {
         DatoDeActividad datoDeActividadTest2 = new DatoDeActividad(TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoConsumoDA.CAMION_DE_CARGA, 1000);
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
 
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest1);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest2);
 
-        assertTrue(calculadorDeHCTest.calcularHC(datoDeActividadTest1) == 100);
-        assertTrue(calculadorDeHCTest.calcularHC(datoDeActividadTest2) == 200);
+
+        assertTrue(calculadorDeHCTest.calcularHC(factorDeEmisionTest1, 200.0) == 100);
+        assertTrue(calculadorDeHCTest.calcularHC(factorDeEmisionTest2, 1000.0) == 200);
 
     }
     @Test
@@ -44,7 +43,7 @@ public class TestCalculadorHC {
     public void testCalculadorHCActividadGenerica(){
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.COMBUSTION_MOVIL, TipoConsumoDA.CARBON_LENIA,0.5);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
+
         ActividadGenericaCargada unaActivadGenericaTest = new ActividadGenericaCargada( TipoActividadDA.COMBUSTION_MOVIL,TipoConsumoDA.CARBON_LENIA,200,2022,12);
 
         assertTrue(unaActivadGenericaTest.calcularHC(2022,12) == 100);
@@ -54,7 +53,7 @@ public class TestCalculadorHC {
     public void testCalculadorHCActividadLogistica(){
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoConsumoDA.CAMION_DE_CARGA,0.5);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
+
         VaraianzaLogistica varaianzaLogisticaTest = new VaraianzaLogistica(0.5);
         ActividadLogisticaCargada unaActivadLogisticaTest = new ActividadLogisticaCargada( TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoProductoTransportado.INSUMOS ,TipoConsumoDA.CAMION_DE_CARGA, 200,10,2022,12,varaianzaLogisticaTest);
         assertTrue(unaActivadLogisticaTest.calcularHC(2022,12) == 500);
@@ -64,7 +63,7 @@ public class TestCalculadorHC {
     public void testCalculadorHCTramo() throws IOException {
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL,0.5);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
+
         SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
         Transporte transporteTest = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
         Ubicacion ubicacionTest1 = new Ubicacion(
@@ -98,11 +97,10 @@ public class TestCalculadorHC {
 
 
 
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest1);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest2);
 
-        assertTrue(calculadorDeHCTest.calcularHC(datoDeActividadTest1) == 100);
-        assertTrue(calculadorDeHCTest.calcularHC(datoDeActividadTest2) == 200);
+
+        assertTrue(calculadorDeHCTest.calcularHC(factorDeEmisionTest1, 200.0) == 100);
+        assertTrue(calculadorDeHCTest.calcularHC(factorDeEmisionTest2, 1000.0) == 200);
 
     }
     @Test
@@ -128,9 +126,7 @@ public class TestCalculadorHC {
         FactorDeEmision factorDeEmisionTest4 = new FactorDeEmision(TipoActividadDA.COMBUSTION_FIJA, TipoConsumoDA.GAS_NATURAL, 0.5);
         FactorDeEmision factorDeEmisionTest5 = new FactorDeEmision(TipoActividadDA.COMBUSTION_MOVIL, TipoConsumoDA.COMBUSTIBLE_CONSUMIDO_GASOIL, 0.5);
 
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest1);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest2);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest3);
+
 
         organizacionTest.cargarMediciones("src/test/java/domain/importadorExcel/fechas.xlsx");
 
@@ -143,7 +139,7 @@ public class TestCalculadorHC {
     public void testFactorDeEmision(){
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         FactorDeEmision factorDeEmisionTest1 = new FactorDeEmision(TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoConsumoDA.CAMION_DE_CARGA, 0.5);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest1);
+
 
     }
 
@@ -194,7 +190,7 @@ public class TestCalculadorHC {
         );
 
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
+
 
         SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
         Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
@@ -252,7 +248,6 @@ public class TestCalculadorHC {
     );
 
     FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
-    calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
     SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
     Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
@@ -339,7 +334,6 @@ public class TestCalculadorHC {
         );
 
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
         SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
         Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
@@ -424,7 +418,6 @@ public class TestCalculadorHC {
         );
 
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
         SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
         Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
@@ -508,7 +501,6 @@ public class TestCalculadorHC {
         );
 
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
-        calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
         SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
         Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
