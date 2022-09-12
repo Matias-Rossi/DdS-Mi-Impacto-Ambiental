@@ -1,12 +1,10 @@
 package domain.calculadorHC;
 
+import domain.transporte.*;
 import domain.ubicacion.MunicipiosODepartamentos;
 import domain.importadorExcel.*;
 import domain.perfil.*;
 import domain.servicios.geodds.ServicioGeoDds;
-import domain.transporte.Particular;
-import domain.transporte.TipoCombustible;
-import domain.transporte.Transporte;
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;
 import domain.ubicacion.Provincia;
@@ -24,7 +22,7 @@ import static domain.perfil.Tipo.ONG;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestCalculadorHC {
-/*
+
     @Test
     @DisplayName("Test Calcular HC")
     public void testCalculadorHC(){
@@ -47,7 +45,7 @@ public class TestCalculadorHC {
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.COMBUSTION_MOVIL, TipoConsumoDA.CARBON_LENIA,0.5);
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
-        ActividadGenericaCargada unaActivadGenericaTest = new ActividadGenericaCargada(calculadorDeHCTest, TipoActividadDA.COMBUSTION_MOVIL,TipoConsumoDA.CARBON_LENIA,200,2022,12);
+        ActividadGenericaCargada unaActivadGenericaTest = new ActividadGenericaCargada( TipoActividadDA.COMBUSTION_MOVIL,TipoConsumoDA.CARBON_LENIA,200,2022,12);
 
         assertTrue(unaActivadGenericaTest.calcularHC(2022,12) == 100);
     }
@@ -58,7 +56,7 @@ public class TestCalculadorHC {
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoConsumoDA.CAMION_DE_CARGA,0.5);
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
         VaraianzaLogistica varaianzaLogisticaTest = new VaraianzaLogistica(0.5);
-        ActividadLogisticaCargada unaActivadLogisticaTest = new ActividadLogisticaCargada(calculadorDeHCTest, TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoProductoTransportado.INSUMOS ,TipoConsumoDA.CAMION_DE_CARGA, 200,10,2022,12,varaianzaLogisticaTest);
+        ActividadLogisticaCargada unaActivadLogisticaTest = new ActividadLogisticaCargada( TipoActividadDA.LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS, TipoProductoTransportado.INSUMOS ,TipoConsumoDA.CAMION_DE_CARGA, 200,10,2022,12,varaianzaLogisticaTest);
         assertTrue(unaActivadLogisticaTest.calcularHC(2022,12) == 500);
     }
     @Test
@@ -67,7 +65,8 @@ public class TestCalculadorHC {
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL,0.5);
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
-        Transporte transporteTest = new Particular(TipoParticular.AUTO, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
+        SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
+        Transporte transporteTest = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
         Ubicacion ubicacionTest1 = new Ubicacion(
                 domain.ubicacion.Provincia.Buenos_Aires,
                 "Bragado",
@@ -84,7 +83,7 @@ public class TestCalculadorHC {
                 "calle falsa",
                 123
         );
-        Tramo tramoTest = new Tramo(ubicacionTest1,ubicacionTest2,transporteTest,calculadorDeHCTest);
+        Tramo tramoTest = new Tramo(ubicacionTest1,ubicacionTest2,transporteTest);
         
         assertTrue(tramoTest.calcularHC() > 0);
     }
@@ -133,7 +132,7 @@ public class TestCalculadorHC {
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest2);
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest3);
 
-        organizacionTest.cargarMediciones("src/test/java/domain/importadorExcel/fechas.xlsx", calculadorDeHCTest);
+        organizacionTest.cargarMediciones("src/test/java/domain/importadorExcel/fechas.xlsx");
 
 
         assertTrue(organizacionTest.calcularHC(2020,0) > 0);
@@ -161,12 +160,21 @@ public class TestCalculadorHC {
         MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
-        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Ubicacion ubicacionCasaJuan = new Ubicacion(
+                domain.ubicacion.Provincia.Buenos_Aires,
+                "Bragado",
+                "Bragado",
+                "C1234",
+                "calle falsa",
+                123
+        );
+        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
         Juan.darseAltaEnOrganizacion(RRHH);
-        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-        List<Integer> indices = new ArrayList<>();
-        indices.add(0);
-        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+
+        RRHH.gestionarMiembrosPendientes(Juan.solicitudes.get(0), SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests = new ArrayList<>();
+        organizacionesTests.add(organizacionEj);
+        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
         Ubicacion ubicacionSalida = new Ubicacion(
             domain.ubicacion.Provincia.Buenos_Aires,
@@ -188,8 +196,10 @@ public class TestCalculadorHC {
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
-        Transporte autoDeJuan = new Particular(TipoParticular.AUTO, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia(), 0.5);
-        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+        SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
+        Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
+
+        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
 
 
         assertTrue(Juan.calcularHC(2022, 8, organizacionEj) > 0);
@@ -207,12 +217,22 @@ public class TestCalculadorHC {
     MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
     Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
     Area RRHH = organizacionEj.darAltaArea("RRHH");
-    Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+
+    Ubicacion ubicacionCasaJuan = new Ubicacion(
+            domain.ubicacion.Provincia.Buenos_Aires,
+            "Bragado",
+            "Bragado",
+            "C1234",
+            "calle falsa",
+            123
+    );
+    Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
+
     Juan.darseAltaEnOrganizacion(RRHH);
-    RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-    List<Integer> indices = new ArrayList<>();
-    indices.add(0);
-    Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+    RRHH.gestionarMiembrosPendientes(Juan.solicitudes.get(0),SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests = new ArrayList<>();
+        organizacionesTests.add(organizacionEj);
+    Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
     Ubicacion ubicacionSalida = new Ubicacion(
         domain.ubicacion.Provincia.Buenos_Aires,
@@ -234,17 +254,19 @@ public class TestCalculadorHC {
     FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
     calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
-    Transporte autoDeJuan = new Particular(TipoParticular.AUTO, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia(), 0.5);
-    Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+    SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
+    Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
+    Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
 
 
     assertTrue(Juan.calcularHCPorcentual(2022, 8, RRHH) > 0);
-    Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+    Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
+
         Juan2.darseAltaEnOrganizacion(RRHH);
-        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-        List<Integer> indices2 = new ArrayList<>();
-        indices2.add(0);
-        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+        RRHH.gestionarMiembrosPendientes(Juan2.solicitudes.get(0), SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests2 = new ArrayList<>();
+        organizacionesTests2.add(organizacionEj);
+        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", organizacionesTests2, 2022, 2, 20);
 
         Ubicacion ubicacionSalida2 = new Ubicacion(
             domain.ubicacion.Provincia.Buenos_Aires,
@@ -264,7 +286,7 @@ public class TestCalculadorHC {
         );
 
 
-        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida2, ubicacionllegada2,autoDeJuan);
 
         assertTrue(Juan2.calcularHCPorcentual(2022, 8, RRHH) > 0);
         assertTrue(Juan.calcularHCPorcentual(2022, 8, RRHH) > 0);
@@ -284,12 +306,20 @@ public class TestCalculadorHC {
         MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
-        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Ubicacion ubicacionCasaJuan = new Ubicacion(
+                domain.ubicacion.Provincia.Buenos_Aires,
+                "Bragado",
+                "Bragado",
+                "C1234",
+                "calle falsa",
+                123
+        );
+        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
         Juan.darseAltaEnOrganizacion(RRHH);
-        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-        List<Integer> indices = new ArrayList<>();
-        indices.add(0);
-        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+        RRHH.gestionarMiembrosPendientes(Juan.solicitudes.get(0),SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests = new ArrayList<>();
+        organizacionesTests.add(organizacionEj);
+        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
         Ubicacion ubicacionSalida = new Ubicacion(
             domain.ubicacion.Provincia.Buenos_Aires,
@@ -311,17 +341,18 @@ public class TestCalculadorHC {
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
-        Transporte autoDeJuan = new Particular(TipoParticular.AUTO, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia(), 0.5);
-        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+        SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
+        Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
+        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
 
 
         assertTrue(Juan.calcularHCPorcentual(2022, 8, RRHH) > 0);
-        Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
         Juan2.darseAltaEnOrganizacion(RRHH);
-        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-        List<Integer> indices2 = new ArrayList<>();
-        indices2.add(0);
-        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+        RRHH.gestionarMiembrosPendientes(Juan2.solicitudes.get(0),SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests2 = new ArrayList<>();
+        organizacionesTests2.add(organizacionEj);
+        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", organizacionesTests2, 2022, 2, 20);
 
         Ubicacion ubicacionSalida2 = new Ubicacion(
             domain.ubicacion.Provincia.Buenos_Aires,
@@ -341,7 +372,7 @@ public class TestCalculadorHC {
         );
 
 
-        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
 
         assertTrue(RRHH.calcularHC(2022, 8) > 0);
         assertTrue(RRHH.calcularHCporMiembro(2022, 8) > 0);
@@ -360,12 +391,20 @@ public class TestCalculadorHC {
         MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
-        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Ubicacion ubicacionCasaJuan = new Ubicacion(
+                domain.ubicacion.Provincia.Buenos_Aires,
+                "Bragado",
+                "Bragado",
+                "C1234",
+                "calle falsa",
+                123
+        );
+        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
         Juan.darseAltaEnOrganizacion(RRHH);
-        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-        List<Integer> indices = new ArrayList<>();
-        indices.add(0);
-        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+        RRHH.gestionarMiembrosPendientes(Juan.solicitudes.get(0),SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests = new ArrayList<>();
+        organizacionesTests.add(organizacionEj);
+        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
         Ubicacion ubicacionSalida = new Ubicacion(
             domain.ubicacion.Provincia.Buenos_Aires,
@@ -387,17 +426,18 @@ public class TestCalculadorHC {
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
-        Transporte autoDeJuan = new Particular(TipoParticular.AUTO, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia(), 0.5);
-        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+        SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
+        Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
+        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
 
 
         assertTrue(Juan.calcularHCPorcentual(2022, 8, RRHH) > 0);
-        Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
         Juan2.darseAltaEnOrganizacion(RRHH);
-        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-        List<Integer> indices2 = new ArrayList<>();
-        indices2.add(0);
-        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+        RRHH.gestionarMiembrosPendientes(Juan2.solicitudes.get(0),SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests2 = new ArrayList<>();
+        organizacionesTests2.add(organizacionEj);
+        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", organizacionesTests2, 2022, 2, 20);
 
         Ubicacion ubicacionSalida2 = new Ubicacion(
             domain.ubicacion.Provincia.Buenos_Aires,
@@ -417,7 +457,7 @@ public class TestCalculadorHC {
         );
 
 
-        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
 
         assertTrue(municipioEj.calcularHC(2022, 8) > 0);
 
@@ -435,12 +475,20 @@ public class TestCalculadorHC {
         MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
-        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Ubicacion ubicacionCasaJuan = new Ubicacion(
+                domain.ubicacion.Provincia.Buenos_Aires,
+                "Bragado",
+                "Bragado",
+                "C1234",
+                "calle falsa",
+                123
+        );
+        Miembro Juan = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
         Juan.darseAltaEnOrganizacion(RRHH);
-        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-        List<Integer> indices = new ArrayList<>();
-        indices.add(0);
-        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+        RRHH.gestionarMiembrosPendientes(Juan.solicitudes.get(0),SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests = new ArrayList<>();
+        organizacionesTests.add(organizacionEj);
+        Trayecto trayectoIDA = Juan.generarTrayecto("Ida a organizacionEJ", organizacionesTests, 2022, 2, 20);
 
         Ubicacion ubicacionSalida = new Ubicacion(
             domain.ubicacion.Provincia.Buenos_Aires,
@@ -462,17 +510,18 @@ public class TestCalculadorHC {
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL, 0.5);
         calculadorDeHCTest.agregarFactorDeEmision(factorDeEmisionTest);
 
-        Transporte autoDeJuan = new Particular(TipoParticular.AUTO, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia(), 0.5);
-        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+        SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
+        Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
+        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
 
 
         assertTrue(Juan.calcularHCPorcentual(2022, 8, RRHH) > 0);
-        Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478 );
+        Miembro Juan2 = new Miembro("Juan", "Perez", TipoDocumento.CEDULA, 39555478,ubicacionCasaJuan, "Juan@123", "juan123" );
         Juan2.darseAltaEnOrganizacion(RRHH);
-        RRHH.gestionarMiembrosPendientes(0,true);  //miembro 0 es juan?
-        List<Integer> indices2 = new ArrayList<>();
-        indices2.add(0);
-        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", indices, 2022, 2, 20);
+        RRHH.gestionarMiembrosPendientes(Juan2.solicitudes.get(0),SolicitudEstado.ACEPTADA);  //miembro 0 es juan?
+        List<Organizacion> organizacionesTests2 = new ArrayList<>();
+        organizacionesTests2.add(organizacionEj);
+        Trayecto trayectoIDA2 = Juan2.generarTrayecto("Ida a organizacionEJ", organizacionesTests2, 2022, 2, 20);
 
         Ubicacion ubicacionSalida2 = new Ubicacion(
             domain.ubicacion.Provincia.Buenos_Aires,
@@ -492,11 +541,11 @@ public class TestCalculadorHC {
         );
 
 
-        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan,calculadorDeHCTest);
+        Tramo tramoTest2 = trayectoIDA2.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
 
         assertTrue(Cordoba.calcularHC(2022, 8) > 0);
 
     }
-*/
+
 
 }
