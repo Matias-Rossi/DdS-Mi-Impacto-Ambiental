@@ -21,6 +21,8 @@ public class Organizacion extends EntidadPersistente {
 
     @Transient
     List<Reportes> reportes= new ArrayList<Reportes>();
+
+    @Getter
     @ManyToOne
     @JoinColumn(name = "municipio_id", referencedColumnName = "id")
     private MunicipiosODepartamentos municipioODepartamento;
@@ -87,5 +89,10 @@ public class Organizacion extends EntidadPersistente {
     public void agregarContacto(String telefono, String email){
         Contacto nuevoContacto = new Contacto(telefono, email,null);
         this.contactos.add(nuevoContacto);
+    }
+
+    public double getHCTotal() {
+        double total = reportes.stream().mapToDouble(rep -> rep.getHuellaDeCarbono()).sum();
+        return total;
     }
 }

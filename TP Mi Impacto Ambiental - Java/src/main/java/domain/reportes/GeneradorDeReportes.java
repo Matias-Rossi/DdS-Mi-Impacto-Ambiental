@@ -8,7 +8,9 @@ import java.util.List;
 
 public class GeneradorDeReportes {
     public double hCTotalPorSectorTerriorial(MunicipiosODepartamentos municipio){
-        return 0;
+        List<Organizacion> organizaciones = municipio.getOrganizaciones();
+        double sumaHC = organizaciones.stream().mapToDouble(org -> org.getHCTotal()).sum();
+        return sumaHC;
     }
 
     public double hCTotalPorTipoDeOrganizacion(Organizacion organizacion){

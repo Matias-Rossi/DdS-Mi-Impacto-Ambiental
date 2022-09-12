@@ -3,12 +3,14 @@ package domain.reportes;
 import domain.calculadorHC.TipoActividadDA;
 import domain.calculadorHC.TipoConsumoDA;
 import domain.perfil.Organizacion;
+import lombok.Getter;
 
 public class Reportes {
     TipoActividadDA tipoActividad;
     TipoConsumoDA tipoConsumo;
     Integer anio;
     Periodo periodo;
+    @Getter
     Double huellaDeCarbono;
     Organizacion organizacion;
     public Reportes(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, Integer anio, Periodo periodo, Double huellaDeCarbono, Organizacion organizacion){

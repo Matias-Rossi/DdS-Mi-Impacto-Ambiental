@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @Table(name = "municipiosODepartamentos")
 public class MunicipiosODepartamentos extends EntidadPersistente {
 
+    @Getter
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "municipioODepartamento")
     List<Organizacion> organizaciones = new ArrayList<Organizacion>();
 
@@ -49,4 +50,5 @@ public class MunicipiosODepartamentos extends EntidadPersistente {
     public Provincia getProvincia() {
         return provincia.getProvincia();
     }
+
 }
