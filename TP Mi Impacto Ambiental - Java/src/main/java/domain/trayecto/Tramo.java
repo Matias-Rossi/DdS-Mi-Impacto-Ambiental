@@ -52,12 +52,10 @@ public class Tramo implements ActividadesEmisorasCO2{
     @Column(name = "distancia")
     public double distancia;
 
-<<<<<<< HEAD
 
-=======
     @Setter
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
->>>>>>> 832923af15b6cd250f473e446da07516eb931c98
+
     @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
     private FactorDeEmision factorDeEmision;
 
