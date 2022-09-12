@@ -1,9 +1,6 @@
 package domain.importadorExcel;
 
-import domain.calculadorHC.CalculadorDeHC;
-import domain.calculadorHC.DatoDeActividad;
-import domain.calculadorHC.TipoActividadDA;
-import domain.calculadorHC.TipoConsumoDA;
+import domain.calculadorHC.*;
 import domain.perfil.Organizacion;
 import domain.persistenceExtend.EntidadPersistente;
 
@@ -38,6 +35,10 @@ public class ActividadBase extends EntidadPersistente {
   @Column(name = "mes")
   private Integer mes;
 
+  @ManyToOne
+  @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
+  private FactorDeEmision factorDeEmision;
+
   private void inicializador(TipoActividadDA actividad, TipoConsumoDA consumo, Integer anio, Integer mes,double  valorDA){
     this.tipoActividadDA = actividad;
     this.consumo = consumo;
@@ -69,7 +70,8 @@ public class ActividadBase extends EntidadPersistente {
   }
 
   public double calcularHC(Integer anio,Integer mes) {
-    double HC =CalculadorDeHC.getInstance().calcularHC(this.generarDatoDeActividad());
+    if(this.factorDeEmision==null) actualizarFE();
+    double HC =CalculadorDeHC.getInstance().calcularHC(this.factorDeEmision,this.valorDA);
     if(!this.delAnio(anio)) return 0;
 
     if(mes==0 || this.delMes(mes)) return HC;
@@ -78,6 +80,10 @@ public class ActividadBase extends EntidadPersistente {
 
     return 0;
   }
+
+    public void actualizarFE(){
+        this.factorDeEmision = CalculadorDeHC.devolverFactorDeEmision(this.generarDatoDeActividad());
+    }
 
   public DatoDeActividad generarDatoDeActividad() {
     return new DatoDeActividad(this.tipoActividadDA, this.consumo, this.valorDA);

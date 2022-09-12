@@ -51,8 +51,17 @@ public class Tramo implements ActividadesEmisorasCO2{
     @Column(name = "distancia")
     public double distancia;
 
+    @ManyToOne
+    @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
+    private FactorDeEmision factorDeEmision;
+
     public double calcularHC(){
-        return CalculadorDeHC.getInstance().calcularHC( this.generarDatoDeActividad() )/ this.integrantes ;
+        if(this.factorDeEmision==null) actualizarFE();
+        return CalculadorDeHC.getInstance().calcularHC( this.factorDeEmision,this.valorDA() )/ this.integrantes ;
+    }
+
+    private void actualizarFE(){
+        this.factorDeEmision = CalculadorDeHC.getInstance().devolverFactorDeEmision(this.generarDatoDeActividad());
     }
 
     public void compartirTramo(Miembro miembro){
