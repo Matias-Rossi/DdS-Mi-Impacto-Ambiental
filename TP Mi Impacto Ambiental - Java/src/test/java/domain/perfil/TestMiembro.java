@@ -6,7 +6,9 @@ import domain.servicios.geodds.ServicioGeoDds;
 import domain.transporte.*;
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;
+import domain.ubicacion.MunicipiosODepartamentos;
 import domain.ubicacion.Provincia;
+import domain.ubicacion.Provincias;
 import domain.ubicacion.Ubicacion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,8 +26,12 @@ public class TestMiembro {
   public void testMiembro() throws IOException {
         //Generar Organizacion y su Lista
         Importador importadorApache = new ApachePOI();
-        Ubicacion ubicacionTest = new Ubicacion(
-                null,
+    Provincias BuenosAiresTest = new Provincias(Provincia.Buenos_Aires);
+    MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
+    MunicipiosODepartamentos ChivilcoyTest = new MunicipiosODepartamentos(BuenosAiresTest, "Chivilcoy");
+
+    Ubicacion ubicacionTest = new Ubicacion(
+            BragadoTest,
                 "Bragado",
                 "C1234",
                 "calle falsa",
@@ -36,8 +42,9 @@ public class TestMiembro {
     Organizacion organizacionTest = new Organizacion(importadorApache, ubicacionTest, "testSA", Tipo.EMPRESA, clasificacionTest);
     Area area = organizacionTest.darAltaArea("arita");
 
-      Ubicacion casaMiembro = new Ubicacion(
-              null,
+
+    Ubicacion casaMiembro = new Ubicacion(
+            BragadoTest,
               "Bragado",
               "C1234",
               "calle falsa",
@@ -49,9 +56,9 @@ public class TestMiembro {
     List<Organizacion> organizacionesTest = new ArrayList<>();
     organizacionesTest.add(organizacionTest);
     Trayecto trayectoTest = miembro.generarTrayecto("Trayecto prueba", organizacionesTest,2022,1,20 );
-    Ubicacion ubicacion = new Ubicacion(null, "Chivilcoy", "C1234", "Calle falsa", 123);
-    Ubicacion ubicacion1 = new Ubicacion(null, "Chivilcoy", "C1234", "Calle falsa1", 124);
-    Ubicacion ubicacion2 = new Ubicacion(null, "Chivilcoy", "C1234", "Calle falsa2", 125);
+    Ubicacion ubicacion = new Ubicacion(ChivilcoyTest, "Chivilcoy", "C1234", "Calle falsa", 123);
+    Ubicacion ubicacion1 = new Ubicacion(ChivilcoyTest, "Chivilcoy", "C1234", "Calle falsa1", 124);
+    Ubicacion ubicacion2 = new Ubicacion(ChivilcoyTest, "Chivilcoy", "C1234", "Calle falsa2", 125);
 
     SubTipoTransporte unAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO" ) ;
     Transporte trans = new Particular(unAuto, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
@@ -73,8 +80,11 @@ public class TestMiembro {
   public void testCompartido() throws IOException {
     CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
       Importador importadorApache = new ApachePOI();
-      Ubicacion ubicacionTest = new Ubicacion(
-              null,
+    Provincias BuenosAiresTest = new Provincias(Provincia.Buenos_Aires);
+    MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
+    MunicipiosODepartamentos ChivilcoyTest = new MunicipiosODepartamentos(BuenosAiresTest, "Chivilcoy");
+    Ubicacion ubicacionTest = new Ubicacion(
+            BragadoTest,
               "Bragado",
               "C1234",
               "calle falsa",
@@ -91,7 +101,7 @@ public class TestMiembro {
       organizacionesTest.add(organizacionTest);
 
     Ubicacion casaMiembro = new Ubicacion(
-            null,
+            BragadoTest,
             "Bragado",
             "C1234",
             "calle falsa",
@@ -102,7 +112,7 @@ public class TestMiembro {
     area.gestionarMiembrosPendientes(miembroCompartido.solicitudes.get(0),SolicitudEstado.ACEPTADA);
 
     Trayecto trayectoTest = miembroCompartido.generarTrayecto("Trayecto prueba", organizacionesTest ,2022,1,20 );
-    Ubicacion ubicacion = new Ubicacion(null, "Chivilcoy", "C1234", "Calle falsa", 123);
+    Ubicacion ubicacion = new Ubicacion(ChivilcoyTest, "Chivilcoy", "C1234", "Calle falsa", 123);
       SubTipoTransporte unAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO" ) ;
       Transporte trans = new Particular(unAuto, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(), 0.5);
 
