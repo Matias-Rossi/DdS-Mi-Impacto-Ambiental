@@ -3,7 +3,10 @@ package domain.importadorExcel;
 import domain.calculadorHC.*;
 import domain.perfil.Organizacion;
 import domain.persistenceExtend.EntidadPersistente;
+<<<<<<< HEAD
 import lombok.Getter;
+=======
+>>>>>>> 832923af15b6cd250f473e446da07516eb931c98
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -37,7 +40,10 @@ public class ActividadBase extends EntidadPersistente {
   @Column(name = "mes")
   private Integer mes;
 
+<<<<<<< HEAD
   @Getter
+=======
+>>>>>>> 832923af15b6cd250f473e446da07516eb931c98
   @Setter
   @ManyToOne
   @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")

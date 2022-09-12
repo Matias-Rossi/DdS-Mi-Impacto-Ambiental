@@ -11,12 +11,11 @@ public class Solicitud extends EntidadPersistente {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private SolicitudEstado estado;
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "miembro_id", referencedColumnName = "id")
     private Miembro miembro;
 
-
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "area_id", referencedColumnName = "id")
     private Area area;
 

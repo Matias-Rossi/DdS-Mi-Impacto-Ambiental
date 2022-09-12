@@ -29,7 +29,7 @@ public class Tramo implements ActividadesEmisorasCO2{
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
-        this.distancia = transporte.calcularDistancia(partida, llegada); ;
+        //this.distancia = transporte.calcularDistancia(partida, llegada); ;
     }
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "ubicacion_partida_id", referencedColumnName = "id")
@@ -43,7 +43,7 @@ public class Tramo implements ActividadesEmisorasCO2{
     @JoinColumn(name = "medioDeTransportes_id", referencedColumnName = "id")
 
      */
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "medioDeTransportes_id", referencedColumnName = "id")
     public Transporte medioDeTransporte;
     @Getter
@@ -52,9 +52,12 @@ public class Tramo implements ActividadesEmisorasCO2{
     @Column(name = "distancia")
     public double distancia;
 
-    @Getter
+<<<<<<< HEAD
+
+=======
     @Setter
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+>>>>>>> 832923af15b6cd250f473e446da07516eb931c98
     @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
     private FactorDeEmision factorDeEmision;
 

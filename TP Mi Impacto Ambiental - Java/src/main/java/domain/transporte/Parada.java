@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "paradas")
 public class Parada extends EntidadPersistente {
-    @ManyToOne(cascade = javax.persistence.CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "linea_id", referencedColumnName = "id")
     private Linea linea;
     @Getter

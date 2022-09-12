@@ -18,11 +18,17 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
-public class ApachePOI implements Importador {
+public final class ApachePOI implements Importador {
   static DataFormatter formatter = new DataFormatter();
-
+    static ApachePOI instance;
+  public static ApachePOI getInstance() {
+    if (instance == null) {
+      instance = new ApachePOI();
+    }
+    return instance;
+  }
   public List<ActividadBase> importarDatos(String path, Organizacion organizacion) {
-    int cantidadDeValoresDeLogistica = 4;
+    final int cantidadDeValoresDeLogistica = 4;
     List<ActividadBase> listaDeCargas = new ArrayList<>();
     try {
       FileInputStream excellFile = new FileInputStream(path);
@@ -110,8 +116,8 @@ public class ApachePOI implements Importador {
         celda = celdas.next();
         valorPeriodoDeImputacion = formatter.formatCellValue(celda);
 
-        anio = this.obtenerAnio(valorPeriodoDeImputacion);
-        mes = this.obtenerMes(valorPeriodoDeImputacion,valorTipoPeriodicidad);
+        anio = ApachePOI.getInstance().obtenerAnio(valorPeriodoDeImputacion);
+        mes = ApachePOI.getInstance().obtenerMes(valorPeriodoDeImputacion,valorTipoPeriodicidad);
 
 
 
@@ -134,10 +140,10 @@ public class ApachePOI implements Importador {
     }
    return listaDeCargas;
   }
-  private Integer obtenerAnio(String fecha){
+  public Integer obtenerAnio(String fecha){
     return Integer.parseInt(fecha.substring(fecha.length()-4,fecha.length()));
   }
-  private Integer obtenerMes(String fecha,TipoPeriodicidad periodo){
+  public Integer obtenerMes(String fecha,TipoPeriodicidad periodo){
     if(periodo==TipoPeriodicidad.ANUAL){
       return 0;
     }else return Integer.parseInt(fecha.substring(0,2));
