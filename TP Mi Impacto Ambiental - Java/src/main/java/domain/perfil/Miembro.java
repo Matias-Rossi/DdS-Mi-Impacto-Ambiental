@@ -43,7 +43,7 @@ public class Miembro extends EntidadPersistente {
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "miembro")
     private List<Trayecto> trayectos = new ArrayList<Trayecto>();
     @Getter
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinTable(
             name = "tramos_a_aceptar_por_miembro",
             joinColumns = @JoinColumn(name = "miembros_id"),
@@ -68,8 +68,10 @@ public class Miembro extends EntidadPersistente {
     public void aniadirArea(Area area){
         this.areas.add(area);
     }*/
-    public void darseAltaEnOrganizacion(Area area){
-        this.solicitudes.add(new Solicitud(this,area));
+    public Solicitud darseAltaEnOrganizacion(Area area){
+        Solicitud solicitud = new Solicitud(this,area);
+        this.solicitudes.add(solicitud);
+        return solicitud;
     }
 
     public double calcularHC(Integer anio,Integer mes,Organizacion organizacion){

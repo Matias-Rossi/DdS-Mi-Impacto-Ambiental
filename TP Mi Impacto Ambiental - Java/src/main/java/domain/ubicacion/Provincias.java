@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class Provincias extends EntidadPersistente {
 
     @Getter
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(name = "provincia")
     private Provincia provincia;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "provincia")

@@ -27,13 +27,13 @@ public class Trayecto extends EntidadPersistente {
     private  Integer diasAlMes;
     @Column(name = "descripcion")
     private String descripcion;
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "trayectos_organizaciones",
             joinColumns = @JoinColumn(name = "trayecto_id"),
             inverseJoinColumns = @JoinColumn(name = "organizacion_id"))
     private List<Organizacion> organizaciones = new ArrayList<>();
     @Getter
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "trayectos_tramos",
             joinColumns = @JoinColumn(name = "trayecto_id"),
             inverseJoinColumns = @JoinColumn(name = "tramo_id"))
