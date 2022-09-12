@@ -1,4 +1,6 @@
 package domain.calculadorHC;
+import domain.persistenceExtend.EntityManagerHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,21 +17,22 @@ public final class CalculadorDeHC {
 
     private  List<FactorDeEmision> factoresDeEmision = new ArrayList<>();
 
-    public double calcularHC(DatoDeActividad actividad){
-        FactorDeEmision factorDeEmision = devolverFactorDeEmision(actividad.getTipoconsumoDA(),actividad.getTipoActividadDA());
+    public double calcularHC(FactorDeEmision factorDeEmision,Double valorDa){
         if (factorDeEmision == null) return 0;
-            else return factorDeEmision.getFactorEmision() * actividad.getDA();
+            else return factorDeEmision.getFactorEmision() * valorDa;
     }
 
-    public FactorDeEmision devolverFactorDeEmision(TipoConsumoDA consumo, TipoActividadDA actividad) {
-        return factoresDeEmision.stream()
-                .filter(factor -> factor.getTipoConsumo().equals(consumo) && factor.getTipoActividad().equals(actividad))
-                .findFirst()
-                .orElse(null);
+    public static FactorDeEmision devolverFactorDeEmision(DatoDeActividad datoDeActividad){
+        TipoConsumoDA consumo = datoDeActividad.getTipoconsumoDA();
+        TipoActividadDA actividad = datoDeActividad.getTipoActividadDA();
+        FactorDeEmision factor =(FactorDeEmision) EntityManagerHelper.createQuery("from FactorDeEmision where tipoConsumo = '"+consumo+"' and tipoActividad = '"+actividad+"'");
+        return factor;
     }
+    /*
     public void nuevoFactorDeEmision(TipoConsumoDA consumo, TipoActividadDA actividad, double factor) {
             factoresDeEmision.add(new FactorDeEmision(actividad,consumo,factor));
     }
-}
+    */
 
+}
 

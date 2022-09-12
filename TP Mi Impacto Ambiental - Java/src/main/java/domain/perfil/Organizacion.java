@@ -24,7 +24,7 @@ public class Organizacion extends EntidadPersistente {
 
     @Column(name = "tipo")
     private Tipo tipo;
-    @OneToMany(mappedBy = "id", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "id", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Area> areas= new ArrayList<Area>();
     @ManyToOne
     @JoinColumn(name = "clasificaciones_id", referencedColumnName = "id")

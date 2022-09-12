@@ -1,5 +1,7 @@
 package domain.persistenceExtend;
 
+import com.twilio.example.Example;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -19,7 +21,7 @@ public class EntityManagerHelper {
             return instance;
         }
 
-        public void persist(Object entity) {
+        public static void persist(Object entity) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
@@ -29,7 +31,7 @@ public class EntityManagerHelper {
             emf.close();
         }
 
-        public void update(Object entity) {
+        public static void update(Object entity) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
@@ -39,7 +41,7 @@ public class EntityManagerHelper {
             emf.close();
         }
 
-        public void delete(Object entity) {
+        public static void delete(Object entity) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
@@ -49,7 +51,17 @@ public class EntityManagerHelper {
             emf.close();
         }
 
-        public Object find(Class clase, Object id) {
+        public static Object createQuery(String query) {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+            Object result = em.createQuery(query).getSingleResult();
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+            return result;
+        }
+        public static Object find(Class clase, Object id) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
             EntityManager em = emf.createEntityManager();
             Object entity = em.find(clase, id);
@@ -58,7 +70,8 @@ public class EntityManagerHelper {
             return entity;
         }
 
-        public List findAll(Class clase) {
+
+        public static List findAll(Class clase) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
             EntityManager em = emf.createEntityManager();
             List entities = em.createQuery("SELECT e FROM " + clase.getSimpleName() + " e").getResultList();
