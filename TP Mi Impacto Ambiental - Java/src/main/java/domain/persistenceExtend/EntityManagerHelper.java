@@ -41,6 +41,7 @@ public class EntityManagerHelper {
             emf.close();
         }
 
+
         public static void delete(Object entity) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
             EntityManager em = emf.createEntityManager();

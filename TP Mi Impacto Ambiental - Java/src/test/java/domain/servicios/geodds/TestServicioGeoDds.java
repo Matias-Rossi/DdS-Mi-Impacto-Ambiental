@@ -51,14 +51,14 @@ public class TestServicioGeoDds {
   public void testDistanciaUbicacion() throws IOException {
     Distancia distancia = ServicioGeoDds.getInstancia().getDistanciaEntrePuntos(
         new Ubicacion(
-            new MunicipiosODepartamentos(new Provincias(domain.ubicacion.Provincia.Buenos_Aires), "Bragado"),
+            new MunicipiosODepartamentos(Provincias.obtenerProvincia(domain.ubicacion.Provincia.Buenos_Aires), "Bragado"),
             "Bragado",
             "C1234",
             "calle falsa",
             123
         ),
         new Ubicacion(
-            new MunicipiosODepartamentos(new Provincias(domain.ubicacion.Provincia.Buenos_Aires), "Chivilcoy"),
+            new MunicipiosODepartamentos(Provincias.obtenerProvincia(domain.ubicacion.Provincia.Buenos_Aires), "Chivilcoy"),
             "Chivilcoy",
             "C5678",
             "falso",

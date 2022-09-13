@@ -29,12 +29,12 @@ public class TestHibernate {
     @Test
     public void hidratarFactorDeEmision(){
         DatoDeActividad dato = new DatoDeActividad(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,0.5);
-        FactorDeEmision fac =CalculadorDeHC.getInstance().devolverFactorDeEmision(dato);
+        FactorDeEmision fac = CalculadorDeHC.getInstance().devolverFactorDeEmision(dato);
         assertEquals(0.5,fac.getFactorEmision());
     }
     @Test
     public void pruebasHidratacion() throws IOException {
-        Provincias bsAs = new Provincias(Provincia.Buenos_Aires);
+        Provincias bsAs = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
         MunicipiosODepartamentos chivilcoy = bsAs.crearMunicipio("Chivilcoy");
         Clasificacion clasificacion = new Clasificacion("clasificacion");
         Organizacion organizacion = chivilcoy.crearOrganizacion(ApachePOI.getInstance(),"razon",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
@@ -55,8 +55,8 @@ public class TestHibernate {
     }
     @Test
     public void traerHidratacion(){
-        Provincias bsas= (Provincias) EntityManagerHelper.createQuery("from Provincias where provincia = 'Buenos_Aires'");
-        MunicipiosODepartamentos vdp = (MunicipiosODepartamentos) EntityManagerHelper.createQuery("from MunicipiosODepartamentos where municipioOLocalidad ='vdp'");
-        assertEquals("Buenos Aires",vdp.getProvincia().toString());
+        Provincias bsas = Provincias.obtenerProvincia(Provincia.Buenos_Aires);//(Provincias) EntityManagerHelper.createQuery("from Provincias where provincia = 'Buenos_Aires'");
+        MunicipiosODepartamentos chivilcoy = (MunicipiosODepartamentos) EntityManagerHelper.createQuery("from MunicipiosODepartamentos where municipioOLocalidad ='Chivilcoy'");
+        assertEquals("Buenos Aires",chivilcoy.getProvincia().toString());
     }
 }
