@@ -4,6 +4,8 @@ import domain.persistenceExtend.EntidadPersistente;
 import domain.persistenceExtend.EntityManagerHelper;
 
 import lombok.Getter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class Provincias extends EntidadPersistente {
     private Provincia provincia;
 
     @Getter
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "provincia")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "provincia")
     List<MunicipiosODepartamentos> municipiosODepartamentos = new ArrayList<>();
 
     public Provincias() {
@@ -34,6 +36,7 @@ public class Provincias extends EntidadPersistente {
     }
 
     public Provincias(Provincia provincia){
+        EntityManagerHelper.persist(this);
         this.provincia=provincia; //TODO: Esto genera que se dupliquen las provincias en distintas líneas
     }
 

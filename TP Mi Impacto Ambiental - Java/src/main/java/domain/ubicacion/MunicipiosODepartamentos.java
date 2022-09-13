@@ -38,7 +38,7 @@ public class MunicipiosODepartamentos extends EntidadPersistente {
         return org;
     }
 
-    public MunicipiosODepartamentos(Provincias provincia,String municipioOLocalidad){
+    public MunicipiosODepartamentos(Provincias provincia, String municipioOLocalidad){
         this.provincia=provincia;
         this.municipioOLocalidad=municipioOLocalidad;
     }
