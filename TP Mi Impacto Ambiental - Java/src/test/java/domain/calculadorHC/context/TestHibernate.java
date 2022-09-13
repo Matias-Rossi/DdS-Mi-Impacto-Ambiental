@@ -5,6 +5,9 @@ import domain.importadorExcel.ActividadBase;
 import domain.importadorExcel.ApachePOI;
 import domain.perfil.*;
 import domain.persistenceExtend.EntityManagerHelper;
+import domain.reportes.GeneradorDeReportes;
+import domain.reportes.Periodo;
+import domain.reportes.Reportes;
 import domain.servicios.geodds.GeoDdsAPI;
 import domain.servicios.geodds.ServicioGeoDds;
 import domain.transporte.*;
@@ -58,5 +61,24 @@ public class TestHibernate {
         Provincias bsas= (Provincias) EntityManagerHelper.createQuery("from Provincias where provincia = 'Buenos_Aires'");
         MunicipiosODepartamentos vdp = (MunicipiosODepartamentos) EntityManagerHelper.createQuery("from MunicipiosODepartamentos where municipioOLocalidad ='vdp'");
         assertEquals("Buenos Aires",vdp.getProvincia().toString());
+    }
+    @Test
+    public void reportes(){
+        Provincias prova = new Provincias(Provincia.Buenos_Aires);
+        Provincias provb = new Provincias(Provincia.Catamarca);
+        MunicipiosODepartamentos vdp = prova.crearMunicipio("vdp");
+        MunicipiosODepartamentos vpr = provb.crearMunicipio("vpr");
+        Clasificacion clasificacion = new Clasificacion("clasificacion");
+        Clasificacion clasificacionb = new Clasificacion("clasificacionb");
+        Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razon",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacionb = vpr.crearOrganizacion(ApachePOI.getInstance(),"razonb",Tipo.INSTITUCION,clasificacion,"locb","cpb","calb",1);
+        EntityManagerHelper.persist(prova);
+        EntityManagerHelper.persist(provb);
+
+        Reportes primero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacionb);
+        Reportes segundo = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacionb);
+        EntityManagerHelper.persist(primero);
+        EntityManagerHelper.persist(segundo);
+        assertEquals(0.0,GeneradorDeReportes.getInstance().hCTotalPorTipoDeOrganizacion(clasificacion));
     }
 }

@@ -51,20 +51,17 @@ public class EntityManagerHelper {
             emf.close();
         }
 
-        //Quiero inicializar solo un elemento de una lista lazy en el momento que lo necesito
-    //solo deberia recuperar el elemento que quiero, no toda la lista
-    //lo deseo obtener a partir de un atributo de esa clase y su valor
-    //ejemplo: quiero obtener un municipio de una provincia con un nombre determinado
-    public static Object getLazyElement(Object entity, String atributo, String valor){
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Object result = em.createQuery("SELECT e FROM " + entity.getClass().getSimpleName() + " e WHERE e." + atributo + " = :" + valor).getSingleResult();
-        em.getTransaction().commit();
-        em.close();
-        emf.close();
-        return result;
-    }
+        //Quiero un createQuey que retorne una lista de objetos
+        public static List<Object> createQueryListResult(String query) {
+            EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
+            EntityManager em = emf.createEntityManager();
+            em.getTransaction().begin();
+            List<Object> result = em.createQuery(query).getResultList();
+            em.getTransaction().commit();
+            em.close();
+            emf.close();
+            return result;
+        }
         public static Object createQuery(String query) {
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("db");
             EntityManager em = emf.createEntityManager();

@@ -11,14 +11,17 @@ import javax.persistence.*;
 @Entity
 @Table(name = "reportes")
 public class Reportes extends EntidadPersistente {
+    @Getter
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_actividad")
     TipoActividadDA tipoActividad;
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_consumo")
     TipoConsumoDA tipoConsumo;
+    @Getter
     @Column(name = "anio")
     Integer anio;
+    @Getter
     @Enumerated(EnumType.STRING)
     @Column(name = "periodo")
     Periodo periodo;
@@ -40,5 +43,8 @@ public class Reportes extends EntidadPersistente {
 
     public Reportes() {
 
+    }
+    public Double getMomento(){
+        return this.anio+(Periodo.toInteger(this.periodo) *0.01);
     }
 }
