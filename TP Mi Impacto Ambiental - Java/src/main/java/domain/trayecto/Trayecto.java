@@ -57,14 +57,16 @@ public class Trayecto extends EntidadPersistente {
     {
         if((!this.organizaciones.contains(organizacion)) || !anio.equals(this.anio))return 0;
 
-        List<Double> mapped = tramos.stream().map(e->e.calcularHC()).collect(Collectors.toList());
-        double HCdiario = (mapped.stream().reduce(0.0, (a, b) ->a+b))/organizaciones.size();
+        List<Double> mapped = tramos.stream().map(e->e.calcularHC(this.organizaciones.size(),this.diasAlMes,(this.semestre-1)*6,this.semestre*6,mes,organizacion,anio)).collect(Collectors.toList());
+        double HC = (mapped.stream().reduce(0.0, (a, b) ->a+b))/*organizaciones.size()*/;
+        return HC;
+        /*
         double HCxMes = HCdiario*diasAlMes;
         Integer inicioSem = (this.semestre-1)*6;
         Integer finSem = this.semestre*6;
         if(mes.equals(0)) return HCxMes*6;
         if(inicioSem<mes && mes<=finSem*6)return HCxMes;
-        return 0;
+        return 0;*/
     }
 
     public Trayecto(String descripcion, List<Organizacion> organizaciones, Integer diasAlMes,Integer anio,Integer semestre,Miembro miembro){

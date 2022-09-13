@@ -1,6 +1,7 @@
 package domain.ubicacion;
 
 import domain.persistenceExtend.EntidadPersistente;
+import domain.persistenceExtend.EntityManagerHelper;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -33,7 +34,7 @@ public class Provincias extends EntidadPersistente {
 
     public Provincias(Provincia provincia){
         this.provincia=provincia;
-
+        EntityManagerHelper.persist(this);
     }
     public double calcularHC(Integer anio, Integer mes){
         List<Double> mapped = municipiosODepartamentos.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());

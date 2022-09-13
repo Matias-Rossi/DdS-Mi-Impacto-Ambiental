@@ -88,7 +88,7 @@ public class ActividadBase extends EntidadPersistente {
     }
 
     if(this.delMes(0)) {
-      Reportes reporte = new Reportes(this.tipoActividadDA, this.consumo, this.anio, Periodo.Anual, HC/12, organizacion);
+      Reportes reporte = new Reportes(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), this.anio, Periodo.Anual, HC/12, organizacion);
       return HC / 12;
     }
 

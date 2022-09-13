@@ -3,6 +3,9 @@ package domain.trayecto;
 import domain.calculadorHC.*;
 import domain.calculadorHC.ActividadesEmisorasCO2;
 import domain.perfil.Miembro;
+import domain.perfil.Organizacion;
+import domain.reportes.Periodo;
+import domain.reportes.Reportes;
 import domain.transporte.TipoTransporte;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
@@ -29,7 +32,7 @@ public class Tramo implements ActividadesEmisorasCO2{
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
-        this.distancia = transporte.calcularDistancia(partida, llegada); ;
+        //this.distancia = transporte.calcularDistancia(partida, llegada); ;
     }
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "ubicacion_partida_id", referencedColumnName = "id")
@@ -58,9 +61,20 @@ public class Tramo implements ActividadesEmisorasCO2{
     @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
     private FactorDeEmision factorDeEmision;
 
-    public double calcularHC(){
+    public double calcularHC(Integer organizaciones, Integer diasAlMes, Integer mesInicio, Integer mesFin, Integer mes, Organizacion organizacion,Integer anio) {
         if(this.factorDeEmision==null) actualizarFE();
-        return CalculadorDeHC.getInstance().calcularHC( this.factorDeEmision,this.valorDA() )/ this.integrantes ;
+        double hcTotalTramo = CalculadorDeHC.getInstance().calcularHC( this.factorDeEmision,this.valorDA() ) ;
+        double hcPorIntegrante = hcTotalTramo / this.integrantes;
+        double HCdiario = hcPorIntegrante / organizaciones;
+        double HCxMes = HCdiario*diasAlMes;
+        if(mes.equals(0)) return this.generarReporte(organizacion, Periodo.Anual,HCxMes*6,anio);
+        if(mesInicio<mes && mes<=mesFin*6)return this.generarReporte(organizacion,Periodo.getPeriodo(mes),HCxMes,anio);
+        return 0;
+    }
+
+    private double generarReporte(Organizacion organizacion,Periodo mes,double hc,Integer anio){
+        Reportes reportes = new Reportes(this.factorDeEmision.getTipoActividad(),this.factorDeEmision.getTipoConsumo(),anio,mes,hc,organizacion);
+        return hc;
     }
 
     private void actualizarFE(){
