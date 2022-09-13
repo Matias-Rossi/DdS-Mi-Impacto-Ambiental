@@ -95,4 +95,5 @@ public class Organizacion extends EntidadPersistente {
         double total = reportes.stream().mapToDouble(rep -> rep.getHuellaDeCarbono()).sum();
         return total;
     }
+
 }

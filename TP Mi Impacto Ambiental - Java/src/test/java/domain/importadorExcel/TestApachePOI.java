@@ -6,7 +6,9 @@ import domain.perfil.Clasificacion;
 import domain.perfil.Importador;
 import domain.perfil.Organizacion;
 import domain.perfil.Tipo;
+import domain.ubicacion.MunicipiosODepartamentos;
 import domain.ubicacion.Provincia;
+import domain.ubicacion.Provincias;
 import domain.ubicacion.Ubicacion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +21,7 @@ public class TestApachePOI {
   public void testApachePoi() {
     Importador importadorApache = new ApachePOI();
     Ubicacion ubicacionTest = new Ubicacion(
-            null,
+            new MunicipiosODepartamentos(Provincias.obtenerProvincia(domain.ubicacion.Provincia.Buenos_Aires), "Chivilcoy"),
             "Bragado",
             "C1234",
             "calle falsa",

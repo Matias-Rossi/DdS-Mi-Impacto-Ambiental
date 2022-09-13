@@ -26,7 +26,7 @@ public class TestMiembro {
   public void testMiembro() throws IOException {
         //Generar Organizacion y su Lista
         Importador importadorApache = new ApachePOI();
-    Provincias BuenosAiresTest = new Provincias(Provincia.Buenos_Aires);
+    Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
     MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
     MunicipiosODepartamentos ChivilcoyTest = new MunicipiosODepartamentos(BuenosAiresTest, "Chivilcoy");
 
@@ -79,8 +79,8 @@ public class TestMiembro {
   @DisplayName("Test trayecto compartido")
   public void testCompartido() throws IOException {
     CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
-      Importador importadorApache = new ApachePOI();
-    Provincias BuenosAiresTest = new Provincias(Provincia.Buenos_Aires);
+    Importador importadorApache = new ApachePOI();
+    Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
     MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
     MunicipiosODepartamentos ChivilcoyTest = new MunicipiosODepartamentos(BuenosAiresTest, "Chivilcoy");
     Ubicacion ubicacionTest = new Ubicacion(

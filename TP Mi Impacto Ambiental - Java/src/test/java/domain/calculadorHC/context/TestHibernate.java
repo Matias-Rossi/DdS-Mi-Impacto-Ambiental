@@ -32,35 +32,35 @@ public class TestHibernate {
     @Test
     public void hidratarFactorDeEmision(){
         DatoDeActividad dato = new DatoDeActividad(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,0.5);
-        FactorDeEmision fac =CalculadorDeHC.getInstance().devolverFactorDeEmision(dato);
+        FactorDeEmision fac = CalculadorDeHC.getInstance().devolverFactorDeEmision(dato);
         assertEquals(0.5,fac.getFactorEmision());
     }
     @Test
     public void pruebasHidratacion() throws IOException {
-        Provincias bsAs = new Provincias(Provincia.Buenos_Aires);
-        MunicipiosODepartamentos vdp = bsAs.crearMunicipio("vdp");
+        Provincias bsAs = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        MunicipiosODepartamentos chivilcoy = bsAs.crearMunicipio("Chivilcoy");
         Clasificacion clasificacion = new Clasificacion("clasificacion");
-        Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razon",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion = chivilcoy.crearOrganizacion(ApachePOI.getInstance(),"razon",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
         Area area = organizacion.darAltaArea("area");
-        Ubicacion ubicacion = new Ubicacion(vdp,"loc","cp","cal",1);
-        Miembro miembro = new Miembro(  "nombre",  "apellido", TipoDocumento.DNI, 12345678,ubicacion,"mail","pass");
+        Ubicacion ubicacion = new Ubicacion(chivilcoy,"loc", "cp", "cal", 1);
+        Miembro miembro = new Miembro("nombre",  "apellido", TipoDocumento.DNI, 12345678,ubicacion,"mail","pass");
         Solicitud solicitud = miembro.darseAltaEnOrganizacion(area);
         area.gestionarMiembrosPendientes(solicitud, SolicitudEstado.ACEPTADA);
-        List<Organizacion> organizacions= new ArrayList<Organizacion>();
+        List<Organizacion> organizacions = new ArrayList<Organizacion>();
         organizacions.add(organizacion);
-        Trayecto trayecto = miembro.generarTrayecto(    "descripcion",organizacions,2022,1,28);
-        Ubicacion llegada = new Ubicacion(vdp,"vdp","231","man",65);
-        Ubicacion salida = new Ubicacion(vdp,"vpr","532","bol",23);
+        Trayecto trayecto = miembro.generarTrayecto("descripcion", organizacions, 2022, 1, 28);
+        Ubicacion llegada = new Ubicacion(chivilcoy,"Chivilcoy", "231", "man", 65);
+        Ubicacion salida = new Ubicacion(chivilcoy, "Chivilcoy", "532", "bol", 23);
         SubTipoTransporte subtipo = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR,"subtipo1");
         Particular particular = new Particular(subtipo, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(),0.5);
-        Tramo tramo =trayecto.aniadirNuevoTramo(salida,llegada,particular);
-        EntityManagerHelper.persist(bsAs);
+        Tramo tramo = trayecto.aniadirNuevoTramo(salida,llegada,particular);
+        EntityManagerHelper.update(bsAs); //Cambiado de persist
     }
     @Test
     public void traerHidratacion(){
-        Provincias bsas= (Provincias) EntityManagerHelper.createQuery("from Provincias where provincia = 'Buenos_Aires'");
-        MunicipiosODepartamentos vdp = (MunicipiosODepartamentos) EntityManagerHelper.createQuery("from MunicipiosODepartamentos where municipioOLocalidad ='vdp'");
-        assertEquals("Buenos Aires",vdp.getProvincia().toString());
+        Provincias bsas = Provincias.obtenerProvincia(Provincia.Buenos_Aires);//(Provincias) EntityManagerHelper.createQuery("from Provincias where provincia = 'Buenos_Aires'");
+        MunicipiosODepartamentos chivilcoy = (MunicipiosODepartamentos) EntityManagerHelper.createQuery("from MunicipiosODepartamentos where municipioOLocalidad ='Chivilcoy'");
+        assertEquals("Buenos Aires",chivilcoy.getProvincia().toString());
     }
     @Test
     public void reportes(){

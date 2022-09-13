@@ -4,6 +4,8 @@ import domain.servicios.geodds.entidades.Distancia;
 import domain.servicios.geodds.entidades.Localidad;
 import domain.servicios.geodds.entidades.Municipio;
 import domain.servicios.geodds.entidades.Provincia;
+import domain.ubicacion.MunicipiosODepartamentos;
+import domain.ubicacion.Provincias;
 import domain.ubicacion.Ubicacion;
 import org.junit.jupiter.api.Test;
 
@@ -49,14 +51,14 @@ public class TestServicioGeoDds {
   public void testDistanciaUbicacion() throws IOException {
     Distancia distancia = ServicioGeoDds.getInstancia().getDistanciaEntrePuntos(
         new Ubicacion(
-            null,
+            new MunicipiosODepartamentos(Provincias.obtenerProvincia(domain.ubicacion.Provincia.Buenos_Aires), "Bragado"),
             "Bragado",
             "C1234",
             "calle falsa",
             123
         ),
         new Ubicacion(
-            null,
+            new MunicipiosODepartamentos(Provincias.obtenerProvincia(domain.ubicacion.Provincia.Buenos_Aires), "Chivilcoy"),
             "Chivilcoy",
             "C5678",
             "falso",
