@@ -1,13 +1,20 @@
 package domain.reportes;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReporteHistorico {
+    @Getter
     List<Double> factoresDeEmision=new ArrayList<>();
+    @Getter
     Periodo mesInicio;
+    @Getter
     Periodo mesFin;
+    @Getter
     Integer anioInicio;
+    @Getter
     Integer anioFin;
     public ReporteHistorico(Periodo mesInicio,Integer anioInicio,Periodo mesFin,Integer anioFin){
         this.mesInicio=mesInicio;

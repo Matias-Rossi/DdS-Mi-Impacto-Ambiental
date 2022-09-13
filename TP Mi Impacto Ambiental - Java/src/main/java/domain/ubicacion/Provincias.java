@@ -2,7 +2,7 @@ package domain.ubicacion;
 
 import domain.persistenceExtend.EntidadPersistente;
 import domain.persistenceExtend.EntityManagerHelper;
-import jdk.jfr.internal.Logger;
+
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -16,7 +16,7 @@ public class Provincias extends EntidadPersistente {
 
     @Getter
     @Enumerated(EnumType.STRING)
-    @Column(name = "provincia")
+    @Column(name = "provincia",unique = true)
     private Provincia provincia;
 
     @Getter
@@ -34,8 +34,7 @@ public class Provincias extends EntidadPersistente {
     }
 
     public Provincias(Provincia provincia){
-        this.provincia=provincia;
-        EntityManagerHelper.persist(this); //TODO: Esto genera que se dupliquen las provincias en distintas líneas
+        this.provincia=provincia; //TODO: Esto genera que se dupliquen las provincias en distintas líneas
     }
 
     //Devuelve una instancia de esta clase, de la base de datos si ya existe en ella, y nueva en caso contrario

@@ -79,6 +79,123 @@ public class TestHibernate {
         Reportes segundo = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacionb);
         EntityManagerHelper.persist(primero);
         EntityManagerHelper.persist(segundo);
-        assertEquals(0.0,GeneradorDeReportes.getInstance().hCTotalPorTipoDeOrganizacion(clasificacion));
+        assertEquals(2.0,GeneradorDeReportes.getInstance().hCTotalPorTipoDeOrganizacion(clasificacion));
+    }
+    @Test
+    public void reportesHcTotalSectorTerritorial(){
+        Provincias prova = new Provincias(Provincia.Jujuy);
+        MunicipiosODepartamentos vdp = prova.crearMunicipio("vdp");
+        MunicipiosODepartamentos jojo = prova.crearMunicipio("lrm");
+        Clasificacion clasificacion = new Clasificacion("clasificacion");
+        Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razonSocialisima",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion2 = vdp.crearOrganizacion(ApachePOI.getInstance(),"pedro",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion3 = jojo.crearOrganizacion(ApachePOI.getInstance(),"papa",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        EntityManagerHelper.persist(prova);
+
+        Reportes primero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacion);
+        Reportes segundo = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion2);
+        Reportes tercero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion3);
+        EntityManagerHelper.persist(primero);
+        EntityManagerHelper.persist(segundo);
+        EntityManagerHelper.persist(tercero);
+        assertEquals(2.0,GeneradorDeReportes.getInstance().hCTotalPorSectorTerriorial(vdp));
+    }
+    @Test
+    public void reportesCompSectorTerr(){
+        Provincias prova = new Provincias(Provincia.Jujuy);
+        MunicipiosODepartamentos vdp = prova.crearMunicipio("vdp");
+        MunicipiosODepartamentos jojo = prova.crearMunicipio("lrm");
+        Clasificacion clasificacion = new Clasificacion("clasificacion");
+        Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razonSocialisima",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion2 = vdp.crearOrganizacion(ApachePOI.getInstance(),"pedro",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion3 = jojo.crearOrganizacion(ApachePOI.getInstance(),"papa",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        EntityManagerHelper.persist(prova);
+
+        Reportes primero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacion);
+        Reportes segundo = new Reportes(TipoActividadDA.COMBUSTION_MOVIL,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion2);
+        Reportes tercero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion);
+        EntityManagerHelper.persist(primero);
+        EntityManagerHelper.persist(segundo);
+        EntityManagerHelper.persist(tercero);
+        assertEquals(2.0,GeneradorDeReportes.getInstance().composicionDeaHCTotalDeUnDeterminadoSectorTerritorial(vdp).getTipoDeActividadCOMBUSTION_FIJA());
+    }
+    @Test
+    public void reportesCompPais(){
+        Provincias prova = new Provincias(Provincia.Jujuy);
+        Provincias tucu = new Provincias(Provincia.Tucuman);
+        Provincias salta = new Provincias(Provincia.Salta);
+        Provincias mendoza = new Provincias(Provincia.Mendoza);
+        MunicipiosODepartamentos vdp = prova.crearMunicipio("vdp");
+        MunicipiosODepartamentos jojo = prova.crearMunicipio("lrm");
+        MunicipiosODepartamentos tucuMuni = tucu.crearMunicipio("das");
+        MunicipiosODepartamentos saltaMuni = salta.crearMunicipio("asdgad");
+        MunicipiosODepartamentos mendoMuni = mendoza.crearMunicipio("dfd");
+        Clasificacion clasificacion = new Clasificacion("clasificacion");
+        Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razonSocialisima",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion2 = vdp.crearOrganizacion(ApachePOI.getInstance(),"pedro",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion3 = jojo.crearOrganizacion(ApachePOI.getInstance(),"papa",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion4 = tucuMuni.crearOrganizacion(ApachePOI.getInstance(),"gdsv",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion5 = saltaMuni.crearOrganizacion(ApachePOI.getInstance(),"rhwrh",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion6 = mendoMuni.crearOrganizacion(ApachePOI.getInstance(),"sfgfb",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+
+        EntityManagerHelper.persist(prova);
+        EntityManagerHelper.persist(tucu);
+        EntityManagerHelper.persist(salta);
+        EntityManagerHelper.persist(mendoza);
+
+        Reportes primero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacion);
+        Reportes segundo = new Reportes(TipoActividadDA.COMBUSTION_MOVIL,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion2);
+        Reportes tercero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion);
+        Reportes cuarto = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacion3);
+        Reportes quinto = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion4);
+        Reportes sexto = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion5);
+        Reportes septimo = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion6);
+        EntityManagerHelper.persist(primero);
+        EntityManagerHelper.persist(segundo);
+        EntityManagerHelper.persist(tercero);
+        EntityManagerHelper.persist(cuarto);
+        EntityManagerHelper.persist(quinto);
+        EntityManagerHelper.persist(sexto);
+        EntityManagerHelper.persist(septimo);
+        List<Provincias> provincias = new ArrayList<>();
+        provincias.add(prova);
+        provincias.add(tucu);
+        assertEquals(4.0,GeneradorDeReportes.getInstance().composicionDeaHCTotalANivelPais(provincias).getTipoDeActividadCOMBUSTION_FIJA());
+    }
+    @Test
+    public void reportesCompSectorOrg(){
+        Provincias prova = new Provincias(Provincia.Jujuy);
+        MunicipiosODepartamentos vdp = prova.crearMunicipio("vdp");
+        MunicipiosODepartamentos jojo = prova.crearMunicipio("lrm");
+        Clasificacion clasificacion = new Clasificacion("clasificacion");
+        Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razonSocialisima",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion2 = vdp.crearOrganizacion(ApachePOI.getInstance(),"pedro",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion3 = jojo.crearOrganizacion(ApachePOI.getInstance(),"papa",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        EntityManagerHelper.persist(prova);
+
+        Reportes primero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacion);
+        Reportes segundo = new Reportes(TipoActividadDA.COMBUSTION_MOVIL,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion);
+        Reportes tercero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion);
+        EntityManagerHelper.persist(primero);
+        EntityManagerHelper.persist(segundo);
+        EntityManagerHelper.persist(tercero);
+        assertEquals(2.0,GeneradorDeReportes.getInstance().composicionDeHCDeUnaOrganizacion(organizacion).getTipoDeActividadCOMBUSTION_FIJA());
+    }
+    @Test
+    public void reportesHistoricos(){
+        Provincias prova = new Provincias(Provincia.Jujuy);
+        MunicipiosODepartamentos vdp = prova.crearMunicipio("vdp");
+        Clasificacion clasificacion = new Clasificacion("clasificacion");
+        Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razonSocialisima",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        Organizacion organizacion2 = vdp.crearOrganizacion(ApachePOI.getInstance(),"pedro",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
+        EntityManagerHelper.persist(prova);
+
+        Reportes primero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacion);
+        Reportes segundo = new Reportes(TipoActividadDA.COMBUSTION_MOVIL,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacion);
+        Reportes tercero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2021, Periodo.Marzo,1.0,organizacion);
+        EntityManagerHelper.persist(primero);
+        EntityManagerHelper.persist(segundo);
+        EntityManagerHelper.persist(tercero);
+        assertEquals(2022,GeneradorDeReportes.getInstance().EvolucionDeHCTotalDeUnDeterminadoSectorTerritorial(vdp).getAnioFin());
     }
 }

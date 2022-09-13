@@ -10,7 +10,7 @@ public class SubTipoTransporte extends EntidadPersistente {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_transporte")
     private TipoTransporte tipo;
-    @Column(name = "nombre")
+    @Column(name = "nombre",unique = true)
     private String subTipo;
 
     public SubTipoTransporte(TipoTransporte tipo, String nombre){

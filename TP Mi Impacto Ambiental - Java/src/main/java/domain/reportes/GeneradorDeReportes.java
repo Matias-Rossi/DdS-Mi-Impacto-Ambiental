@@ -6,6 +6,7 @@ import domain.persistenceExtend.EntityManagerHelper;
 import domain.ubicacion.MunicipiosODepartamentos;
 import domain.ubicacion.Provincias;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class GeneradorDeReportes {
@@ -103,24 +104,30 @@ public final class GeneradorDeReportes {
     private Object getReporteAnualDeUnAnio(List<Object> reportes, int anio){
         return reportes.stream().filter(e->((Reportes) e).getAnio()==anio && ((Reportes) e).getPeriodo()==Periodo.Anual).findFirst().get();
     }
-    private int menorAnio(List<Object> reportes){
+    public int menorAnio(List<Object> reportes){
         return reportes.stream().mapToInt(e->((Reportes) e).getAnio()).min().getAsInt();
     }
-    private int getMayorAnio(List<Object> reportes){
+    public int getMayorAnio(List<Object> reportes){
         return reportes.stream().mapToInt(e->((Reportes) e).getAnio()).max().getAsInt();
     }
 
     private List<Object> getReportesDeOrganizacion(Organizacion organizacion){
-        return EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion = :"+organizacion);
+        return EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.razonSocial = '"+organizacion.getRazonSocial()+"'");
     }
     private List<Object> getReportesDeOrganizacionConClasificacion(Clasificacion clasificacion){
-        return EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.clasificacion = :"+clasificacion);
+        return EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.clasificacion.nombre = '"+clasificacion.getNombre()+"'");
     }
     private List<Object> getReportesDeMunicipio(MunicipiosODepartamentos municipio){
-        return EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.municipioODepartamento = :"+municipio);
+        return EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.municipioODepartamento.municipioOLocalidad = '"+municipio.getMunicipioOLocalidad()+"'");
     }
-    private List<Object> getReportesDeTodasLasProvinciasMenos(List<Provincias> provincia){
-        return EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.municipioODepartamento.provincia NOT IN :"+provincia);
+    public List<Object> getReportesDeTodasLasProvinciasMenos(List<Provincias> provincia){
+
+        List<Object> reportes = new ArrayList<>();
+        provincia.forEach(e->reportes.addAll(EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.municipioODepartamento.provincia.provincia = '"+e.getProvincia()+"'")));
+        return reportes;
+       }
+       private Object getReporteDeProvincia(Provincias provincia){
+        return EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.municipioODepartamento.provincia = '"+provincia.getProvincia()+"'");
        }
 
 }

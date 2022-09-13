@@ -19,7 +19,7 @@ public class Miembro extends EntidadPersistente {
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     private Ubicacion ubicacion;
 
-    @Column(name = "usuario")
+    @Column(name = "usuario",unique = true)
     private String usuario;
 
     @Column(name = "mail")

@@ -29,14 +29,15 @@ public class Organizacion extends EntidadPersistente {
     @Getter
     @OneToMany(mappedBy = "organizacion",cascade = javax.persistence.CascadeType.ALL,fetch = javax.persistence.FetchType.LAZY)
     public List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
-    @Column(name = "razon_social")
+    @Getter
+    @Column(name = "razon_social",unique = true)
     private String razonSocial;
 
     @Column(name = "tipo")
     private Tipo tipo;
     @OneToMany(mappedBy = "id", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Area> areas= new ArrayList<Area>();
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "clasificaciones_id", referencedColumnName = "id")
     private Clasificacion clasificacion;
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
