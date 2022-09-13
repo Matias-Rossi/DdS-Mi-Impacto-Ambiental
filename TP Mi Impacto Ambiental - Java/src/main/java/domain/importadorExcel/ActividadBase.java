@@ -56,7 +56,7 @@ public class ActividadBase extends EntidadPersistente {
   public ActividadBase(TipoActividadDA actividad, TipoConsumoDA consumo, Integer anio, Integer mes,double  valorDA){
     this.inicializador(tipoActividadDA,consumo,anio,mes,valorDA);
   }
-  public ActividadBase(TipoActividadDA tipoActividad, TipoConsumoDA tipoTransporteUtilizado,Integer anio, Integer mes, double distanciaMediaRecorrida, double pesoTotalTransportado, VaraianzaLogistica varianzaLogistica,TipoProductoTransportado tipoProductoTransportado){
+  public ActividadBase(TipoActividadDA tipoActividad, TipoConsumoDA tipoTransporteUtilizado, Integer anio, Integer mes, double distanciaMediaRecorrida, double pesoTotalTransportado, VaraianzaLogistica varianzaLogistica,TipoProductoTransportado tipoProductoTransportado){
     this.inicializador(tipoActividad,tipoTransporteUtilizado,anio,mes, distanciaMediaRecorrida * pesoTotalTransportado * varianzaLogistica.getVaraianzaLogistica());
     this.tipoProductoTransportado = tipoProductoTransportado;
     this.distanciaMediaRecorrida = distanciaMediaRecorrida;
@@ -76,7 +76,7 @@ public class ActividadBase extends EntidadPersistente {
     return anioAProbar.equals(this.anio);
   }
 
-  public double calcularHC(Integer anio,Integer mes,Organizacion organizacion){
+  public double calcularHC(Integer anio, Integer mes, Organizacion organizacion){
     if(this.factorDeEmision==null) actualizarFE();
     double HC =CalculadorDeHC.getInstance().calcularHC(this.factorDeEmision,this.valorDA);
     if(!this.delAnio(anio)) return 0;
