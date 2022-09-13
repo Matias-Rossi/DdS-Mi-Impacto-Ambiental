@@ -43,16 +43,14 @@ public class Trayecto extends EntidadPersistente {
 
     }
 
-    /*
-        private Ubicacion fin(){
-            return (this.tramos.get(this.tramos.size()-1)).destino();
-        }
+    private Ubicacion fin(){
+        return (this.tramos.get(this.tramos.size()-1)).getLlegada();
+    }
+    private Ubicacion inicio(){
+        return (this.tramos.get(0)).getPartida();
+    }
 
-        private Ubicacion inicio(){
-            return (this.tramos.get(0)).origen();
-        }
 
-     */
     public double calcularHC(Integer anio, Integer mes, Organizacion organizacion)
     {
         if((!this.organizaciones.contains(organizacion)) || !anio.equals(this.anio))return 0;

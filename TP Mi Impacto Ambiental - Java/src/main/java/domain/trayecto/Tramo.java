@@ -32,11 +32,15 @@ public class Tramo implements ActividadesEmisorasCO2{
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
-        //this.distancia = transporte.calcularDistancia(partida, llegada); ;
+        this.distancia = transporte.calcularDistancia(partida, llegada); ;
     }
+
+    @Getter
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "ubicacion_partida_id", referencedColumnName = "id")
     private Ubicacion partida;
+
+    @Getter
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "ubicacion_llegada_id", referencedColumnName = "id")
     private Ubicacion llegada;

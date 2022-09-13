@@ -37,6 +37,8 @@ public class Solicitud extends EntidadPersistente {
         this.estado = estado;
     }
 
+
+    public Solicitud(){}
     public Solicitud(Miembro miembro,Area area) {
         this.area = area;
         this.miembro = miembro;
