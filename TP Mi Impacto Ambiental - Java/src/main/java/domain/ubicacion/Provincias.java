@@ -37,10 +37,9 @@ public class Provincias extends EntidadPersistente {
 
     public Provincias(Provincia provincia){
         this.provincia=provincia;
-        EntityManagerHelper.persist(this);
     }
 
-    //Devuelve una instancia de esta clase, de la base de datos si ya existe en ella, y nueva en caso contrario
+    //Devuelve una instancia de esta clase, de la base de datos si ya existe en ella, y nueva en caso contrario, haciéndola persistir
     public static Provincias obtenerProvincia(Provincia provincia) {
         Provincias provinciaExistente;
         try {
@@ -49,9 +48,11 @@ public class Provincias extends EntidadPersistente {
 
         } catch (NoResultException e)  {
             System.out.println("Creando provincia " + provincia.toString());
-            return new Provincias(provincia);
+            provinciaExistente = new Provincias(provincia);
+            EntityManagerHelper.persist(provinciaExistente);
         }
-            return provinciaExistente;
+        return provinciaExistente;
+
     }
 
     public double calcularHC(Integer anio, Integer mes){
