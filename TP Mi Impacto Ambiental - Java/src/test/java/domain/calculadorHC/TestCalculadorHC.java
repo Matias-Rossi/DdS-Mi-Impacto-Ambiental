@@ -1,5 +1,6 @@
 package domain.calculadorHC;
 
+import domain.persistenceExtend.repositorios.RepositorioProvincias;
 import domain.transporte.*;
 import domain.ubicacion.MunicipiosODepartamentos;
 import domain.importadorExcel.*;
@@ -7,10 +8,9 @@ import domain.perfil.*;
 import domain.servicios.geodds.ServicioGeoDds;
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;
+import domain.ubicacion.NombreProvincia;
 import domain.ubicacion.Provincia;
-import domain.ubicacion.Provincias;
 import domain.ubicacion.Ubicacion;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +22,7 @@ import static domain.perfil.Tipo.ONG;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestCalculadorHC {
-
+  //TODO: Pendiente arreglos con repositorio
     @Test
     @DisplayName("Test Calcular HC")
     public void testCalculadorHC(){
@@ -42,7 +42,8 @@ public class TestCalculadorHC {
     @DisplayName("Test Calcular HC De Actividad Generica")
     public void testCalculadorHCActividadGenerica(){
       Importador moduloImportadorTest = new ApachePOI();
-      Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+      RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
       MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
       Clasificacion clasificacion = new Clasificacion("Ministerio");
       Organizacion organizacionEj1 = BragadoTest.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
@@ -62,7 +63,8 @@ public class TestCalculadorHC {
     public void testCalculadorHCActividadLogistica(){
         Importador moduloImportadorTest = new ApachePOI();
         Clasificacion clasificacion = new Clasificacion("Ministerio");
-        Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+        Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Buenos_Aires);
         MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
         Organizacion organizacionEj2 = BragadoTest.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
@@ -85,7 +87,8 @@ public class TestCalculadorHC {
         FactorDeEmision factorDeEmisionTest = new FactorDeEmision(TipoActividadDA.TRANSPORTE_PARTICULAR, TipoConsumoDA.AUTO_GASOIL,0.5);
         SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
         Transporte transporteTest = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
-        Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
         Importador moduloImportadorTest = new ApachePOI();
         Clasificacion clasificacion = new Clasificacion("Ministerio");
@@ -133,7 +136,8 @@ public class TestCalculadorHC {
 
         Importador moduloImportadorTest = new ApachePOI();
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
-        Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
 
         Ubicacion ubicacionTest1 = new Ubicacion(
@@ -180,11 +184,12 @@ public class TestCalculadorHC {
         Importador moduloImportadorTest = new ApachePOI();
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         Clasificacion clasificacion = new Clasificacion("Ministerio");
-        Provincias Cordoba = Provincias.obtenerProvincia(Provincia.Cordoba);
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+        Provincia Cordoba = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
-        Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
 
         Ubicacion ubicacionCasaJuan = new Ubicacion(
@@ -238,12 +243,12 @@ public class TestCalculadorHC {
     Importador moduloImportadorTest = new ApachePOI();
     CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
     Clasificacion clasificacion = new Clasificacion("Ministerio");
-    Provincias Cordoba = Provincias.obtenerProvincia(Provincia.Cordoba);
+    RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+    Provincia Cordoba = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
     MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
     Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
     Area RRHH = organizacionEj.darAltaArea("RRHH");
-
-        Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+    Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
 
         Ubicacion ubicacionCasaJuan = new Ubicacion(
@@ -324,11 +329,12 @@ public class TestCalculadorHC {
         Importador moduloImportadorTest = new ApachePOI();
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         Clasificacion clasificacion = new Clasificacion("Ministerio");
-        Provincias Cordoba = Provincias.obtenerProvincia(Provincia.Cordoba);
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+        Provincia Cordoba = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
-        Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
 
         Ubicacion ubicacionCasaJuan = new Ubicacion(
@@ -406,11 +412,12 @@ public class TestCalculadorHC {
         Importador moduloImportadorTest = new ApachePOI();
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         Clasificacion clasificacion = new Clasificacion("Ministerio");
-        Provincias Cordoba = Provincias.obtenerProvincia(Provincia.Cordoba);
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+        Provincia Cordoba = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
-        Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
 
         Ubicacion ubicacionCasaJuan = new Ubicacion(
@@ -487,11 +494,12 @@ public class TestCalculadorHC {
         Importador moduloImportadorTest = new ApachePOI();
         CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
         Clasificacion clasificacion = new Clasificacion("Ministerio");
-        Provincias Cordoba = Provincias.obtenerProvincia(Provincia.Cordoba);
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+        Provincia Cordoba = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos municipioEj = Cordoba.crearMunicipio("muniEj");
         Organizacion organizacionEj = municipioEj.crearOrganizacion(moduloImportadorTest, "organizacionEj", ONG, clasificacion, "Cordoba Capital", "C2045", "Andes", 1200);
         Area RRHH = organizacionEj.darAltaArea("RRHH");
-        Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Cordoba);
         MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
 
         Ubicacion ubicacionCasaJuan = new Ubicacion(
@@ -527,7 +535,7 @@ public class TestCalculadorHC {
 
         SubTipoTransporte subTipoAuto = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR, "AUTO");
         Transporte autoDeJuan = new Particular(subTipoAuto, TipoCombustible.GASOIL, ServicioGeoDds.getInstancia() , 0.5);
-        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada,autoDeJuan);
+        Tramo tramoTest = trayectoIDA.aniadirNuevoTramo(ubicacionSalida, ubicacionllegada, autoDeJuan);
         tramoTest.setFactorDeEmision(factorDeEmisionTest);
 
         assertTrue(Juan.calcularHCPorcentual(2022, 8, RRHH) > 0);
@@ -559,5 +567,7 @@ public class TestCalculadorHC {
         assertTrue(Cordoba.calcularHC(2022, 8) > 0);
 
     }
+
+     
 
 }

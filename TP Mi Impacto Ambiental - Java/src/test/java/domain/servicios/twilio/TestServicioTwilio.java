@@ -5,7 +5,6 @@ import domain.notificaciones.*;
 import domain.perfil.Clasificacion;
 import domain.perfil.Organizacion;
 import domain.perfil.Tipo;
-import domain.ubicacion.Provincia;
 import domain.ubicacion.Ubicacion;
 import org.junit.jupiter.api.Test;
 

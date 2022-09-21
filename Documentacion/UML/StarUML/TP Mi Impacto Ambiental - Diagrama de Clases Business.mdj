@@ -3654,7 +3654,7 @@
 											"top": 563,
 											"width": 128.26708984375,
 											"height": 13,
-											"text": "-provincia: String",
+											"text": "-nombreProvincia: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -17804,7 +17804,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGARzvZKLd216Y="
 							},
-							"name": "provincia",
+							"name": "nombreProvincia",
 							"visibility": "private",
 							"type": "String"
 						},

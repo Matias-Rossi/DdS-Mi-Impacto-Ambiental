@@ -1,5 +1,6 @@
 package domain.calculadorHC;
 import domain.persistenceExtend.EntityManagerHelper;
+import domain.persistenceExtend.repositorios.RepositorioFactorDeEmision;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,11 @@ public final class CalculadorDeHC {
     }
 
     public static FactorDeEmision devolverFactorDeEmision(DatoDeActividad datoDeActividad){
-        TipoConsumoDA consumo = datoDeActividad.getTipoconsumoDA();
+        TipoConsumoDA consumo = datoDeActividad.getTipoConsumoDA();
         TipoActividadDA actividad = datoDeActividad.getTipoActividadDA();
-        FactorDeEmision factor =(FactorDeEmision) EntityManagerHelper.createQuery("from FactorDeEmision where tipoConsumo = '"+consumo+"' and tipoActividad = '"+actividad+"'");
+        RepositorioFactorDeEmision repositorioFactorDeEmision = new RepositorioFactorDeEmision();
+        //FactorDeEmision factor =(FactorDeEmision) EntityManagerHelper.createQuery("from FactorDeEmision where tipoConsumo = '"+consumo+"' and tipoActividad = '"+actividad+"'");
+        FactorDeEmision factor = repositorioFactorDeEmision.buscarSegunDatoDeActividad(datoDeActividad);
         return factor;
     }
     /*

@@ -13,13 +13,13 @@ public class DatoDeActividad {
   private TipoActividadDA tipoActividadDA;
   @Getter
   @Setter
-  private TipoConsumoDA tipoconsumoDA;
+  private TipoConsumoDA tipoConsumoDA;
 
-  public DatoDeActividad(TipoActividadDA tipoActividadDA, TipoConsumoDA tipoconsumoDA,double DA) {
+  public DatoDeActividad(TipoActividadDA tipoActividadDA, TipoConsumoDA tipoConsumoDA, double DA) {
 
     this.DA = DA;
     this.tipoActividadDA = tipoActividadDA;
-    this.tipoconsumoDA = tipoconsumoDA;
+    this.tipoConsumoDA = tipoConsumoDA;
   }
 
 

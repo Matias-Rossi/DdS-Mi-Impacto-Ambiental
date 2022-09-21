@@ -22,7 +22,7 @@ public class MunicipiosODepartamentos extends EntidadPersistente {
 
     @ManyToOne
     @JoinColumn(name = "provincia_id", referencedColumnName = "id")
-    Provincias provincia;
+    Provincia provincia;
     @Getter
     @Column(name = "muncipioOLocalidad")
     private String municipioOLocalidad;
@@ -38,7 +38,7 @@ public class MunicipiosODepartamentos extends EntidadPersistente {
         return org;
     }
 
-    public MunicipiosODepartamentos(Provincias provincia, String municipioOLocalidad){
+    public MunicipiosODepartamentos(Provincia provincia, String municipioOLocalidad){
         this.provincia=provincia;
         this.municipioOLocalidad=municipioOLocalidad;
     }
@@ -47,8 +47,8 @@ public class MunicipiosODepartamentos extends EntidadPersistente {
         return mapped.stream().reduce(0.0, (a, b) ->a+b);
     }
 
-    public Provincia getProvincia() {
-        return provincia.getProvincia();
+    public NombreProvincia getProvincia() {
+        return provincia.getNombreProvincia();
     }
 
 }

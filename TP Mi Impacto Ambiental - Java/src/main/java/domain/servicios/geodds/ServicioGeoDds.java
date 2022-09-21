@@ -4,7 +4,6 @@ import domain.servicios.geodds.entidades.Distancia;
 import domain.servicios.geodds.entidades.Localidad;
 import domain.servicios.geodds.entidades.Municipio;
 import domain.servicios.geodds.entidades.Provincia;
-import domain.ubicacion.CalculadorDeDistancia;
 import domain.ubicacion.Ubicacion;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -117,13 +116,13 @@ public class ServicioGeoDds implements domain.transporte.CalculadorDeDistancia {
 
   public Distancia getDistanciaEntrePuntos(Ubicacion origen, Ubicacion destino) throws IOException {
     int idLocalidadOrigen = getIdLocalidad(
-        origen.getProvincia().toString().toUpperCase(Locale.ROOT),
+        origen.getNombreProvincia().toString().toUpperCase(Locale.ROOT),
         origen.getMunicipalidad().getMunicipioOLocalidad().toUpperCase(Locale.ROOT),
         origen.getLocalidad().toUpperCase(Locale.ROOT)
     );
 
     int idLocalidadDestino = getIdLocalidad(
-        origen.getProvincia().toString().toUpperCase(Locale.ROOT),
+        origen.getNombreProvincia().toString().toUpperCase(Locale.ROOT),
         origen.getMunicipalidad().getMunicipioOLocalidad().toUpperCase(Locale.ROOT),
         origen.getLocalidad().toUpperCase(Locale.ROOT)
     );

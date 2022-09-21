@@ -4,7 +4,7 @@ import domain.calculadorHC.*;
 import domain.perfil.Organizacion;
 import domain.persistenceExtend.EntidadPersistente;
 import domain.reportes.Periodo;
-import domain.reportes.Reportes;
+import domain.reportes.Reporte;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -82,13 +82,13 @@ public class ActividadBase extends EntidadPersistente {
     if(!this.delAnio(anio)) return 0;
 
     if(mes==0 || this.delMes(mes)) {
-      Reportes reporte = new Reportes(this.tipoActividadDA, this.consumo, this.anio, /*this.mes*/null, HC, organizacion);
+      Reporte reporte = new Reporte(this.tipoActividadDA, this.consumo, this.anio, /*this.mes*/null, HC, organizacion);
       //TODO parsear el mes
       return HC;
     }
 
     if(this.delMes(0)) {
-      Reportes reporte = new Reportes(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), this.anio, Periodo.Anual, HC/12, organizacion);
+      Reporte reporte = new Reporte(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), this.anio, Periodo.Anual, HC/12, organizacion);
       return HC / 12;
     }
 
