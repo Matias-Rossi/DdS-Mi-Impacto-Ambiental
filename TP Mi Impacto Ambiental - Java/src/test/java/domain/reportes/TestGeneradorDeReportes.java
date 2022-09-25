@@ -18,15 +18,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestGeneradorDeReportes {
   @Test
   public void reportes(){
-    Provincia provincia_a = new Provincia(NombreProvincia.Buenos_Aires);
-    Provincia provincia_b = new Provincia(NombreProvincia.Catamarca);
+    RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+
+    Provincia provincia_a = repositorioProvincias.getProvincia(NombreProvincia.Buenos_Aires);
+    Provincia provincia_b = repositorioProvincias.getProvincia(NombreProvincia.Catamarca);
+
     MunicipiosODepartamentos vdp = provincia_a.crearMunicipio("vdp");
     MunicipiosODepartamentos vpr = provincia_b.crearMunicipio("vpr");
     Clasificacion clasificacion = new Clasificacion("clasificacion");
     Clasificacion clasificacionb = new Clasificacion("clasificacionb");
     Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razon", Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
     Organizacion organizacionb = vpr.crearOrganizacion(ApachePOI.getInstance(),"razonb",Tipo.INSTITUCION,clasificacion,"locb","cpb","calb",1);
-    RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
     repositorioProvincias.actualizar(provincia_a);
     repositorioProvincias.actualizar(provincia_b);
 

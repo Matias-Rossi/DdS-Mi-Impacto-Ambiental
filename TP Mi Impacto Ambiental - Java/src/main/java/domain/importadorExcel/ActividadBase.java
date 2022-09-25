@@ -77,9 +77,14 @@ public class ActividadBase extends EntidadPersistente {
   }
 
   public double calcularHC(Integer anio, Integer mes, Organizacion organizacion){
-    if(this.factorDeEmision==null) actualizarFE();
-    double HC =CalculadorDeHC.getInstance().calcularHC(this.factorDeEmision,this.valorDA);
-    if(!this.delAnio(anio)) return 0;
+
+    if(this.factorDeEmision == null)
+      actualizarFE();
+
+    double HC = CalculadorDeHC.getInstance().calcularHC(this.factorDeEmision,this.valorDA);
+
+    if(!this.delAnio(anio))
+      return 0;
 
     if(mes==0 || this.delMes(mes)) {
       Reporte reporte = new Reporte(this.tipoActividadDA, this.consumo, this.anio, /*this.mes*/null, HC, organizacion);
@@ -91,7 +96,6 @@ public class ActividadBase extends EntidadPersistente {
       Reporte reporte = new Reporte(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), this.anio, Periodo.Anual, HC/12, organizacion);
       return HC / 12;
     }
-
 
     return 0;
   }

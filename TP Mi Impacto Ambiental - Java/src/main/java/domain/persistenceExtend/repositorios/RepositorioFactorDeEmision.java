@@ -5,6 +5,7 @@ import domain.calculadorHC.FactorDeEmision;
 import domain.persistenceExtend.BusquedaConPredicado;
 import domain.persistenceExtend.Repositorio;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -21,15 +22,28 @@ public class RepositorioFactorDeEmision extends Repositorio<FactorDeEmision> {
     CriteriaQuery<FactorDeEmision> query = criteriaBuilder.createQuery(FactorDeEmision.class);
     Root<FactorDeEmision> raiz = query.from(FactorDeEmision.class);
 
-    Predicate predicadoTipoConsumo = criteriaBuilder.equal(raiz.get("tipoConsumo"), datoDeActividad.getTipoConsumoDA());
-    Predicate predicadoTipoActividad = criteriaBuilder.equal(raiz.get("tipoActividad"), datoDeActividad.getTipoActividadDA());
+    Predicate predicadoTipoConsumo = criteriaBuilder.equal(raiz.get("tipoConsumo"), datoDeActividad.getTipoConsumo());
+    Predicate predicadoTipoActividad = criteriaBuilder.equal(raiz.get("tipoActividad"), datoDeActividad.getTipoActividad());
     Predicate predicado = criteriaBuilder.and(predicadoTipoActividad, predicadoTipoConsumo);
     query.where(predicado);
 
-    BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
-    System.out.println(busqueda.getCritero() == null? "null": "noNull");
+    try {
+      //Ejecución de la búsqueda
+      BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
+      //System.out.println(busqueda.getCritero() == null? "null": "noNull");
+      return buscar(busqueda);
 
-    //Ejecución de la búsqueda
-    return buscar(busqueda);
+    } catch (NoResultException nre) {
+      System.out.println("No se encontró el Factor de Emisión según el Dato de Actividad brindado");
+      throw nre;
+    }
+  }
+
+  public FactorDeEmision buscarOCrearSegunDatoDeActividad(DatoDeActividad datoDeActividad, double factorDeEmision) {
+    try {
+      return buscarSegunDatoDeActividad(datoDeActividad);
+    } catch(NoResultException nre) {
+      return new FactorDeEmision(datoDeActividad.getTipoActividad(), datoDeActividad.getTipoConsumo(), factorDeEmision);
+    }
   }
 }

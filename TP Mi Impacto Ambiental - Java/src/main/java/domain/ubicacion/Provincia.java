@@ -20,7 +20,7 @@ public class Provincia extends EntidadPersistente {
     private NombreProvincia nombreProvincia;
 
     @Getter
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "provincia")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, mappedBy = "provincia")
     List<MunicipiosODepartamentos> municipiosODepartamentos = new ArrayList<>();
 
     public Provincia() {

@@ -3,9 +3,7 @@ package domain.persistenceExtend;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class EntidadPersistente {
@@ -13,5 +11,6 @@ public abstract class EntidadPersistente {
     @Setter
     @Id
     @GeneratedValue
-    private int id;
+    protected int id;
+
 }

@@ -23,7 +23,7 @@ public class Ubicacion extends EntidadPersistente {
     @Column(name = "provincia")
     private NombreProvincia nombreProvincia;
     @Getter
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "municipio_id", referencedColumnName = "id")
     private MunicipiosODepartamentos municipalidad;
     @Getter

@@ -69,7 +69,7 @@ public class Organizacion extends EntidadPersistente {
     }
 
     public double calcularHC(Integer anio,Integer mes){
-        return this.calcularHCConsumos(anio,mes)+this.calcularHCViajes(anio,mes);
+        return this.calcularHCConsumos(anio,mes) + this.calcularHCViajes(anio,mes);
     }
     private double calcularHCConsumos(Integer anio,Integer mes){
         List<Double> mapped = actividadesCargadas.stream().map(e->e.calcularHC(anio,mes,this)).collect(Collectors.toList());

@@ -1,5 +1,6 @@
 package domain.persistenceExtend;
 
+import domain.calculadorHC.DatoDeActividad;
 import domain.calculadorHC.FactorDeEmision;
 import domain.calculadorHC.TipoActividadDA;
 import domain.calculadorHC.TipoConsumoDA;
@@ -15,9 +16,12 @@ public class TestRepositorio {
   @DisplayName("Repositorio puede guardar y retraer una entrada")
   public void testRepositorio() {
     RepositorioFactorDeEmision repositorio = new RepositorioFactorDeEmision();
-    FactorDeEmision factorDeEmisionSaliente = new FactorDeEmision(TipoActividadDA.COMBUSTION_FIJA, TipoConsumoDA.GAS_NATURAL, 0.5);
-    repositorio.actualizar(factorDeEmisionSaliente);
-    FactorDeEmision factorDeEmisionEntrante = repositorio.buscar(factorDeEmisionSaliente.getId());
-    assertEquals(factorDeEmisionEntrante, factorDeEmisionSaliente);
+
+    FactorDeEmision saliente = new FactorDeEmision(TipoActividadDA.COMBUSTION_FIJA, TipoConsumoDA.GAS_NATURAL, 0.5);
+    repositorio.agregar(saliente);
+
+    FactorDeEmision entrante = repositorio.buscar(saliente.getId());
+    System.out.println(entrante == null? "Null" : "No null");
+    assertEquals(saliente, entrante);
   }
 }

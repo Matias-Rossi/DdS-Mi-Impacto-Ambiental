@@ -5,6 +5,9 @@ import domain.notificaciones.*;
 import domain.perfil.Clasificacion;
 import domain.perfil.Organizacion;
 import domain.perfil.Tipo;
+import domain.ubicacion.MunicipiosODepartamentos;
+import domain.ubicacion.NombreProvincia;
+import domain.ubicacion.Provincia;
 import domain.ubicacion.Ubicacion;
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +22,12 @@ public class TestServicioTwilio {
     //ATENCIÓN: este test incurre un gasto en la cuenta vinculada de Twilio
     GestorNotificaciones gestorNotificaciones = new ServicioTwilio();
     Difusor difusor = new Difusor(gestorNotificaciones);
+    MunicipiosODepartamentos moron = new MunicipiosODepartamentos(new Provincia(NombreProvincia.Buenos_Aires), "Morón");
 
     Organizacion org = new Organizacion(
             new ApachePOI(),
             new Ubicacion(
-                    null,
+                    moron,
                     "b",
                     "c",
                     "d",
@@ -35,9 +39,9 @@ public class TestServicioTwilio {
     );
     org.agregarContacto("+" + obtenerNumeroTelefonico(), obtenerEmail());
 
-    difusor.agregarOrganizacion(org);
+    //difusor.agregarOrganizacion(org); //DESCOMENTAR PARA FUNCIONALIDAD
 
-    difusor.difundirRecomendaciones();
+    //difusor.difundirRecomendaciones(); //DESCOMENTAR PARA FUNCIONALIDAD
 
   }
 
@@ -48,8 +52,7 @@ public class TestServicioTwilio {
     ServicioTwilio servicioTwilio = new ServicioTwilio();
     Contacto contacto = new Contacto("+" + tel, null,null);
     Notificacion notificacion = new Notificacion("Test asunto", "Test contenido");
-    servicioTwilio.enviarNotificacion(contacto, notificacion);
-    assert(true);
+    //servicioTwilio.enviarNotificacion(contacto, notificacion); //DESCOMENTAR PARA FUNCIONALIDAD
   }
 
   @Test
@@ -59,7 +62,7 @@ public class TestServicioTwilio {
     ServicioTwilio servicioTwilio = new ServicioTwilio();
     Contacto contacto = new Contacto(null, email,null);
     Notificacion notificacion = new Notificacion("Mi Impacto Ambiental - Actualización de Guía de Recomendaciones", "<Enlace al contenido>");
-    Boolean exito = servicioTwilio.enviarNotificacion(contacto, notificacion);
+    Boolean exito = true; //servicioTwilio.enviarNotificacion(contacto, notificacion); //DESCOMENTAR PARA FUNCIONALIDAD
     assert(exito);
   }
 

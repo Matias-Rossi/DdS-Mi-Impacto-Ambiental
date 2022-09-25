@@ -34,7 +34,7 @@ public class RepositorioProvincias extends Repositorio<Provincia> {
       Predicate predicado = criteriaBuilder.equal(raiz.get("nombreProvincia"), nombreProvincia);
       query.where(predicado);
       BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
-      System.out.println(busqueda.getCritero() == null? "null": "noNull");
+      //System.out.println(busqueda.getCritero() == null? "null": "noNull");
 
       //Ejecución de la búsqueda
       provinciaExistente = buscar(busqueda);

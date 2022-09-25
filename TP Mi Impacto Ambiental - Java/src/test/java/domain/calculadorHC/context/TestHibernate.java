@@ -3,16 +3,10 @@ package domain.context;
 import domain.calculadorHC.*;
 import domain.importadorExcel.ApachePOI;
 import domain.perfil.*;
-import domain.persistenceExtend.EntityManagerHelper;
 import domain.persistenceExtend.repositorios.RepositorioFactorDeEmision;
 import domain.persistenceExtend.repositorios.RepositorioMunicipiosODepartamentos;
 import domain.persistenceExtend.repositorios.RepositorioProvincias;
-import domain.persistenceExtend.repositorios.RepositorioReportes;
-import domain.reportes.GeneradorDeReportes;
-import domain.reportes.Periodo;
-import domain.reportes.Reporte;
 import domain.servicios.geodds.ServicioGeoDds;
-import domain.servicios.geodds.entidades.Municipio;
 import domain.transporte.*;
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;
@@ -32,13 +26,12 @@ public class TestHibernate {
     public void hidratarFactorDeEmision(){
         //Carga a db
         RepositorioFactorDeEmision repositorio = new RepositorioFactorDeEmision();
-        FactorDeEmision factorDeEmisionSaliente = new FactorDeEmision(TipoActividadDA.COMBUSTION_FIJA, TipoConsumoDA.GAS_NATURAL, 0.5);
-        repositorio.actualizar(factorDeEmisionSaliente);
+        FactorDeEmision saliente = new FactorDeEmision(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL, 0.5);
+        repositorio.agregar(saliente);
 
         //Fetch de db
-        DatoDeActividad dato = new DatoDeActividad(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,0.5);
-        FactorDeEmision fac = CalculadorDeHC.getInstance().devolverFactorDeEmision(dato);
-        assertEquals(0.5, fac.getFactorEmision());
+        FactorDeEmision entrante = repositorio.buscar(saliente.getId());
+        assertEquals(0.5, entrante.getFactorEmision());
     }
 
     @Test

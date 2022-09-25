@@ -7,19 +7,19 @@ public class DatoDeActividad {
 
   @Getter
   @Setter
-  private double DA;
+  private double valorDatoActividad;
   @Getter
   @Setter
-  private TipoActividadDA tipoActividadDA;
+  private TipoActividadDA tipoActividad;
   @Getter
   @Setter
-  private TipoConsumoDA tipoConsumoDA;
+  private TipoConsumoDA tipoConsumo;
 
-  public DatoDeActividad(TipoActividadDA tipoActividadDA, TipoConsumoDA tipoConsumoDA, double DA) {
+  public DatoDeActividad(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, double valorDatoActividad) {
 
-    this.DA = DA;
-    this.tipoActividadDA = tipoActividadDA;
-    this.tipoConsumoDA = tipoConsumoDA;
+    this.valorDatoActividad = valorDatoActividad;
+    this.tipoActividad = tipoActividad;
+    this.tipoConsumo = tipoConsumo;
   }
 
 
