@@ -1,14 +1,11 @@
 package domain.context;
 
 import domain.calculadorHC.*;
-import domain.importadorExcel.ActividadBase;
 import domain.importadorExcel.ApachePOI;
 import domain.perfil.*;
-import domain.persistenceExtend.EntityManagerHelper;
-import domain.reportes.GeneradorDeReportes;
-import domain.reportes.Periodo;
-import domain.reportes.Reportes;
-import domain.servicios.geodds.GeoDdsAPI;
+import domain.persistenceExtend.repositorios.RepositorioFactorDeEmision;
+import domain.persistenceExtend.repositorios.RepositorioMunicipiosODepartamentos;
+import domain.persistenceExtend.repositorios.RepositorioProvincias;
 import domain.servicios.geodds.ServicioGeoDds;
 import domain.transporte.*;
 import domain.trayecto.Tramo;
@@ -23,21 +20,23 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestHibernate {
-    @Test
-    public void persisting() {
-        FactorDeEmision factorDeEmision = new FactorDeEmision(TipoActividadDA.COMBUSTION_FIJA, TipoConsumoDA.GAS_NATURAL, 0.5);
-        EntityManagerHelper.delete(factorDeEmision);
-        EntityManagerHelper.persist(factorDeEmision);
-    }
+    private RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+
     @Test
     public void hidratarFactorDeEmision(){
-        DatoDeActividad dato = new DatoDeActividad(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,0.5);
-        FactorDeEmision fac = CalculadorDeHC.getInstance().devolverFactorDeEmision(dato);
-        assertEquals(0.5,fac.getFactorEmision());
+        //Carga a db
+        RepositorioFactorDeEmision repositorio = new RepositorioFactorDeEmision();
+        FactorDeEmision saliente = new FactorDeEmision(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL, 0.5);
+        repositorio.agregar(saliente);
+
+        //Fetch de db
+        FactorDeEmision entrante = repositorio.buscar(saliente.getId());
+        assertEquals(0.5, entrante.getFactorEmision());
     }
+
     @Test
     public void pruebasHidratacion() throws IOException {
-        Provincias bsAs = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+        Provincia bsAs = repositorioProvincias.getProvincia(NombreProvincia.Buenos_Aires);
         MunicipiosODepartamentos chivilcoy = bsAs.crearMunicipio("Chivilcoy");
         Clasificacion clasificacion = new Clasificacion("clasificacion");
         Organizacion organizacion = chivilcoy.crearOrganizacion(ApachePOI.getInstance(),"razon",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
@@ -54,31 +53,16 @@ public class TestHibernate {
         SubTipoTransporte subtipo = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR,"subtipo1");
         Particular particular = new Particular(subtipo, TipoCombustible.NAFTA, ServicioGeoDds.getInstancia(),0.5);
         Tramo tramo = trayecto.aniadirNuevoTramo(salida,llegada,particular);
-        EntityManagerHelper.update(bsAs); //Cambiado de persist
+        repositorioProvincias.actualizar(bsAs); //Cambiado de persist
     }
     @Test
     public void traerHidratacion(){
-        Provincias bsas = Provincias.obtenerProvincia(Provincia.Buenos_Aires);//(Provincias) EntityManagerHelper.createQuery("from Provincias where provincia = 'Buenos_Aires'");
-        MunicipiosODepartamentos chivilcoy = (MunicipiosODepartamentos) EntityManagerHelper.createQuery("from MunicipiosODepartamentos where municipioOLocalidad ='Chivilcoy'");
-        assertEquals("Buenos Aires",chivilcoy.getProvincia().toString());
+        Provincia bsas = repositorioProvincias.getProvincia(NombreProvincia.Buenos_Aires);
+        RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new RepositorioMunicipiosODepartamentos();
+        MunicipiosODepartamentos saliente = repositorioMunicipiosODepartamentos.getMunicipio(bsas, "Chivilcoy");
+        repositorioMunicipiosODepartamentos.actualizar(saliente);
+        MunicipiosODepartamentos entrante = repositorioMunicipiosODepartamentos.getMunicipioDesdeNombre("Chivilcoy");
+        assertEquals("Buenos Aires",entrante.getProvincia().toString());
     }
-    @Test
-    public void reportes(){
-        Provincias prova = new Provincias(Provincia.Buenos_Aires);
-        Provincias provb = new Provincias(Provincia.Catamarca);
-        MunicipiosODepartamentos vdp = prova.crearMunicipio("vdp");
-        MunicipiosODepartamentos vpr = provb.crearMunicipio("vpr");
-        Clasificacion clasificacion = new Clasificacion("clasificacion");
-        Clasificacion clasificacionb = new Clasificacion("clasificacionb");
-        Organizacion organizacion = vdp.crearOrganizacion(ApachePOI.getInstance(),"razon",Tipo.INSTITUCION,clasificacion,"loc","cp","cal",1);
-        Organizacion organizacionb = vpr.crearOrganizacion(ApachePOI.getInstance(),"razonb",Tipo.INSTITUCION,clasificacion,"locb","cpb","calb",1);
-        EntityManagerHelper.persist(prova);
-        EntityManagerHelper.persist(provb);
 
-        Reportes primero = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacionb);
-        Reportes segundo = new Reportes(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacionb);
-        EntityManagerHelper.persist(primero);
-        EntityManagerHelper.persist(segundo);
-        assertEquals(0.0,GeneradorDeReportes.getInstance().hCTotalPorTipoDeOrganizacion(clasificacion));
-    }
 }

@@ -21,9 +21,9 @@ public class Ubicacion extends EntidadPersistente {
     @Getter
     @Enumerated(javax.persistence.EnumType.STRING)
     @Column(name = "provincia")
-    private Provincia provincia;
+    private NombreProvincia nombreProvincia;
     @Getter
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "municipio_id", referencedColumnName = "id")
     private MunicipiosODepartamentos municipalidad;
     @Getter
@@ -31,7 +31,7 @@ public class Ubicacion extends EntidadPersistente {
     private String localidad;
 
     public Ubicacion(MunicipiosODepartamentos mun, String loc, String cp, String cal, int num) {
-        this.provincia = mun.getProvincia();
+        this.nombreProvincia = mun.getProvincia();
         this.municipalidad = mun;
         this.localidad = loc;
         this.codPostal = cp;

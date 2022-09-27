@@ -2,13 +2,14 @@ package domain.perfil;
 
 import domain.calculadorHC.CalculadorDeHC;
 import domain.importadorExcel.ApachePOI;
+import domain.persistenceExtend.repositorios.RepositorioProvincias;
 import domain.servicios.geodds.ServicioGeoDds;
 import domain.transporte.*;
 import domain.trayecto.Tramo;
 import domain.trayecto.Trayecto;
 import domain.ubicacion.MunicipiosODepartamentos;
+import domain.ubicacion.NombreProvincia;
 import domain.ubicacion.Provincia;
-import domain.ubicacion.Provincias;
 import domain.ubicacion.Ubicacion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,13 +21,15 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestMiembro {
+
   @Test
   @DisplayName("Test Distancia De Trayecto")
 
   public void testMiembro() throws IOException {
-        //Generar Organizacion y su Lista
-        Importador importadorApache = new ApachePOI();
-    Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+    //Generar Organizacion y su Lista
+    Importador importadorApache = new ApachePOI();
+    RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+    Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Buenos_Aires);
     MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
     MunicipiosODepartamentos ChivilcoyTest = new MunicipiosODepartamentos(BuenosAiresTest, "Chivilcoy");
 
@@ -76,11 +79,12 @@ public class TestMiembro {
   }
 
   @Test
-  @DisplayName("Test trayecto compartido")
+  @DisplayName("Los trayectos pueden ser compartidos")
   public void testCompartido() throws IOException {
     CalculadorDeHC calculadorDeHCTest = new CalculadorDeHC();
     Importador importadorApache = new ApachePOI();
-    Provincias BuenosAiresTest = Provincias.obtenerProvincia(Provincia.Buenos_Aires);
+    RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+    Provincia BuenosAiresTest = repositorioProvincias.getProvincia(NombreProvincia.Buenos_Aires);
     MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
     MunicipiosODepartamentos ChivilcoyTest = new MunicipiosODepartamentos(BuenosAiresTest, "Chivilcoy");
     Ubicacion ubicacionTest = new Ubicacion(
@@ -123,6 +127,8 @@ public class TestMiembro {
     miembroCompartido.gestionarTramosCompartidos(tramoCompartido, trayectoTest, true);
     assertTrue(tramoCompartido.getIntegrantes() == 2 );
   }
+
+
 
 }
 
