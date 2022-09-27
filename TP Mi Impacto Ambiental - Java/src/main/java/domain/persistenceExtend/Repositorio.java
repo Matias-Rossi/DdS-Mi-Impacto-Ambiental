@@ -1,5 +1,6 @@
 package domain.persistenceExtend;
 
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
@@ -27,8 +28,19 @@ public class Repositorio<T> {
     return (T) EntityManagerHelper.getEntityManager().createQuery(busq.getCritero()).getSingleResult();
   }
 
+  public T buscar(String sentencia) {
+    //Hacer que se le pueda pasar una
+    Query query = EntityManagerHelper.getEntityManager().createQuery(sentencia);
+    return (T) query.getSingleResult();
+  }
+
   public T buscarLista(BusquedaConPredicado busq) {
     return (T) EntityManagerHelper.getEntityManager().createQuery(busq.getCritero()).getResultList();
+  }
+
+  public T buscarLista(String sentencia) {
+    Query query = EntityManagerHelper.getEntityManager().createQuery(sentencia);
+    return (T) query.getResultList();
   }
 
 
@@ -53,4 +65,5 @@ public class Repositorio<T> {
   public static CriteriaBuilder criteriaBuilder(){
     return EntityManagerHelper.getEntityManager().getCriteriaBuilder();
   }
+
 }

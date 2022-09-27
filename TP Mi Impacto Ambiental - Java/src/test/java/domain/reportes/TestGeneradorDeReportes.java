@@ -33,10 +33,10 @@ public class TestGeneradorDeReportes {
     repositorioProvincias.actualizar(provincia_b);
 
     RepositorioReportes repositorioReportes = new RepositorioReportes();
-    Reporte primero = new Reporte(TipoActividadDA.COMBUSTION_FIJA, TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0,organizacionb);
-    Reporte segundo = new Reporte(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0,organizacionb);
+    Reporte primero = new Reporte(TipoActividadDA.COMBUSTION_FIJA, TipoConsumoDA.GAS_NATURAL,2022, Periodo.Abril,1.0, organizacionb);
+    Reporte segundo = new Reporte(TipoActividadDA.COMBUSTION_FIJA,TipoConsumoDA.GAS_NATURAL,2020, Periodo.Marzo,1.0, organizacionb);
     repositorioReportes.actualizar(primero);
     repositorioReportes.actualizar(segundo);
-    assertEquals(0.0,GeneradorDeReportes.getInstance().hCTotalPorTipoDeOrganizacion(clasificacion));
+    assertEquals(2.0, GeneradorDeReportes.getInstance().hCTotalPorTipoDeOrganizacion(clasificacion));
   }
 }

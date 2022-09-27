@@ -9,6 +9,8 @@ import domain.reportes.Reporte;
 import domain.ubicacion.MunicipiosODepartamentos;
 import domain.ubicacion.Provincia;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.criteria.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,19 +39,14 @@ public class RepositorioReportes extends Repositorio<Reporte> {
   public List<Reporte> getReportesDeOrganizacionConClasificacion(Clasificacion clasificacion){
 
     //Construcción de la query
-    CriteriaBuilder criteriaBuilder = criteriaBuilder();
-    CriteriaQuery<Reporte> query = criteriaBuilder.createQuery(Reporte.class);
-    Root<Reporte> raiz = query.from(Reporte.class);
-    //TODO: El join de abajo rompe
-
-    Join<Reporte, Organizacion> organizacion = raiz.join("clasificacion", JoinType.LEFT);
-    Predicate clasif = criteriaBuilder.equal(raiz.get("clasificacion"), clasificacion.getId());
-    query.where(clasif);
-    BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
+    EntityManager em = EntityManagerHelper.getEntityManager();
+    Query query = em.createQuery("SELECT r FROM Reporte r LEFT JOIN FETCH r.organizacion o WHERE o.clasificacion.id=?1", Reporte.class);
+    query.setParameter(1, clasificacion.getId());
 
     //Ejecución de la búsqueda
-    return (List<Reporte>) buscarLista(busqueda);
+    return query.getResultList();
 
+    //TODO: Todo esto va a haber que pasarlo al controller
     //REEMPLAZA A EntityManagerHelper.createQueryListResult("SELECT r FROM Reportes r WHERE r.organizacion.clasificacion = :"+clasificacion);
   }
 
