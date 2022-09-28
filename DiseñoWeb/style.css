@@ -1,0 +1,175 @@
+.prevent-select {
+	-webkit-user-select: none; /* Safari */
+	-ms-user-select: none; /* IE 10 and IE 11 */
+	user-select: none; /* Standard syntax */
+}
+.footer{
+	position: absolute !important;
+	bottom: 0 !important;
+	width: 100% !important;
+}
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:14px !important;
+	outline-color: #006241 !important;
+    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
+	border-color:#006241 !important;
+}
+.form-select-custom:hover{
+	outline:14px !important;
+	outline-color: #006241 !important;
+    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
+	border-color:#006241 !important;
+}
+.form-select-custom:active{
+	outline:14px !important;
+	outline-color: #006241 !important;
+    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
+	border-color:#006241 !important;
+}.form-select-custom:focus{
+	outline:14px !important;
+	outline-color: #006241 !important;
+    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
+	border-color:#006241 !important;
+}
+
+.nav-link-custom {
+	margin-right: 10vw;
+	border: none;
+	background-color: rgba(0,0,0,0);
+	color: rgba(242,240,235,1);
+	font-family: SoDo Sans;
+	font-size: 35px;
+	text-decoration: none;
+}
+
+.nav-link-custom:hover {
+	color:#1e3932;
+
+}
+
+#Texto-Titulo {
+	mix-blend-mode: hard-light;
+	left: 240px;
+	top: 150px;
+	position: absolute;
+	overflow: visible;
+	width: 541px;
+	white-space: nowrap;
+	line-height: 125px;
+	margin-top: -7.5px;
+	text-align: center;
+	font-family: Trigar Rough;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 110px;
+	color: #004C3E;
+	letter-spacing: 1.2px;
+	pointer-events: none;
+}
+.texto {
+	font-family: SoDo Sans;
+	font-style: normal;
+	font-weight: normal;
+	text-align: center;
+	color: #006241;
+	padding: 4%;
+}
+
+.textoInputs {
+	font-family: SoDo Sans;
+	font-style: normal;
+	font-weight: normal;
+	color: #006241;
+
+}
+
+.center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	}
+.centerHorizontal {
+		position: absolute;
+		left: 50%;
+		transform: translate(-50%, 0%);
+		}
+
+.btn-custom {
+	padding: 1vh 2.3vw 1vh 2.3vw !important;
+	margin-top: 1vmax;
+	margin-bottom: 1vmax;
+	border: none;
+	border-radius: 15px !important;
+	background-color:#006241 !important;
+	color:#f2f0eb !important;
+	font-family: SoDo Sans !important;
+	text-decoration: none;
+	text-align: center;
+	font-size: 1.4rem !important;;
+}
+.textoLink{
+	color: blue;
+	font-size: 0.7vmax;
+	font-family: SoDo Sans;
+	font-style: normal;
+	font-weight: normal;
+	margin-bottom: 1vmax;
+	text-decoration: none;
+}
+.textoLink:hover{
+	text-decoration: underline;
+}
+.textoNoLink{
+	margin: 1vmax 0vmax 1vmax 0vmax;
+	color: black;
+	font-size: 0.7vmax;
+	font-family: SoDo Sans;
+	font-style: normal;
+	font-weight: normal;
+	margin-bottom: 1.5vmax;
+	text-decoration: none;
+
+}
+.textoIngreso{
+	margin: 1vmax 0vmax 1vmax 0vmax;
+	text-decoration: none;
+	font-family: SoDo Sans;
+	font-style: normal;
+	font-weight: normal;
+	text-align: center;
+	color: #006241;
+}
+.textoIngreso:hover{
+	text-decoration: none;
+	color: #006241;
+
+}
+.conteinerIngreso{
+	background-color: white;
+	width:fit-content;
+	height: fit-content;
+	margin-top: 25vh;
+	border-radius: 0.7vmax; 
+}
+.conteinerRegistro{
+	background-color: white;
+	width:fit-content;
+	height: fit-content;
+	margin-top: 25vh;
+	border-radius: 0.7vmax; 
+
+}
