@@ -1,83 +1,52 @@
-
-    function setPasswordConfirmValidity(str) {
-        const password1 = document.getElementById('inputContrseña');
-        const password2 = document.getElementById('inputConfirmarContrseña');
-
-        if (password1.value === password2.value) {
-             password2.setCustomValidity('');
-        } else {
-            password2.setCustomValidity('Passwords must match');
-        }
-        console.log('inputConfirmarContrseña customError ', document.getElementById('inputConfirmarContrseña').validity.customError);
-        console.log('inputConfirmarContrseña validationMessage ', document.getElementById('inputConfirmarContrseña').validationMessage);
-    }
-
-
-function validateField() {
-    let cont = $('#passwordForm');
-    if (cont.hasClass('display-none')) {
-      cont.removeClass('display-none');
-      $("#password").attr('data-bv-validatorname', true);
-      $("#password2").attr('data-bv-validatorname', true);
-    } else {
-      cont.addClass('display-none');
-      $("#password").attr('data-bv-validatorname', false);
-      $("#password2").attr('data-bv-validatorname', false);
-    }
-    console.log(`$("#password").attr('data-bv-validatorname') is ${$("#password2").attr('data-bv-validatorname')}`);
-    console.log(`$("#password2").attr('data-bv-validatorname') is ${$("#password2").attr('data-bv-validatorname')}`);
-  }
-  
-  $('#passwordForm').bootstrapValidator({
-        message: 'This value is not valid',
-        live: 'enabled',
-        fields: {
-          password: {
-            message: 'The password is not valid',
-            validators: {
-              notEmpty: {
-                message: 'The password is required and cannot be empty'
-              },
-              identical: {
-                field: 'password',
-                message: 'The passwords must match. '
-              },
-              stringLength: {
-                min: 6,
-                max: 30,
-                message: 'The password must be more than 6 and less than 30 characters long'
-              },
-              regexp: {
-                regexp: /^[a-zA-Z0-9_]+$/,
-                message: 'The password can only consist of alphabetical, number and underscore'
-              }
-            }
-          },
-          password2: {
-            message: 'The password2 is not valid',
-            validators: {
-              notEmpty: {
-                message: 'The password2 is required and cannot be empty'
-              },
-              identical: {
-                field: 'password',
-                message: 'The passwords must match. '
-              },
-              stringLength: {
-                min: 6,
-                max: 30,
-                message: 'The password2 must be more than 6 and less than 30 characters long'
-              },
-              regexp: {
-                regexp: /^[a-zA-Z0-9_]+$/,
-                message: 'The password2 can only consist of alphabetical, number and underscore'
-              }
-            }
+function validateAll() {
+    const forms = document.querySelectorAll('.requires-validation')
+    Array.from(forms)
+      .forEach(function (form) {
+        form.addEventListener('idRegistrarse', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
           }
-        }
-        });
-  
-  
-      $('a.accountFormToggleBtn').on('click', function() {
-        validateField();
-      }); 
+    
+          form.classList.add('was-validated')
+        }, false)
+      })
+    }
+// Toggle the type of input between password and text
+function togglePasswordF() {
+    const togglePassword1 = document.getElementById('togglePassword1');
+    const password1 = document.getElementById('inputContrseña');
+
+    if (password1.type === 'password') {
+        password1.setAttribute('type', 'text');
+        togglePassword1.classList.add('hide');
+    } else {
+        password1.setAttribute('type', 'password');
+        togglePassword1.classList.remove('hide');
+    }
+}
+
+
+function setPasswordConfirmValidity(str) {
+    const password1 = document.getElementById('inputContrseña');
+    const password2 = document.getElementById('inputConfirmarContrseña');
+
+    if (password1.value === password2.value) {
+         password2.setCustomValidity('');
+    } else {
+        password2.setCustomValidity('Passwords must match');
+    }
+    console.log('inputConfirmarContrseña customError ', document.getElementById('inputConfirmarContrseña').validity.customError);
+    console.log('inputConfirmarContrseña validationMessage ', document.getElementById('inputConfirmarContrseña').validationMessage);
+    }
+
+const email = document.getElementById("inputEmail");
+
+email.addEventListener("input", (event) => {
+  if (email.validity.typeMismatch) {
+    email.setCustomValidity("I am expecting an e-mail address!");
+    email.reportValidity();
+  } else {
+    email.setCustomValidity("");
+  }
+});

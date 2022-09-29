@@ -119,7 +119,7 @@ label:focus,
 	font-family: SoDo Sans !important;
 	text-decoration: none;
 	text-align: center;
-	font-size: 1.4rem !important;;
+	font-size: 1.4rem !important;
 }
 .textoLink{
 	color: blue;
@@ -173,3 +173,48 @@ label:focus,
 	border-radius: 0.7vmax; 
 
 }
+
+.btn-action-icon{
+	padding: 0px 0px 0px 0px !important;
+	border: 1px solid #CED4DA !important;
+	border-radius: 0px 5px 5px 0px !important;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	font-size: 22px !important;
+	color:#006241 !important;
+	cursor: pointer;
+}
+
+.btn-action-icon::before{
+	font-family: "Material Icons";
+	content: 'visibility';
+}
+.btn-action-icon.hide::before{
+	content: 'visibility_off';
+}
+.validation {
+    background: #effaf1;
+	border-radius: 8px;
+	box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.15);
+}
+.validation ul{
+position: relative;
+display: flex;
+flex-direction: column;
+gap: 5px;
+}
+.validation ul li{
+position: relative;
+list-style: none;
+color: red;
+font-size: 0.85rem;
+transition: 0.5s;
+
+}
+.validation ul li::before{
+	font-family: "Material Icons";
+content: 'radio_button_checked' ;
+
+	}
