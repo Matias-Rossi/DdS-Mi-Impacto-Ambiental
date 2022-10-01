@@ -3,12 +3,16 @@
 	-ms-user-select: none; /* IE 10 and IE 11 */
 	user-select: none; /* Standard syntax */
 }
-.footer{
-	position: absolute !important;
-	bottom: 0 !important;
-	width: 100% !important;
+#footer{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+
 }
 
+#content-wrap {
+	padding-bottom: 2.5rem;    /* Footer height */
+  }
 textarea:hover, 
 input:hover, 
 textarea:active, 
@@ -50,12 +54,15 @@ label:focus,
 	background-color: rgba(0,0,0,0);
 	color: rgba(242,240,235,1);
 	font-family: SoDo Sans;
-	font-size: 35px;
+	font-size: 30px;
 	text-decoration: none;
 }
 .nav-link-custom:hover {
 	color:#1e3932;
 
+}
+#logo{
+	margin-left: 10vw;
 }
 #Texto-Titulo {
 	mix-blend-mode: hard-light;
@@ -101,10 +108,25 @@ label:focus,
 	left: 50%;
 	transform: translate(-50%, 0%);
 }
+#poseeCuenta{
+	height: 20px !important;
+	margin: 10px 0px 0px 0px !important;
+	padding: 0px !important;
+}
+#poseeCuenta1{
+	margin: 0px !important;
+	padding: 0px !important;
+	text-align: center;
+}
+#poseeCuenta2{
+	margin: 0px !important;
+	padding: 0px !important;
+	text-align: center;
+}
+
 .btn-custom {
 	padding: 1vh 2.3vw 1vh 2.3vw !important;
-	margin-top: 1vmax;
-	margin-bottom: 1vmax;
+
 	border: none;
 	border-radius: 15px !important;
 	background-color:#006241 !important;
@@ -116,24 +138,22 @@ label:focus,
 }
 .textoLink{
 	color: blue;
-	font-size: 0.7vmax;
+	font-size:small;
 	font-family: SoDo Sans;
 	font-style: normal;
 	font-weight: normal;
-	margin-bottom: 1vmax;
 	text-decoration: none;
 }
 .textoLink:hover{
 	text-decoration: underline;
 }
 .textoNoLink{
-	margin: 1vmax 0vmax 1vmax 0vmax;
+	margin: 20px 0px 20px 0px;
 	color: black;
-	font-size: 0.7vmax;
+	font-size: small;
 	font-family: SoDo Sans;
 	font-style: normal;
 	font-weight: normal;
-	margin-bottom: 1.5vmax;
 	text-decoration: none;
 }
 .textoIngreso{
@@ -156,6 +176,23 @@ label:focus,
 	margin-top: 25vh;
 	border-radius: 0.7vmax; 
 }
+.textoFooter{
+	color: gray;
+	font-family: SoDo Sans;
+	font-style: normal;
+	font-weight: normal;
+}
+.textoFooter:hover{
+	text-decoration: underline;
+}
+
+.textoCompanyName{
+	color: gray;
+	font-family: SoDo Sans;
+	font-style: normal;
+	font-weight: normal;
+}
+
 .conteinerRegistro{
 	background-color: white;
 	width:fit-content;
@@ -165,7 +202,7 @@ label:focus,
 
 }
 .btn-action-icon{
-	padding: 0px 0px 0px 0px !important;
+	padding: 0px 3px 0px 3px !important;
 	border: 1px solid #CED4DA !important;
 	border-radius: 0px 5px 5px 0px !important;
 	display: flex;
@@ -175,6 +212,7 @@ label:focus,
 	font-size: 22px !important;
 	color:#006241 !important;
 	cursor: pointer;
+
 }
 .btn-action-icon::before{
 	font-family: "Material Icons";
@@ -217,7 +255,4 @@ label:focus,
 .validation  li.valid::before{
 	content: 'check_circle';
 	color: #006241;
-}
-.requisitos{
-
 }

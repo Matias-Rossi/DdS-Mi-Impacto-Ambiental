@@ -1,27 +1,22 @@
-function validateAll() {
-    const forms = document.querySelectorAll('.requires-validation')
-    Array.from(forms)
-      .forEach(function (form) {
-        form.addEventListener('idRegistrarse', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-    
-          form.classList.add('was-validated')
-        }, false)
-      })
+function validadorFechaDosDigitos(fecha) {
+  if (fecha.length == 1) {
+    return '0' + fecha;
+  }
+  else {
+    return fecha;
+  }
 }
+
 function parserLocalDateStringToYYYYMMDD(str) {
   var dateSting = str.split('/');
   var DD = dateSting.at(0);
   var MM = dateSting.at(1);
   var YYYY = dateSting.at(2);
-  var YYYYMMDD = YYYY +'-'+ MM +'-'+ DD;
-  return YYYYMMDD ;
-} 
+  var YYYYMMDD = YYYY + '-' + validadorFechaDosDigitos(MM) + '-' + validadorFechaDosDigitos(DD);
+  return YYYYMMDD;
+}
 
-var inputDate = document.getElementById('inputDate');
+let inputDate = document.getElementById('inputDate');
 var actualDate = new Date().toLocaleDateString('es-AR');
 inputDate.max = parserLocalDateStringToYYYYMMDD(actualDate);
 
@@ -29,13 +24,13 @@ function togglePasswordF1() {
   var togglePassword1 = document.getElementById('togglePassword1');
   var password1 = document.getElementById('inputContrseña');
 
-    if (password1.type === 'password') {
-        password1.setAttribute('type', 'text');
-        togglePassword1.classList.add('hide');
-    } else {
-        password1.setAttribute('type', 'password');
-        togglePassword1.classList.remove('hide');
-    }
+  if (password1.type === 'password') {
+    password1.setAttribute('type', 'text');
+    togglePassword1.classList.add('hide');
+  } else {
+    password1.setAttribute('type', 'password');
+    togglePassword1.classList.remove('hide');
+  }
 }
 
 function togglePasswordF2() {
@@ -57,21 +52,18 @@ function setPasswordConfirmValidity(str) {
   var contrseñaNoCoincide = document.getElementById('contrseñaNoCoincide');
   var contrseñaCoincide = document.getElementById('contrseñaCoincide');
 
-    if (password1.value === password2.value) {
-      contrseñaCoincide.classList.add('valid');
-        contrseñaNoCoincide.classList.add('d-none');
-        contrseñaCoincide.classList.remove('d-none');
-
-    } 
-    else{
-      contrseñaCoincide.classList.remove('valid');
-      contrseñaNoCoincide.classList.remove('d-none');
-      contrseñaCoincide.classList.add('d-none');
-
-    }
+  if (password1.value === password2.value) {
+    contrseñaCoincide.classList.add('valid');
+    contrseñaNoCoincide.classList.add('d-none');
+    contrseñaCoincide.classList.remove('d-none');
+  } else {
+    contrseñaCoincide.classList.remove('valid');
+    contrseñaNoCoincide.classList.remove('d-none');
+    contrseñaCoincide.classList.add('d-none');
   }
+}
 
-function checkPassword(data){
+function checkPassword(data) {
 
   var lowerCase = document.getElementById('lower');
   var upperCase = document.getElementById('upper');
@@ -86,42 +78,42 @@ function checkPassword(data){
   const number = new RegExp('(?=.*[0-9])');
   const length = new RegExp('.{8,32}$');
 
-//lower case Validation check
-if (lower.test(data)){lowerCase.classList.add('valid');}
-else{lowerCase.classList.remove('valid');}
+  //lower case Validation check
+  if (lower.test(data)) { lowerCase.classList.add('valid'); }
+  else { lowerCase.classList.remove('valid'); }
 
-//upper case Validation check
-if (upper.test(data)){upperCase.classList.add('valid');}
-else{upperCase.classList.remove('valid');}
+  //upper case Validation check
+  if (upper.test(data)) { upperCase.classList.add('valid'); }
+  else { upperCase.classList.remove('valid'); }
 
-//number Validation check
-if (number.test(data)){numberCase.classList.add('valid');}
-else{numberCase.classList.remove('valid');}
+  //number Validation check
+  if (number.test(data)) { numberCase.classList.add('valid'); }
+  else { numberCase.classList.remove('valid'); }
 
-//special character Validation check
-if (special.test(data)){specialCase.classList.add('valid');}
-else{specialCase.classList.remove('valid');}
+  //special character Validation check
+  if (special.test(data)) { specialCase.classList.add('valid'); }
+  else { specialCase.classList.remove('valid'); }
 
-//length Validation check
-if (length.test(data)){lengthCase.classList.add('valid');}
-else{lengthCase.classList.remove('valid');}
+  //length Validation check
+  if (length.test(data)) { lengthCase.classList.add('valid'); }
+  else { lengthCase.classList.remove('valid'); }
 
-if(length.test(data) && special.test(data) && number.test(data) && upper.test(data) && lower.test(data)){requisitosCase.classList.add('valid');}
-else{requisitosCase.classList.remove('valid');}
+  if (length.test(data) && special.test(data) && number.test(data) && upper.test(data) && lower.test(data)) { requisitosCase.classList.add('valid'); }
+  else { requisitosCase.classList.remove('valid'); }
 }
 
-var mostrarValidaciones = function(id) {
+var mostrarValidaciones = function (id) {
   var current = document.getElementById(id);
-    current.classList.add('valid-feedback' );
-    current.classList.add('invalid-feedback');
-      current.classList.add('validation');
-      current.classList.remove('d-none');
-  }
+  current.classList.add('valid-feedback');
+  current.classList.add('invalid-feedback');
+  current.classList.add('validation');
+  current.classList.remove('d-none');
+}
 
-var ocultarValidaciones = function(id) {
+var ocultarValidaciones = function (id) {
   var current = document.getElementById(id);
-    current.classList.remove('valid-feedback' );
-    current.classList.remove('invalid-feedback');
-      current.classList.remove('validation');
-      current.classList.add('d-none');
-  }
+  current.classList.remove('valid-feedback');
+  current.classList.remove('invalid-feedback');
+  current.classList.remove('validation');
+  current.classList.add('d-none');
+}
