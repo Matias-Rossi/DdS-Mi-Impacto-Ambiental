@@ -44,7 +44,6 @@ label:focus,
     box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
 	border-color:#006241 !important;
 }
-
 .nav-link-custom {
 	margin-right: 10vw;
 	border: none;
@@ -54,12 +53,10 @@ label:focus,
 	font-size: 35px;
 	text-decoration: none;
 }
-
 .nav-link-custom:hover {
 	color:#1e3932;
 
 }
-
 #Texto-Titulo {
 	mix-blend-mode: hard-light;
 	left: 240px;
@@ -87,27 +84,23 @@ label:focus,
 	color: #006241;
 	padding: 4%;
 }
-
 .textoInputs {
 	font-family: SoDo Sans;
 	font-style: normal;
 	font-weight: normal;
 	color: #006241;
-
 }
-
 .center {
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	}
+}
 .centerHorizontal {
-		position: absolute;
-		left: 50%;
-		transform: translate(-50%, 0%);
-		}
-
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0%);
+}
 .btn-custom {
 	padding: 1vh 2.3vw 1vh 2.3vw !important;
 	margin-top: 1vmax;
@@ -142,7 +135,6 @@ label:focus,
 	font-weight: normal;
 	margin-bottom: 1.5vmax;
 	text-decoration: none;
-
 }
 .textoIngreso{
 	margin: 1vmax 0vmax 1vmax 0vmax;
@@ -156,7 +148,6 @@ label:focus,
 .textoIngreso:hover{
 	text-decoration: none;
 	color: #006241;
-
 }
 .conteinerIngreso{
 	background-color: white;
@@ -173,7 +164,6 @@ label:focus,
 	border-radius: 0.7vmax; 
 
 }
-
 .btn-action-icon{
 	padding: 0px 0px 0px 0px !important;
 	border: 1px solid #CED4DA !important;
@@ -186,7 +176,6 @@ label:focus,
 	color:#006241 !important;
 	cursor: pointer;
 }
-
 .btn-action-icon::before{
 	font-family: "Material Icons";
 	content: 'visibility';
@@ -195,26 +184,40 @@ label:focus,
 	content: 'visibility_off';
 }
 .validation {
-    background: #effaf1;
-	border-radius: 8px;
-	box-shadow: 0 15px 25px 0 rgba(0, 0, 0, 0.15);
+	flex-direction: column;
+	font-family: SoDo Sans !important;
+	font-style: normal !important;
+	font-weight: normal !important;
+	text-decoration: none !important;
+	color: red;
+	font-size: 14px !important;	
+	line-height: 20px;
 }
-.validation ul{
-position: relative;
-display: flex;
-flex-direction: column;
-gap: 5px;
-}
-.validation ul li{
-position: relative;
-list-style: none;
-color: red;
-font-size: 0.85rem;
-transition: 0.5s;
 
+#lower {margin-left: 25px;}
+#upper {margin-left: 25px;}
+#number {margin-left: 25px;}
+#special {margin-left: 25px;}
+#length{margin-left: 25px;}
+
+.validation  li.valid{
+	color: #006241;
 }
-.validation ul li::before{
+.validation  span.valid{
+	color: #006241;
+}
+
+.validation  li::before{
+	text-align: right !important;
 	font-family: "Material Icons";
-content: 'radio_button_checked' ;
+	font-size: 20px;
+	content: 'cancel';
+	align-items: center !important;
+}
+.validation  li.valid::before{
+	content: 'check_circle';
+	color: #006241;
+}
+.requisitos{
 
-	}
+}
