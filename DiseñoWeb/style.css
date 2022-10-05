@@ -49,7 +49,6 @@ label:focus,
 	border-color:#006241 !important;
 }
 .nav-link-custom {
-	margin-right: 10vw;
 	border: none;
 	background-color: rgba(0,0,0,0);
 	color: rgba(242,240,235,1);
@@ -59,7 +58,13 @@ label:focus,
 }
 .nav-link-custom:hover {
 	color:#1e3932;
+}
+#ingresar{
+	margin-right: 10vw;
+}
 
+#miPerfil{
+	margin-right: 10vw;
 }
 #logo{
 	margin-left: 10vw;

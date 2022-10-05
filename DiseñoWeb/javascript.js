@@ -15,11 +15,11 @@ function parserLocalDateStringToYYYYMMDD(str) {
   var YYYYMMDD = YYYY + '-' + validadorFechaDosDigitos(MM) + '-' + validadorFechaDosDigitos(DD);
   return YYYYMMDD;
 }
-
+function maxDate(){
 let inputDate = document.getElementById('inputDate');
 var actualDate = new Date().toLocaleDateString('es-AR');
 inputDate.max = parserLocalDateStringToYYYYMMDD(actualDate);
-
+}
 function togglePasswordF1() {
   var togglePassword1 = document.getElementById('togglePassword1');
   var password1 = document.getElementById('inputContrseña');
