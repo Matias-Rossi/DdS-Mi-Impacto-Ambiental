@@ -1,15 +1,6 @@
 package domain.notificaciones;
 
-import domain.importadorExcel.ApachePOI;
-import domain.perfil.Clasificacion;
 import domain.perfil.Organizacion;
-import domain.perfil.Tipo;
-import domain.ubicacion.Provincia;
-import domain.ubicacion.Ubicacion;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-import org.quartz.JobKey;
 
 import java.util.ArrayList;
 import java.util.List;

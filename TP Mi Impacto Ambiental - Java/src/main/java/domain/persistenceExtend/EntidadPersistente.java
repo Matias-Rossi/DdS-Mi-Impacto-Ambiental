@@ -1,15 +1,17 @@
 package domain.persistenceExtend;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 
 @MappedSuperclass
 public abstract class EntidadPersistente {
+    @Getter
+    @Setter
     @Id
     @GeneratedValue
-    private int id;
-    public int getId() {
-        return id;
-    }
+    @Column
+    protected int id;
+
 }

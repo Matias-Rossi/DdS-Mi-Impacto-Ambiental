@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi Impacto Ambiental</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/icono.png" type="image/x-icon">
+    <link rel="stylesheet" id="applicationStylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <style>
+        body {
+            background-image: url(https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Fondo-CartonCompleto.png);
+            background-blend-mode: normal;
+            position: relative;
+            padding-bottom: 3em;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body class="prevent-select">
+    <nav class="navbar fixed-top" style="background-color:#006241;">
+        <div class="container-fluid">
+            <a href="Home.html" class="navbar-brand ms-5">
+                <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+                    height="49" id="logo">
+            </a>
+        </div>
+    </nav>
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <form class="was-validated" novalidate>
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                        <div class="col-md-3">
+                            <label for="firstName" class="form-label textoInputs">Nombre</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="lastName" class="form-label textoInputs">Apellido</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="TipoDoc" class="form-label textoInputs">Tipo de documento</label>
+                            <select class="form-select form-select-custom" id="TipoDoc" required>
+                                <option selected disabled value="">Elegir...</option>
+                                <option>DNI</option>
+                                <option>CUIL</option>
+                                <option>Pasaporte</option>
+                                <option>Cedula</option>
+                                <option>Libreta Civica</option>
+                                <option>Libreta de Enrolamiento</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                        <div class="col-md-6">
+                            <label for="inputDate" class="form-label textoInputs">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" id="inputDate" placeholder="" value="" onclick="maxDate();" required> 
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inpudDocumento" class="form-label textoInputs">Numero de documento</label>
+                            <input type="number" class="form-control" id="inpudDocumento" placeholder="" value=""
+                                min="0" required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                        <div class="col-md-6">
+                            <label for="inputEmail" class="form-label textoInputs">Correo electronico</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="" value="" required>
+                        </div>
+                    </div>
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                        <div class="col-md-6">
+                            <label for="inputContrseña" class="form-label textoInputs">Contraseña</label>
+                            <div class="input-group mb-6">
+                                <input type="password" class="form-control " id="inputContrseña"
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$"
+                                    placeholder="" value=""
+                                    onfocus="mostrarValidaciones(document.getElementById('validaciones1').id);"
+                                    onblur="ocultarValidaciones(document.getElementById('validaciones1').id);"
+                                    oninput="setPasswordConfirmValidity();" onkeyup="checkPassword(this.value);"
+                                    required>
+                                <span class="btn-action-icon" id="togglePassword1" onclick="togglePasswordF1();"></span>
+                                <div id="validaciones1" class="d-none">
+                                    <span class="d-flex align-items-center" id="requisitos">&nbsp Debe contener al
+                                        menos: </span>
+                                    <li class="d-flex align-items-center" id="lower">Una letra minuscula. &nbsp </li>
+                                    <li class="d-flex align-items-center" id="upper">Una letra mayuscula. &nbsp </li>
+                                    <li class="d-flex align-items-center" id="number">Un numero. &nbsp </li>
+                                    <li class="d-flex align-items-center" id="special">Un caracter especial. &nbsp </li>
+                                    <li class="d-flex align-items-center" id="length">8 caracteres. &nbsp </li>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputConfirmarContrseña" class="form-label textoInputs">Confirmar
+                                contraseña</label>
+                            <div class="input-group mb-6">
+                                <input type="password" class="form-control " id="inputConfirmarContrseña"
+                                    pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$"
+                                    placeholder="" value=""
+                                    onfocus="mostrarValidaciones(document.getElementById('validaciones2').id);"
+                                    onblur="ocultarValidaciones(document.getElementById('validaciones2').id);"
+                                    oninput="setPasswordConfirmValidity();" required>
+                                <span class="btn-action-icon" id="togglePassword2" onclick="togglePasswordF2();"></span>
+                                <div id="validaciones2" class="d-none">
+                                    <li class="d-flex align-items-center" id="contrseñaNoCoincide">&nbsp Las contraseñas
+                                        no
+                                        coinciden</li>
+                                    <li class="d-flex align-items-center d-none" id="contrseñaCoincide">&nbsp Las
+                                        contraseñas coinciden</li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
+                        <button class=" btn-custom " href="#" type="submit" id="idRegistrarse">Registrar</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+        <div class="d-flex row justify-content-center" id="poseeCuenta">
+            <span class="textoNoLink text-small col-sm-1" style="width: fit-content;" id="poseeCuenta1">¿Ya posee una
+                cuenta?&nbsp</span> <a href="Login.html" id="poseeCuenta2" class=" col-sm-1 textoLink"
+                style="width: fit-content;">Inicie Sesion</a>
+        </div>
+    </div>
+    <div class="container">
+        <footer class="py-2 my-2" style="padding-bottom: 6px;">
+            <p class="text-center text-muted textoCompanyName">© 2022 Mi Impacto Ambiental</p>
+            <ul class="nav justify-content-center pb-2 mb-2">
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted textoFooter">Privacy</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted textoFooter">Support</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted textoFooter">Terms</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted textoFooter">FAQs</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted textoFooter">About</a></li>
+            </ul>
+        </footer>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    crossorigin="anonymous"></script>
+<script src="javascript.js"></script>
+
+</html>

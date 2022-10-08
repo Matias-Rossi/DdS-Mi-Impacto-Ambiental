@@ -4,7 +4,6 @@ import domain.servicios.geodds.entidades.Distancia;
 import domain.servicios.geodds.entidades.Localidad;
 import domain.servicios.geodds.entidades.Municipio;
 import domain.servicios.geodds.entidades.Provincia;
-import domain.ubicacion.CalculadorDeDistancia;
 import domain.ubicacion.Ubicacion;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -110,20 +109,35 @@ public class ServicioGeoDds implements domain.transporte.CalculadorDeDistancia {
   }
 
   public int getIdLocalidad(String prov, String mun, String loc) throws IOException {
-    int idProvincia = mapProvincias().get(prov.toUpperCase(Locale.ROOT));
-    int idMunicipio = mapMunicipios(idProvincia).get(mun.toUpperCase(Locale.ROOT));
+    int idProvincia;
+    int idMunicipio = 0;
+
+    try {
+      idProvincia = mapProvincias().get(prov.toUpperCase(Locale.ROOT));
+      idMunicipio = mapMunicipios(idProvincia).get(mun.toUpperCase(Locale.ROOT));
+
+    } catch(Exception e) {
+      System.out.println("# ERROR al buscar el ID de la localidad:");
+      System.out.printf("Provincia: %s, \nMunicipio: %s, \nLocalidad: %s\n\n", prov, mun, loc);
+      e.printStackTrace();
+
+    }
+
     return mapLocalidades(idMunicipio).get(loc.toUpperCase(Locale.ROOT));
+
+
+
   }
 
   public Distancia getDistanciaEntrePuntos(Ubicacion origen, Ubicacion destino) throws IOException {
     int idLocalidadOrigen = getIdLocalidad(
-        origen.getProvincia().toString().toUpperCase(Locale.ROOT),
+        origen.getNombreProvincia().toString().toUpperCase(Locale.ROOT),
         origen.getMunicipalidad().getMunicipioOLocalidad().toUpperCase(Locale.ROOT),
         origen.getLocalidad().toUpperCase(Locale.ROOT)
     );
 
     int idLocalidadDestino = getIdLocalidad(
-        origen.getProvincia().toString().toUpperCase(Locale.ROOT),
+        origen.getNombreProvincia().toString().toUpperCase(Locale.ROOT),
         origen.getMunicipalidad().getMunicipioOLocalidad().toUpperCase(Locale.ROOT),
         origen.getLocalidad().toUpperCase(Locale.ROOT)
     );

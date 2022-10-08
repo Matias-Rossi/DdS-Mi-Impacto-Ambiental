@@ -1,5 +1,5 @@
 package domain.calculadorHC;
-import domain.persistenceExtend.EntityManagerHelper;
+import domain.persistenceExtend.repositorios.RepositorioFactorDeEmision;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,15 +17,18 @@ public final class CalculadorDeHC {
 
     private  List<FactorDeEmision> factoresDeEmision = new ArrayList<>();
 
-    public double calcularHC(FactorDeEmision factorDeEmision,Double valorDa){
+    public double calcularHC(FactorDeEmision factorDeEmision,Double valorDatoDeActividad){
         if (factorDeEmision == null) return 0;
-            else return factorDeEmision.getFactorEmision() * valorDa;
+            else return factorDeEmision.getFactorEmision() * valorDatoDeActividad;
     }
 
     public static FactorDeEmision devolverFactorDeEmision(DatoDeActividad datoDeActividad){
-        TipoConsumoDA consumo = datoDeActividad.getTipoconsumoDA();
-        TipoActividadDA actividad = datoDeActividad.getTipoActividadDA();
-        FactorDeEmision factor =(FactorDeEmision) EntityManagerHelper.createQuery("from FactorDeEmision where tipoConsumo = '"+consumo+"' and tipoActividad = '"+actividad+"'");
+        //TODO: No veo como esto es responsabilidad del CalculadorDeHC
+        TipoConsumoDA consumo = datoDeActividad.getTipoConsumo();
+        TipoActividadDA actividad = datoDeActividad.getTipoActividad();
+        RepositorioFactorDeEmision repositorioFactorDeEmision = new RepositorioFactorDeEmision();
+        //FactorDeEmision factor =(FactorDeEmision) EntityManagerHelper.createQuery("from FactorDeEmision where tipoConsumo = '"+consumo+"' and tipoActividad = '"+actividad+"'");
+        FactorDeEmision factor = repositorioFactorDeEmision.buscarSegunDatoDeActividad(datoDeActividad);
         return factor;
     }
     /*

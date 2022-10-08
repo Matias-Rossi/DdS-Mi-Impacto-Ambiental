@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "reportes")
-public class Reportes extends EntidadPersistente {
+public class Reporte extends EntidadPersistente {
     @Getter
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_actividad")
@@ -31,7 +31,7 @@ public class Reportes extends EntidadPersistente {
     @ManyToOne
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     Organizacion organizacion;
-    public Reportes(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, Integer anio, Periodo periodo, Double huellaDeCarbono, Organizacion organizacion){
+    public Reporte(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, Integer anio, Periodo periodo, Double huellaDeCarbono, Organizacion organizacion){
         this.tipoActividad = tipoActividad;
         this.tipoConsumo = tipoConsumo;
         this.anio = anio;
@@ -41,7 +41,7 @@ public class Reportes extends EntidadPersistente {
         organizacion.agregarReporte(this);
     }
 
-    public Reportes() {
+    public Reporte() {
 
     }
     public Double getMomento(){

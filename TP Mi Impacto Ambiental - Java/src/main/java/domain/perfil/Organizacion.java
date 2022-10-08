@@ -1,26 +1,24 @@
 package domain.perfil;
 
-import domain.calculadorHC.CalculadorDeHC;
 import domain.importadorExcel.ActividadBase;
 import domain.notificaciones.Contacto;
 import domain.persistenceExtend.EntidadPersistente;
-import domain.reportes.Reportes;
+import domain.reportes.Reporte;
 import domain.ubicacion.MunicipiosODepartamentos;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 @Entity
 @Table(name = "organizaciones")
 public class Organizacion extends EntidadPersistente {
 
     @Transient
-    List<Reportes> reportes= new ArrayList<Reportes>();
+    List<Reporte> reportes= new ArrayList<Reporte>();
 
     @Getter
     @ManyToOne
@@ -67,12 +65,12 @@ public class Organizacion extends EntidadPersistente {
         return nuevaArea;
     }
 
-    public void agregarReporte(Reportes reporte){
+    public void agregarReporte(Reporte reporte){
         this.reportes.add(reporte);
     }
 
     public double calcularHC(Integer anio,Integer mes){
-        return this.calcularHCConsumos(anio,mes)+this.calcularHCViajes(anio,mes);
+        return this.calcularHCConsumos(anio,mes) + this.calcularHCViajes(anio,mes);
     }
     private double calcularHCConsumos(Integer anio,Integer mes){
         List<Double> mapped = actividadesCargadas.stream().map(e->e.calcularHC(anio,mes,this)).collect(Collectors.toList());

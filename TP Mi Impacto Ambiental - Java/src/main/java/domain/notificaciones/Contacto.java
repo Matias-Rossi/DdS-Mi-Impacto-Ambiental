@@ -31,10 +31,18 @@ public class Contacto extends EntidadPersistente {
     this.organizacion= organizacion;
     this.telefono = telefono;
     this.email = email;
-    if(telefono != null) this.preferenciasContacto = PreferenciasContacto.WHATSAPP;
-    if(email != null) this.preferenciasContacto = PreferenciasContacto.EMAIL;
-    if(email != null && telefono != null) this.preferenciasContacto = PreferenciasContacto.TODOS;
-    throw new IllegalArgumentException("No se puede crear un contacto sin telefono ni email");
+
+    if(email != null && telefono != null)
+      this.preferenciasContacto = PreferenciasContacto.TODOS;
+
+    else if(telefono != null)
+      this.preferenciasContacto = PreferenciasContacto.WHATSAPP;
+
+    else if(email != null)
+      this.preferenciasContacto = PreferenciasContacto.EMAIL;
+
+    else
+      throw new IllegalArgumentException("No se puede crear un contacto sin telefono ni email");
   }
 
   public Contacto() {
