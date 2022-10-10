@@ -20,6 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestHibernate {
+    /*
     private RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
 
     @Test
@@ -191,4 +192,6 @@ public class TestHibernate {
     }
 =======
 >>>>>>> dfe3fc8179e05180af67ed24bf315b1053bdd45d
+
+     */
 }

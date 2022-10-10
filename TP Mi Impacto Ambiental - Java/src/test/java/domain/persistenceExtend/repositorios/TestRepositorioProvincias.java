@@ -24,6 +24,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestRepositorioProvincias {
+  /*
   @Test
   @DisplayName("Provincia puede ser actualizada")
   public void testRepositorioProvincias() throws IOException {
@@ -64,4 +65,6 @@ public class TestRepositorioProvincias {
     //Comparación de los datos
     assertEquals(bsAs, provinciaFetcheada);
   }
+
+   */
 }

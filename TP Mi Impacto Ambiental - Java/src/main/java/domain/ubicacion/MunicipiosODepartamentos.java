@@ -5,6 +5,7 @@ import domain.perfil.Importador;
 import domain.perfil.Organizacion;
 import domain.perfil.Tipo;
 import domain.persistenceExtend.EntidadPersistente;
+import domain.reportes.HChistorico;
 import lombok.Getter;
 
 
@@ -49,6 +50,10 @@ public class MunicipiosODepartamentos extends EntidadPersistente {
 
     public NombreProvincia getProvincia() {
         return provincia.getNombreProvincia();
+    }
+
+    public List<HChistorico> getHcHistoricos(){
+        return organizaciones.stream().map(e->e.getHChistoricos()).flatMap(e->e.stream()).collect(Collectors.toList());
     }
 
 }

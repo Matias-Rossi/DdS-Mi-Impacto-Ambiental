@@ -5,7 +5,7 @@ import domain.calculadorHC.ActividadesEmisorasCO2;
 import domain.perfil.Miembro;
 import domain.perfil.Organizacion;
 import domain.reportes.Periodo;
-import domain.reportes.Reporte;
+import domain.reportes.HChistorico;
 import domain.transporte.TipoTransporte;
 import domain.transporte.Transporte;
 import domain.ubicacion.Ubicacion;
@@ -77,7 +77,7 @@ public class Tramo implements ActividadesEmisorasCO2{
     }
 
     private double generarReporte(Organizacion organizacion,Periodo mes,double hc,Integer anio){
-        Reporte reporte = new Reporte(this.factorDeEmision.getTipoActividad(),this.factorDeEmision.getTipoConsumo(),anio,mes,hc,organizacion);
+        HChistorico HChistorico = new HChistorico(this.factorDeEmision.getTipoActividad(),this.factorDeEmision.getTipoConsumo(),anio,mes,hc,organizacion);
         return hc;
     }
 

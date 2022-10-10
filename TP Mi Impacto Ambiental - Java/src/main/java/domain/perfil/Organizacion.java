@@ -3,7 +3,7 @@ package domain.perfil;
 import domain.importadorExcel.ActividadBase;
 import domain.notificaciones.Contacto;
 import domain.persistenceExtend.EntidadPersistente;
-import domain.reportes.Reporte;
+import domain.reportes.HChistorico;
 import domain.ubicacion.MunicipiosODepartamentos;
 import domain.ubicacion.Ubicacion;
 import lombok.Getter;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class Organizacion extends EntidadPersistente {
 
     @Transient
-    List<Reporte> reportes= new ArrayList<Reporte>();
+    List<HChistorico> HChistoricos = new ArrayList<HChistorico>();
 
     @Getter
     @ManyToOne
@@ -65,8 +65,8 @@ public class Organizacion extends EntidadPersistente {
         return nuevaArea;
     }
 
-    public void agregarReporte(Reporte reporte){
-        this.reportes.add(reporte);
+    public void agregarReporte(HChistorico HChistorico){
+        this.HChistoricos.add(HChistorico);
     }
 
     public double calcularHC(Integer anio,Integer mes){
@@ -91,8 +91,12 @@ public class Organizacion extends EntidadPersistente {
     }
 
     public double getHCTotal() {
-        double total = reportes.stream().mapToDouble(rep -> rep.getHuellaDeCarbono()).sum();
+        double total = HChistoricos.stream().mapToDouble(rep -> rep.getHuellaDeCarbono()).sum();
         return total;
+    }
+
+    public List<HChistorico> getHChistoricos() {
+        return HChistoricos;
     }
 
 }

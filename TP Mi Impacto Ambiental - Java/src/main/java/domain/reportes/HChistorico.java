@@ -9,8 +9,8 @@ import lombok.Getter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "reportes")
-public class Reporte extends EntidadPersistente {
+@Table(name = "hcHistorico")
+public class HChistorico extends EntidadPersistente {
     @Getter
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_actividad")
@@ -31,7 +31,7 @@ public class Reporte extends EntidadPersistente {
     @ManyToOne
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     Organizacion organizacion;
-    public Reporte(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, Integer anio, Periodo periodo, Double huellaDeCarbono, Organizacion organizacion){
+    public HChistorico(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, Integer anio, Periodo periodo, Double huellaDeCarbono, Organizacion organizacion){
         this.tipoActividad = tipoActividad;
         this.tipoConsumo = tipoConsumo;
         this.anio = anio;
@@ -41,7 +41,7 @@ public class Reporte extends EntidadPersistente {
         organizacion.agregarReporte(this);
     }
 
-    public Reporte() {
+    public HChistorico() {
 
     }
     public Double getMomento(){
