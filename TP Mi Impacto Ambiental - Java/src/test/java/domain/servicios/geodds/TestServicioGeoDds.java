@@ -1,13 +1,14 @@
 package domain.servicios.geodds;
 
-import domain.persistenceExtend.repositorios.RepositorioProvincias;
-import domain.servicios.geodds.entidades.Distancia;
-import domain.servicios.geodds.entidades.Localidad;
-import domain.servicios.geodds.entidades.Municipio;
-import domain.ubicacion.MunicipiosODepartamentos;
-import domain.ubicacion.NombreProvincia;
-import domain.ubicacion.Provincia;
-import domain.ubicacion.Ubicacion;
+import proservices.models.repositorios.RepositorioProvincias;
+import proservices.models.entities.servicios.geodds.ServicioGeoDds;
+import proservices.models.entities.servicios.geodds.entidades.Distancia;
+import proservices.models.entities.servicios.geodds.entidades.Localidad;
+import proservices.models.entities.servicios.geodds.entidades.Municipio;
+import proservices.models.entities.ubicacion.MunicipiosODepartamentos;
+import proservices.models.entities.ubicacion.NombreProvincia;
+import proservices.models.entities.ubicacion.Provincia;
+import proservices.models.entities.ubicacion.Ubicacion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +22,7 @@ public class TestServicioGeoDds {
   @Test
   @DisplayName("GeoDds obtiene provincias")
   public void testProvincias() throws IOException {
-    List<domain.servicios.geodds.entidades.Provincia> provincias = ServicioGeoDds.getInstancia().listadoProvincias();
+    List<Provincia> provincias = ServicioGeoDds.getInstancia().listadoProvincias();
     assertEquals(24, provincias.size());
   }
 

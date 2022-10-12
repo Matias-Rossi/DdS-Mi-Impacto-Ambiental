@@ -1,16 +1,17 @@
 package domain.perfil;
 
-import domain.calculadorHC.CalculadorDeHC;
-import domain.importadorExcel.ApachePOI;
-import domain.persistenceExtend.repositorios.RepositorioProvincias;
-import domain.servicios.geodds.ServicioGeoDds;
-import domain.transporte.*;
-import domain.trayecto.Tramo;
-import domain.trayecto.Trayecto;
-import domain.ubicacion.MunicipiosODepartamentos;
-import domain.ubicacion.NombreProvincia;
-import domain.ubicacion.Provincia;
-import domain.ubicacion.Ubicacion;
+import proservices.models.entities.calculadorHC.CalculadorDeHC;
+import proservices.models.entities.importadorExcel.ApachePOI;
+import proservices.models.entities.perfil.*;
+import proservices.models.repositorios.RepositorioProvincias;
+import proservices.models.entities.servicios.geodds.ServicioGeoDds;
+import proservices.models.entities.transporte.*;
+import proservices.models.entities.trayecto.Tramo;
+import proservices.models.entities.trayecto.Trayecto;
+import proservices.models.entities.ubicacion.MunicipiosODepartamentos;
+import proservices.models.entities.ubicacion.NombreProvincia;
+import proservices.models.entities.ubicacion.Provincia;
+import proservices.models.entities.ubicacion.Ubicacion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +56,7 @@ public class TestMiembro {
       );
     Miembro miembro = new Miembro("Persona",  "Falsa", TipoDocumento.DNI, 12345789,casaMiembro, "1234", "1234@1234");
     miembro.darseAltaEnOrganizacion(area);
-    area.gestionarMiembrosPendientes(miembro.solicitudes.get(0),SolicitudEstado.ACEPTADA);
+    area.gestionarMiembrosPendientes(miembro.solicitudes.get(0), SolicitudEstado.ACEPTADA);
     List<Organizacion> organizacionesTest = new ArrayList<>();
     organizacionesTest.add(organizacionTest);
     Trayecto trayectoTest = miembro.generarTrayecto("Trayecto prueba", organizacionesTest,2022,1,20 );

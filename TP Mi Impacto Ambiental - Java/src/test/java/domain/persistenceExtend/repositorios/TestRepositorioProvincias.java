@@ -1,26 +1,5 @@
 package domain.persistenceExtend.repositorios;
 
-import domain.importadorExcel.ApachePOI;
-import domain.perfil.*;
-import domain.persistenceExtend.EntityManagerHelper;
-import domain.servicios.geodds.ServicioGeoDds;
-import domain.transporte.Particular;
-import domain.transporte.SubTipoTransporte;
-import domain.transporte.TipoCombustible;
-import domain.transporte.TipoTransporte;
-import domain.trayecto.Tramo;
-import domain.trayecto.Trayecto;
-import domain.ubicacion.MunicipiosODepartamentos;
-import domain.ubicacion.NombreProvincia;
-import domain.ubicacion.Provincia;
-import domain.ubicacion.Ubicacion;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestRepositorioProvincias {

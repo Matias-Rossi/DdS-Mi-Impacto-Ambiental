@@ -1,22 +1,5 @@
 package domain.context;
 
-import domain.calculadorHC.*;
-import domain.importadorExcel.ApachePOI;
-import domain.perfil.*;
-import domain.persistenceExtend.repositorios.RepositorioFactorDeEmision;
-import domain.persistenceExtend.repositorios.RepositorioMunicipiosODepartamentos;
-import domain.persistenceExtend.repositorios.RepositorioProvincias;
-import domain.servicios.geodds.ServicioGeoDds;
-import domain.transporte.*;
-import domain.trayecto.Tramo;
-import domain.trayecto.Trayecto;
-import domain.ubicacion.*;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestHibernate {

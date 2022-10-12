@@ -1,9 +1,9 @@
 package domain.security.password;
 
-import domain.security.password.ValidadorContrasenia;
-import domain.security.password.ValidadorCriterio;
-import domain.security.password.ValidadorCriterioBase;
-import domain.security.password.ValidadorCriterioFrecuente;
+import proservices.models.entities.security.password.ValidadorContrasenia;
+import proservices.models.entities.security.password.ValidadorCriterio;
+import proservices.models.entities.security.password.ValidadorCriterioBase;
+import proservices.models.entities.security.password.ValidadorCriterioFrecuente;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

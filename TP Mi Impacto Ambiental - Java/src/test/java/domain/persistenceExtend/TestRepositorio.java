@@ -1,10 +1,9 @@
 package domain.persistenceExtend;
 
-import domain.calculadorHC.DatoDeActividad;
-import domain.calculadorHC.FactorDeEmision;
-import domain.calculadorHC.TipoActividadDA;
-import domain.calculadorHC.TipoConsumoDA;
-import domain.persistenceExtend.repositorios.RepositorioFactorDeEmision;
+import proservices.models.entities.calculadorHC.FactorDeEmision;
+import proservices.models.entities.calculadorHC.TipoActividadDA;
+import proservices.models.entities.calculadorHC.TipoConsumoDA;
+import proservices.models.repositorios.RepositorioFactorDeEmision;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

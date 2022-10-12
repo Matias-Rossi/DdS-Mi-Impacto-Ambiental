@@ -1,6 +1,8 @@
 package domain.notificaciones;
 
 import org.junit.jupiter.api.Test;
+import proservices.models.entities.notificaciones.Contacto;
+import proservices.models.entities.notificaciones.PreferenciasContacto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

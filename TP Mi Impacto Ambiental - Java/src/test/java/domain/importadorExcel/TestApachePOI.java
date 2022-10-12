@@ -1,15 +1,15 @@
 package domain.importadorExcel;
 
 
-import domain.perfil.Clasificacion;
-import domain.perfil.Importador;
-import domain.perfil.Organizacion;
-import domain.perfil.Tipo;
-import domain.persistenceExtend.repositorios.RepositorioProvincias;
-import domain.ubicacion.MunicipiosODepartamentos;
-import domain.ubicacion.NombreProvincia;
-import domain.ubicacion.Provincia;
-import domain.ubicacion.Ubicacion;
+import proservices.models.entities.importadorExcel.ApachePOI;
+import proservices.models.entities.perfil.Clasificacion;
+import proservices.models.entities.perfil.Importador;
+import proservices.models.entities.perfil.Organizacion;
+import proservices.models.entities.perfil.Tipo;
+import proservices.models.repositorios.RepositorioProvincias;
+import proservices.models.entities.ubicacion.MunicipiosODepartamentos;
+import proservices.models.entities.ubicacion.NombreProvincia;
+import proservices.models.entities.ubicacion.Ubicacion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

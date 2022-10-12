@@ -1,17 +1,21 @@
 package domain.calculadorHC;
 
-import domain.persistenceExtend.repositorios.RepositorioFactorDeEmision;
-import domain.persistenceExtend.repositorios.RepositorioProvincias;
-import domain.transporte.*;
-import domain.ubicacion.MunicipiosODepartamentos;
-import domain.importadorExcel.*;
-import domain.perfil.*;
-import domain.servicios.geodds.ServicioGeoDds;
-import domain.trayecto.Tramo;
-import domain.trayecto.Trayecto;
-import domain.ubicacion.NombreProvincia;
-import domain.ubicacion.Provincia;
-import domain.ubicacion.Ubicacion;
+import proservices.models.entities.calculadorHC.*;
+import proservices.models.entities.importadorExcel.ActividadBase;
+import proservices.models.entities.importadorExcel.ApachePOI;
+import proservices.models.entities.importadorExcel.TipoProductoTransportado;
+import proservices.models.entities.importadorExcel.VaraianzaLogistica;
+import proservices.models.entities.perfil.*;
+import proservices.models.repositorios.RepositorioFactorDeEmision;
+import proservices.models.repositorios.RepositorioProvincias;
+import proservices.models.entities.transporte.*;
+import proservices.models.entities.ubicacion.MunicipiosODepartamentos;
+import proservices.models.entities.servicios.geodds.ServicioGeoDds;
+import proservices.models.entities.trayecto.Tramo;
+import proservices.models.entities.trayecto.Trayecto;
+import proservices.models.entities.ubicacion.NombreProvincia;
+import proservices.models.entities.ubicacion.Provincia;
+import proservices.models.entities.ubicacion.Ubicacion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static domain.perfil.Tipo.ONG;
+import static proservices.models.entities.perfil.Tipo.ONG;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
