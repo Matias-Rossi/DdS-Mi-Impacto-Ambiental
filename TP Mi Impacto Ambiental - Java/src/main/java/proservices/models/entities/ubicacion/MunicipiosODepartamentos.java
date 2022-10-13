@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Entity
 @Table(name = "municipiosODepartamentos")
-public class MunicipiosODepartamentos extends EntidadPersistente {
+public class MunicipiosODepartamentos extends SectorTerritorial {
 
     @Getter
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "municipioODepartamento")

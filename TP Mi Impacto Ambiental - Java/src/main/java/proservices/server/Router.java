@@ -1,9 +1,8 @@
 package proservices.server;
 
 import proservices.controllers.*;
-import proservices.helpers.PermisoHelper;
 import proservices.middlewares.AuthMiddleware;
-import proservices.models.entities.usuarios.Permiso;
+
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import proservices.spark.utils.BooleanHelper;
@@ -26,8 +25,8 @@ public class Router {
         Router.configure();
     }
 
-    private static void configure() {
-
+    private static void configure() { //TODO
+/*
         ServiciosController serviciosController = new ServiciosController();
         TareasController tareasController = new TareasController();
         //LoginController loginController = new LoginController();
@@ -93,5 +92,7 @@ public class Router {
         //ROUTE PARAM
         //Spark.get("/saludo/:nombre", ((request, response) -> "Hola " + request.params("nombre")));
         Spark.get("/saludo/:nombre", saludoController::saludarPorNombre);
+    }
+    */
     }
 }

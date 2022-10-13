@@ -7,6 +7,7 @@ import proservices.models.entities.reportes.HChistorico;
 import proservices.models.entities.ubicacion.MunicipiosODepartamentos;
 import proservices.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
+import proservices.models.entities.usuario.Usuario;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -16,6 +17,10 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "organizaciones")
 public class Organizacion extends EntidadPersistente {
+
+    @ManyToOne
+            @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    Usuario usuario;
 
     @Transient
     List<HChistorico> HChistoricos = new ArrayList<HChistorico>();
@@ -50,6 +55,11 @@ public class Organizacion extends EntidadPersistente {
 
     public Organizacion(){
     }
+
+    public Organizacion(Usuario usuario){
+        this.usuario = usuario;
+        }
+
     public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion) {
         this.ubicacion=ubicacion;
         this.razonSocial=razonSocial;

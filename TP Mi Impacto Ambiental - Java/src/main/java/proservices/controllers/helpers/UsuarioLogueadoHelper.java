@@ -1,7 +1,7 @@
 package proservices.controllers.helpers;
 
 import proservices.db.EntityManagerHelper;
-import proservices.models.entities.usuarios.Usuario;
+import proservices.models.entities.usuario.Usuario;
 import spark.Request;
 
 public class UsuarioLogueadoHelper {

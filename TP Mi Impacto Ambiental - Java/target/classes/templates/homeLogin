@@ -1,0 +1,13 @@
+{{#partial "contenidoNav" }}
+			<div class="dropdown ">
+				<button class="dropdown-toggle nav-link-custom" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="miPerfil">
+					Mi perfil
+				</button>
+				<ul class="dropdown-menu">
+				  <li><a class="dropdown-item" href="#">Action</a></li>
+				  <li><a class="dropdown-item" href="#">Action two</a></li>
+				  <li><a class="dropdown-item" href="#">Action three</a></li>
+				</ul>
+			  </div>
+{{/partial}}
+{{> homeBase.hbs }}

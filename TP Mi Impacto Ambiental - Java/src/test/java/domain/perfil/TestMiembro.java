@@ -22,7 +22,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TestMiembro {
-
+/*
   @Test
   @DisplayName("Test Distancia De Trayecto")
 
@@ -130,7 +130,7 @@ public class TestMiembro {
   }
 
 
-
+*/
 }
 
 

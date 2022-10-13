@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "provincias")
-public class Provincia extends EntidadPersistente {
+public class Provincia extends SectorTerritorial {
 
     @Getter
     @Enumerated(EnumType.STRING)

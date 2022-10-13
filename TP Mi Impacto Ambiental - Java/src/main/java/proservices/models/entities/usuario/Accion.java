@@ -4,5 +4,6 @@ public enum Accion {
     CREAR,
     MODIFICAR,
     ELIMINAR,
-    VER
+    VER,
+    TOTAL
 }

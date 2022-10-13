@@ -15,10 +15,14 @@ import java.util.Set;
 @Setter
 @Getter
 public class Rol extends EntidadPersistente {
-    @Column
-    private String nombre;
 
-    @ManyToMany(mappedBy = "roles")
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo")
+    private TipoUsuario tipo;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "rol_permiso", joinColumns = @JoinColumn(name = "rol_id"), inverseJoinColumns = @JoinColumn(name = "permiso_id"))
     private Set<Permiso> permisos;
 
     public Rol() {
@@ -30,10 +34,19 @@ public class Rol extends EntidadPersistente {
     }
 
     public Boolean tenesPermiso(Permiso permiso) {
-        return this.permisos.contains(permiso);
+        if(tipo.equals(TipoUsuario.ADMINISTRADOR)) return true;
+        return this.permisos.stream().anyMatch(p -> p.permite(permiso));
     }
 
     public Boolean tenesTodosLosPermisos(Permiso ... permisos) {
-        return Arrays.stream(permisos).allMatch(p -> this.permisos.contains(p));
+        return Arrays.stream(permisos).allMatch(this::tenesPermiso);
+    }
+
+    public Boolean esTipo(TipoUsuario tipoUsuario) {
+        return this.tipo.equals(tipoUsuario);
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return this.tipo;
     }
 }

@@ -1,13 +1,10 @@
 package proservices.models.entities.importadorExcel;
-
-import domain.calculadorHC.*;
 import proservices.models.entities.perfil.Organizacion;
 import proservices.models.entities.EntidadPersistente;
 import proservices.models.entities.reportes.HChistorico;
 import proservices.models.entities.reportes.Periodo;
 import lombok.Getter;
 import lombok.Setter;
-import proservices.domain.calculadorHC.*;
 import proservices.models.entities.calculadorHC.*;
 
 import javax.persistence.*;

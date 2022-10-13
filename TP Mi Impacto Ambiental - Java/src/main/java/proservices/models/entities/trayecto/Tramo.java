@@ -1,6 +1,5 @@
 package proservices.models.entities.trayecto;
 
-import domain.calculadorHC.*;
 import proservices.models.entities.calculadorHC.ActividadesEmisorasCO2;
 import proservices.models.entities.perfil.Miembro;
 import proservices.models.entities.perfil.Organizacion;
@@ -18,7 +17,7 @@ import proservices.models.entities.calculadorHC.FactorDeEmision;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tramos")
+//@Table(name = "tramos")
 public class Tramo implements ActividadesEmisorasCO2 {
     @Id
     @GeneratedValue

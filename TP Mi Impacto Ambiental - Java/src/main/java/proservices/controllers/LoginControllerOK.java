@@ -1,7 +1,7 @@
 package proservices.controllers;
 
 import proservices.db.EntityManagerHelper;
-import proservices.models.entities.usuarios.Usuario;
+import proservices.models.entities.usuario.Usuario;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -16,7 +16,7 @@ public class LoginControllerOK {
         try {
             String query = "from "
                     + Usuario.class.getName()
-                    + " WHERE nombreDeUsuario = '"
+                    + " WHERE usuario = '"
                     + request.queryParams("email")
                     + "' AND contrasenia='"
                     + request.queryParams("contrasenia")
@@ -30,7 +30,7 @@ public class LoginControllerOK {
             if(email != null) {
                 request.session(true);
                 request.session().attribute("id", email.getId());
-                response.redirect("/loginSuccesfulOK");
+                response.redirect("/login/");
             }
             else {
                 response.redirect("/login");

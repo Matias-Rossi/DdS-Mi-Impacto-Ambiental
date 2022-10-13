@@ -5,6 +5,7 @@ import proservices.models.entities.trayecto.Tramo;
 import proservices.models.entities.trayecto.Trayecto;
 import proservices.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
+import proservices.models.entities.usuario.Usuario;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,11 +20,9 @@ public class Miembro extends EntidadPersistente {
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     private Ubicacion ubicacion;
 
-    @Column(name = "usuario",unique = true)
-    private String usuario;
-
-    @Column(name = "mail")
-    private String mail;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    private Usuario usuario;
 
     @Column(name = "nombre")
     private String nombre;
@@ -51,14 +50,17 @@ public class Miembro extends EntidadPersistente {
     )
     private List<Tramo> tramosCompartidosAAceptar = new ArrayList<Tramo>();
 
-    public Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, Integer numeroDocumento,Ubicacion ubicacion,String mail,String usuario) {
+    public Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, Integer numeroDocumento,Ubicacion ubicacion,String mail,String usuario,Usuario usuario1) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
         this.ubicacion=ubicacion;
-        this.mail=mail;
-        this.usuario=usuario;
+        this.usuario=usuario1;
+    }
+
+    public Miembro(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Miembro() {

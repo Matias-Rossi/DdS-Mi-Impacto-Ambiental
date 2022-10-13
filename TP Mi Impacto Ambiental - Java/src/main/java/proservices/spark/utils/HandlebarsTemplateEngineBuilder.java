@@ -2,9 +2,9 @@ package proservices.spark.utils;
 
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Helper;
-import com.github.jknack.handlebars.HumanizeHelper;
+//TODO import com.github.jknack.handlebars.HumanizeHelper;
 import com.github.jknack.handlebars.helper.I18nHelper;
-import com.github.jknack.handlebars.helper.NumberHelper;
+//TODO import com.github.jknack.handlebars.helper.NumberHelper;
 import com.github.jknack.handlebars.helper.StringHelpers;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -37,8 +37,8 @@ public class HandlebarsTemplateEngineBuilder {
 
 	public HandlebarsTemplateEngineBuilder withDefaultHelpers() {
 		StringHelpers.register(getHandlerbars());
-		NumberHelper.register(getHandlerbars());
-		HumanizeHelper.register(getHandlerbars());
+		//NumberHelper.register(getHandlerbars());
+		//HumanizeHelper.register(getHandlerbars());
 		withHelper("i18n", I18nHelper.i18n);
 		return this;
 	}
