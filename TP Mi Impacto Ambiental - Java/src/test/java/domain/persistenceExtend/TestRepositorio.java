@@ -1,9 +1,9 @@
 package domain.persistenceExtend;
 
-import proservices.models.entities.calculadorHC.FactorDeEmision;
-import proservices.models.entities.calculadorHC.TipoActividadDA;
-import proservices.models.entities.calculadorHC.TipoConsumoDA;
-import proservices.models.repositorios.RepositorioFactorDeEmision;
+import impacto_ambiental.models.entities.calculadorHC.FactorDeEmision;
+import impacto_ambiental.models.entities.calculadorHC.TipoActividadDA;
+import impacto_ambiental.models.entities.calculadorHC.TipoConsumoDA;
+import impacto_ambiental.models.repositorios.RepositorioFactorDeEmision;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package proservices.controllers;
+package impacto_ambiental.controllers;
 
 import spark.ModelAndView;
 import spark.Request;

@@ -1,15 +1,15 @@
 package domain.importadorExcel;
 
 
-import proservices.models.entities.importadorExcel.ApachePOI;
-import proservices.models.entities.perfil.Clasificacion;
-import proservices.models.entities.perfil.Importador;
-import proservices.models.entities.perfil.Organizacion;
-import proservices.models.entities.perfil.Tipo;
-import proservices.models.repositorios.RepositorioProvincias;
-import proservices.models.entities.ubicacion.MunicipiosODepartamentos;
-import proservices.models.entities.ubicacion.NombreProvincia;
-import proservices.models.entities.ubicacion.Ubicacion;
+import impacto_ambiental.models.entities.importadorExcel.ApachePOI;
+import impacto_ambiental.models.entities.perfil.Clasificacion;
+import impacto_ambiental.models.entities.perfil.Importador;
+import impacto_ambiental.models.entities.perfil.Organizacion;
+import impacto_ambiental.models.entities.perfil.Tipo;
+import impacto_ambiental.models.repositorios.RepositorioProvincias;
+import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
+import impacto_ambiental.models.entities.ubicacion.NombreProvincia;
+import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

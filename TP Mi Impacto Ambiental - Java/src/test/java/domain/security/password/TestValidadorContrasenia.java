@@ -4,7 +4,7 @@ package domain.security.password;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import proservices.models.entities.security.password.ValidadorContrasenia;
+import impacto_ambiental.models.entities.security.password.ValidadorContrasenia;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

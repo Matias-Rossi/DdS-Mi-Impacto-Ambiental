@@ -1,9 +1,9 @@
 package domain.security.password;
 
-import proservices.models.entities.security.password.ValidadorContrasenia;
-import proservices.models.entities.security.password.ValidadorCriterio;
-import proservices.models.entities.security.password.ValidadorCriterioBase;
-import proservices.models.entities.security.password.ValidadorCriterioFrecuente;
+import impacto_ambiental.models.entities.security.password.ValidadorContrasenia;
+import impacto_ambiental.models.entities.security.password.ValidadorCriterio;
+import impacto_ambiental.models.entities.security.password.ValidadorCriterioBase;
+import impacto_ambiental.models.entities.security.password.ValidadorCriterioFrecuente;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

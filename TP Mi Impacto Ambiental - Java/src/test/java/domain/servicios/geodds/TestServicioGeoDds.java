@@ -1,22 +1,5 @@
 package domain.servicios.geodds;
 
-import proservices.models.repositorios.RepositorioProvincias;
-import proservices.models.entities.servicios.geodds.ServicioGeoDds;
-import proservices.models.entities.servicios.geodds.entidades.Distancia;
-import proservices.models.entities.servicios.geodds.entidades.Localidad;
-import proservices.models.entities.servicios.geodds.entidades.Municipio;
-import proservices.models.entities.ubicacion.MunicipiosODepartamentos;
-import proservices.models.entities.ubicacion.NombreProvincia;
-import proservices.models.entities.ubicacion.Provincia;
-import proservices.models.entities.ubicacion.Ubicacion;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 public class TestServicioGeoDds {
 /*
   @Test

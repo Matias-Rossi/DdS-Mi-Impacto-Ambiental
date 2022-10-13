@@ -1,6 +1,6 @@
-package proservices.helpers;
+package impacto_ambiental.helpers;
 
-import proservices.models.entities.usuarios.Permiso;
+import impacto_ambiental.models.entities.usuarios.Permiso;
 import spark.Request;
 
 public class PermisoHelper {

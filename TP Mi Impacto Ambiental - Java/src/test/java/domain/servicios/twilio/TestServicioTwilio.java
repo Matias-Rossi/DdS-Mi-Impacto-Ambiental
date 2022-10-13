@@ -1,18 +1,18 @@
 package domain.servicios.twilio;
 
-import proservices.models.entities.importadorExcel.ApachePOI;
-import proservices.models.entities.notificaciones.Contacto;
-import proservices.models.entities.notificaciones.Difusor;
-import proservices.models.entities.notificaciones.GestorNotificaciones;
-import proservices.models.entities.notificaciones.Notificacion;
-import proservices.models.entities.perfil.Clasificacion;
-import proservices.models.entities.perfil.Organizacion;
-import proservices.models.entities.perfil.Tipo;
-import proservices.models.entities.servicios.twilio.ServicioTwilio;
-import proservices.models.entities.ubicacion.MunicipiosODepartamentos;
-import proservices.models.entities.ubicacion.NombreProvincia;
-import proservices.models.entities.ubicacion.Provincia;
-import proservices.models.entities.ubicacion.Ubicacion;
+import impacto_ambiental.models.entities.importadorExcel.ApachePOI;
+import impacto_ambiental.models.entities.notificaciones.Contacto;
+import impacto_ambiental.models.entities.notificaciones.Difusor;
+import impacto_ambiental.models.entities.notificaciones.GestorNotificaciones;
+import impacto_ambiental.models.entities.notificaciones.Notificacion;
+import impacto_ambiental.models.entities.perfil.Clasificacion;
+import impacto_ambiental.models.entities.perfil.Organizacion;
+import impacto_ambiental.models.entities.perfil.Tipo;
+import impacto_ambiental.models.entities.servicios.twilio.ServicioTwilio;
+import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
+import impacto_ambiental.models.entities.ubicacion.NombreProvincia;
+import impacto_ambiental.models.entities.ubicacion.Provincia;
+import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
