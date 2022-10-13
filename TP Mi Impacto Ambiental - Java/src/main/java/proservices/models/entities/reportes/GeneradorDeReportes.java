@@ -61,7 +61,7 @@ public final class GeneradorDeReportes {
         municipio.getHcHistoricos().forEach(e->reporte.agregarHc(e));
         return reporte;
         }
-        
+
     public ReporteHistorico EvolucionDeHCTotalDeUnaOrganizacion(Organizacion organizacion){
         ReporteHistorico reporte = new ReporteHistorico();
         organizacion.getHChistoricos().forEach(e->reporte.agregarHc(e));
