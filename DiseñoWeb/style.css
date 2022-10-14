@@ -354,7 +354,7 @@ label:focus,
 	
 }
 
-.trayectoStyle{
+.listStyle{
 	font-family: SoDo Sans;
 	font-size: 18px;
 	color: #006241;
@@ -362,6 +362,6 @@ label:focus,
 	font-style: normal !important;
 	text-decoration: none !important;
 }
-.trayectoStyle:hover{
+.listStyle:hover{
 	color: #1e3932;
 }
