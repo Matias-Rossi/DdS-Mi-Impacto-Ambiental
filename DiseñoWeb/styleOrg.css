@@ -26,61 +26,60 @@ label:focus,
 .btn.active
 {
     outline:14px !important;
-	outline-color: #006241 !important;
-    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
-	border-color:#006241 !important;
+	outline-color: #692C6D !important;
+    box-shadow: 0px 0px 3px 2px #004d3e4a !important;
+	border-color:#692C6D !important;
 }
 .form-select-custom:hover{
 	outline:14px !important;
-	outline-color: #006241 !important;
-    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
-	border-color:#006241 !important;
+	outline-color: #692C6D !important;
+    box-shadow: 0px 0px 3px 2px #004d3e4a !important;
+	border-color:#692C6D !important;
 }
 .form-select-custom:active{
 	outline:14px !important;
-	outline-color: #006241 !important;
-    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
-	border-color:#006241 !important;
+	outline-color: #692C6D !important;
+    box-shadow: 0px 0px 3px 2px #004d3e4a !important;
+	border-color:#692C6D !important;
 }.form-select-custom:focus{
 	outline:14px !important;
-	outline-color: #006241 !important;
-    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
-	border-color:#006241 !important;
+	outline-color: #692C6D !important;
+    box-shadow: 0px 0px 3px 2px #004d3e4a !important;
+	border-color:#692C6D !important;
 }
-
 .nav-link-custom {
 	border: none;
-	background-color: rgba(0,0,0,0) !important;
-	color: rgba(242,240,235,1);
+	background-color: #00000000 !important;
+	color: #f2f0eb;
 	font-family: SoDo Sans;
 	font-size: 30px;
 	text-decoration: none;
 	box-shadow: none;
 }
 .nav-link-custom:hover {
-	color:#1e3932 !important;
+	color:#3D1A40 !important;
 	box-shadow: none!important;
 }
 
 .nav-drop-custom {
 	border: none;
 	background-color: #00000000 !important;
-	color: rgba(242,240,235,1);
+	color: #f2f0eb;
 	font-family: SoDo Sans;
 	font-size: 30px;
 	text-decoration: none;
 	box-shadow: none;
 }
 .nav-drop-custom:hover {
-	color:#1e3932 !important;
+	color:#3D1A40 !important;
 	box-shadow: none!important;
 }
 .nav-drop-custom:active {
-	color:#1e3932 !important;
+	color:#3D1A40 !important;
 	box-shadow: none!important;
 }
 .nav-drop-custom:focus {
-	color:#1e3932 !important;
+	color:#3D1A40 !important;
 	box-shadow: none!important;
 }
 .drop-menu-custom {
@@ -88,25 +87,12 @@ label:focus,
 	border-radius: 0px 0px 0px 0px !important;
 	text-align: center!important;
 	justify-content: center!important;
-	min-width: 136.81px !important;
-	max-width: 136.81px !important;
+	min-width: 194.406px !important;
+	max-width: 194.406px !important;
 	padding: 0px !important;
 	border: none !important;
 }
 .drop-menu-custom:hover {
-	color: #f2f0eb !important;
-}
-.drop-menu-custom2 {
-	margin-top: 13px!important;
-	border-radius: 0px 0px 0px 0px !important;
-	text-align: center!important;
-	justify-content: center!important;
-	min-width: 226.781px !important;
-	max-width: 226.781px !important;
-	padding: 0px !important;
-	border: none !important;
-}
-.drop-menu-custom2:hover {
 	color: #f2f0eb !important;
 }
 .drop-item-custom {
@@ -120,10 +106,10 @@ label:focus,
 	box-shadow: none!important;
 }
 #drop1{
-	background-color: #006241;
+	background-color: #692C6D;
 }
 #drop1:hover{
-	background-color: #1e3932;
+	background-color: #3D1A40;
 }
 
 #ingresar{
@@ -151,7 +137,7 @@ label:focus,
 	font-style: normal;
 	font-weight: normal;
 	font-size: 110px;
-	color: #004C3E;
+	color: #432268;
 	letter-spacing: 1.2px;
 	pointer-events: none;
 }
@@ -160,14 +146,14 @@ label:focus,
 	font-style: normal;
 	font-weight: normal;
 	text-align: center;
-	color: #006241;
+	color: #692C6D;
 	padding: 4%;
 }
 .textoInputs {
 	font-family: SoDo Sans;
 	font-style: normal;
 	font-weight: normal;
-	color: #006241;
+	color: #692C6D;
 }
 .center {
 	position: absolute;
@@ -201,7 +187,7 @@ label:focus,
 
 	border: none;
 	border-radius: 15px !important;
-	background-color:#006241 !important;
+	background-color:#692C6D !important;
 	color:#f2f0eb !important;
 	font-family: SoDo Sans !important;
 	text-decoration: none;
@@ -235,11 +221,11 @@ label:focus,
 	font-style: normal;
 	font-weight: normal;
 	text-align: center;
-	color: #006241;
+	color: #692C6D;
 }
 .textoIngreso:hover{
 	text-decoration: none;
-	color: #006241;
+	color: #692C6D;
 }
 .conteinerIngreso{
 	background-color: white;
@@ -282,7 +268,7 @@ label:focus,
 	justify-content: center;
 	align-items: center;
 	font-size: 22px !important;
-	color:#006241 !important;
+	color:#692C6D !important;
 	cursor: pointer;
 
 }
@@ -311,10 +297,10 @@ label:focus,
 #length{margin-left: 25px;}
 
 .validation  li.valid{
-	color: #006241;
+	color: #692C6D;
 }
 .validation  span.valid{
-	color: #006241;
+	color: #692C6D;
 }
 
 .validation  li::before{
@@ -326,5 +312,5 @@ label:focus,
 }
 .validation  li.valid::before{
 	content: 'check_circle';
-	color: #006241;
+	color: #692C6D;
 }
