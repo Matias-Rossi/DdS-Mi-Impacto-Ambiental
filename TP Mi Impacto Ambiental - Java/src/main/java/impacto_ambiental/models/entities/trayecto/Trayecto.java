@@ -6,6 +6,7 @@ import impacto_ambiental.models.entities.EntidadPersistente;
 import impacto_ambiental.models.entities.transporte.Transporte;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
+import lombok.Setter;
 //import org.graalvm.compiler.core.common.type.ArithmeticOpTable;
 
 import javax.persistence.*;
@@ -18,15 +19,17 @@ public class Trayecto extends EntidadPersistente {
     @ManyToOne()
     @JoinColumn(name = "miembro_id", referencedColumnName = "id")
     private Miembro miembro;
-    @Column(name = "anio")
+
+    @Column(name = "anio") @Setter
     private Integer anio;
-    @Column(name = "semestre")
+    @Column(name = "semestre") @Setter
     private Integer semestre;
-    @Column(name = "diasAlMes")
+    @Column(name = "diasAlMes") @Setter
     private  Integer diasAlMes;
-    @Column(name = "descripcion")
+    @Column(name = "descripcion") @Setter
     private String descripcion;
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @Setter
     @JoinTable(name = "trayectos_organizaciones",
             joinColumns = @JoinColumn(name = "trayecto_id"),
             inverseJoinColumns = @JoinColumn(name = "organizacion_id"))
