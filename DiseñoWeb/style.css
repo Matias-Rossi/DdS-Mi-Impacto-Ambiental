@@ -101,8 +101,8 @@ label:focus,
 	border-radius: 0px 0px 0px 0px !important;
 	text-align: center!important;
 	justify-content: center!important;
-	min-width: 226.781px !important;
-	max-width: 226.781px !important;
+	min-width: 232.781px !important;
+	max-width: 232.781px !important;
 	padding: 0px !important;
 	border: none !important;
 }
@@ -296,8 +296,8 @@ label:focus,
 .validation {
 	flex-direction: column;
 	font-family: SoDo Sans !important;
-	font-style: normal !important;
 	font-weight: normal !important;
+	font-style: normal !important;
 	text-decoration: none !important;
 	color: red;
 	font-size: 14px !important;	
@@ -327,4 +327,41 @@ label:focus,
 .validation  li.valid::before{
 	content: 'check_circle';
 	color: #006241;
+}
+.edit{
+	color: #006241 !important;
+	cursor: pointer!important;
+	margin-right: 2px;
+	font-style: normal !important;
+	text-decoration: none !important;
+}
+.edit:hover{
+	color: blue!important;
+}
+.delete{
+	color: #006241 !important;
+	cursor: pointer!important;
+	margin-left: 2px;
+	font-style: normal !important;
+	text-decoration: none !important;
+}
+.delete:hover{
+	color: red!important;
+}
+
+#boxTrayectos{
+	padding: 0px !important;
+	
+}
+
+.trayectoStyle{
+	font-family: SoDo Sans;
+	font-size: 18px;
+	color: #006241;
+	margin-right: 15px;
+	font-style: normal !important;
+	text-decoration: none !important;
+}
+.trayectoStyle:hover{
+	color: #1e3932;
 }
