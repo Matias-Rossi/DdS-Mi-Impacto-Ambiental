@@ -32,6 +32,14 @@ public class EntityManagerHelper {
         public static void persist(Object entidad) {
           getEntityManager().persist(entidad);
         }
+        public static void beginTransaction() {
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+
+        if(!tx.isActive()){
+            tx.begin();
+        }
+        }
 
         public static void commit() {
           EntityManager em = EntityManagerHelper.getEntityManager();

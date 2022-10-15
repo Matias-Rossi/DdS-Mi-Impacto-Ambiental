@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 @Table(name = "areas")
 public class Area extends EntidadPersistente {
     @Getter
+    @Setter
     @Column(name = "nombre")
     public String nombre;
     @ManyToOne
