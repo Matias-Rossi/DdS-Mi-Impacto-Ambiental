@@ -156,3 +156,40 @@ function buscarAreaSector() {
     }
   }
 }
+
+
+window.onload = function () {
+	//Get html elements
+	var category_sel = document.getElementById("category_sel");
+	var topic_sel = document.getElementById("topic_sel");
+	//Load countries
+	for (var country in countryStateInfo) {
+		category_sel.options[category_sel.options.length] = new Option(country, country);
+	}
+	//County Changed
+	category_sel.onchange = function () {
+		 topic_sel.length = 1; // remove all options bar first
+		 if (this.selectedIndex < 1)
+			 return; // done
+
+		 for (var state in countryStateInfo[this.value]) {
+			 topic_sel.options[topic_sel.options.length] = new Option(state, countryStateInfo[this.value][state]);
+		 }
+	}
+}
+
+function grabOrgArea(){
+  var listOrg, valueOrg, listArea, valueArea;
+  listOrg = document.getElementById("category_sel");
+  valueOrg = listOrg.options[listOrg.selectedIndex].value;
+
+  listArea = document.getElementById("topic_sel");
+  valueArea = listArea.options[listArea.selectedIndex].value;
+  
+  //document.write(valueOrg);
+  //document.write(valueArea);
+
+}
+
+
+

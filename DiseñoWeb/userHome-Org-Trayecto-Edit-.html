@@ -2,3 +2,86 @@
     <input class="form-check-input me-2" type="radio" name="listGroupRadio" value=""
         id="firstCheckboxStretched"> <a class="listStyleOrgs ">Universidad Tecnologica Nacional</a>
 </li>
+
+
+<div class="d-flex flex-column" id="content-wrap">
+    <div class=" d-flex align-self-center conteinerRegistro">
+        <main>
+            <form>
+                <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <label for="inputBuscarOrganizacion" class="form-label textoInputs">Buscar
+                            organizacion</label>
+                        <input type="text" class="form-control" id="inputBuscarOrganizacion"
+                            onkeyup="buscarOrganizacion();" placeholder="" value=""> 
+
+                    </div>
+                    <div class="col-lg-12">
+                        <ul class="list-group overflow-auto" id="listaDeOrgs"
+                            style=" padding: 0px !important; max-height: 400px;">
+                            <br>
+                            <li class="list-group-item">
+                                <a class="listStyleOrgs " data-bs-toggle="modal" data-bs-target="#agregarAreaSector">Universidad Tecnologica Nacional</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="listStyleOrgs " href="#" data-bs-toggle="modal" data-bs-target="#agregarAreaSector">ITBA</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="listStyleOrgs " href="#" data-bs-toggle="modal" data-bs-target="#agregarAreaSector">UBA</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a class="listStyleOrgs " href="#" data-bs-toggle="modal" data-bs-target="#agregarAreaSector">UNLAM</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--
+                <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
+                    <button class=" btn-custom " href="#" type="submit" id="idRegistrarse">Vinularme</button>
+                </div> 
+                -->
+            </form>
+        </main>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="agregarAreaSector" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 texto" id="nombreOrgLabel">nombreOrg</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <label for="inputBuscarOrganizacion" class="form-label textoInputs">Buscar
+                        area o sector</label>
+                    <input type="text" class="form-control" id="inputBuscarSectoresAreas"
+                        onkeyup="buscarAreaSector();" placeholder="" value="">
+                    </div>
+                    <div class="col-lg-12">
+                    <ul class="list-group overflow-auto" id="listaDeSectoresAreas"
+                        style=" padding: 0px !important; max-height: 400px;">
+                        <br>
+                        <li class="list-group-item"><a href="#" class="listStyleOrgs">Area/Sector 1</a></li>
+                        <li class="list-group-item"><a href="#" class="listStyleOrgs">Area/Sector 2</a></li>
+                        <li class="list-group-item"><a href="#" class="listStyleOrgs">Area/Sector 3</a></li>
+                        <li class="list-group-item"><a href="#" class="listStyleOrgs">Area/Sector 4</a></li>
+                    </ul>
+                    </div>
+            </div> 
+          </div>
+        </div>
+      </div>
+   <!--Fin Modal -->
