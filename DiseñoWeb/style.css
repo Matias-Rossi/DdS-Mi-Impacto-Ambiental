@@ -198,7 +198,6 @@ label:focus,
 
 .btn-custom {
 	padding: 1vh 2.3vw 1vh 2.3vw !important;
-
 	border: none;
 	border-radius: 15px !important;
 	background-color:#006241 !important;
@@ -206,7 +205,15 @@ label:focus,
 	font-family: SoDo Sans !important;
 	text-decoration: none;
 	text-align: center;
-	font-size: 1.4rem !important;
+	font-size:20px !important;
+}
+.btn-custom-modal {
+	background-color:#006241 !important;
+	color:#f2f0eb !important;
+	font-family: SoDo Sans !important;
+	text-decoration: none;
+	text-align: center;
+
 }
 .textoLink{
 	color: blue;
@@ -363,5 +370,15 @@ label:focus,
 	text-decoration: none !important;
 }
 .listStyle:hover{
+	color: #1e3932;
+}
+.listStyleOrgs{
+	font-family: SoDo Sans;
+	font-size: 18px;
+	color: #006241;
+	font-style: normal !important;
+	text-decoration: none !important;
+}
+.listStyleOrgs:hover{
 	color: #1e3932;
 }
