@@ -42,9 +42,8 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
         this.provincia=provincia;
         this.municipioOLocalidad=municipioOLocalidad;
     }
-    public double calcularHC(Integer anio, Integer mes){
-        List<Double> mapped = organizaciones.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());
-        return mapped.stream().reduce(0.0, (a, b) ->a+b);
+    public void calcularHC(){
+        organizaciones.stream().forEach(e->e.calcularHC());
     }
 
     public NombreProvincia getProvincia() {

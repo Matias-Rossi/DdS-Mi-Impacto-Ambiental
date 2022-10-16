@@ -1,6 +1,7 @@
 package impacto_ambiental.models.entities.perfil;
 
 import impacto_ambiental.models.entities.EntidadPersistente;
+import impacto_ambiental.models.entities.reportes.HChistorico;
 import impacto_ambiental.models.entities.trayecto.Tramo;
 import impacto_ambiental.models.entities.trayecto.Trayecto;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name = "miembros")
 public class Miembro extends EntidadPersistente {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "miembro")
+    List<HChistorico> hcsHistoricos = new ArrayList<>();
 
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
@@ -76,12 +80,13 @@ public class Miembro extends EntidadPersistente {
         return solicitud;
     }
 
-    public double calcularHC(Integer anio,Integer mes,Organizacion organizacion){
-        List<Double> mapped = trayectos.stream().map(e->e.calcularHC(anio,mes,organizacion)).collect(Collectors.toList());
-        return mapped.stream().reduce(0.0, (a, b) ->a+b);
+    public void calcularHC(Organizacion organizacion){
+        trayectos.stream().forEach(e->e.calcularHC(organizacion));
     }
     public double calcularHCPorcentual(Integer anio,Integer mes,Area area){
-        return (this.calcularHC(anio,mes,this.decirOrganizacion(area))/this.decirOrganizacion(area).calcularHC(anio,mes))*100;
+//        return (this.calcularHC(this.decirOrganizacion(area))/this.decirOrganizacion(area).calcularHC(anio,mes))*100;
+        //TODO
+        return 0.0;
     }
 
     public Organizacion decirOrganizacion(Area area){
@@ -104,5 +109,9 @@ public class Miembro extends EntidadPersistente {
         Trayecto nuevoTrayecto = new Trayecto(descripcion,organizaciones,diasAlMes,anio,semestre,this);
         trayectos.add(nuevoTrayecto);
         return nuevoTrayecto;
+    }
+
+    public void agregarHC(HChistorico hc){
+        hcsHistoricos.add(hc);
     }
 }

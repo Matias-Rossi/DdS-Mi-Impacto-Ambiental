@@ -8,10 +8,14 @@ import lombok.Setter;
 import impacto_ambiental.models.entities.calculadorHC.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "actividades_bases")
 public class ActividadBase extends EntidadPersistente {
+
+  @Column(name = "hc")
+  private double hc;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "tipo_producto_transportado")
@@ -75,29 +79,46 @@ public class ActividadBase extends EntidadPersistente {
     return anioAProbar.equals(this.anio);
   }
 
-  public double calcularHC(Integer anio, Integer mes, Organizacion organizacion){
+  public void calcularHC(){
+    if(Objects.isNull(this.hc)) this.cargarHc();
+//
+//
+//    if(!this.delAnio(anio))
+//      return 0;
+//
+//    if(mes==0 || this.delMes(mes)) {
+//      return this.hc;
+//    }
+//
+//    if(this.delMes(0)) {
+//      return this.hc / 12;
+//    }
+//
+//
+//
+//    return 0;
+  }
+
+
+  public void cargarHc(){
 
     if(this.factorDeEmision == null)
       actualizarFE();
 
-    double HC = CalculadorDeHC.getInstance().calcularHC(this.factorDeEmision,this.valorDA);
+    this.hc = CalculadorDeHC.getInstance().calcularHC(this.factorDeEmision,this.valorDA);
 
-    if(!this.delAnio(anio))
-      return 0;
-
-    if(mes==0 || this.delMes(mes)) {
-      HChistorico HChistorico = new HChistorico(this.tipoActividadDA, this.consumo, this.anio, /*this.mes*/null, HC, organizacion);
-      //TODO parsear el mes
-      return HC;
+    if(this.delMes(0)){
+      for(int i = 1; i <= 12; i++){
+        HChistorico HChistorico = new HChistorico(this.tipoActividadDA, this.consumo, this.anio, Periodo.getPeriodo(i), this.hc, this.organizacion);
+      }
+     }
+    else{
+      HChistorico HChistorico = new HChistorico(this.tipoActividadDA, this.consumo, this.anio, Periodo.getPeriodo(this.mes), this.hc, this.organizacion);
     }
-
-    if(this.delMes(0)) {
-      HChistorico HChistorico = new HChistorico(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), this.anio, Periodo.Anual, HC/12, organizacion);
-      return HC / 12;
-    }
-
-    return 0;
   }
+
+
+
 
     public void actualizarFE(){
         this.factorDeEmision = CalculadorDeHC.devolverFactorDeEmision(this.generarDatoDeActividad());

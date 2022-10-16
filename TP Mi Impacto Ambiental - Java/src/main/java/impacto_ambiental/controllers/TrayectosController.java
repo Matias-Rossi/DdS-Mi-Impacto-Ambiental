@@ -96,7 +96,7 @@ public class TrayectosController {
 
       List<String> idOrganizaciones = Arrays.asList(request.queryParams("organizaciones").split("\\s*,\\s*"));
       List<Organizacion> organizaciones = idOrganizaciones.stream().map(repositorioOrganizaciones::buscar).collect(Collectors.toList());
-      trayecto.setOrganizaciones(organizaciones);
+      //trayecto.setOrganizaciones(organizaciones);
     }
   }
 }

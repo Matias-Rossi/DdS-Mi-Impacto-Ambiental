@@ -38,9 +38,8 @@ public class Provincia extends SectorTerritorial {
     }
 
 
-    public double calcularHC(Integer anio, Integer mes){
-        List<Double> mapped = municipiosODepartamentos.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());
-        return mapped.stream().reduce(0.0, (a, b) ->a+b);
+    public void calcularHC(Integer anio, Integer mes){
+        municipiosODepartamentos.stream().forEach(e->e.calcularHC());
     }
 
     public List<HChistorico> getHChistoricos(){

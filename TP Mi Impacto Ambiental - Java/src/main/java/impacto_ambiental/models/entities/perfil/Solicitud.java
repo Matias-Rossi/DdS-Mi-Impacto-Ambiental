@@ -46,10 +46,9 @@ public class Solicitud extends EntidadPersistente {
         area.agregarAMiembroPendiente(this);
     }
 
-    public double calcularHC(Integer anio, Integer mes, Organizacion organizacion) {
+    public void calcularHC() {
         if(estado== SolicitudEstado.ACEPTADA){
-            return miembro.calcularHC(anio,mes,organizacion);
+            miembro.calcularHC(this.area.getOrganizacion());
         }
-        return 0.0;
     }
 }

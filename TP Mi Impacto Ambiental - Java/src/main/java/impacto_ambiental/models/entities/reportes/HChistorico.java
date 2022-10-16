@@ -2,6 +2,7 @@ package impacto_ambiental.models.entities.reportes;
 
 import impacto_ambiental.models.entities.calculadorHC.TipoActividadDA;
 import impacto_ambiental.models.entities.calculadorHC.TipoConsumoDA;
+import impacto_ambiental.models.entities.perfil.Miembro;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.EntidadPersistente;
 import lombok.Getter;
@@ -11,6 +12,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "hcHistorico")
 public class HChistorico extends EntidadPersistente {
+
+    @ManyToOne
+    @JoinColumn(name = "miembro_id", referencedColumnName = "id")
+    Miembro miembro;
+
     @Getter
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_actividad")
@@ -39,6 +45,18 @@ public class HChistorico extends EntidadPersistente {
         this.huellaDeCarbono = huellaDeCarbono;
         this.organizacion = organizacion;
         organizacion.agregarReporte(this);
+    }
+
+    public HChistorico(TipoActividadDA tipoActividad, TipoConsumoDA tipoConsumo, Integer anio, Periodo periodo, Double huellaDeCarbono, Organizacion organizacion, Miembro miembro){
+        this.tipoActividad = tipoActividad;
+        this.tipoConsumo = tipoConsumo;
+        this.anio = anio;
+        this.periodo = periodo;
+        this.huellaDeCarbono = huellaDeCarbono;
+        this.organizacion = organizacion;
+        this.miembro = miembro;
+        organizacion.agregarReporte(this);
+        miembro.agregarHC(this);
     }
 
     public HChistorico() {

@@ -79,16 +79,15 @@ public class Organizacion extends EntidadPersistente {
         this.HChistoricos.add(HChistorico);
     }
 
-    public double calcularHC(Integer anio,Integer mes){
-        return this.calcularHCConsumos(anio,mes) + this.calcularHCViajes(anio,mes);
+    public void calcularHC(){
+        this.calcularHCConsumos();
+        this.calcularHCViajes();
     }
-    private double calcularHCConsumos(Integer anio,Integer mes){
-        List<Double> mapped = actividadesCargadas.stream().map(e->e.calcularHC(anio,mes,this)).collect(Collectors.toList());
-        return mapped.stream().reduce(0.0, (a, b) ->a+b);
+    private void calcularHCConsumos(){
+        actividadesCargadas.stream().forEach(e->e.calcularHC());
     }
-    private double calcularHCViajes(Integer anio,Integer mes){
-        List<Double> mapped = areas.stream().map(e->e.calcularHC(anio,mes)).collect(Collectors.toList());
-        return mapped.stream().reduce(0.0, (a, b) ->a+b);
+    private void calcularHCViajes(){
+        areas.stream().forEach(e->e.calcularHC());
     }
 
     public void cargarMediciones(String nombreArchivo){

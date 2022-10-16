@@ -12,10 +12,15 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 @Entity
 @Table(name = "trayectos")
 public class Trayecto extends EntidadPersistente {
+
+
+    @Column(name = "hc")
+    private double hc;
     @ManyToOne()
     @JoinColumn(name = "miembro_id", referencedColumnName = "id")
     private Miembro miembro;
@@ -28,12 +33,15 @@ public class Trayecto extends EntidadPersistente {
     private  Integer diasAlMes;
     @Column(name = "descripcion") @Setter
     private String descripcion;
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-    @Setter
-    @JoinTable(name = "trayectos_organizaciones",
-            joinColumns = @JoinColumn(name = "trayecto_id"),
-            inverseJoinColumns = @JoinColumn(name = "organizacion_id"))
-    private List<Organizacion> organizaciones = new ArrayList<>();
+//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//    @Setter
+//    @JoinTable(name = "trayectos_organizaciones",
+//            joinColumns = @JoinColumn(name = "trayecto_id"),
+//            inverseJoinColumns = @JoinColumn(name = "organizacion_id"))
+//    private List<Organizacion> organizaciones = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "trayecto")
+    List<TrayectosPorOrganizaciones> organizacionesxtrayectos = new ArrayList<>();
     @Getter
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "trayectos_tramos",
@@ -53,20 +61,18 @@ public class Trayecto extends EntidadPersistente {
     }
 
 
-    public double calcularHC(Integer anio, Integer mes, Organizacion organizacion)
+    public void calcularHC(Organizacion organizacion)
     {
-        if((!this.organizaciones.contains(organizacion)) || !anio.equals(this.anio))return 0;
+        TrayectosPorOrganizaciones trayectosPorOrganizaciones = this.organizacionesxtrayectos.stream().filter(t -> t.getOrganizacion().equals(organizacion)).collect(Collectors.toList()).get(0);
+        if(Objects.isNull(trayectosPorOrganizaciones.getHc())) {
+            double hcxOrg = tramos.stream().map(e->e.calcularHC(this.organizacionesxtrayectos.size(),(this.semestre-1)*6,this.semestre*6,this.anio,trayectosPorOrganizaciones.getOrganizacion(),this.miembro)).collect(Collectors.toList()).stream().reduce(0.0, (a, b) ->a+b);
+            trayectosPorOrganizaciones.setHc(hcxOrg);
+        }
+    }
 
-        List<Double> mapped = tramos.stream().map(e->e.calcularHC(this.organizaciones.size(),this.diasAlMes,(this.semestre-1)*6,this.semestre*6,mes,organizacion,anio)).collect(Collectors.toList());
-        double HC = (mapped.stream().reduce(0.0, (a, b) ->a+b))/*organizaciones.size()*/;
-        return HC;
-        /*
-        double HCxMes = HCdiario*diasAlMes;
-        Integer inicioSem = (this.semestre-1)*6;
-        Integer finSem = this.semestre*6;
-        if(mes.equals(0)) return HCxMes*6;
-        if(inicioSem<mes && mes<=finSem*6)return HCxMes;
-        return 0;*/
+    public void calcularHC()
+    {
+        this.organizacionesxtrayectos.stream().forEach(e->this.calcularHC(e.getOrganizacion()));
     }
 
     public Trayecto(String descripcion, List<Organizacion> organizaciones, Integer diasAlMes,Integer anio,Integer semestre,Miembro miembro){
@@ -75,12 +81,12 @@ public class Trayecto extends EntidadPersistente {
         this.anio = anio;
         this.semestre = semestre;
         this.descripcion = descripcion;
-        this.organizaciones = organizaciones;
+        this.organizacionesxtrayectos = organizaciones.stream().map(e->new TrayectosPorOrganizaciones(e,this)).collect(Collectors.toList());
         this.diasAlMes = diasAlMes;
     }
 
     public Tramo aniadirNuevoTramo(Ubicacion salida, Ubicacion llegada, Transporte transporte){
-        Tramo nuevoTramo = new Tramo(salida, llegada, transporte);
+        Tramo nuevoTramo = new Tramo(salida, llegada, transporte, diasAlMes);
         this.agregarIntegranteATramo(nuevoTramo);
         return  nuevoTramo;
     }

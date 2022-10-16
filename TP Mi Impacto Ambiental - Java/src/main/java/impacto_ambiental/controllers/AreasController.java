@@ -1,5 +1,6 @@
 package impacto_ambiental.controllers;
 
+import impacto_ambiental.models.entities.perfil.Area;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.trayecto.Trayecto;
 import impacto_ambiental.models.repositorios.RepositorioAreas;
@@ -18,14 +19,14 @@ public class AreasController {
   //LISTAR TODAS, MOSTRAR UN AREA EN PARTICULAR, GUARDAR, VISTA PARA CREAR, MODIFICAR, VISTA PARA MODIFICAR, ELIMINAR
 
 
-  public TrayectosController() {
-    this.repositorio = new RepositorioAreas();
+  public void TrayectosController() {
+    this.repositorio = new RepositorioAreas(Area.class);
   }
 
   //Mostrar todas las areas de la organizacion
   public ModelAndView mostrarTodas(Request request, Response response) {
     String idOrganizacion = request.params("idOrganizacion");
-    List<Areas> areasOrganizacion = repositorio.listarAreasSegunOrganizacion(Integer.valueOf(idOrganizacion));
+    List<Area> areasOrganizacion = repositorio.listarAreasSegunOrganizacion(Integer.valueOf(idOrganizacion));
 
     return new ModelAndView(new HashMap<String, Object>(){{
       put("", areasOrganizacion); //TODO Agregar el key
@@ -49,7 +50,7 @@ public class AreasController {
     if(request.queryParams("nombre") != null) {
       nuevaArea.setNombre(request.queryParams("nombre"));
       Organizacion organizacionCorrespondiente   ; //TODO  como recupero la organizacion
-      nuevaArea.setOrganizacion(organizacionCorrespondiente);
+     // nuevaArea.setOrganizacion(organizacionCorrespondiente);
     }
   }
 }

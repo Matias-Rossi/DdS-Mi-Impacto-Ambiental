@@ -15,6 +15,9 @@ import impacto_ambiental.models.entities.calculadorHC.DatoDeActividad;
 import impacto_ambiental.models.entities.calculadorHC.FactorDeEmision;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 //@Table(name = "tramos")
@@ -23,6 +26,12 @@ public class Tramo implements ActividadesEmisorasCO2 {
     @GeneratedValue
     private int id;
 
+    @Column(name = "hc")
+    private double hcXIntegrantes;
+
+    @Column(name = "diasAlMes")
+    private Integer diasAlMes;
+
     public Tramo() {
 
     }
@@ -30,11 +39,12 @@ public class Tramo implements ActividadesEmisorasCO2 {
     public int getId() {
         return id;
     }
-    public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte){
+    public Tramo(Ubicacion partida, Ubicacion llegada, Transporte transporte, Integer diasAlMes){
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
         this.distancia = transporte.calcularDistancia(partida, llegada); ;
+        this.diasAlMes = diasAlMes;
     }
 
     @Getter @Setter
@@ -68,15 +78,29 @@ public class Tramo implements ActividadesEmisorasCO2 {
     @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
     private FactorDeEmision factorDeEmision;
 
-    public double calcularHC(Integer organizaciones, Integer diasAlMes, Integer mesInicio, Integer mesFin, Integer mes, Organizacion organizacion,Integer anio) {
-        if(this.factorDeEmision==null) actualizarFE();
-        double hcTotalTramo = CalculadorDeHC.getInstance().calcularHC( this.factorDeEmision,this.valorDA() ) ;
-        double hcPorIntegrante = hcTotalTramo / this.integrantes;
-        double HCdiario = hcPorIntegrante / organizaciones;
-        double HCxMes = HCdiario*diasAlMes;
+    public double calcularHC(Integer size, Integer mesInicio, Integer mesFin, Integer anio, Organizacion org,Miembro miembro) {
+        if(Objects.isNull(this.hcXIntegrantes)) this.cargarHc();
+
+
+        double hcXorgXpart = this.hcXIntegrantes/size;
+
+
+        for(;mesInicio<=mesFin;mesInicio++){
+            Integer month = mesInicio;
+            new HChistorico(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), anio, Periodo.getPeriodo(month), hcXorgXpart,org,miembro);
+        }
+/*
         if(mes.equals(0)) return this.generarReporte(organizacion, Periodo.Anual,HCxMes*6,anio);
         if(mesInicio<mes && mes<=mesFin*6)return this.generarReporte(organizacion,Periodo.getPeriodo(mes),HCxMes,anio);
         return 0;
+        */
+        return hcXorgXpart;
+    }
+
+
+    private void cargarHc(){
+        if(this.factorDeEmision==null) actualizarFE();
+        this.hcXIntegrantes = CalculadorDeHC.getInstance().calcularHC( this.factorDeEmision,this.valorDA() )/this.integrantes*this.diasAlMes ;
     }
 
     private double generarReporte(Organizacion organizacion,Periodo mes,double hc,Integer anio){
