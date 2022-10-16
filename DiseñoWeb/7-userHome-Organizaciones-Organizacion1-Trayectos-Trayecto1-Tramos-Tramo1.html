@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mi Impacto Ambiental</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/icono.png" type="image/x-icon">
+    <link rel="stylesheet" id="applicationStylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-image: url(https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Fondo-CartonCompleto.png);
+            background-color: #cccccc;
+            background-blend-mode: normal;
+            position: relative;
+            padding-bottom: 3em;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body class="prevent-select">
+    <nav class="navbar fixed-top" style="background-color:#006241;">
+        <div class="container-fluid">
+            <a href="Home.html" class="navbar-brand ms-5">
+                <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+                    height="49" id="logo">
+            </a>
+            <a class="nav-drop-custom" id="nombreOrg" style="cursor: default;">nombreOrg</a>
+            <div class="dropdown">
+                <button class="nav-drop-custom" data-bs-toggle="dropdown" aria-expanded="false" id="miPerfil">
+                    Mi perfil
+                </button>
+                <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom">
+                    <li id="drop1"><a class="drop-item-custom" href="#">Mis datos</a></li>
+                    <li id="drop1"><a class="drop-item-custom" href="#">Cerrar sesion</a></li>
+                </ul>
+            </div>
+        </div>
+
+        </div>
+    </nav>
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <form novalidate>
+                    <div class="form-check" style="padding: 0px !important; margin:20px !important;">
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                        <label class="form-label texto" style="font-size: 24px !important; padding:0px !important; margin: 0px !important;"
+                            id="nombreDelTrayecto">Tramo 1</label>
+                    </div>
+                    
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                       
+                            <div class="col-md-6">
+                            
+                                <input class="form-check-input" type="radio" name="flexRadioTramo" id="flexRadioTipoDeVehiculo">
+                                <label class="form-check-label textoInputs" for="flexRadioTipoDeVehiculo" style="font-size: 20px;">Vehiculo particular</label>
+                                <br>
+                                
+                                <label for="tipoDeVehiculo" class="form-label textoInputs">Tipo de vehiculo</label>
+                                <select class="form-select form-select-custom" id="tipoDeVehiculo" required>
+                                    <option selected disabled value="">-- Seleccionar tipo de vehiculo --</option>
+                                    <option>Moto</option>
+                                    <option>Auto</option>
+                                    <option>Camioneta</option>
+                                </select>
+                                <label for="tipoDeCombustible" class="form-label textoInputs">Tipo de combustible</label>
+                                <select class="form-select form-select-custom" id="tipoDeCombustible" required>
+                                    <option selected disabled value="">-- Seleccionar tipo de combustible --</option>
+                                    <option>GNC</option>
+                                    <option>Nafta</option>
+                                    <option>Gasoil</option>
+                                    <option>Electrico</option>
+
+                                </select>
+
+                                <label for="inputDireccionDeSalida" class="form-label textoInputs">Direccion de salida</label>
+                                <input type="text" class="form-control" id="inputDireccionDeSalida" placeholder="" value="" required>
+                                <label for="inputDireccionDeLlegada" class="form-label textoInputs">Direccion de llegada</label>
+                                <input type="text" class="form-control" id="inputDireccionDeLlegada" placeholder="" value="" required>
+                                
+                            </div>
+                        
+                        <div class="col-md-6">
+                            
+                                <input class="form-check-input" type="radio" name="flexRadioTramo" id="flexRadioServicioContratado">
+                                <label class="form-check-label textoInputs" for="flexRadioServicioContratado"style="font-size: 20px;">Servicio contratado</label>
+
+                                <label for="servicioContratado" class="form-label textoInputs">Servicio contratado</label>
+                                <select class="form-select form-select-custom" id="servicioContratado" required>
+                                    <option selected disabled value="">-- Seleccionar servicio contratado --</option>
+                                    <option>Taxi</option>
+                                    <option>Uber</option>
+                                    <option>Beat</option>
+                                    <option>Didi</option>
+                                    <option>Cabify </option>
+                                    <option>Remis</option>
+                                </select>
+
+                                <label for="inputDireccionDeSalida" class="form-label textoInputs">Direccion de salida</label>
+                                <input type="text" class="form-control" id="inputDireccionDeSalida" placeholder="" value="" required>
+                                <label for="inputDireccionDeLlegada" class="form-label textoInputs">Direccion de llegada</label>
+                                <input type="text" class="form-control" id="inputDireccionDeLlegada" placeholder="" value="" required>
+                                
+                            </div>
+                        
+                    </div>
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                       
+                        <div class="col-md-6">
+                        
+                            <input class="form-check-input" type="radio" name="flexRadioTramo" id="flexRadioTransportePublico">
+                            <label class="form-check-label textoInputs" for="flexRadioTransportePublico" style="font-size: 20px;">Transporte publico</label>
+                            <br>
+                            
+                            <label for="tipoDeTransportePublico" class="form-label textoInputs" >Tipo de transporte publico</label>
+                            <select class="form-select form-select-custom" id="tipoDeTransportePublico" onload="mostrarLineas();" required>
+                                <option selected disabled value="">-- Seleccionar tipo de transporte --</option>
+
+                            </select>
+                            <label for="linea" class="form-label textoInputs">Linea</label>
+                            <select class="form-select form-select-custom" id="linea"required>
+                                <option selected disabled value="">-- Seleccionar linea --</option>
+                            </select>
+                            <label for="paradaInicio" class="form-label textoInputs">Parada inicio</label>
+                            <select class="form-select form-select-custom" id="paradaInicio" required>
+                                <option selected disabled value="">-- Seleccionar parada inicio --</option>
+                            </select>
+                            <label for="paradaFin" class="form-label textoInputs">Parada fin</label>
+                            <select class="form-select form-select-custom" id="paradaFin" required>
+                                <option selected disabled value="">-- Seleccionar parada fin--</option>
+                            </select>
+
+                        </div>
+                    
+                    
+                </div>
+               
+                    <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
+                        <button class=" btn-custom " href="#" type="submit" id="idRegistrarse">Registrar</button>
+                    </div>
+                </div>
+                </form>
+            </main>
+        </div>
+        <div class="d-flex row justify-content-center" id="poseeCuenta">
+            <span class="textoNoLink text-small col-sm-1" style="width: fit-content;" id="poseeCuenta1">¿Ya posee una
+                cuenta?&nbsp</span> <a href="Login.html" id="poseeCuenta2" class=" col-sm-1 textoLink"
+                style="width: fit-content;">Inicie Sesion</a>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+
+<script>
+    var tipoDeTransportePublicoInfo = {
+        Tren: {
+            sarmiento: {
+                once:["once"],
+                moreno:["moreno"]
+            }
+        },
+        "Subte": {
+            "ITBA 1": ["ITBA 1"],
+            "ITBA 2": ["ITBA 2"],
+            "ITBA 3": ["ITBA 3"]
+        },
+        "Colectivo": {
+            "UBA 1": ["UBA 1"],
+            "UBA 2": ["UBA 2"],
+            "UBA 3": ["UBA 3"]
+        },
+
+    } 
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+<script src="javascript.js"></script>
+</html>
+
+

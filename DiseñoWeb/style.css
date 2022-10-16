@@ -30,22 +30,28 @@ label:focus,
     box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
 	border-color:#006241 !important;
 }
-.form-select-custom:hover{
+.form-select,.form-control{
 	outline:14px !important;
 	outline-color: #006241 !important;
-    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
+    box-shadow: 0px 0px 3px 2px #004d3e4a !important;
 	border-color:#006241 !important;
 }
-.form-select-custom:active{
+.form-select-custom:hover,.form-control:hover{
 	outline:14px !important;
-	outline-color: #006241 !important;
+	outline-color: #1e3932 !important;
     box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
-	border-color:#006241 !important;
-}.form-select-custom:focus{
+	border-color:#1e3932 !important;
+}
+.form-select-custom:active,.form-control:active{
 	outline:14px !important;
-	outline-color: #006241 !important;
+	outline-color: #1e3932 !important;
     box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
-	border-color:#006241 !important;
+	border-color:#1e3932 !important;
+}.form-select-custom:focus,.form-control:focus{
+	outline:14px !important;
+	outline-color: #1e3932 !important;
+    box-shadow: 0px 0px 3px 2px hsla(169, 100%, 15%, 0.292) !important;
+	border-color:#1e3932 !important;
 }
 
 .nav-link-custom {
@@ -162,6 +168,10 @@ label:focus,
 	text-align: center;
 	color: #006241;
 	padding: 4%;
+	text-decoration: none;
+}
+.texto:hover {
+	color: #1e3932;
 }
 .textoInputs {
 	font-family: SoDo Sans;
@@ -383,6 +393,16 @@ label:focus,
 	color: #1e3932;
 }
 
+
+.material-symbols-outlined {
+color: #006241;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' -25,
+  'opsz' 48
+  
+}
 
 
 

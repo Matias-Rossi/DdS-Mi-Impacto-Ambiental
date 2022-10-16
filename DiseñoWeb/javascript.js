@@ -15,10 +15,10 @@ function parserLocalDateStringToYYYYMMDD(str) {
   var YYYYMMDD = YYYY + '-' + validadorFechaDosDigitos(MM) + '-' + validadorFechaDosDigitos(DD);
   return YYYYMMDD;
 }
-function maxDate(){
-let inputDate = document.getElementById('inputDate');
-var actualDate = new Date().toLocaleDateString('es-AR');
-inputDate.max = parserLocalDateStringToYYYYMMDD(actualDate);
+function maxDate() {
+  let inputDate = document.getElementById('inputDate');
+  var actualDate = new Date().toLocaleDateString('es-AR');
+  inputDate.max = parserLocalDateStringToYYYYMMDD(actualDate);
 }
 function togglePasswordF1() {
   var togglePassword1 = document.getElementById('togglePassword1');
@@ -157,39 +157,101 @@ function buscarAreaSector() {
   }
 }
 
+//window.onload =
+function mostrarAreas() {
+  //Get html elements
+  var category_sel = document.getElementById("category_sel");
+  var topic_sel = document.getElementById("topic_sel");
+  //Load countries
+  for (var country in countryStateInfo) {
+    category_sel.options[category_sel.options.length] = new Option(country, country);
+  }
+  //County Changed
+  category_sel.onchange = function () {
+    topic_sel.length = 1; // remove all options bar first
+    if (this.selectedIndex < 1)
+      return; // done
 
-window.onload = function () {
-	//Get html elements
-	var category_sel = document.getElementById("category_sel");
-	var topic_sel = document.getElementById("topic_sel");
-	//Load countries
-	for (var country in countryStateInfo) {
-		category_sel.options[category_sel.options.length] = new Option(country, country);
-	}
-	//County Changed
-	category_sel.onchange = function () {
-		 topic_sel.length = 1; // remove all options bar first
-		 if (this.selectedIndex < 1)
-			 return; // done
-
-		 for (var state in countryStateInfo[this.value]) {
-			 topic_sel.options[topic_sel.options.length] = new Option(state, countryStateInfo[this.value][state]);
-		 }
-	}
+    for (var state in countryStateInfo[this.value]) {
+      topic_sel.options[topic_sel.options.length] = new Option(state, countryStateInfo[this.value][state]);
+    }
+  }
 }
 
-function grabOrgArea(){
+function grabOrgArea() {
   var listOrg, valueOrg, listArea, valueArea;
   listOrg = document.getElementById("category_sel");
   valueOrg = listOrg.options[listOrg.selectedIndex].value;
 
   listArea = document.getElementById("topic_sel");
   valueArea = listArea.options[listArea.selectedIndex].value;
-  
+
   //document.write(valueOrg);
   //document.write(valueArea);
 
 }
+
+
+window.onload = function mostrarLineas() {
+  //Get html elements
+  var tipoDeTransportePublico = document.getElementById("tipoDeTransportePublico");
+  var linea = document.getElementById("linea");
+  var paradaInicio = document.getElementById("paradaInicio");
+
+  //Load tipoDeTransporte
+  for (var tipoDeTransporte in tipoDeTransportePublicoInfo) {
+    tipoDeTransportePublico.options[tipoDeTransportePublico.options.length] = new Option(tipoDeTransporte, tipoDeTransporte);
+  }
+  //tipoDeTransporte Changed
+  tipoDeTransportePublico.onchange = function () {
+    linea.length = 1; // remove all options bar first
+    if (this.selectedIndex < 1)
+      return; // done
+
+    for (var lineaDeTransporte in tipoDeTransportePublicoInfo[this.value]) {
+      linea.options[linea.options.length] = new Option(lineaDeTransporte, tipoDeTransportePublicoInfo[this.value][lineaDeTransporte]);
+
+    }
+    }
+
+    linea.onchange = function () {
+      var lineaInfo = tipoDeTransportePublicoInfo[this.value];
+      paradaInicio.length = 1; // remove all options bar first
+      if (this.selectedIndex < 1)
+        return; // done
+  
+        for (var paradaInicioTransporte in lineaInfo[this.value]) {
+          paradaInicio.options[paradaInicio.options.length] = new Option(paradaInicioTransporte, lineaInfo[this.value][paradaInicioTransporte]);
+        }
+      }
+
+
+
+
+  }
+
+
+
+function mostrarParadas() { //pasar parametros para poder llamar a la funcion arriba
+  //Get html elements
+  var linea = document.getElementById("linea");
+  var paradaInicio = document.getElementById("paradaInicio");
+  var paradaFin = document.getElementById("paradaFin");
+  var lineaInfo = tipoDeTransportePublicoInfo[this.value];
+
+
+  //County Changed
+  linea.onchange = function () {
+    paradaInicio.length = 1; // remove all options bar first
+    if (this.selectedIndex < 1)
+      return; // done
+
+    for (var paradaInicioTransporte in lineaInfo[this.value]) {
+      paradaInicio.options[paradaInicio.options.length] = new Option(paradaInicioTransporte, lineaInfo[this.value][paradaInicioTransporte]);
+    }
+  }
+}
+
 
 
 
