@@ -27,4 +27,16 @@ public class RepositorioAreas extends Repositorio {
         EntityManagerHelper.getEntityManager().persist(nuevaArea);
         EntityManagerHelper.commit();
     }
+
+    public void eliminar(Area area) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().remove(area);
+        EntityManagerHelper.commit();
+    }
+
+    public void modificar(Area area) {
+        EntityManagerHelper.beginTransaction();
+        EntityManagerHelper.getEntityManager().merge(area);
+        EntityManagerHelper.commit();
+    }
 }

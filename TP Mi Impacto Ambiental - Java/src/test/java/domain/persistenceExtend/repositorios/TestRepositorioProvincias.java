@@ -1,8 +1,24 @@
 package domain.persistenceExtend.repositorios;
 
+import impacto_ambiental.db.EntityManagerHelper;
+import impacto_ambiental.models.entities.usuario.Usuario;
+import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestRepositorioProvincias {
+    @Test
+    public void testUsuario(){
+        String query = "from " + Usuario.class.getName() + " WHERE usuario = 'admin@gmail.com' AND contrasenia='1234'";
+
+        Usuario email = (Usuario) EntityManagerHelper
+                .getEntityManager()
+                .createQuery(query)
+                .getSingleResult();
+
+        assertEquals(email.getId(), 1);
+    }
+
   /*
   @Test
   @DisplayName("Provincia puede ser actualizada")

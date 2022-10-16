@@ -18,19 +18,24 @@ public class LoginControllerOK {
                     + Usuario.class.getName()
                     + " WHERE usuario = '"
                     + request.queryParams("email")
-                    + "' AND contrasenia='"
-                    + request.queryParams("contrasenia")
+                    + "' AND contrasenia ='"
+                    + request.queryParams("password")
                     + "'";
 
-            Usuario email = (Usuario) EntityManagerHelper
+            System.out.println(request.queryParams("password"));
+
+
+            Usuario usuario = (Usuario) EntityManagerHelper
                     .getEntityManager()
                     .createQuery(query)
                     .getSingleResult();
 
-            if(email != null) {
+
+
+            if(usuario != null) {
                 request.session(true);
-                request.session().attribute("id", email.getId());
-                response.redirect("/login/");
+                request.session().attribute("id", usuario.getId());
+                response.redirect("/home");
             }
             else {
                 response.redirect("/login");

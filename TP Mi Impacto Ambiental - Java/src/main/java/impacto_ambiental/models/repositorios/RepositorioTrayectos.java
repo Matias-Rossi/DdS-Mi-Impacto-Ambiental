@@ -29,4 +29,6 @@ public class RepositorioTrayectos extends Repositorio<Trayecto> {
 
     return (List<Trayecto>) buscarLista(busqueda);
   }
+  //quiero listar los trayectos de un usuario que tienen a una organizacion en su lista de organizaciones
+
 }

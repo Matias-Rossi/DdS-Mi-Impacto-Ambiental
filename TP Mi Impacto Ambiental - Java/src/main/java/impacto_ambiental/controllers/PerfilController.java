@@ -10,7 +10,8 @@ import static org.apache.http.client.methods.RequestBuilder.put;
 
 public class PerfilController {
 
-    //TODO mostrar
-
-
+    public ModelAndView mostrar(Request request, Response response) {
+        String idPerfil = request.params("id");
+        return null;
+    }
 }

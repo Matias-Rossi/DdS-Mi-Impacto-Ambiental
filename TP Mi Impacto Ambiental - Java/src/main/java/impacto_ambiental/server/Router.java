@@ -27,12 +27,7 @@ public class Router {
     }
 
 
-    private static void configure() { //TODO
-
-        /*
-
-        ServiciosController serviciosController = new ServiciosController();
-        TareasController tareasController = new TareasController();
+    private static void configure() {
         TrayectosController trayectosController = new TrayectosController();
         TramosController tramosController = new TramosController();
         //LoginController loginController = new LoginController();
@@ -51,9 +46,9 @@ public class Router {
             Spark.post("", loginController::login);                     //TODO codigo MIA
             Spark.post("/logout", loginController::logout);                     //TODO codigo MIA
         });                                                                          //TODO codigo MIA
-
+/*
         Spark.path("/perfil", () -> {
-            Spark.get("/:idPerfil", perfilController::mostrar, engine);
+            Spark.get("", perfilController::mostrar, engine);
         });
 
         Spark.path("/solicitudes", () -> {
