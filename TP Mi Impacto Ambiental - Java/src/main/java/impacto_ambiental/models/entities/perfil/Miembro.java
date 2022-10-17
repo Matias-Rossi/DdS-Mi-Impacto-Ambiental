@@ -24,7 +24,7 @@ public class Miembro extends EntidadPersistente {
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     private Ubicacion ubicacion;
 
-    @ManyToOne
+    @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
@@ -36,7 +36,7 @@ public class Miembro extends EntidadPersistente {
     @Column(name = "tipo_doc")
     private TipoDocumento tipoDocumento;
     @Column(name = "numero_doc")
-    private Integer numeroDocumento;
+    private String numeroDocumento;
     /*
     @ManyToMany
     private List<Area> areas = new ArrayList<Area>();
@@ -54,7 +54,7 @@ public class Miembro extends EntidadPersistente {
     )
     private List<Tramo> tramosCompartidosAAceptar = new ArrayList<Tramo>();
 
-    public Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, Integer numeroDocumento,Ubicacion ubicacion,String mail,String usuario,Usuario usuario1) {
+    public Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, String numeroDocumento,Ubicacion ubicacion,String mail,String usuario,Usuario usuario1) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;

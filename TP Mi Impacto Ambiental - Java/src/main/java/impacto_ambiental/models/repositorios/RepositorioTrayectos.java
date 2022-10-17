@@ -17,13 +17,13 @@ public class RepositorioTrayectos extends Repositorio<Trayecto> {
     super(Trayecto.class);
   }
 
-  public List<Trayecto> listarTrayectosSegunIdUsuario(int idUsuario) {
+  public List<Trayecto> listarTrayectosSegunIdMiembro(int idMiembro) {
 
     CriteriaBuilder criteriaBuilder = criteriaBuilder();
     CriteriaQuery<Trayecto> query = criteriaBuilder.createQuery(Trayecto.class);
     Root<Trayecto> raiz = query.from(Trayecto.class);
 
-    Predicate predicado = criteriaBuilder.equal(raiz.get("miembro_id"), idUsuario);
+    Predicate predicado = criteriaBuilder.equal(raiz.get("miembro_id"), idMiembro);
     query.where(predicado);
     BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
 

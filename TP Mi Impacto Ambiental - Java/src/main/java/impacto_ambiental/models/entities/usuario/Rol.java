@@ -25,8 +25,9 @@ public class Rol extends EntidadPersistente {
     @JoinTable(name = "rol_permiso", joinColumns = @JoinColumn(name = "rol_id"), inverseJoinColumns = @JoinColumn(name = "permiso_id"))
     private Set<Permiso> permisos;
 
-    public Rol() {
+    public Rol(TipoUsuario tipo) {
         this.permisos = new LinkedHashSet<>();
+        this.tipo = tipo;
     }
 
     public void agregarPermiso(Permiso permiso) {

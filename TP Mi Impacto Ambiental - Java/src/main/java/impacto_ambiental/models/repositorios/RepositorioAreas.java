@@ -7,11 +7,11 @@ import impacto_ambiental.models.entities.perfil.Organizacion;
 
 import java.util.List;
 
-public class RepositorioAreas extends Repositorio {
+public class RepositorioAreas extends Repositorio<Area> {
 
 
-    public RepositorioAreas(Class tipo) {
-        super(tipo);
+    public RepositorioAreas() {
+        super(Area.class);
     }
 
     public List<Area> listarAreasSegunOrganizacion(Integer idOrganizacion) {

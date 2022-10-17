@@ -11,12 +11,19 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class SectorTerritorial extends EntidadPersistente {
 
-    @Column(name = "perro")
-    String perro;
-
-    @OneToMany(mappedBy = "sectorTerritorial", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @Column(name = "sector")
+    String sector;
+    @OneToMany(mappedBy = "sectorTerritorialSolicitado", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
 
     private List<Usuario> solicitudes=new ArrayList<>();
+
+    public SectorTerritorial(String sector) {
+        this.sector = sector;
+    }
+
+    public SectorTerritorial() {
+
+    }
 
     public void solicitarUnirse(Usuario usuario){
         solicitudes.add(usuario);

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Table(name = "organizaciones")
 public class Organizacion extends EntidadPersistente {
 
-    @ManyToOne
+    @OneToOne(cascade = javax.persistence.CascadeType.ALL)
             @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     Usuario usuario;
 
@@ -56,10 +56,15 @@ public class Organizacion extends EntidadPersistente {
     public Organizacion(){
     }
 
-    public Organizacion(Usuario usuario){
-        this.usuario = usuario;
-        }
-
+    public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion,Usuario usuario) {
+        this.ubicacion=ubicacion;
+        this.razonSocial=razonSocial;
+        this.tipo=tipo;
+        this.clasificacion=clasificacion;
+        this.moduloImportador = moduloImportador;
+        this.municipioODepartamento=ubicacion.getMunicipalidad();
+        this.usuario=usuario;
+    }
     public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion) {
         this.ubicacion=ubicacion;
         this.razonSocial=razonSocial;

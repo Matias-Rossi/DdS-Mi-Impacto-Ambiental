@@ -1,9 +1,6 @@
 package impacto_ambiental.server;
 
-import impacto_ambiental.controllers.HomeControllerOK;
-import impacto_ambiental.controllers.LoginControllerOK;
-import impacto_ambiental.controllers.TramosController;
-import impacto_ambiental.controllers.TrayectosController;
+import impacto_ambiental.controllers.*;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import impacto_ambiental.spark.utils.BooleanHelper;
@@ -31,7 +28,7 @@ public class Router {
         TrayectosController trayectosController = new TrayectosController();
         TramosController tramosController = new TramosController();
         //LoginController loginController = new LoginController();
-
+        SignUpController signUpController = new SignUpController();
         LoginControllerOK loginController = new LoginControllerOK();                     //TODO codigo MIA
         HomeControllerOK homeController = new HomeControllerOK();                         //TODO codigo MIA
        // Spark.staticFiles.location("/public");                                      //TODO codigo MIA
@@ -46,6 +43,10 @@ public class Router {
             Spark.post("", loginController::login);                     //TODO codigo MIA
             Spark.post("/logout", loginController::logout);                     //TODO codigo MIA
         });                                                                          //TODO codigo MIA
+
+        Spark.path("/signup", () -> {
+            Spark.get("", signUpController::pantallaDeSignUp, engine);
+        });
 /*
         Spark.path("/perfil", () -> {
             Spark.get("", perfilController::mostrar, engine);
@@ -64,16 +65,15 @@ public class Router {
            Spark.get("/:idOrganizacion", organizacionesMiembroController::mostrar);
         });
 
-        Spark.path("/organizaciones/:idOrganizacion/trayectos", () -> {
+        Spark.path("/trayectos", () -> {
             Spark.get("", trayectosController::mostrarTodos, engine);
             Spark.get("/:idTrayecto", trayectosController::mostrar, engine);
             Spark.get("/:idTrayecto/editar", trayectosController::vistaEditar, engine);
             Spark.post("/:idTrayecto", trayectosController::modificar);
             Spark.post("", trayectosController::guardar);
-            //Spark.get("/:idTrayecto/tramos", )
         });
 
-        Spark.path("/organizaciones/:idOrganizacion/trayectos/:idTrayecto/tramos", () -> {
+        Spark.path("/trayectos/:idTrayecto/tramos", () -> {
             Spark.get("", tramosController::mostrarTodos, engine);
             Spark.get("/:idTramo", tramosController::mostrar, engine);
             Spark.get("/:idTramo/editar", tramosController::vistaEditar, engine);

@@ -20,7 +20,7 @@ public class AreasController {
 
 
   public void TrayectosController() {
-    this.repositorio = new RepositorioAreas(Area.class);
+    this.repositorio = new RepositorioAreas();
   }
 
   //Mostrar todas las areas de la organizacion

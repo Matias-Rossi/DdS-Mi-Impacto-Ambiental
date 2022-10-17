@@ -19,21 +19,21 @@ public class Provincia extends SectorTerritorial {
     private NombreProvincia nombreProvincia;
 
     @Getter
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.LAZY, mappedBy = "provincia")
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "provincia")
     List<MunicipiosODepartamentos> municipiosODepartamentos = new ArrayList<>();
 
     public Provincia() {
-
+        super("");
     }
 
     public MunicipiosODepartamentos crearMunicipio(String municipioNombre){
-        RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new RepositorioMunicipiosODepartamentos();
-        MunicipiosODepartamentos muni = repositorioMunicipiosODepartamentos.getMunicipio(this, municipioNombre);
+        MunicipiosODepartamentos muni = new MunicipiosODepartamentos(this,municipioNombre);
         this.municipiosODepartamentos.add(muni);
         return muni;
     }
 
     public Provincia(NombreProvincia nombreProvincia){
+        super(nombreProvincia.toString());
         this.nombreProvincia = nombreProvincia;
     }
 

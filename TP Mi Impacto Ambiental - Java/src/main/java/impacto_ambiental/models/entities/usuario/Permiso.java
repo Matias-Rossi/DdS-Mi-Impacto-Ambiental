@@ -22,4 +22,10 @@ public class Permiso extends EntidadPersistente {
     public Boolean permite(Permiso permiso) {
         return this.alcance.equals(permiso.alcance) && (this.accion.equals(permiso.accion) || this.accion.equals(Accion.TOTAL)) && this.objeto.equals(permiso.objeto);
     }
+
+    public Permiso(Alcance alcance, Accion accion, Objeto objeto) {
+        this.alcance = alcance;
+        this.accion = accion;
+        this.objeto = objeto;
+    }
 }

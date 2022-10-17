@@ -24,11 +24,11 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
     @JoinColumn(name = "provincia_id", referencedColumnName = "id")
     Provincia provincia;
     @Getter
-    @Column(name = "muncipioOLocalidad")
+    @Column(name = "municipioOLocalidad")
     private String municipioOLocalidad;
 
     public MunicipiosODepartamentos() {
-
+        super("");
     }
 
     public Organizacion crearOrganizacion(Importador moduloImportador,String razonSocial,Tipo tipo, Clasificacion clasificacion,String loc,String cp,String cal,int num){
@@ -39,6 +39,7 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
     }
 
     public MunicipiosODepartamentos(Provincia provincia, String municipioOLocalidad){
+        super(municipioOLocalidad);
         this.provincia=provincia;
         this.municipioOLocalidad=municipioOLocalidad;
     }

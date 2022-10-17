@@ -1,12 +1,13 @@
 package impacto_ambiental.models.entities.usuario;
 
 import impacto_ambiental.models.entities.EntidadPersistente;
-import impacto_ambiental.models.entities.perfil.Miembro;
-import impacto_ambiental.models.entities.perfil.Organizacion;
+import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
 import impacto_ambiental.models.entities.ubicacion.SectorTerritorial;
+import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
 
 @Entity
 @Table(name = "usuarios")
@@ -22,25 +23,30 @@ public class Usuario extends EntidadPersistente {
     private String contrasenia;
 
     @ManyToOne
-    @JoinColumn(name = "sector_id", referencedColumnName = "id")
+    @JoinColumn(name = "sectorSolicitado_id", referencedColumnName = "id")
+    private SectorTerritorial sectorTerritorialSolicitado;
+
+    @ManyToOne
+    @JoinColumn(name = "sectorActual_id", referencedColumnName = "id")
     private SectorTerritorial sectorTerritorial;
 
 
-    public Usuario(Rol rol, String usuario, String contrasenia, Miembro miembro, Organizacion organizacion, MunicipiosODepartamentos municipioODepartamento) {
+    public Usuario(Rol rol, String email, String contrasenia) {
         this.rol = rol;
-        this.usuario = usuario;
+        this.usuario = email;
         this.contrasenia = contrasenia;
-        if(rol.esTipo(TipoUsuario.MIEMBRO)){
-            new Miembro(this);
-        }
-        if(rol.esTipo(TipoUsuario.ORGANIZACION)){
-            new Organizacion(this);
-        }
+        //TODO ?
     }
 
     public Usuario() {
 
     }
+
+    public void solicitarSector(SectorTerritorial sectorTerritorial) {
+        this.sectorTerritorialSolicitado = sectorTerritorial;
+        sectorTerritorial.solicitarUnirse(this);
+    }
+
 
     public void agregarSector(SectorTerritorial sectorTerritorial){
         this.sectorTerritorial = sectorTerritorial;

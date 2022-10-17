@@ -44,8 +44,6 @@ public class TramosController {
     }}, ".hbs"); //TODO Implementar .hbs
   }
 
-
-  //Vista de edicion
   public ModelAndView vistaEditar(Request request, Response response) {
     String idTramo = request.params("idTramo");
 

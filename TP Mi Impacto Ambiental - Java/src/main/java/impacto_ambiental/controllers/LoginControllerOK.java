@@ -22,7 +22,7 @@ public class LoginControllerOK {
                     + request.queryParams("password")
                     + "'";
 
-            System.out.println(request.queryParams("password"));
+
 
 
             Usuario usuario = (Usuario) EntityManagerHelper
