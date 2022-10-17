@@ -11,45 +11,8 @@ import impacto_ambiental.models.entities.usuario.Usuario;
 import impacto_ambiental.models.repositorios.*;
 import org.junit.jupiter.api.Test;
 
-public class MunicipiosYCositas {
-    @Test
-    public void municipioYCositas(){
-
-        Provincia prov = new Provincia(NombreProvincia.BUENOS_AIRES);
-        prov.crearMunicipio("Lanus");
-        prov.crearMunicipio("Avellaneda");
-
-        RepositorioProvincias repo = new RepositorioProvincias();
-        repo.agregar(prov);
-
-    }
-
-    @Test
-    public void roles() {
-        Rol rol = new Rol(TipoUsuario.MIEMBRO);
-        RepositorioRoles repo = new RepositorioRoles();
-        repo.agregar(rol);
-
-        Rol rol2 = new Rol(TipoUsuario.ORGANIZACION);
-        repo.agregar(rol2);
-
-        Rol rol3 = new Rol(TipoUsuario.AGENTE);
-        repo.agregar(rol3);
-
-        Rol rol4 = new Rol(TipoUsuario.ADMINISTRADOR);
-        repo.agregar(rol4);
-    }
-    @Test
-    public void clasificacion() {
-        Clasificacion clasificacion1 = new Clasificacion("Escuela");
-        RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
-        repositorioClasificacion.agregar(clasificacion1);
-
-        Clasificacion clasificacion2 = new Clasificacion("Ministerio");
-        repositorioClasificacion.agregar(clasificacion2);
-        Clasificacion clasificacion3 = new Clasificacion("Universidad");
-        repositorioClasificacion.agregar(clasificacion3);
-    }
+public class Cositas {
+    
     @Test
     public void unaProbinciaBSASYMunicipio(){
         RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
@@ -73,11 +36,10 @@ public class MunicipiosYCositas {
         RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
         RepositorioAreas repositorioAreas = new RepositorioAreas();
         RepositorioRoles repositorioRoles = new RepositorioRoles();
-        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+        RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new repositorioMunicipios();
         RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
 
-        Provincia BuenosAiresTest = new Provincia(NombreProvincia.BUENOS_AIRES);
-        MunicipiosODepartamentos BragadoTest = BuenosAiresTest.crearMunicipio("Bragado");
+        MunicipiosODepartamentos BragadoTest = repositori
         Ubicacion ubicacionTest = new Ubicacion(
                 BragadoTest,
                 "Bragado",

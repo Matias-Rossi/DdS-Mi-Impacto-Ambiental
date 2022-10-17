@@ -25,7 +25,7 @@ public class OrganizacionController {
 
         Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(Integer.valueOf(request.session().attribute("id")));
 
-        //List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
+        List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
 
         List<Area> areas = solicitudes.stream().map(sol->sol.getArea()).toList();
         List<Organizacion> orgs = areas.stream().map(sol->sol.getOrganizacion()).toList();
