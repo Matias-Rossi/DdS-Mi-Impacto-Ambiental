@@ -4,9 +4,8 @@ import impacto_ambiental.models.entities.perfil.Clasificacion;
 import impacto_ambiental.models.entities.servicios.geodds.ServicioGeoDds;
 import impacto_ambiental.models.entities.servicios.geodds.entidades.Municipio;
 import impacto_ambiental.models.entities.ubicacion.NombreProvincia;
-import impacto_ambiental.models.entities.usuario.Rol;
+import impacto_ambiental.models.entities.usuario.*;
 import impacto_ambiental.models.entities.ubicacion.Provincia;
-import impacto_ambiental.models.entities.usuario.TipoUsuario;
 import impacto_ambiental.models.repositorios.RepositorioClasificacion;
 import impacto_ambiental.models.repositorios.RepositorioProvincias;
 import impacto_ambiental.models.repositorios.RepositorioRoles;
@@ -27,6 +26,7 @@ public class Init {
 
         System.out.println("### Inicializando roles de usuarios ###");
         Rol rol = new Rol(TipoUsuario.MIEMBRO);
+        new Permiso(Alcance.PROPIOS, Accion.TOTAL,Objeto.ORGANIZACION,rol);
         repo.agregar(rol);
         Rol rol2 = new Rol(TipoUsuario.ORGANIZACION);
         repo.agregar(rol2);
@@ -34,6 +34,7 @@ public class Init {
         repo.agregar(rol3);
         Rol rol4 = new Rol(TipoUsuario.ADMINISTRADOR);
         repo.agregar(rol4);
+
         System.out.println("Roles de usuarios inicializados");
     }
 

@@ -21,8 +21,7 @@ public class Rol extends EntidadPersistente {
     @Column(name = "tipo")
     private TipoUsuario tipo;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "rol_permiso", joinColumns = @JoinColumn(name = "rol_id"), inverseJoinColumns = @JoinColumn(name = "permiso_id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Permiso> permisos;
 
 

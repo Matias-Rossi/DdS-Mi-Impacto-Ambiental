@@ -23,7 +23,7 @@
     <div class="d-flex flex-column" id="content-wrap">
         <div class=" d-flex align-self-center conteinerRegistro">
             <main>
-                <form  novalidate>
+                <form novalidate>
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <ul class="list-group" id="boxTrayectos">
                         {{#each areas}}
@@ -32,7 +32,7 @@
                                 <a  class="listStyle" >{{ organizacion.razonSocial }} - {{ nombre }} </a>
                             </div>
 
-                            <a class="material-symbols-outlined delete" href="/organizaciones/{{id}}/desvincularse" >delete</a>
+                            <a class="material-symbols-outlined delete" href="/organizaciones/desvincularse">delete</a>
                     </li>
                     {{/each}}
                 </ul>

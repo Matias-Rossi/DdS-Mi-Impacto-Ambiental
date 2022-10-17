@@ -7,7 +7,6 @@ import spark.Request;
 public class PermisoHelper {
 
     public static Boolean usuarioTienePermisos(Request request, Permiso permiso) {
-        Usuario user = null;
-        return true;
+        return UsuarioLogueadoHelper.usuarioLogueado(request).getRol().tenesTodosLosPermisos();
     }
 }

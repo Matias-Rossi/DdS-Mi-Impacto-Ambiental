@@ -65,23 +65,23 @@ public class Router {
         Spark.path("/organizaciones", () -> {
 
 
-//            Spark.before("", ((request, response) -> {
-//                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
-//                    response.redirect("/prohibido");
-//                    Spark.halt();
-//                }
-//            }));
-//
-//            Spark.before("/*", ((request, response) -> {
-//                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
-//                    response.redirect("/prohibido");
-//                    Spark.halt();
-//                }
-//            }));
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.ORGANIZACION))) {
+                    response.redirect("/prohibido");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.ORGANIZACION))) {
+                    response.redirect("/prohibido");
+                    Spark.halt();
+                }
+            }));
 
 
             Spark.get("", organizacionController::mostrarPropias, engine);
-            Spark.post("/:id/desvincularse", organizacionController::vincularseOrganizacion);
+            Spark.post("/:id/desvincularse", organizacionController::desvincularseOrganizacion);
             Spark.get("/vincularse", organizacionController::pantallaVincularse, engine);
             Spark.post ("/vincularse/:id", organizacionController::vincularseOrganizacion);
         });

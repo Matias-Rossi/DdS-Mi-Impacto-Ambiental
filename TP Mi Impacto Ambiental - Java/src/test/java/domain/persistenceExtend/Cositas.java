@@ -30,6 +30,7 @@ public class Cositas {
         repositorioProvincias.agregar(BuenosAiresTest);
     }
 
+
     @Test
     public void miembroConOrganizacionesYAreas() {
         RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();

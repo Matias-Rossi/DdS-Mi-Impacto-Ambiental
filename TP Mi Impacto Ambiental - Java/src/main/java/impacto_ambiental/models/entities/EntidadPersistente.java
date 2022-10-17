@@ -12,6 +12,6 @@ public abstract class EntidadPersistente {
     @Id
     @GeneratedValue
     @Column
-    protected int id;
+    public int id;
 
 }
