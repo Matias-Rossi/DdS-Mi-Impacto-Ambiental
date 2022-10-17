@@ -12,7 +12,7 @@ import impacto_ambiental.models.repositorios.*;
 import org.junit.jupiter.api.Test;
 
 public class Cositas {
-    
+
     @Test
     public void unaProbinciaBSASYMunicipio(){
         RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
@@ -36,10 +36,10 @@ public class Cositas {
         RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
         RepositorioAreas repositorioAreas = new RepositorioAreas();
         RepositorioRoles repositorioRoles = new RepositorioRoles();
-        RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new repositorioMunicipios();
+        RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new RepositorioMunicipiosODepartamentos();
         RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
 
-        MunicipiosODepartamentos BragadoTest = repositori
+        MunicipiosODepartamentos BragadoTest = repositorioMunicipiosODepartamentos.buscar(18); //id 18 bragado
         Ubicacion ubicacionTest = new Ubicacion(
                 BragadoTest,
                 "Bragado",
@@ -67,7 +67,7 @@ public class Cositas {
         area1.gestionarMiembrosPendientes(solicitudAArea1,SolicitudEstado.ACEPTADA);
         //area2.gestionarMiembrosPendientes(solicitudAArea2,SolicitudEstado.ACEPTADA);
 
-        repositorioProvincias.agregar(BuenosAiresTest);
+        repositorioOrganizaciones.agregar(organizacionPrueba);
 
         //System.out.println("FASE 1");
         //repositorioAreas.agregar(area1);

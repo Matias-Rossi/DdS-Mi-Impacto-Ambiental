@@ -20,7 +20,7 @@ public class RepositorioSolicitudes extends Repositorio<Solicitud> {
         CriteriaQuery<Solicitud> query = criteriaBuilder.createQuery(Solicitud.class);
         Root<Solicitud> raiz = query.from(Solicitud.class);
 
-        Predicate predicado = criteriaBuilder.equal(raiz.get("miembro_id"), idMiembro);
+        Predicate predicado = criteriaBuilder.equal(raiz.get("miembro"), idMiembro);
         query.where(predicado);
         BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
 

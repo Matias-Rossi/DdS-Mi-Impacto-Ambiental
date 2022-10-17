@@ -2,6 +2,7 @@ package impacto_ambiental.controllers;
 
 import impacto_ambiental.db.EntityManagerHelper;
 import impacto_ambiental.models.entities.usuario.Usuario;
+import impacto_ambiental.models.repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -14,23 +15,11 @@ public class LoginController {
 
     public Response login(Request request, Response response) {
         try {
-            String query = "from "
-                    + Usuario.class.getName()
-                    + " WHERE usuario = '"
-                    + request.queryParams("email")
-                    + "' AND contrasenia ='"
-                    + request.queryParams("password")
-                    + "'";
+            RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
 
-
-
-
-            Usuario usuario = (Usuario) EntityManagerHelper
-                    .getEntityManager()
-                    .createQuery(query)
-                    .getSingleResult();
-
-
+            String email = request.queryParams("email");
+            String password = request.queryParams("password");
+            Usuario usuario = repositorioUsuarios.obtenerUsuarioSegunCredenciales(email, password);
 
             if(usuario != null) {
                 request.session(true);

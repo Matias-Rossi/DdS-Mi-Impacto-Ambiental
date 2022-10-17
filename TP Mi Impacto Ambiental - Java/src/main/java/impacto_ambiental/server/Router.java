@@ -1,6 +1,11 @@
 package impacto_ambiental.server;
 
 import impacto_ambiental.controllers.*;
+import impacto_ambiental.controllers.helpers.PermisoHelper;
+import impacto_ambiental.models.entities.usuario.Accion;
+import impacto_ambiental.models.entities.usuario.Alcance;
+import impacto_ambiental.models.entities.usuario.Objeto;
+import impacto_ambiental.models.entities.usuario.Permiso;
 import spark.Spark;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import impacto_ambiental.spark.utils.BooleanHelper;
@@ -58,7 +63,24 @@ public class Router {
         });
 
         Spark.path("/organizaciones", () -> {
-            Spark.get("", organizacionController::mostrarTodas, engine);
+
+
+//            Spark.before("", ((request, response) -> {
+//                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+//                    response.redirect("/prohibido");
+//                    Spark.halt();
+//                }
+//            }));
+//
+//            Spark.before("/*", ((request, response) -> {
+//                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+//                    response.redirect("/prohibido");
+//                    Spark.halt();
+//                }
+//            }));
+
+
+            Spark.get("", organizacionController::mostrarPropias, engine);
             Spark.post("/:id/desvincularse", organizacionController::vincularseOrganizacion);
             Spark.get("/vincularse", organizacionController::pantallaVincularse, engine);
             Spark.post ("/vincularse/:id", organizacionController::vincularseOrganizacion);

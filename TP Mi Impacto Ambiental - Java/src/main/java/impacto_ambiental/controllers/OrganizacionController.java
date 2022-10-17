@@ -21,14 +21,16 @@ public class OrganizacionController {
     private RepositorioAreas repositorioAreas = new RepositorioAreas();
     private RepositorioSolicitudes repositorioSolicitudes =  new RepositorioSolicitudes();
 
-    public ModelAndView mostrarTodas(Request request, Response response){
+    public ModelAndView mostrarPropias(Request request, Response response){
 
-        Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(Integer.valueOf(request.session().attribute("id")));
+
+
+        Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));
 
         List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
 
-        List<Area> areas = solicitudes.stream().map(sol->sol.getArea()).toList();
-        List<Organizacion> orgs = areas.stream().map(sol->sol.getOrganizacion()).toList();
+        List<Area> areas = (List<Area>) solicitudes.stream().map(Solicitud::getArea).toList();
+        List<Organizacion> orgs = areas.stream().map(Area::getOrganizacion).toList();
 
 //
 //        List<Organizacion> organizacionesDeMiembro =   unMiembro.getSolicitudes().stream()
@@ -37,8 +39,8 @@ public class OrganizacionController {
 
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("organizaciones",orgs );
-        }}, "oraganizaciones.hbs"); //TODO Implementar este .hbs, ya existe el .html
+            put("areas",areas );
+        }}, "/organizaciones/organizaciones.hbs"); //TODO Implementar este .hbs, ya existe el .html
 
     }
 
