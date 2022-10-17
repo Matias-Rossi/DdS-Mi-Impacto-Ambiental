@@ -47,3 +47,5 @@ TP Mi Impacto Ambiental - Java/target/maven-status/maven-compiler-plugin/testCom
 TP Mi Impacto Ambiental - Java/.idea/
 
 TP Mi Impacto Ambiental - Java/target/classes/META-INF/persistence.xml
+
+TP Mi Impacto Ambiental - Java/src/main/resources/META-INF/persistence.xml
