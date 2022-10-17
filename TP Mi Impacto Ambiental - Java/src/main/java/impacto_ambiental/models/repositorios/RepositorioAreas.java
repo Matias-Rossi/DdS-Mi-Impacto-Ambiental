@@ -14,7 +14,7 @@ public class RepositorioAreas extends Repositorio<Area> {
         super(Area.class);
     }
 
-    public List<Area> listarAreasSegunOrganizacion(Integer idOrganizacion) {
+ /*   public List<Area> listarAreasSegunOrganizacion(Integer idOrganizacion) {
 //        return EntityManagerHelper
 //                .getEntityManager()
 //                .createQueryListResult("from " + Organizacion.class.getName() +" Where id = " && idOrganizacion)
@@ -38,5 +38,5 @@ public class RepositorioAreas extends Repositorio<Area> {
         EntityManagerHelper.beginTransaction();
         EntityManagerHelper.getEntityManager().merge(area);
         EntityManagerHelper.commit();
-    }
+    }*/
 }

@@ -8,6 +8,7 @@ import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
 import impacto_ambiental.models.entities.usuario.Usuario;
+import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -38,8 +39,10 @@ public class Organizacion extends EntidadPersistente {
 
     @Column(name = "tipo")
     private Tipo tipo;
+
     @OneToMany(mappedBy = "id", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Area> areas= new ArrayList<Area>();
+
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "clasificaciones_id", referencedColumnName = "id")
     private Clasificacion clasificacion;

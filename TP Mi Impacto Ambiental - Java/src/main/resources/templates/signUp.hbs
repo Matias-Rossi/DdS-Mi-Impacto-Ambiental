@@ -367,6 +367,7 @@
                                       <label for="selectSectorTerritorial" class="form-label textoInputs">Sector terriotorial</label>
                                       <select name="sectorTerritorial" class="form-select form-select-custom" id="selectSectorTerritorial"
                                               required>
+                                          <option selected disabled value="">-- Seleccionar un sector terriotorial --</option>
                                           {{#each sectoresTerritoriales}}
                                               <option value="{{id}}">{{sector}}</option>
                                           {{/each}}
@@ -450,4 +451,4 @@
 
 
 {{/partial}}
-{{> baseOK.hbs }}
+{{> base.hbs }}

@@ -1,6 +1,7 @@
 package impacto_ambiental.models.entities.perfil;
 
 import impacto_ambiental.models.entities.EntidadPersistente;
+import lombok.Getter;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ public class Solicitud extends EntidadPersistente {
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private SolicitudEstado estado;
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "miembro_id", referencedColumnName = "id")
     private Miembro miembro;

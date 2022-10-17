@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 @Entity
 @Table(name = "areas")
@@ -15,7 +16,8 @@ public class Area extends EntidadPersistente {
     @Setter
     @Column(name = "nombre")
     public String nombre;
-    @ManyToOne
+
+    @ManyToOne()
     @JoinColumn(name = "organizaciones_id", referencedColumnName = "id")
     private Organizacion organizacion;
     /*
@@ -42,6 +44,12 @@ public class Area extends EntidadPersistente {
 
     public void gestionarMiembrosPendientes(Solicitud solicitud, SolicitudEstado estado) {
         solicitud.setEstado(estado);
+    }
+    public void desvincularMiembro(Miembro unMiembro) {
+        Optional<Solicitud> laSolicitud = this.solicitudes.stream().filter(unaSolicitud -> unaSolicitud.getMiembro() == unMiembro && unaSolicitud.getEstado() == SolicitudEstado.ACEPTADA ).findFirst();
+        if(laSolicitud.isPresent()) {
+            laSolicitud.get().setEstado(SolicitudEstado.DESVINCULADO);
+        }
     }
 
     public void agregarAMiembroPendiente(Solicitud solicitud){

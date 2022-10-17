@@ -11,6 +11,7 @@ import impacto_ambiental.models.repositorios.RepositorioUsuarios;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
+import spark.Spark;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,17 +28,24 @@ public class TrayectosController {
   }
 
   //Mostrar todos
-  public ModelAndView mostrarTodos(Request request, Response response) {
-    String idUsuario = request.session().attribute("id");
+  //Spark.get("", trayectosController::mostrarTodos, engine);
 
-    Miembro miembro = repositorioMiembros.buscarPorIDUsuario(Integer.valueOf(idUsuario));
-    List<Trayecto> trayectosBuscados = repositorio.listarTrayectosSegunIdMiembro(miembro.getId());
+  public ModelAndView mostrarTodos(Request request, Response response) {
+
+    Usuario unUsuario = repositorioUsuarios.buscar(Integer.valueOf(request.session().attribute("id")) );
+    String queryParaBuscarDedeOtroId = "SELECT e FROM " + unUsuario.getClass() + " WHERE id_="+unUsuario.getId();
+    Miembro unMiembro = repositorioMiembros.buscar(queryParaBuscarDedeOtroId);
+
+
+    List<Trayecto> trayectosDelMiembro = unMiembro.getTrayectos();
 
     return new ModelAndView(new HashMap<String, Object>(){{
-      put("trayectos", trayectosBuscados); //TODO Agregar el key
-    }}, "userHomeOrgTrayectos.hbs"); //TODO Implementar este .hbs, ya existe el .html
+      put("trayectos", trayectosDelMiembro); //TODO Agregar el key
+    }}, "trayecto/Trayectos.hbs"); //TODO Implementar este .hbs, ya existe el .html
   }
 
+  //Spark.post ("/:id/add", trayectosController::addTrayecto);
+  //Spark.post("/:id/delete", trayectosController::deleteTrayecto);
   //Mostrar individual
   public ModelAndView mostrar(Request request, Response response) {
     String idTrayecto = request.params("idTrayecto");

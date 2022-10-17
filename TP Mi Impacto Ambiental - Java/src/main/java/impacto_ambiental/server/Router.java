@@ -59,9 +59,29 @@ public class Router {
 
         Spark.path("/organizaciones", () -> {
             Spark.get("", organizacionController::mostrarTodas, engine);
-
+            Spark.post("/:id/desvincularse", organizacionController::vincularseOrganizacion);
+            Spark.get("/vincularse", organizacionController::pantallaVincularse, engine);
+            Spark.post ("/vincularse/:id", organizacionController::vincularseOrganizacion);
         });
+        // ### Trayectos ###
+        Spark.path("/trayectos", () -> {
+            Spark.get("", trayectosController::mostrarTodos, engine);
+            Spark.post ("/:id/add", trayectosController::addTrayecto);
+            Spark.post("/:id/delete", trayectosController::deleteTrayecto);
+        });
+        // ### Tramos ###
+
+        Spark.path("/trayectos/:id/tramos", () -> {
+            Spark.get("", tramosController::mostrarTodos, engine);
+            Spark.get("/new", tramosController::pantallaNewTramo, engine);
+            Spark.post("/new", tramosController::newTramo);
+            Spark.get("/:id", tramosController::mostrar, engine);
+            Spark.get("/:id/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
+            Spark.post("/:id/edit", tramosController::modificar);       //lo que realmente lo edita
+        });
+
 /*
+
         Spark.path("/perfil", () -> {
             Spark.get("", perfilController::mostrar, engine);
         });

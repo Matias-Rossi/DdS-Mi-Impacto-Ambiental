@@ -1,0 +1,50 @@
+{{#partial "contenidoNav" }}
+    <a href="/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Organizaciones
+    </a >
+
+    <a href="/trayectos" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Trayectos
+    </a >
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <li id="drop1"><a class="drop-item-custom"  href="/solicitudes">Solicitudes</a></li>
+            <li id="drop1"><a class="drop-item-custom"  href="/logout">Cerrar sesion</a></li>
+        </ul>
+    </div>
+{{/partial}}
+
+{{partial contenido}}
+<div class="d-flex flex-column" id="content-wrap">
+    <div class=" d-flex align-self-center conteinerRegistro">
+        <main>
+            <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax;">
+                <div class="col-md-12">
+                    <label class="form-label textoInputs">Organizaciones</label>
+                    <br>
+                    <form name="myform" method="POST" action="/organiazciones/vincularse/:id" id="myForm">
+                        <select name="area" class="form-select overflow-auto" id="category_sel" size="1">
+                            <option selected disabled value="">-- Seleccionar Area --</option>
+                            {{#each area}}
+                                <option selected  value="{{id}}">{{area}}</option>
+                                {{/each}}
+                        </select>
+                        <br>
+                        <br>
+                        <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
+                            <button class=" btn-custom" type="submit" id="idVinularme" >Vinularme</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+
+{{/partial}}
+{{> base.hbs }}

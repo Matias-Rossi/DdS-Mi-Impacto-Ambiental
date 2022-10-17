@@ -7,6 +7,7 @@ import impacto_ambiental.models.entities.trayecto.Trayecto;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
 import impacto_ambiental.models.entities.usuario.Usuario;
+import retrofit2.http.GET;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class Miembro extends EntidadPersistente {
     @Getter
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "miembro")
     public List<Solicitud> solicitudes = new ArrayList<>();
+    @Getter
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "miembro")
     private List<Trayecto> trayectos = new ArrayList<Trayecto>();
     @Getter

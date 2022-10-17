@@ -26,10 +26,10 @@ public class AreasController {
   //Mostrar todas las areas de la organizacion
   public ModelAndView mostrarTodas(Request request, Response response) {
     String idOrganizacion = request.params("idOrganizacion");
-    List<Area> areasOrganizacion = repositorio.listarAreasSegunOrganizacion(Integer.valueOf(idOrganizacion));
+    //List<Area> areasOrganizacion = repositorio.listarAreasSegunOrganizacion(Integer.valueOf(idOrganizacion));
 
     return new ModelAndView(new HashMap<String, Object>(){{
-      put("", areasOrganizacion); //TODO Agregar el key
+      //put("", areasOrganizacion); //TODO Agregar el key
     }}, "areasOrganizacion.hbs"); //TODO Implementar este .hbs, ya existe el .html
   }
 
@@ -42,7 +42,7 @@ public class AreasController {
   public Response guardar(Request request, Response response) {
     Area nuevaArea = new Area();
     this.asignarParametros(nuevaArea, request);
-    this.repositorio.guardar(nuevaArea);
+    //this.repositorio.guardar(nuevaArea);
     response.redirect("/"); //TODO redireccionar a Ruta correspondiente
     return response;
   }
