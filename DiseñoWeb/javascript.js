@@ -265,15 +265,6 @@ function checkPasswordAS(data) {
   else { requisitosCase.classList.remove('valid'); }
 }
 
-
-
-
-
-
-
-
-
-
 var mostrarValidaciones = function (id) {
   var current = document.getElementById(id);
   current.classList.add('valid-feedback');
@@ -289,105 +280,17 @@ var ocultarValidaciones = function (id) {
   current.classList.remove('validation');
   current.classList.add('d-none');
 }
-function buscarOrganizacion() {
-  // Declare variables
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById('inputBuscarOrganizacion');
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("listaDeOrgs");
-  li = ul.getElementsByTagName('li');
 
-  // Loop through all list items, and hide those who don't match the search query
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
+function mostrarFormulario(id) {
+  var formularios = document.getElementsByClassName("formulariosTransporte");
+  for (var i = 0; i < formularios.length; i++) {
+      formularios[i].style.display = "none";
+  }
+  if (id.style.display == "none") {
+      id.style.display = "block";
+
+  } else if (id.style.display == "block") {
+      id.style.display = "none";
   }
 }
-
-function buscarAreaSector() {
-  // Declare variables
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById('inputBuscarSectoresAreas');
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("listaDeSectoresAreas");
-  li = ul.getElementsByTagName('li');
-
-  // Loop through all list items, and hide those who don't match the search query
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-
-//window.onload =
-function mostrarAreas() {
-  //Get html elements
-  var category_sel = document.getElementById("category_sel");
-  var topic_sel = document.getElementById("topic_sel");
-  //Load countries
-  for (var country in countryStateInfo) {
-    category_sel.options[category_sel.options.length] = new Option(country, country);
-  }
-  //County Changed
-  category_sel.onchange = function () {
-    topic_sel.length = 1; // remove all options bar first
-    if (this.selectedIndex < 1)
-      return; // done
-
-    for (var state in countryStateInfo[this.value]) {
-      topic_sel.options[topic_sel.options.length] = new Option(state, countryStateInfo[this.value][state]);
-    }
-  }
-}
-
-function grabOrgArea() {
-  var listOrg, valueOrg, listArea, valueArea;
-  listOrg = document.getElementById("category_sel");
-  valueOrg = listOrg.options[listOrg.selectedIndex].value;
-
-  listArea = document.getElementById("topic_sel");
-  valueArea = listArea.options[listArea.selectedIndex].value;
-
-  //document.write(valueOrg);
-  //document.write(valueArea);
-
-}
-
-
-
-
-
-
-function mostrarParadas() { //pasar parametros para poder llamar a la funcion arriba
-  //Get html elements
-  var linea = document.getElementById("linea");
-  var paradaInicio = document.getElementById("paradaInicio");
-  var paradaFin = document.getElementById("paradaFin");
-  var lineaInfo = tipoDeTransportePublicoInfo[this.value];
-
-
-  //County Changed
-  linea.onchange = function () {
-    paradaInicio.length = 1; // remove all options bar first
-    if (this.selectedIndex < 1)
-      return; // done
-
-    for (var paradaInicioTransporte in lineaInfo[this.value]) {
-      paradaInicio.options[paradaInicio.options.length] = new Option(paradaInicioTransporte, lineaInfo[this.value][paradaInicioTransporte]);
-    }
-  }
-}
-
-
-
 
