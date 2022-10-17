@@ -183,6 +183,30 @@
         },
 
     } 
+
+window.onload = function mostrarLineas() {
+  //Get html elements
+  var tipoDeTransportePublico = document.getElementById("tipoDeTransportePublico");
+  var linea = document.getElementById("linea");
+  var paradaInicio = document.getElementById("paradaInicio");
+
+  //Load tipoDeTransporte
+  for (var tipoDeTransporte in tipoDeTransportePublicoInfo) {
+    tipoDeTransportePublico.options[tipoDeTransportePublico.options.length] = new Option(tipoDeTransporte, tipoDeTransporte);
+  }
+  //tipoDeTransporte Changed
+  tipoDeTransportePublico.onchange = function () {
+    linea.length = 1; // remove all options bar first
+    if (this.selectedIndex < 1)
+      return; // done
+
+    for (var lineaDeTransporte in tipoDeTransportePublicoInfo[this.value]) {
+      linea.options[linea.options.length] = new Option(lineaDeTransporte, tipoDeTransportePublicoInfo[this.value][lineaDeTransporte]);
+
+    }
+    }
+  }
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
