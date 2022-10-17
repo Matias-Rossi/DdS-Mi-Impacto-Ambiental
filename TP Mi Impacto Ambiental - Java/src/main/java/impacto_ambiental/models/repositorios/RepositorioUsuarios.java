@@ -4,6 +4,7 @@ import impacto_ambiental.db.BusquedaConPredicado;
 import impacto_ambiental.db.Repositorio;
 import impacto_ambiental.models.entities.usuario.Usuario;
 
+import javax.persistence.NoResultException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -37,8 +38,11 @@ public class RepositorioUsuarios extends Repositorio<Usuario> {
     Predicate coincidirEmail = criteriaBuilder.equal(raiz.get("usuario"), email);
     query.where(coincidirEmail);
 
-    BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
-    return buscar(busqueda) != null;
+    try {
+      BusquedaConPredicado busqueda = new BusquedaConPredicado(coincidirEmail, query);
+      return buscar(busqueda) != null;
+    } catch (NoResultException nre) {
+      return false;
+    }
   }
-
 }

@@ -42,24 +42,25 @@ public class SignUpController {
         //REPOS
         RepositorioRoles repositorioRoles = new RepositorioRoles();
         RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
-        RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new RepositorioMunicipiosODepartamentos();
-
-        //Boolean existeUsuario = repositorioUsuarios.existeUsuario(email); //TODO arreglar
-        Boolean existeUsuario = false;
-
+        RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
 
         //Creación de usuario
         //Datos para el Usuario
         Rol rol = repositorioRoles.obtenerRol(request.queryParams("tipoUsuario"));
         String email = request.queryParams("email");
         String password = request.queryParams("password");
+
         //Comprobación si usuario existe
+        Boolean existeUsuario = repositorioUsuarios.existeUsuario(email);
         if(existeUsuario) {
-            //TODO Handlear usuario ya existe
+            response.body("Ya existe el usuario");
+            System.out.println("Ya existe el usuario");
             return response;
         }
         //Validación de contraseña
         if(!validarContrasenia(password)) {
+            response.body("Contrasenia invalida");
+            System.out.println("Contrasenia invalida");
             return response;
         }
         Usuario usuario = new Usuario(rol, email, password);
@@ -84,23 +85,27 @@ public class SignUpController {
         RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
         RepositorioRoles repositorioRoles = new RepositorioRoles();
         RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
+        RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
 
-        //Boolean existeUsuario = repositorioUsuarios.existeUsuario(email); //TODO arreglar
-        Boolean existeUsuario = false;
+
+
         //Datos para el Usuario
         Rol rol = repositorioRoles.obtenerRol(request.queryParams("tipoUsuario"));
         String email = request.queryParams("email");
-        String contrasenia = request.queryParams("password");
+        String password = request.queryParams("password");
+
         //Comprobación si usuario existe
+        Boolean existeUsuario = repositorioUsuarios.existeUsuario(email); //TODO arreglar
         if(existeUsuario) {
-            //TODO Handlear usuario ya existe
+            response.body("Ya existe el usuario");
             return response;
         }
         //Validación de contraseña
-        if(!validarContrasenia(contrasenia)) {
+        if(!validarContrasenia(password)) {
+            response.body("Contrasenia invalida");
             return response;
         }
-        Usuario usuario = new Usuario(rol, email, contrasenia);
+        Usuario usuario = new Usuario(rol, email, password);
 
         //Creación de organización
         //Datos para la Organizacion
@@ -129,18 +134,18 @@ public class SignUpController {
         String email = request.queryParams("email");
         String password = request.queryParams("password");
 
-        //Boolean existeUsuario = repositorioUsuarios.existeUsuario(email); //TODO arreglar
-        Boolean existeUsuario = false;
+        Boolean existeUsuario = repositorioUsuarios.existeUsuario(email);
 
         //Comprobación si usuario existe
         if(existeUsuario) {
-            //TODO Handlear usuario ya existe
+            response.body("Ya existe el usuario");
             return response;
         }
-        //TODO Validación de contraseña
-        /*if(!validarContrasenia(password)) {
+        //Validación de contraseña
+        if(!validarContrasenia(password)) {
+            response.body("Contrasenia invalida");
             return response;
-        }*/
+        }
 
         Usuario usuario = new Usuario(rol, email, password);
 

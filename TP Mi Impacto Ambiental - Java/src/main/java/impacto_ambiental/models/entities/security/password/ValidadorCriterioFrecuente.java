@@ -16,7 +16,7 @@ public class ValidadorCriterioFrecuente extends ValidadorCriterioDecorator {
     FileInputStream fstream;
     String PATH_A_CONTRASENIAS = null; //TODO: Pasarlo al .properties
     try {
-      PATH_A_CONTRASENIAS = "10k-most-common.txt";
+      PATH_A_CONTRASENIAS = "/10k-most-common.txt";
       fstream = new FileInputStream(PATH_A_CONTRASENIAS);
     } catch (FileNotFoundException e) {
       e.printStackTrace();

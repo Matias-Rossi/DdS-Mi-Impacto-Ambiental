@@ -19,7 +19,7 @@ public class Init {
         inicializarRoles();
         inicializarClasificacion();
         inicializarProvincias();
-        System.out.println("Inicialización finalizada correctamente");
+        System.out.println(" ##### Inicialización finalizada correctamente ##### ");
     }
 
     static void inicializarRoles(){
