@@ -1,145 +1,145 @@
 package impacto_ambiental.models.entities.ubicacion;
 
 public enum NombreProvincia {
-    Buenos_Aires {
+    BUENOS_AIRES {
         public String toString() {
             return "Buenos Aires";
         }
         public String toEnumString() { return "Buenos_Aires"; }
     },
-    Ciudad_de_Buenos_Aires{
+    CIUDAD_DE_BUENOS_AIRES {
         public String toString() {
             return "Ciudad de Buenos Aires";
         }
         public String toEnumString() { return "Ciudad_de_Buenos_Aires"; }
     },
-    Cordoba{
+    CORDOBA {
         public String toString() {
             return "Cordoba";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Catamarca{
+    CATAMARCA {
         public String toString() {
             return "Catamarca";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Chaco{
+    CHACO {
         public String toString() {
             return "Chaco";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Chubut {
+    CHUBUT {
         public String toString() {
             return "Chubut";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Corrientes{
+    CORRIENTES {
         public String toString() {
             return "Corrientes";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Entre_Rios{
+    ENTRE_RIOS {
         public String toString() {
             return "Entre Rios";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Formosa{
+    FORMOSA {
         public String toString() {
             return "Formosa";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Jujuy{
+    JUJUY {
         public String toString() {
             return "Jujuy";
         }
         public String toEnumString() { return this.toString(); }
     },
-    La_Pampa{
+    LA_PAMPA {
         public String toString() {
             return "La Pampa";
         }
         public String toEnumString() { return this.toString(); }
     },
-    La_Rioja{
+    LA_RIOJA {
         public String toString() {
             return "La Rioja";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Mendoza{
+    MENDOZA {
         public String toString() {
             return "Mendoza";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Misiones{
+    MISIONES {
         public String toString() {
             return "Misiones";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Neuquen{
+    NEUQUEN {
         public String toString() {
             return "Neuquen";
         }
         public String toEnumString() { return this.toString(); }
     },
-    Rio_Negro{
+    RIO_NEGRO {
         public String toString() {
             return "Rio Negro";
         }
         public String toEnumString() { return "Rio_Negro"; }
     },
-    Salta{
+    SALTA {
         public String toString() {
             return "Salta";
         }
         public String toEnumString() { return this.toString(); }
     },
-    San_Juan{
+    SAN_JUAN {
         public String toString() {
             return "San Juan";
         }
         public String toEnumString() { return "San_Juan"; }
     },
-    San_Luis{
+    SAN_LUIS {
         public String toString() {
             return "San Luis";
         }
         public String toEnumString() { return "San_Luis"; }
     },
-    Santa_Cruz{
+    SANTA_CRUZ {
         public String toString() {
             return "Santa Cruz";
         }
         public String toEnumString() { return "Santa_Cruz"; }
     },
-    Santa_Fe{
+    SANTA_FE {
         public String toString() {
             return "Santa Fe";
         }
         public String toEnumString() { return "Santa_Fe"; }
     },
-    Santiago_del_Estero{
+    SANTIAGO_DEL_ESTERO {
         public String toString() {
             return "Santiago del Estero";
         }
         public String toEnumString() { return "Santiago_del_Estero"; }
     },
-    Tierra_del_Fuego{
+    TIERRA_DEL_FUEGO {
         public String toString() {
             return "Tierra del Fuego";
         }
         public String toEnumString() { return "Tierra_del_Fuego"; }
     },
-    Tucuman{
+    TUCUMAN {
         public String toString() {
             return "Tucuman";
         }
@@ -149,8 +149,8 @@ public enum NombreProvincia {
     public String toEnumString() {
         return "";
     }
-    public NombreProvincia toEnum(String nombre) {
-        String nombreConEspacios = nombre.replace("_", " ");
+    public static NombreProvincia toEnum(String nombre) {
+        String nombreConEspacios = nombre.replace(" ", "_");
         return NombreProvincia.valueOf(nombreConEspacios);
     }
 }

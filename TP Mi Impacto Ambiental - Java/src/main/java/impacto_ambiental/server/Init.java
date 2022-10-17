@@ -15,11 +15,13 @@ import java.io.IOException;
 import java.util.List;
 
 public class Init {
-    static public void main() {
-
+    static public void main(String[] args) throws IOException {
+        inicializarRoles();
+        inicializarClasificacion();
+        inicializarProvincias();
     }
 
-    void inicializarRoles(){
+    static void inicializarRoles(){
         RepositorioRoles repo = new RepositorioRoles();
 
         System.out.println("### Inicializando roles de usuarios ###");
@@ -34,7 +36,7 @@ public class Init {
         System.out.println("Roles de usuarios inicializados");
     }
 
-    void inicializarClasificacion() {
+    static void inicializarClasificacion() {
         RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
 
         System.out.println("### Inicializando clasificacion de organizaciones ###");
@@ -48,7 +50,7 @@ public class Init {
         //TODO ¿Hay más?
     }
 
-    void inicializarProvincias() throws IOException{
+    static void inicializarProvincias() throws IOException{
         System.out.println("### Inicializando provincias y municipios ###");
         try{
             //Obtener provincias de GeoDdS
@@ -59,7 +61,7 @@ public class Init {
             List<Provincia> provincias = provinciasGeoDdS.stream().
                     map((_prov) -> {
                         System.out.println("Inicializando provincia " + _prov.getNombre());
-                        NombreProvincia nombre = NombreProvincia.valueOf(_prov.getNombre());
+                        NombreProvincia nombre = NombreProvincia.toEnum(_prov.getNombre());
                         Provincia nuevaProvincia = new Provincia(nombre); //TODO comprobar funcionamiento con Enum
 
                         try {

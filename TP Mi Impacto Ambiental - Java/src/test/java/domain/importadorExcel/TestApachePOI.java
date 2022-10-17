@@ -23,7 +23,7 @@ public class TestApachePOI {
     Importador importadorApache = new ApachePOI();
     RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
     Ubicacion ubicacionTest = new Ubicacion(
-            new MunicipiosODepartamentos(repositorioProvincias.getProvincia(NombreProvincia.Buenos_Aires), "Chivilcoy"),
+            new MunicipiosODepartamentos(repositorioProvincias.getProvincia(NombreProvincia.BUENOS_AIRES), "Chivilcoy"),
             "Bragado",
             "C1234",
             "calle falsa",

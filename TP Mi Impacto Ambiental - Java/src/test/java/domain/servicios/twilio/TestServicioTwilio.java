@@ -26,7 +26,7 @@ public class TestServicioTwilio {
     //ATENCIÓN: este test incurre un gasto en la cuenta vinculada de Twilio
     GestorNotificaciones gestorNotificaciones = new ServicioTwilio();
     Difusor difusor = new Difusor(gestorNotificaciones);
-    MunicipiosODepartamentos moron = new MunicipiosODepartamentos(new Provincia(NombreProvincia.Buenos_Aires), "Morón");
+    MunicipiosODepartamentos moron = new MunicipiosODepartamentos(new Provincia(NombreProvincia.BUENOS_AIRES), "Morón");
 
     Organizacion org = new Organizacion(
             new ApachePOI(),

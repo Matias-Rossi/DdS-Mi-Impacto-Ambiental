@@ -15,7 +15,7 @@ public class MunicipiosYCositas {
     @Test
     public void municipioYCositas(){
 
-        Provincia prov = new Provincia(NombreProvincia.Buenos_Aires);
+        Provincia prov = new Provincia(NombreProvincia.BUENOS_AIRES);
         prov.crearMunicipio("Lanus");
         prov.crearMunicipio("Avellaneda");
 
@@ -54,7 +54,7 @@ public class MunicipiosYCositas {
     public void unaProbinciaBSASYMunicipio(){
         RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
 
-        Provincia BuenosAiresTest = new Provincia(NombreProvincia.Buenos_Aires);
+        Provincia BuenosAiresTest = new Provincia(NombreProvincia.BUENOS_AIRES);
         MunicipiosODepartamentos BragadoTest = BuenosAiresTest.crearMunicipio("Bragado");
         
         Ubicacion ubicacionTest = new Ubicacion(
@@ -76,7 +76,7 @@ public class MunicipiosYCositas {
         RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
         RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
 
-        Provincia BuenosAiresTest = new Provincia(NombreProvincia.Buenos_Aires);
+        Provincia BuenosAiresTest = new Provincia(NombreProvincia.BUENOS_AIRES);
         MunicipiosODepartamentos BragadoTest = BuenosAiresTest.crearMunicipio("Bragado");
         Ubicacion ubicacionTest = new Ubicacion(
                 BragadoTest,
