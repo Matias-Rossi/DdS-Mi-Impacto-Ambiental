@@ -4,10 +4,7 @@ package impacto_ambiental.controllers;
 
 import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.usuario.Usuario;
-import impacto_ambiental.models.repositorios.RepositorioAreas;
-import impacto_ambiental.models.repositorios.RepositorioMiembros;
-import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
-import impacto_ambiental.models.repositorios.RepositorioUsuarios;
+import impacto_ambiental.models.repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -30,17 +27,18 @@ public class OrganizacionController {
 
         List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
 
-        solicitudes.stream().map(sol->sol.)
-        
+        List<Area> areas = solicitudes.stream().map(sol->sol.getArea()).toList();
+        List<Organizacion> orgs = areas.stream().map(sol->sol.getOrganizacion()).toList();
 
-        List<Organizacion> organizacionesDeMiembro =   unMiembro.getSolicitudes().stream()
-                .filter(unaSolicitud-> unaSolicitud.getEstado() == SolicitudEstado.ACEPTADA )
-                .map(unaSolicitud-> unaSolicitud.getArea().getOrganizacion() ).toList() ;
+//
+//        List<Organizacion> organizacionesDeMiembro =   unMiembro.getSolicitudes().stream()
+//                .filter(unaSolicitud-> unaSolicitud.getEstado() == SolicitudEstado.ACEPTADA )
+//                .map(unaSolicitud-> unaSolicitud.getArea().getOrganizacion() ).toList() ;
 
 
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("organizaciones",organizacionesDeMiembro );
+            put("organizaciones",orgs );
         }}, "oraganizaciones.hbs"); //TODO Implementar este .hbs, ya existe el .html
 
     }
