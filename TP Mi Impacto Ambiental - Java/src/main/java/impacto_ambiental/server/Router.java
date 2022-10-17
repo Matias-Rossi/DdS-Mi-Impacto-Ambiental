@@ -63,7 +63,7 @@ public class Router {
             Spark.get("/vincularse", organizacionController::pantallaVincularse, engine);
             Spark.post ("/vincularse/:id", organizacionController::vincularseOrganizacion);
         });
-        // ### Trayectos ###
+       /* // ### Trayectos ###
         Spark.path("/trayectos", () -> {
             Spark.get("", trayectosController::mostrarTodos, engine);
             Spark.post ("/:id/add", trayectosController::addTrayecto);
@@ -79,7 +79,7 @@ public class Router {
             Spark.get("/:id/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
             Spark.post("/:id/edit", tramosController::modificar);       //lo que realmente lo edita
         });
-
+/*
 /*
 
         Spark.path("/perfil", () -> {

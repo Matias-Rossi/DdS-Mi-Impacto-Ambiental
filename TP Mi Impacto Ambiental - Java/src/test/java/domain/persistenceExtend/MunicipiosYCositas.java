@@ -51,14 +51,12 @@ public class MunicipiosYCositas {
         repositorioClasificacion.agregar(clasificacion3);
     }
     @Test
-    public void miembroConOrganizacionesYAreas() {
-        RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
-        RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
-        RepositorioAreas repositorioAreas = new RepositorioAreas();
-        RepositorioRoles repositorioRoles = new RepositorioRoles();
+    public void unaProbinciaBSASYMunicipio(){
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
 
         Provincia BuenosAiresTest = new Provincia(NombreProvincia.Buenos_Aires);
-        MunicipiosODepartamentos BragadoTest = new MunicipiosODepartamentos(BuenosAiresTest, "Bragado");
+        MunicipiosODepartamentos BragadoTest = BuenosAiresTest.crearMunicipio("Bragado");
+        
         Ubicacion ubicacionTest = new Ubicacion(
                 BragadoTest,
                 "Bragado",
@@ -66,10 +64,33 @@ public class MunicipiosYCositas {
                 "calle falsa",
                 123
         );
-        Clasificacion clasificacion1 = new Clasificacion("Escuela");
+        repositorioProvincias.agregar(BuenosAiresTest);
+    }
+
+    @Test
+    public void miembroConOrganizacionesYAreas() {
+        RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
+        RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
+        RepositorioAreas repositorioAreas = new RepositorioAreas();
+        RepositorioRoles repositorioRoles = new RepositorioRoles();
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+        RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
+
+        Provincia BuenosAiresTest = new Provincia(NombreProvincia.Buenos_Aires);
+        MunicipiosODepartamentos BragadoTest = BuenosAiresTest.crearMunicipio("Bragado");
+        Ubicacion ubicacionTest = new Ubicacion(
+                BragadoTest,
+                "Bragado",
+                "C1234",
+                "calle falsa",
+                123
+        );
+        Clasificacion clasificacion1 = repositorioClasificacion.buscar(1);
         Rol rolOrg = repositorioRoles.obtenerRol("ORGANIZACION");
         Rol rolMiem = repositorioRoles.obtenerRol("MIEMBRO");
+
         System.out.println(rolOrg.getTipoUsuario());
+
         Usuario unUsuario = new Usuario(rolOrg,"prueba@123","prueba@456");
         Usuario unUsuarioMIEMBRO = new Usuario(rolMiem,"prueba@789","prueba@456");
         Organizacion organizacionPrueba = new Organizacion(null,ubicacionTest,"PRUEBAORG",Tipo.EMPRESA,clasificacion1,unUsuario);
@@ -84,12 +105,14 @@ public class MunicipiosYCositas {
         area1.gestionarMiembrosPendientes(solicitudAArea1,SolicitudEstado.ACEPTADA);
         //area2.gestionarMiembrosPendientes(solicitudAArea2,SolicitudEstado.ACEPTADA);
 
+        repositorioProvincias.agregar(BuenosAiresTest);
+
         //System.out.println("FASE 1");
         //repositorioAreas.agregar(area1);
         //System.out.println("FASE 2");
         //repositorioAreas.agregar(area2);
         //System.out.println("FASE 3");
-        repositorioOrganizaciones.agregar(organizacionPrueba);
+       // repositorioOrganizaciones.agregar(organizacionPrueba);
         //System.out.println("FASE 4");
         //repositorioOrganizaciones.agregar(organizacionPrueba2);
         //System.out.println("FASE 5");

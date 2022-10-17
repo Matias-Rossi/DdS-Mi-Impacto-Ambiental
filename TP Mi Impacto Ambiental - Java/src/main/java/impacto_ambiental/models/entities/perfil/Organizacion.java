@@ -40,7 +40,7 @@ public class Organizacion extends EntidadPersistente {
     @Column(name = "tipo")
     private Tipo tipo;
 
-    @OneToMany(mappedBy = "id", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organizacion", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Area> areas= new ArrayList<Area>();
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
@@ -67,6 +67,7 @@ public class Organizacion extends EntidadPersistente {
         this.moduloImportador = moduloImportador;
         this.municipioODepartamento=ubicacion.getMunicipalidad();
         this.usuario=usuario;
+        this.municipioODepartamento.agregarOrganizacion(this);
     }
     public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion) {
         this.ubicacion=ubicacion;

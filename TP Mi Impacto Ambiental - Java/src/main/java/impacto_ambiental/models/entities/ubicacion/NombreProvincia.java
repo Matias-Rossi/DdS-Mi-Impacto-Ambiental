@@ -149,4 +149,8 @@ public enum NombreProvincia {
     public String toEnumString() {
         return "";
     }
+    public NombreProvincia toEnum(String nombre) {
+        String nombreConEspacios = nombre.replace("_", " ");
+        return NombreProvincia.valueOf(nombreConEspacios);
+    }
 }

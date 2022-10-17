@@ -55,5 +55,8 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
     public List<HChistorico> getHcHistoricos(){
         return organizaciones.stream().map(e->e.getHChistoricos()).flatMap(e->e.stream()).collect(Collectors.toList());
     }
+    public void agregarOrganizacion(Organizacion unaOrganizacion){
+        this.organizaciones.add(unaOrganizacion);
+    }
 
 }

@@ -49,7 +49,6 @@
     <div class="d-flex flex-column" id="content-wrap">
         <div class=" d-flex align-self-center conteinerRegistro">
             <main>
-                <form novalidate>
                     <div class="form-check" style="padding: 0px !important; margin:20px !important;">
                         <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                             <label class="form-label texto"
@@ -59,14 +58,16 @@
 
                         <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
 
                                 <input class="form-check-input" type="radio" name="flexRadioTramo"
-                                    id="flexRadioTipoDeVehiculo">
+                                    id="flexRadioTipoDeVehiculo"onclick="mostrarFormulario(formularioTipoDeVehiculo)">
                                 <label class="form-check-label textoInputs" for="flexRadioTipoDeVehiculo"
                                     style="font-size: 20px;">Vehiculo particular</label>
                                 <br>
-
+                                <div class="formulariosTransporte" id="formularioTipoDeVehiculo"
+                                style="display: none;">
+                                <form class="was-validated" novalidate  method="POST" action="/trayectos/:id/tramos/new">
                                 <label for="tipoDeVehiculo" class="form-label textoInputs">Tipo de vehiculo</label>
                                 <select class="form-select form-select-custom" id="tipoDeVehiculo" required>
                                     <option selected disabled value="">-- Seleccionar tipo de vehiculo --</option>
@@ -93,15 +94,21 @@
                                     llegada</label>
                                 <input type="text" class="form-control" id="inputDireccionDeLlegada" placeholder=""
                                     value="" required>
-
+                                </form>
                             </div>
-
-                            <div class="col-md-6">
+                        </div>
+                        </div>
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                            <div class="col-md-12">
 
                                 <input class="form-check-input" type="radio" name="flexRadioTramo"
-                                    id="flexRadioServicioContratado">
+                                    id="flexRadioServicioContratado" onclick="mostrarFormulario(formularioServicioContratado)">
                                 <label class="form-check-label textoInputs" for="flexRadioServicioContratado"
                                     style="font-size: 20px;">Servicio contratado</label>
+                                    <br>
+                                    <div class="formulariosTransporte" id="formularioServicioContratado"
+                                        style="display: none;">
+                                        <form class="was-validated" novalidate  method="POST" action="/trayectos/:id/tramos/new">
 
                                 <label for="servicioContratado" class="form-label textoInputs">Servicio
                                     contratado</label>
@@ -123,24 +130,28 @@
                                     llegada</label>
                                 <input type="text" class="form-control" id="inputDireccionDeLlegada" placeholder=""
                                     value="" required>
-
+                                </form>
                             </div>
-
                         </div>
+                        </div>
+
+
                         <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
 
                                 <input class="form-check-input" type="radio" name="flexRadioTramo"
-                                    id="flexRadioTransportePublico">
+                                    id="flexRadioTransportePublico"  onclick="mostrarFormulario(formularioTransportePublico)">
                                 <label class="form-check-label textoInputs" for="flexRadioTransportePublico"
                                     style="font-size: 20px;">Transporte publico</label>
-                                <br>
+                                    <br>
+                                    <div class="formulariosTransporte" id="formularioTransportePublico"
+                                        style="display: none;">
+                                        <form class="was-validated" novalidate  method="POST" action="/trayectos/:id/tramos/new">
 
                                 <label for="tipoDeTransportePublico" class="form-label textoInputs">Tipo de transporte
                                     publico</label>
-                                <select class="form-select form-select-custom" id="tipoDeTransportePublico"
-                                    onload="mostrarLineas();" required>
+                                <select class="form-select form-select-custom" id="tipoDeTransportePublico"required>
                                     <option selected disabled value="">-- Seleccionar tipo de transporte --</option>
 
                                 </select>
@@ -156,46 +167,81 @@
                                 <select class="form-select form-select-custom" id="paradaFin" required>
                                     <option selected disabled value="">-- Seleccionar parada fin--</option>
                                 </select>
-
-                            </div>
+                            </form>
+                            </div> 
+                        </div>
                         </div>
                         <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
 
+
                             <div class="col-md-12">
                                 <input class="form-check-input" type="radio" name="flexRadioTramo"
-                                    id="flexRadioTransportePublico"
+                                    id="flexRadioBicicletaOSimilares"
                                     onclick="mostrarFormulario(formularioBicicletaOSimilares)">
                                 <label class="form-check-label textoInputs" for="flexRadioBicicletaOSimilares"
                                     style="font-size: 20px;">Bicicleta o similares</label>
                                 <br>
-                                <div class="formulariosTransporte" id="formularioBicicletaOSimilares" style="display: none;">
-                                    <form>
+                                <div class="formulariosTransporte" id="formularioBicicletaOSimilares"
+                                    style="display: none;">
+                                    <form class="was-validated" novalidate  method="POST" action="/trayectos/:id/tramos/new">
 
                                         <label for="inputDireccionDeSalida" class="form-label textoInputs">Direccion de
                                             salida</label>
-                                        <input type="text" class="form-control" id="inputDireccionDeSalida" placeholder=""
-                                            value="" required>
+                                        <input type="text" class="form-control" id="inputDireccionDeSalida"
+                                            placeholder="" value="" required>
                                         <label for="inputDireccionDeLlegada" class="form-label textoInputs">Direccion de
                                             llegada</label>
-                                        <input type="text" class="form-control" id="inputDireccionDeLlegada" placeholder=""
-                                            value="" required>
+                                        <input type="text" class="form-control" id="inputDireccionDeLlegada"
+                                            placeholder="" value="" required>
+                                    </form>
                                 </div>
-                </form>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+
+
+                            <div class="col-md-12">
+                                <input class="form-check-input" type="radio" name="flexRadioTramo" id="flexRadioAPie"
+                                    onclick="mostrarFormulario(formularioAPie)">
+                                <label class="form-check-label textoInputs" for="flexRadioAPie"
+                                    style="font-size: 20px;">A pie</label>
+                                <br>
+                                <div class="formulariosTransporte" id="formularioAPie" style="display: none;">
+                                    <form class="was-validated" novalidate  method="POST" action="/trayectos/:id/tramos/new">
+
+                                        <label for="inputDireccionDeSalida" class="form-label textoInputs">Direccion de
+                                            salida</label>
+                                        <input type="text" class="form-control" id="inputDireccionDeSalida"
+                                            placeholder="" value="" required>
+                                        <label for="inputDireccionDeLlegada" class="form-label textoInputs">Direccion de
+                                            llegada</label>
+                                        <input type="text" class="form-control" id="inputDireccionDeLlegada"
+                                            placeholder="" value="" required>
+                                    </form>
+                                    <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+                                        <button class=" btn-custom " type="submit" id="idRegistrarse">Añadir tramo</button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
         </div>
 
-    </div>
-    </div>
-    <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
-        <button class=" btn-custom " href="#" type="submit" id="idRegistrarse">Registrar</button>
-    </div>
-    </div>
-    </form>
-    </main>
-    </div>
-    <div class="d-flex row justify-content-center" id="poseeCuenta">
-        <span class="textoNoLink text-small col-sm-1" style="width: fit-content;" id="poseeCuenta1">¿Ya posee una
-            cuenta?&nbsp</span> <a href="Login.html" id="poseeCuenta2" class=" col-sm-1 textoLink"
-            style="width: fit-content;">Inicie Sesion</a>
+        </main>
     </div>
     </div>
 
@@ -206,15 +252,17 @@
 
 
 <script>
-    function mostrarFormulario(formularioBicicletaOSimilares){
+    function mostrarFormulario(id) {
         var formularios = document.getElementsByClassName("formulariosTransporte");
-        
+        for (var i = 0; i < formularios.length; i++) {
+            formularios[i].style.display = "none";
+        }
+        if (id.style.display == "none") {
+            id.style.display = "block";
 
-        if(formularioBicicletaOSimilares.style.display == "none"){
-            formularioBicicletaOSimilares.style.display = "block";
-        }else{
-            formularioBicicletaOSimilares.style.display = "none";
-        }        
+        } else if (id.style.display == "block") {
+            id.style.display = "none";
+        }
     }
 
 </script>

@@ -2,10 +2,7 @@ package impacto_ambiental.controllers;
 
 
 
-import impacto_ambiental.models.entities.perfil.Area;
-import impacto_ambiental.models.entities.perfil.Miembro;
-import impacto_ambiental.models.entities.perfil.Organizacion;
-import impacto_ambiental.models.entities.perfil.SolicitudEstado;
+import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.usuario.Usuario;
 import impacto_ambiental.models.repositorios.RepositorioAreas;
 import impacto_ambiental.models.repositorios.RepositorioMiembros;
@@ -25,12 +22,16 @@ public class OrganizacionController {
     private RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
     private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
     private RepositorioAreas repositorioAreas = new RepositorioAreas();
-
+    private RepositorioSolicitudes repositorioSolicitudes =  new RepositorioSolicitudes();
 
     public ModelAndView mostrarTodas(Request request, Response response){
-        Usuario unUsuario = repositorioUsuarios.buscar(Integer.valueOf(request.session().attribute("id")) );
-        String queryParaBuscarDedeOtroId = "SELECT e FROM " + unUsuario.getClass() + " WHERE id_="+unUsuario.getId();
-        Miembro unMiembro = repositorioMiembros.buscar(queryParaBuscarDedeOtroId);
+
+        Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(Integer.valueOf(request.session().attribute("id"));
+
+        List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
+
+        solicitudes.stream().map(sol->sol.)
+        
 
         List<Organizacion> organizacionesDeMiembro =   unMiembro.getSolicitudes().stream()
                 .filter(unaSolicitud-> unaSolicitud.getEstado() == SolicitudEstado.ACEPTADA )
