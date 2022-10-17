@@ -23,9 +23,9 @@ public class OrganizacionController {
 
     public ModelAndView mostrarTodas(Request request, Response response){
 
-        Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(Integer.valueOf(request.session().attribute("id"));
+        Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(Integer.valueOf(request.session().attribute("id")));
 
-        List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
+        //List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
 
         List<Area> areas = solicitudes.stream().map(sol->sol.getArea()).toList();
         List<Organizacion> orgs = areas.stream().map(sol->sol.getOrganizacion()).toList();
@@ -34,7 +34,6 @@ public class OrganizacionController {
 //        List<Organizacion> organizacionesDeMiembro =   unMiembro.getSolicitudes().stream()
 //                .filter(unaSolicitud-> unaSolicitud.getEstado() == SolicitudEstado.ACEPTADA )
 //                .map(unaSolicitud-> unaSolicitud.getArea().getOrganizacion() ).toList() ;
-
 
 
         return new ModelAndView(new HashMap<String, Object>(){{

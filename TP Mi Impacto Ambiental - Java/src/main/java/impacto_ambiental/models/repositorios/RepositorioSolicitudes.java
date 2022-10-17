@@ -8,8 +8,14 @@ import java.util.List;
 
 public class RepositorioSolicitudes extends Repositorio<Solicitud> {
 
+<<<<<<< Updated upstream
     public RepositorioSolicitudes{ super(Solicitud.class)}
     public List<Solicitud> buscarSolicitudesAceptadasPorIDMiembro(int id){
         
+=======
+
+    public RepositorioSolicitudes() {
+        super(Solicitud.class);
+>>>>>>> Stashed changes
     }
 }
