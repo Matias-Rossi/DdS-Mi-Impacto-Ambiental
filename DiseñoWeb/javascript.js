@@ -120,7 +120,7 @@ function setPasswordConfirmValidityOrg(str) {
 }
 function togglePasswordF12() {
   var togglePassword12 = document.getElementById('togglePassword12');
-  var password1 = document.getElementById('inputContrseñaOrg');
+  var password12 = document.getElementById('inputContrseñaOrg');
 
   if (password1.type === 'password') {
     password12.setAttribute('type', 'text');

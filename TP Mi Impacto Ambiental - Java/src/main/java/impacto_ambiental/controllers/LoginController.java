@@ -6,10 +6,10 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class LoginControllerOK {
+public class LoginController {
 
     public ModelAndView pantallaDeLogin(Request request, Response response) {
-        return new ModelAndView(null, "loginOK.hbs");
+        return new ModelAndView(null, "login.hbs");
     }
 
     public Response login(Request request, Response response) {
@@ -49,7 +49,7 @@ public class LoginControllerOK {
 
     public Response logout(Request request, Response response) {
         request.session().invalidate();
-        response.redirect("/home");
+        response.redirect("/");
         return response;
     }
 

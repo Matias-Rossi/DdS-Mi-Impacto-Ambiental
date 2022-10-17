@@ -21,43 +21,38 @@ public class SignUpController {
 
     private RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new RepositorioMunicipiosODepartamentos();
     private  RepositorioSectoresTerritoriales repositorioSectoresTerritoriales = new RepositorioSectoresTerritoriales();
+    private  RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
 
     public ModelAndView pantallaDeSignUp(Request request, Response response) {
         //return new ModelAndView(null, "signUp.hbs");
         List<MunicipiosODepartamentos> municipiosODepartamentosBuscados = this.repositorioMunicipiosODepartamentos.buscarTodos();
         List<SectorTerritorial> sectoresTerritoriales = this.repositorioSectoresTerritoriales.buscarTodos();
-        List<String> prueba = new ArrayList<String>();
-        prueba.add("1");
-        prueba.add("2");
-        prueba.add("1");
+        List<Clasificacion> clasificaciones = this.repositorioClasificacion.buscarTodos();
 
        return new ModelAndView(new HashMap<String, Object>(){{
             put("municipiosODepartamentos", municipiosODepartamentosBuscados); //TODO Agregar el key
            put("sectoresTerritoriales", sectoresTerritoriales);
-            //put("municicpiosODepartamentos", prueba);
+           put("clasificaciones", clasificaciones);
        }}, "signUp.hbs"); //TODO Implementar este .hbs, ya existe el .html
 
 
     }
 
     public Response signUpMiembro(Request request, Response response) {
+        //REPOS
         RepositorioRoles repositorioRoles = new RepositorioRoles();
-        RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
         RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
-        RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
         RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new RepositorioMunicipiosODepartamentos();
-        RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
-        RepositorioSectoresTerritoriales repositorioSectorTerritorial = new RepositorioSectoresTerritoriales();
 
-
-
-
-
-        String email = request.queryParams("email");
-        String password = request.queryParams("password");
         //Boolean existeUsuario = repositorioUsuarios.existeUsuario(email); //TODO arreglar
         Boolean existeUsuario = false;
 
+
+        //Creación de usuario
+        //Datos para el Usuario
+        Rol rol = repositorioRoles.obtenerRol(request.queryParams("tipoUsuario"));
+        String email = request.queryParams("email");
+        String password = request.queryParams("password");
         //Comprobación si usuario existe
         if(existeUsuario) {
             //TODO Handlear usuario ya existe
@@ -67,90 +62,63 @@ public class SignUpController {
         if(!validarContrasenia(password)) {
             return response;
         }
+        Usuario usuario = new Usuario(rol, email, password);
 
-        //Creación de usuario
-        Rol rol = repositorioRoles.obtenerRol(request.queryParams("tipoUsuario"));
-        MunicipiosODepartamentos municipio = repositorioMunicipiosODepartamentos.buscar(Integer.parseInt(request.queryParams("municipio")));
-        Integer numeracion = Integer.parseInt(request.queryParams("numeracion"));
-        String calle = request.queryParams("calle");
-        String localidad = request.queryParams("localidad");
-        String codPostal = request.queryParams("codPostal");
+        //Creación de la Organizacion
+        //Datos para la Organizacion
         String nombre = request.queryParams("nombre");
         String apellido = request.queryParams("apellido");
         String numeroDoc = request.queryParams("numeroDoc");
-        String razonsocial = request.queryParams("razonsocial");
         TipoDocumento tipoDoc = TipoDocumento.valueOf(request.queryParams("tipoDoc"));
+        Ubicacion ubicacion = obtenerUbicacion(request);
 
-        //SectorTerritorial sector = repositorioSectorTerritorial.buscar(Integer.parseInt(request.queryParams("sectorTerritorial")));
-
-        Usuario usuario = new Usuario(
-                rol,
-                email,
-                password
-        );
-        Ubicacion ubi;
-        if(rol.esTipo(TipoUsuario.MIEMBRO)){
-            ubi = new Ubicacion(municipio, localidad, codPostal, calle, numeracion);
-            Miembro miembro = new Miembro(nombre,apellido,tipoDoc,numeroDoc,ubi,email,null,usuario);
-            repositorioMiembros.agregar(miembro);
-        }
-        if(rol.esTipo(TipoUsuario.ORGANIZACION)) {
-            //ubi = new Ubicacion(municipio, localidad, codPostal, calle, numeracion);
-            //Organizacion organizacion = new Organizacion(null,ubi,razonsocial,tipo,clasificacion,usuario);
-            //repositorioOrganizaciones.agregar(organizacion);
-        }
-        if(rol.esTipo(TipoUsuario.AGENTE)){
-            //usuario.solicitarSector(sector);
-            //repositorioUsuarios.agregar(usuario);
-        }
+        Miembro miembro = new Miembro(nombre,apellido,tipoDoc,numeroDoc,ubicacion,email,null,usuario);
+        repositorioMiembros.agregar(miembro);
 
         response.redirect("/login");
         return response;
     }
 
     public Response signUpOrganizacion(Request request, Response response) {
-
-        String password = request.queryParams("password");
+        //REPOS
+        RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
+        RepositorioRoles repositorioRoles = new RepositorioRoles();
+        RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
 
         //Boolean existeUsuario = repositorioUsuarios.existeUsuario(email); //TODO arreglar
         Boolean existeUsuario = false;
-
+        //Datos para el Usuario
+        Rol rol = repositorioRoles.obtenerRol(request.queryParams("tipoUsuario"));
+        String email = request.queryParams("email");
+        String contrasenia = request.queryParams("password");
         //Comprobación si usuario existe
         if(existeUsuario) {
             //TODO Handlear usuario ya existe
             return response;
         }
         //Validación de contraseña
-        if(!validarContrasenia(password)) {
+        if(!validarContrasenia(contrasenia)) {
             return response;
         }
-
-        //Creación de organización
-        RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
-        RepositorioRoles repositorioRoles = new RepositorioRoles();
-        RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
-
-        String email = request.queryParams("email");
-        String contrasenia = request.queryParams("contrasenia");
-
-        //TODO Agregar RAZON SOCIAL al form de registro para organizaciones
-        String razonSocial = request.queryParams("razonSocial");
-        Rol rol = repositorioRoles.obtenerRol(request.queryParams("tipoUsuario"));
-
-        Ubicacion ubicacion = obtenerUbicacion(request);
-        Tipo tipo = Tipo.valueOf(request.queryParams("tipo")); //TODO Agregar selector de TIPO DE ORGANIZACION
-        String inputClasificacion = request.queryParams("clasificacion");
-        Clasificacion clasificacion = repositorioClasificacion.buscar(Integer.parseInt(inputClasificacion)); //TODO Agregar clasificacion
-
         Usuario usuario = new Usuario(rol, email, contrasenia);
 
-        Organizacion organizacion = new Organizacion(null, ubicacion, razonSocial, Tipo.GUBERNAMENTAL, clasificacion, usuario);
+        //Creación de organización
+        //Datos para la Organizacion
+        String razonSocial = request.queryParams("razonSocial");
+        Tipo tipo = Tipo.valueOf(request.queryParams("tipo"));
+        String inputClasificacion = request.queryParams("clasificacion");
+        Clasificacion clasificacion = repositorioClasificacion.buscar(Integer.parseInt(inputClasificacion));
+        Ubicacion ubicacion = obtenerUbicacion(request);
+
+        Organizacion organizacion = new Organizacion(null, ubicacion, razonSocial, tipo, clasificacion, usuario);
         repositorioOrganizaciones.agregar(organizacion);
 
         response.redirect("/login");
         return response;
     }
+
     public Response signUpAgenteSectorial(Request request, Response response) {
+        //REPOS
         RepositorioRoles repositorioRoles = new RepositorioRoles();
         RepositorioSectoresTerritoriales repositorioSectoresTerritoriales = new RepositorioSectoresTerritoriales();
         RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
@@ -174,26 +142,20 @@ public class SignUpController {
             return response;
         }*/
 
+        Usuario usuario = new Usuario(rol, email, password);
+
+        //Datos Sector territorial
         Integer idSectorTerritorial = Integer.valueOf(request.queryParams("sectorTerritorial"));
         SectorTerritorial sector = repositorioSectoresTerritoriales.buscar(idSectorTerritorial);
+        usuario.solicitarSector(sector); //TODO ver que onda
+        usuario.agregarSector(sector);
 
-        //repositorioProvincias.
-
-
-
-
-        Usuario usuario = new Usuario(
-            rol,
-            email,
-            request.queryParams("password")
-        );
-
-        usuario.solicitarSector(sector);
         repositorioUsuarios.agregar(usuario);
 
         response.redirect("/login");
         return response;
     }
+
 
     private Ubicacion obtenerUbicacion(Request request){
         RepositorioMunicipiosODepartamentos repositorioMoD = new RepositorioMunicipiosODepartamentos();

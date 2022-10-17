@@ -27,28 +27,39 @@ public class Router {
     private static void configure() {
         TrayectosController trayectosController = new TrayectosController();
         TramosController tramosController = new TramosController();
-        //LoginController loginController = new LoginController();
         SignUpController signUpController = new SignUpController();
-        LoginControllerOK loginController = new LoginControllerOK();                     //TODO codigo MIA
-        HomeControllerOK homeController = new HomeControllerOK();                         //TODO codigo MIA
-       // Spark.staticFiles.location("/public");                                      //TODO codigo MIA
+        LoginController loginController = new LoginController();
+        HomeController homeController = new HomeController();
+        OrganizacionController organizacionController = new OrganizacionController();
+       // Spark.staticFiles.location("/public");
 
         // ### Miembro ###
-        Spark.path("/home", () -> {                                                  //TODO codigo MIA
-            Spark.get("", homeController::pantallaDeHome, engine);                       //TODO codigo MIA
-        });//TODO codigo MIA
+        Spark.path("/", () -> {
+            Spark.get("", homeController::pantallaDeHome, engine);
+        });
 
         Spark.path("/login", () -> {
-            Spark.get("", loginController::pantallaDeLogin, engine);                     //TODO codigo MIA
-            Spark.post("", loginController::login);                     //TODO codigo MIA
-            Spark.post("/logout", loginController::logout);                     //TODO codigo MIA
-        });                                                                          //TODO codigo MIA
+            Spark.get("", loginController::pantallaDeLogin, engine);
+            Spark.post("", loginController::login);
+        });
+        Spark.path("/logout", () -> {
+            Spark.post("/logout", loginController::logout);
 
+        });
         Spark.path("/signup", () -> {
             Spark.get("", signUpController::pantallaDeSignUp, engine);
             Spark.post("/miembro", signUpController::signUpMiembro);
             Spark.post("/organizacion", signUpController::signUpOrganizacion);
             Spark.post("/agente_sectorial", signUpController::signUpAgenteSectorial);
+        });
+
+        Spark.path("/home", () -> {
+            Spark.get("", homeController::homeUser, engine);
+        });
+
+        Spark.path("/organizaciones", () -> {
+            Spark.get("", organizacionController::mostrarTodas, engine);
+
         });
 /*
         Spark.path("/perfil", () -> {

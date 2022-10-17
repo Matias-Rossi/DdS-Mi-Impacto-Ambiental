@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class Organizacion extends EntidadPersistente {
 
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
-            @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     Usuario usuario;
 
     @Transient

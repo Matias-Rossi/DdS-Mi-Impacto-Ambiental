@@ -208,7 +208,13 @@
                               <div  style="color: rgba(0, 0, 0, 0);">ORGANIZACION</div>
                               <input name="tipoUsuario" style="color: rgba(0, 0, 0, 0);" value="ORGANIZACION" type="hidden">
 
-
+                              <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax; ">
+                                  <div class="col-md-12">
+                                      <label for="razonSocial" class="form-label textoInputs">Razon social</label>
+                                      <input name="razonSocial" type="text" class="form-control" id="razonSocial" placeholder=""
+                                             value="" required>
+                                  </div>
+                              </div>
 
                               <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax; ">
                                   <div class="col-md-6">
@@ -227,6 +233,34 @@
                                              placeholder="" value="" min="0" required>
                                   </div>
                               </div>
+                              <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax; ">
+                                  <div class="col-md-6">
+                                      <label for="tipo" class="form-label textoInputs">Tipo</label>
+                                      <select name="tipo" class="form-select form-select-custom" id="tipo"
+                                              required>
+                                          <option selected disabled value="">Elegir...</option>
+                                              <option value="ONG">ONG</option>
+                                          <option value="EMPRESA">EMPRESA</option>
+                                          <option value="INSTITUCION">INSTITUCION</option>
+                                      </select>
+
+                                  </div>
+
+                                  <div class="col-md-6">
+                                      <label for="clasificacion" class="form-label textoInputs">Clasificacion</label>
+
+                                      <select name="clasificacion" class="form-select form-select-custom" id="clasificacion"
+                                              required>
+                                          <option selected disabled value="">Elegir...</option>
+                                         {{#each clasificaciones}}
+                                             <option value="{{id}}"> {{nombre}}</option>
+                                         {{/each}}
+                                      </select>
+
+                              </div>
+                              </div>
+    
+
                               <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                                   <div class="col-md-6">
                                       <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>

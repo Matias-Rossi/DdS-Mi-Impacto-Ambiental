@@ -41,6 +41,7 @@ public class Miembro extends EntidadPersistente {
     @ManyToMany
     private List<Area> areas = new ArrayList<Area>();
 */
+    @Getter
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "miembro")
     public List<Solicitud> solicitudes = new ArrayList<>();
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "miembro")
