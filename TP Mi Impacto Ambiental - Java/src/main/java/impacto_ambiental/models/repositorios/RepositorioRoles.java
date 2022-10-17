@@ -4,6 +4,7 @@ import impacto_ambiental.db.BusquedaConPredicado;
 import impacto_ambiental.db.Repositorio;
 import impacto_ambiental.models.entities.usuario.Rol;
 import impacto_ambiental.models.entities.usuario.Rol;
+import impacto_ambiental.models.entities.usuario.TipoUsuario;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -21,7 +22,7 @@ public class RepositorioRoles extends Repositorio<Rol> {
         CriteriaQuery<Rol> query = criteriaBuilder.createQuery(Rol.class);
         Root<Rol> raiz = query.from(Rol.class);
 
-        Predicate predicado = criteriaBuilder.equal(raiz.get("tipo"), tipoUsuario);
+        Predicate predicado = criteriaBuilder.equal(raiz.get("tipo"), TipoUsuario.valueOf(tipoUsuario));
         query.where(predicado);
 
         BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);

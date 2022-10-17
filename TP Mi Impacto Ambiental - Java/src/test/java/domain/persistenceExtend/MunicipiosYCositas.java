@@ -2,7 +2,10 @@ package domain.persistenceExtend;
 
 import impacto_ambiental.models.entities.ubicacion.NombreProvincia;
 import impacto_ambiental.models.entities.ubicacion.Provincia;
+import impacto_ambiental.models.entities.usuario.Rol;
+import impacto_ambiental.models.entities.usuario.TipoUsuario;
 import impacto_ambiental.models.repositorios.RepositorioProvincias;
+import impacto_ambiental.models.repositorios.RepositorioRoles;
 import org.junit.jupiter.api.Test;
 
 public class MunicipiosYCositas {
@@ -16,5 +19,12 @@ public class MunicipiosYCositas {
         RepositorioProvincias repo = new RepositorioProvincias();
         repo.agregar(prov);
 
+    }
+
+    @Test
+    public void roles() {
+        Rol rol = new Rol(TipoUsuario.MIEMBRO);
+        RepositorioRoles repo = new RepositorioRoles();
+        repo.agregar(rol);
     }
 }

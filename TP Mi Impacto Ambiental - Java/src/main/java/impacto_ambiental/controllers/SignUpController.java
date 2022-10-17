@@ -52,13 +52,13 @@ public class SignUpController {
 
 
         String email = request.queryParams("email");
-        Boolean existeUsuario = repositorioUsuarios.existeUsuario(email);
+        //Boolean existeUsuario = repositorioUsuarios.existeUsuario(email);
 
-        if(existeUsuario) {
+        if(false) {
             //TODO Handlear usuario ya existe
             //return?
             //TODO Comprobaciones de contraseña
-        }else{
+        }else {
             //Crear usuario
             Rol rol = repositorioRoles.obtenerRol(request.queryParams("tipoUsuario"));
             MunicipiosODepartamentos municipio = repositorioMunicipiosODepartamentos.buscar(Integer.parseInt(request.queryParams("municipio")));
@@ -71,9 +71,18 @@ public class SignUpController {
             String numeroDoc = request.queryParams("numeroDoc");
             String razonsocial = request.queryParams("razonsocial");
             TipoDocumento tipoDoc = TipoDocumento.valueOf(request.queryParams("tipoDoc"));
-            Tipo tipo = Tipo.valueOf(request.queryParams("tipo"));
-            Clasificacion clasificacion = repositorioClasificacion.buscar(Integer.parseInt(request.queryParams("clasificacion")));
-            SectorTerritorial sector = repositorioSectorTerritorial.buscar(Integer.parseInt(request.queryParams("sectorTerritorial")));
+            //Tipo tipo = Tipo.valueOf(request.queryParams("tipo"));
+            //Clasificacion clasificacion = repositorioClasificacion.buscar(Integer.parseInt(request.queryParams("clasificacion")));
+            //SectorTerritorial sector = repositorioSectorTerritorial.buscar(Integer.parseInt(request.queryParams("sectorTerritorial")));
+
+            System.out.println(numeracion);
+            System.out.println(calle);
+            System.out.println(localidad);
+            System.out.println(codPostal);
+            System.out.println(nombre);
+            System.out.println(apellido);
+            System.out.println(numeroDoc);
+            System.out.println(request.queryParams("password"));
 
 
             Usuario usuario = new Usuario(
@@ -87,14 +96,14 @@ public class SignUpController {
                 Miembro miembro = new Miembro(nombre,apellido,tipoDoc,numeroDoc,ubi,email,null,usuario);
                 repositorioMiembros.agregar(miembro);
             }
-            if(rol.esTipo(TipoUsuario.ORGANIZACION)){
-                ubi = new Ubicacion(municipio, localidad, codPostal, calle, numeracion);
-                Organizacion organizacion = new Organizacion(null,ubi,razonsocial,tipo,clasificacion,usuario);
-                repositorioOrganizaciones.agregar(organizacion);
+            if(rol.esTipo(TipoUsuario.ORGANIZACION)) {
+                //ubi = new Ubicacion(municipio, localidad, codPostal, calle, numeracion);
+                //Organizacion organizacion = new Organizacion(null,ubi,razonsocial,tipo,clasificacion,usuario);
+                //repositorioOrganizaciones.agregar(organizacion);
             }
             if(rol.esTipo(TipoUsuario.AGENTE)){
-                usuario.solicitarSector(sector);
-                repositorioUsuarios.agregar(usuario);
+                //usuario.solicitarSector(sector);
+                //repositorioUsuarios.agregar(usuario);
             }
 
 
