@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Entity
 @Table(name = "municipiosODepartamentos")
+@DiscriminatorValue("Municipio")
 public class MunicipiosODepartamentos extends SectorTerritorial {
 
     @Getter

@@ -51,7 +51,7 @@
               <div class="modal-content">
                   <div class="modal-body">
                       <main>
-                          <form class="was-validated" method="POST" action="/signup" novalidate>
+                          <form class="was-validated" method="POST" action="/signup/miembro" novalidate>
                               <input name="tipoUsuario" style="color: rgba(0, 0, 0, 0);" value="MIEMBRO" type="hidden">
                               <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                                   <div class="col-md-3">
@@ -198,6 +198,221 @@
           </div>
       </div>
       <!--Fin Modal Miembro -->
+      <!-- Modal Organizacion -->
+      <div class="modal fade" id="registroOrganizacion" tabindex="-1">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                  <div class="modal-body">
+                      <main>
+                          <form class="was-validated" method="POST" action="/signup/organizacion" novalidate>
+                              <div  style="color: rgba(0, 0, 0, 0);">ORGANIZACION</div>
+                              <input name="tipoUsuario" style="color: rgba(0, 0, 0, 0);" value="ORGANIZACION" type="hidden">
+
+
+
+                              <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax; ">
+                                  <div class="col-md-6">
+                                      <label for="inputCalle" class="form-label textoInputs">Direccion</label>
+                                      <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
+                                             value="" required>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
+                                      <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
+                                             placeholder="" value="" min="0" required>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
+                                      <input name="codPostal" type="number" class="form-control" id="inputCP"
+                                             placeholder="" value="" min="0" required>
+                                  </div>
+                              </div>
+                              <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                  <div class="col-md-6">
+                                      <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>
+                                      <select name="municipio" class="form-select form-select-custom" id="selectMunicipio"
+                                              required>
+                                          <option selected disabled value="">Elegir...</option>
+                                          {{#each municipiosODepartamentos}}
+                                              <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                          {{/each}}
+                                      </select>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                      <label for="inputLocalidad" class="form-label textoInputs">Localidad</label>
+                                      <input name="localidad" type="text" class="form-control" id="inputLocalidad"
+                                             placeholder="" value="" required>
+                                  </div>
+                              </div>
+                              <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                  <div class="col-md-6">
+                                      <label for="inputEmail" class="form-label textoInputs">Correo electronico</label>
+                                      <input type="email" name="email" class="form-control" id="inputEmail" placeholder="" value=""
+                                             required>
+                                  </div>
+                              </div>
+                              <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                  <div class="col-md-6">
+                                      <label for="inputContrseñaOrg" class="form-label textoInputs">Contraseña</label>
+                                      <div class="input-group mb-6">
+                                          <input type="password" class="form-control " id="inputContrseñaOrg"
+                                                 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$"
+                                                 placeholder="" value=""
+                                                 onfocus="mostrarValidaciones(document.getElementById('validaciones12').id);"
+                                                 onblur="ocultarValidaciones(document.getElementById('validaciones12').id);"
+                                                 oninput="setPasswordConfirmValidityOrg();" onkeyup="checkPasswordOrg(this.value);"
+                                                 required>
+                                          <span class="btn-action-icon" id="togglePassword12"
+                                                onclick="togglePasswordF12();"></span>
+                                          <div id="validaciones12" class="d-none">
+                                              <span class="d-flex align-items-center" id="requisitosOrg">&nbsp Debe contener
+                                                  al
+                                                  menos: </span>
+                                              <li class="d-flex align-items-center" id="lowerOrg">Una letra minuscula. &nbsp
+                                              </li>
+                                              <li class="d-flex align-items-center" id="upperOrg">Una letra mayuscula. &nbsp
+                                              </li>
+                                              <li class="d-flex align-items-center" id="numberOrg">Un numero. &nbsp </li>
+                                              <li class="d-flex align-items-center" id="specialOrg">Un caracter especial.
+                                                  &nbsp </li>
+                                              <li class="d-flex align-items-center" id="lengthOrg">8 caracteres. &nbsp </li>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <label for="inputConfirmarContrseñaOrg" class="form-label textoInputs">Confirmar
+                                          contraseña</label>
+                                      <div class="input-group mb-6">
+                                          <input type="password" name="password" class="form-control " id="inputConfirmarContrseñaOrg"
+                                                 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$"
+                                                 placeholder="" value=""
+                                                 onfocus="mostrarValidaciones(document.getElementById('validaciones22').id);"
+                                                 onblur="ocultarValidaciones(document.getElementById('validaciones22').id);"
+                                                 oninput="setPasswordConfirmValidityOrg();" required>
+                                          <span class="btn-action-icon" id="togglePassword22"
+                                                onclick="togglePasswordF22();"></span>
+                                          <div id="validaciones22" class="d-none">
+                                              <li class="d-flex align-items-center" id="contrseñaNoCoincideOrg">&nbsp Las
+                                                  contraseñas
+                                                  no
+                                                  coinciden</li>
+                                              <li class="d-flex align-items-center d-none" id="contrseñaCoincideOrg">&nbsp
+                                                  Las
+                                                  contraseñas coinciden</li>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
+                                  <button class=" btn-custom " href="#" type="submit" id="idRegistrarse">Registrar</button>
+                              </div>
+                          </form>
+                      </main>
+
+
+                  </div>
+
+              </div>
+
+          </div>
+      </div>
+      <!--Fin Modal Organizacion -->
+
+      <!-- Modal Agente Sectorial -->
+      <div class="modal fade" id="registroAS" tabindex="-1">
+          <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                  <div class="modal-body">
+                      <main>
+                          <form class="was-validated" method="POST" action="/signup/agente_sectorial" novalidate>
+                              <div  style="color: rgba(0, 0, 0, 0);">AGENTE</div>
+                              <input name="tipoUsuario" style="color: rgba(0, 0, 0, 0);" value="AGENTE" type="hidden">
+                              <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                  <div class="col-md-6">
+                                      <label for="selectSectorTerritorial" class="form-label textoInputs">Sector terriotorial</label>
+                                      <select name="sectorTerritorial" class="form-select form-select-custom" id="selectSectorTerritorial"
+                                              required>
+                                          {{#each sectoresTerritoriales}}
+                                              <option value="{{id}}">{{sector}}</option>
+                                          {{/each}}
+                                      </select>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                      <label for="inputEmail" class="form-label textoInputs">Correo electronico</label>
+                                      <input type="email" name="email" class="form-control" id="inputEmail" placeholder="" value=""
+                                             required>
+                                  </div>
+                              </div>
+                              <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                  <div class="col-md-6">
+                                      <label for="inputContrseñaAS" class="form-label textoInputs">Contraseña</label>
+                                      <div class="input-group mb-6">
+                                          <input type="password" class="form-control " id="inputContrseñaAS"
+                                                 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$"
+                                                 placeholder="" value=""
+                                                 onfocus="mostrarValidaciones(document.getElementById('validaciones13').id);"
+                                                 onblur="ocultarValidaciones(document.getElementById('validaciones13').id);"
+                                                 oninput="setPasswordConfirmValidityAS();" onkeyup="checkPasswordAS(this.value);"
+                                                 required>
+                                          <span class="btn-action-icon" id="togglePassword13"
+                                                onclick="togglePasswordF13();"></span>
+                                          <div id="validaciones13" class="d-none">
+                                          <span class="d-flex align-items-center" id="requisitosAS">&nbsp Debe contener
+                                              al
+                                              menos: </span>
+                                              <li class="d-flex align-items-center" id="lowerAS">Una letra minuscula. &nbsp
+                                              </li>
+                                              <li class="d-flex align-items-center" id="upperAS">Una letra mayuscula. &nbsp
+                                              </li>
+                                              <li class="d-flex align-items-center" id="numberAS">Un numero. &nbsp </li>
+                                              <li class="d-flex align-items-center" id="specialAS">Un caracter especial.
+                                                  &nbsp </li>
+                                              <li class="d-flex align-items-center" id="lengthAS">8 caracteres. &nbsp </li>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <label for="inputConfirmarContrseñaAS" class="form-label textoInputs">Confirmar
+                                          contraseña</label>
+                                      <div class="input-group mb-6">
+                                          <input type="password" name="password" class="form-control " id="inputConfirmarContrseñaAS"
+                                                 pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,32}$"
+                                                 placeholder="" value=""
+                                                 onfocus="mostrarValidaciones(document.getElementById('validaciones23').id);"
+                                                 onblur="ocultarValidaciones(document.getElementById('validaciones23').id);"
+                                                 oninput="setPasswordConfirmValidityAS();" required>
+                                          <span class="btn-action-icon" id="togglePassword23"
+                                                onclick="togglePasswordF23();"></span>
+                                          <div id="validaciones23" class="d-none">
+                                              <li class="d-flex align-items-center" id="contrseñaNoCoincideAS">&nbsp Las
+                                                  contraseñas
+                                                  no
+                                                  coinciden</li>
+                                              <li class="d-flex align-items-center d-none" id="contrseñaCoincideAS">&nbsp
+                                                  Las
+                                                  contraseñas coinciden</li>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
+                                  <button class=" btn-custom " type="submit" id="idRegistrarse">Registrar</button>
+                              </div>
+
+                          </form>
+                      </main>
+
+
+                  </div>
+
+              </div>
+
+          </div>
+      </div>
+      <!--Fin Modal Agente Sectorial -->
 
 
 {{/partial}}

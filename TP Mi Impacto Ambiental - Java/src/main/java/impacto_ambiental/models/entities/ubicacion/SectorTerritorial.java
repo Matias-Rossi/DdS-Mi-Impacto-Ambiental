@@ -9,7 +9,11 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING,
+    name = "tipo")
 public abstract class SectorTerritorial extends EntidadPersistente {
+    @Column
+    String discriminador;
 
     @Column(name = "sector")
     String sector;

@@ -15,9 +15,7 @@ public class Clasificacion extends EntidadPersistente {
     @Column(name = "nombre",unique = true)
     private String nombre;
     public Clasificacion(String nombre){
-
         this.nombre = nombre;
-        EntityManagerHelper.persist(this);
     }
 
 

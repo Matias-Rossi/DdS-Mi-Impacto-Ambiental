@@ -26,5 +26,14 @@ public class MunicipiosYCositas {
         Rol rol = new Rol(TipoUsuario.MIEMBRO);
         RepositorioRoles repo = new RepositorioRoles();
         repo.agregar(rol);
+
+        Rol rol2 = new Rol(TipoUsuario.ORGANIZACION);
+        repo.agregar(rol2);
+
+        Rol rol3 = new Rol(TipoUsuario.AGENTE);
+        repo.agregar(rol3);
+
+        Rol rol4 = new Rol(TipoUsuario.ADMINISTRADOR);
+        repo.agregar(rol4);
     }
 }

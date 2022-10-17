@@ -46,7 +46,9 @@ public class Router {
 
         Spark.path("/signup", () -> {
             Spark.get("", signUpController::pantallaDeSignUp, engine);
-            Spark.post("", signUpController::signUp);
+            Spark.post("/miembro", signUpController::signUpMiembro);
+            Spark.post("/organizacion", signUpController::signUpOrganizacion);
+            Spark.post("/agente_sectorial", signUpController::signUpAgenteSectorial);
         });
 /*
         Spark.path("/perfil", () -> {

@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "provincias")
+@DiscriminatorValue("Provincia")
 public class Provincia extends SectorTerritorial {
 
     @Getter

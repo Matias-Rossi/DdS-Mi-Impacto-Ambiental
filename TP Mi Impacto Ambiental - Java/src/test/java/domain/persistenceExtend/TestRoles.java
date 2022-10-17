@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class TestRoles {
 
     @Test
-            public void testRoles() {
+    public void testRoles() {
         Rol miembro = new Rol(TipoUsuario.MIEMBRO);
         Rol organizacion = new Rol(TipoUsuario.ORGANIZACION);
         Rol agente = new Rol(TipoUsuario.AGENTE);

@@ -16,7 +16,7 @@ public class ValidadorCriterioFrecuente extends ValidadorCriterioDecorator {
     FileInputStream fstream;
     String PATH_A_CONTRASENIAS = null; //TODO: Pasarlo al .properties
     try {
-      PATH_A_CONTRASENIAS = "src/main/resources/10k-most-common.txt";
+      PATH_A_CONTRASENIAS = "10k-most-common.txt";
       fstream = new FileInputStream(PATH_A_CONTRASENIAS);
     } catch (FileNotFoundException e) {
       e.printStackTrace();
@@ -25,6 +25,7 @@ public class ValidadorCriterioFrecuente extends ValidadorCriterioDecorator {
       File f = new File(PATH_A_CONTRASENIAS);
       if(!f.exists()) {
         System.out.println("El archivo no existe");
+        return true; //TODO Sacar!
       } else {
         if(!f.canRead()) {
           System.out.println("El archivo no puede ser leido");
