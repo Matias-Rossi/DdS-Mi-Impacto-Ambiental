@@ -24,13 +24,16 @@ public class OrganizacionController {
     public ModelAndView mostrarPropias(Request request, Response response){
 
 
+        System.out.println("QUIERO MOSTRAR");
 
         Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));
+
+        System.out.println(unMiembro.getId());
 
         List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
 
         List<Area> areas = (List<Area>) solicitudes.stream().map(Solicitud::getArea).toList();
-        List<Organizacion> orgs = areas.stream().map(Area::getOrganizacion).toList();
+
 
 //
 //        List<Organizacion> organizacionesDeMiembro =   unMiembro.getSolicitudes().stream()
@@ -50,10 +53,11 @@ public class OrganizacionController {
 
         List<Area> todasLasAreas = this.repositorioAreas.buscarTodos() ;
 
+        //TODO FILTRAR LAS QUE NO PERTENECEN AL MIEMBRO
 
         return new ModelAndView(new HashMap<String, Object>(){{
                     put("areas",todasLasAreas );
-        }}, "oraganizaciones.hbs");
+        }}, "/organizaciones/vincularse.hbs");
     }
     //Spark.post ("/organiazciones/vincularse/:id", organizacionController::vincularseOrganizacion, engine);
     public Response vincularseOrganizacion(Request request, Response response){
@@ -61,9 +65,7 @@ public class OrganizacionController {
         Integer idArea = Integer.valueOf(request.queryParams("area"));
         Area area = this.repositorioAreas.buscar(idArea);
         //RECUPERO EL MIEMBRO
-        Usuario unUsuario = repositorioUsuarios.buscar(Integer.valueOf(request.session().attribute("id")) );
-        String queryParaBuscarDedeOtroId = "SELECT e FROM " + unUsuario.getClass() + " WHERE id_="+unUsuario.getId();
-        Miembro unMiembro = repositorioMiembros.buscar(queryParaBuscarDedeOtroId);
+        Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));
 
         //LO DAMOS DE ALTA EN AREA Y ACTUALIZAMOS BD
         unMiembro.darseAltaEnOrganizacion(area);

@@ -28,9 +28,9 @@ public class TrayectosController {
   }
 
   //Mostrar todos
-  //Spark.get("", trayectosController::mostrarTodos, engine);
+  //Spark.get("", trayectosController::mostrarPropi, engine);
 
-  public ModelAndView mostrarTodos(Request request, Response response) {
+  public ModelAndView mostrarPropios(Request request, Response response) {
 
     Usuario unUsuario = repositorioUsuarios.buscar(Integer.valueOf(request.session().attribute("id")) );
     String queryParaBuscarDedeOtroId = "SELECT e FROM " + unUsuario.getClass() + " WHERE id_="+unUsuario.getId();

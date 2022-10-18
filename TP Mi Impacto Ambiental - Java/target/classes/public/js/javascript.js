@@ -294,3 +294,9 @@ function mostrarFormulario(id) {
   }
 }
 
+function areaID(id){
+ var form =  document.getElementById("myForm");
+
+ form.action.remove();
+ form.action.add('/organiazciones/vincularse/' + id);
+}

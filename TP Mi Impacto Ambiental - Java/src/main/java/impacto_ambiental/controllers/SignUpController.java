@@ -55,12 +55,14 @@ public class SignUpController {
         if(existeUsuario) {
             response.body("Ya existe el usuario");
             System.out.println("Ya existe el usuario");
+            response.redirect("/signup");
             return response;
         }
         //Validación de contraseña
         if(!validarContrasenia(password)) {
             response.body("Contrasenia invalida");
             System.out.println("Contrasenia invalida");
+            response.redirect("/signup");
             return response;
         }
         Usuario usuario = new Usuario(rol, email, password);
@@ -98,11 +100,13 @@ public class SignUpController {
         Boolean existeUsuario = repositorioUsuarios.existeUsuario(email); //TODO arreglar
         if(existeUsuario) {
             response.body("Ya existe el usuario");
+            response.redirect("/signup");
             return response;
         }
         //Validación de contraseña
         if(!validarContrasenia(password)) {
             response.body("Contrasenia invalida");
+            response.redirect("/signup");
             return response;
         }
         Usuario usuario = new Usuario(rol, email, password);
@@ -139,11 +143,13 @@ public class SignUpController {
         //Comprobación si usuario existe
         if(existeUsuario) {
             response.body("Ya existe el usuario");
+            response.redirect("/signup");
             return response;
         }
         //Validación de contraseña
         if(!validarContrasenia(password)) {
             response.body("Contrasenia invalida");
+            response.redirect("/signup");
             return response;
         }
 

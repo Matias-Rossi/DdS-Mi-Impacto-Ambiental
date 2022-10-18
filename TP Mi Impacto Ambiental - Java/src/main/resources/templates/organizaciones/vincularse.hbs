@@ -18,7 +18,8 @@
     </div>
 {{/partial}}
 
-{{partial contenido}}
+{{#partial "contenido"}}
+
 <div class="d-flex flex-column" id="content-wrap">
     <div class=" d-flex align-self-center conteinerRegistro">
         <main>
@@ -26,17 +27,17 @@
                 <div class="col-md-12">
                     <label class="form-label textoInputs">Organizaciones</label>
                     <br>
-                    <form name="myform" method="POST" action="/organiazciones/vincularse/:id" id="myForm">
+                    <form name="myform" method="POST" action="/organiazciones/vincularse/" id="myForm">
                         <select name="area" class="form-select overflow-auto" id="category_sel" size="1">
                             <option selected disabled value="">-- Seleccionar Area --</option>
-                            {{#each area}}
-                                <option selected  value="{{id}}">{{area}}</option>
+                            {{#each areas}}
+                                <option  value="{{id}}" onclick="areaID({{id}});"> {{ organizacion.razonSocial }} - {{ nombre }} </option>
                                 {{/each}}
                         </select>
                         <br>
                         <br>
                         <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
-                            <button class=" btn-custom" type="submit" id="idVinularme" >Vinularme</button>
+                            <button class=" btn-custom" type="submit" id="idVinularme" >Vincularme</button>
                         </div>
                     </form>
                 </div>

@@ -1,12 +1,26 @@
 package domain.persistenceExtend.repositorios;
 
 import impacto_ambiental.db.EntityManagerHelper;
+import impacto_ambiental.models.entities.perfil.Area;
+import impacto_ambiental.models.entities.perfil.Solicitud;
 import impacto_ambiental.models.entities.usuario.Usuario;
+import impacto_ambiental.models.repositorios.RepositorioSolicitudes;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestRepositorioProvincias {
+
+    @Test
+    public void testaa(){
+        RepositorioSolicitudes repositorioSolicitudes = new RepositorioSolicitudes();
+        List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(1);
+
+        List<Area> areas = (List<Area>) solicitudes.stream().map(Solicitud::getArea).toList();
+    }
+
     @Test
     public void testUsuario(){
         String query = "from " + Usuario.class.getName() + " WHERE usuario = 'admin@gmail.com' AND contrasenia='1234'";

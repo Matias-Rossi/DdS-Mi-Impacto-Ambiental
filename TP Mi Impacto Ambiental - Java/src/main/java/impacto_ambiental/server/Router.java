@@ -47,8 +47,9 @@ public class Router {
             Spark.get("", loginController::pantallaDeLogin, engine);
             Spark.post("", loginController::login);
         });
+
         Spark.path("/logout", () -> {
-            Spark.post("/logout", loginController::logout);
+            Spark.post("", loginController::logout);
 
         });
         Spark.path("/signup", () -> {
@@ -66,28 +67,35 @@ public class Router {
 
 
             Spark.before("", ((request, response) -> {
+                System.out.println("ANTES DEL IF");
+
                 if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.ORGANIZACION))) {
+                    System.out.println("ENTRA DEL IF");
                     response.redirect("/prohibido");
                     Spark.halt();
                 }
+                System.out.println("SALE DEL IF");
             }));
 
             Spark.before("/*", ((request, response) -> {
+                System.out.println("ANTES DEL IF");
                 if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.ORGANIZACION))) {
+                    System.out.println("ENTRA DEL IF");
                     response.redirect("/prohibido");
                     Spark.halt();
                 }
+                System.out.println("SALE DEL IF");
             }));
 
 
             Spark.get("", organizacionController::mostrarPropias, engine);
             Spark.post("/:id/desvincularse", organizacionController::desvincularseOrganizacion);
             Spark.get("/vincularse", organizacionController::pantallaVincularse, engine);
-            Spark.post ("/vincularse/:id", organizacionController::vincularseOrganizacion);
+            Spark.post ("/vincularse", organizacionController::vincularseOrganizacion);
         });
        /* // ### Trayectos ###
         Spark.path("/trayectos", () -> {
-            Spark.get("", trayectosController::mostrarTodos, engine);
+            Spark.get("", trayectosController::mostrarPropios, engine);
             Spark.post ("/:id/add", trayectosController::addTrayecto);
             Spark.post("/:id/delete", trayectosController::deleteTrayecto);
         });
