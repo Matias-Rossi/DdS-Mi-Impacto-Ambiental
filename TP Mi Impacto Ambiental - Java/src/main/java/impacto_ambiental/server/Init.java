@@ -13,6 +13,7 @@ import impacto_ambiental.models.repositorios.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Init {
     static public void main(String[] args) throws IOException {
@@ -169,7 +170,7 @@ public class Init {
                             e.printStackTrace();
                         }
                         return nuevaProvincia;
-            }).toList();
+            }).collect(Collectors.toList());
 
             //Agregar al repositorio
             RepositorioProvincias repositorioProvincias = new RepositorioProvincias();

@@ -11,7 +11,7 @@ public class UsuarioLogueadoHelper {
     public static Usuario usuarioLogueado(Request request) {
         RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
 
-        return repositorioUsuarios.buscar(Integer.valueOf(request.session().attribute("id")) );
+        return repositorioUsuarios.buscar((int)request.session().attribute("id"));
         //return EntityManagerHelper
         //        .getEntityManager()
         //        .find(Usuario.class, request.session().attribute("id"));

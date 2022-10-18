@@ -287,7 +287,7 @@
                                 <select name="paradaSalidaId" class="form-select form-select-custom" id="paradaInicio" required>
                                     <option selected disabled value="">-- Seleccionar parada inicio --</option>
                                     {{#each paradas}}
-                                    <option value="{{id}}">{{parada.linea.tipotransporte.subtipotransporte.subTipo}} - {{parada.linea.nombre}} - {{parada}} </option>
+                                    <option value="{{id}}"> Transporte {{linea.tipotransporte.subtipotransporte.id}} - Linea {{linea.id}} - Parada {{index}} </option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -298,7 +298,7 @@
                         <select name="paradaLlegadaId" class="form-select form-select-custom" id="paradaFin" required>
                             <option selected disabled value="">-- Seleccionar parada fin --</option>
                             {{#each paradas}}
-                                <option value="{{id}}">{{linea.transporte.subTipoTransporte.subTipo}} - {{linea.nombre}} - {{index}} </option>
+                                <option value="{{id}}">Transporte {{linea.transporte.subTipoTransporte.id}} - Linea {{linea.nombre.id}} - Parada {{index}} </option>
                             {{/each}}
                         </select>
                             </div>

@@ -18,7 +18,9 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
             <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
-            <li id="drop1"><a class="drop-item-custom"  href="/logout">Cerrar sesion</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
         </ul>
     </div>
 {{/partial}}
