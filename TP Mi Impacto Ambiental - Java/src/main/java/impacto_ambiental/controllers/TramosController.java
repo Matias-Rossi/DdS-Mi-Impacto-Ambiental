@@ -24,7 +24,7 @@ public class TramosController {
   }
 
   //Mostrar todos
-  public ModelAndView mostrarTodos(Request request, Response response) {
+  public ModelAndView mostrarPropios(Request request, Response response) {
     String idTrayecto = request.params("idTrayecto");
     List<Tramo> tramosBuscados = repTramos.listarTramosDeTrayecto(Integer.valueOf(idTrayecto));
 

@@ -1,13 +1,12 @@
 package impacto_ambiental.controllers;
 
+import impacto_ambiental.models.entities.perfil.Area;
 import impacto_ambiental.models.entities.perfil.Miembro;
 import impacto_ambiental.models.entities.perfil.Organizacion;
+import impacto_ambiental.models.entities.perfil.Solicitud;
 import impacto_ambiental.models.entities.trayecto.Trayecto;
 import impacto_ambiental.models.entities.usuario.Usuario;
-import impacto_ambiental.models.repositorios.RepositorioMiembros;
-import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
-import impacto_ambiental.models.repositorios.RepositorioTrayectos;
-import impacto_ambiental.models.repositorios.RepositorioUsuarios;
+import impacto_ambiental.models.repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -22,26 +21,30 @@ public class TrayectosController {
   private RepositorioTrayectos repositorio = new RepositorioTrayectos();
   private RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
   private RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
+  private RepositorioAreas repositorioAreas = new RepositorioAreas();
+  private RepositorioSolicitudes repositorioSolicitudes =  new RepositorioSolicitudes();
 
   public TrayectosController() {
 
   }
 
   //Mostrar todos
-  //Spark.get("", trayectosController::mostrarPropi, engine);
+  //Spark.get("", trayectosController::mostrarPropios, engine);
 
   public ModelAndView mostrarPropios(Request request, Response response) {
 
-    Usuario unUsuario = repositorioUsuarios.buscar(Integer.valueOf(request.session().attribute("id")) );
-    String queryParaBuscarDedeOtroId = "SELECT e FROM " + unUsuario.getClass() + " WHERE id_="+unUsuario.getId();
-    Miembro unMiembro = repositorioMiembros.buscar(queryParaBuscarDedeOtroId);
+    Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));
+    List<Trayecto> trayectos = unMiembro.getTrayectos();
 
+    List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
 
-    List<Trayecto> trayectosDelMiembro = unMiembro.getTrayectos();
+    List<Area> areas = solicitudes.stream().map(solicitud -> solicitud.getArea()).collect(Collectors.toList());
+
 
     return new ModelAndView(new HashMap<String, Object>(){{
-      put("trayectos", trayectosDelMiembro); //TODO Agregar el key
-    }}, "trayecto/Trayectos.hbs"); //TODO Implementar este .hbs, ya existe el .html
+      put("trayectos", trayectos);
+      put("areas", areas);
+    }}, "trayectos/Trayectos.hbs"); //TODO Implementar este .hbs, ya existe el .html
   }
 
   //Spark.post ("/:id/add", trayectosController::addTrayecto);
@@ -51,6 +54,7 @@ public class TrayectosController {
     String idTrayecto = request.params("idTrayecto");
 
     Trayecto trayectoBuscado = repositorio.buscar(idTrayecto);
+
 
     return new ModelAndView(new HashMap<String, Object>(){{
       put("trayecto", trayectoBuscado); //TODO Agregar el key
@@ -86,15 +90,23 @@ public class TrayectosController {
 
   //Instanciación y creación del nuevo trayecto
   public Response guardar(Request request, Response response) {
+    RepositorioTrayectos repositorioTrayectos = new RepositorioTrayectos();
+
+
     Trayecto trayecto = new Trayecto();
     this.asignarParametros(trayecto, request);
-    this.repositorio.agregar(trayecto);
+
+    repositorioTrayectos.agregar(trayecto);
+
     response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
     return response;
   }
 
   private void asignarParametros(Trayecto trayecto, Request request) {
-    //TODO ¿Los tramos se tratan directamente desde TramosController?
+    //TODO ¿Los tramos se tratan directamente desde TramosController? zi
+    Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));
+    trayecto.setMiembro(unMiembro);
+
     if(request.queryParams("anio") != null) {
       trayecto.setAnio(Integer.valueOf(request.queryParams("anio")));
     }
@@ -109,10 +121,11 @@ public class TrayectosController {
     }
     if(request.queryParams("organizaciones") != null) { //Formato: ?organizaciones=<id1>,<id2>,...
       RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
-
       List<String> idOrganizaciones = Arrays.asList(request.queryParams("organizaciones").split("\\s*,\\s*")); //IDs de organizaciones separados por comas
-      List<Organizacion> organizaciones = idOrganizaciones.stream().map(repositorioOrganizaciones::buscar).collect(Collectors.toList());
-      //trayecto.setOrganizaciones(organizaciones);
+      List<Organizacion> organizaciones = idOrganizaciones.stream().map((_idOrg)->{
+        return repositorioOrganizaciones.buscar(Integer.valueOf(_idOrg));
+      }).collect(Collectors.toList());
+      trayecto.setOrganizaciones(organizaciones);
     }
   }
 }

@@ -13,6 +13,7 @@ import spark.Spark;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrganizacionController {
     private RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
@@ -32,7 +33,7 @@ public class OrganizacionController {
 
         List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(unMiembro.getId());
 
-        List<Area> areas = (List<Area>) solicitudes.stream().map(Solicitud::getArea).toList();
+        List<Area> areas = solicitudes.stream().map(solicitud -> solicitud.getArea()).collect(Collectors.toList());
 
 
 //
@@ -42,8 +43,8 @@ public class OrganizacionController {
 
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("areas",areas );
-        }}, "/organizaciones/organizaciones.hbs"); //TODO Implementar este .hbs, ya existe el .html
+            put("solicitudes",solicitudes );
+        }}, "/organizaciones/organizaciones.hbs");
 
     }
 
@@ -69,9 +70,9 @@ public class OrganizacionController {
 
         //LO DAMOS DE ALTA EN AREA Y ACTUALIZAMOS BD
         unMiembro.darseAltaEnOrganizacion(area);
-        repositorioMiembros.actualizar(unMiembro);
+       repositorioMiembros.actualizar(unMiembro);
 
-        response.redirect("/organiazciones");
+        response.redirect("/organizaciones");
         return response;
     }
 
@@ -79,17 +80,19 @@ public class OrganizacionController {
     //Spark.post("/organiazciones/:id/desvincularse", organizacionController::desvincularse, engine);
     public Response desvincularseOrganizacion(Request request, Response response){
         //RECUPERO EL AREA
-        Integer idArea = Integer.valueOf(request.queryParams("area"));
-        Area area = this.repositorioAreas.buscar(idArea);
+        Integer idSolicitud = Integer.valueOf(request.queryParams("solicitud"));
+        //Area area = this.repositorioAreas.buscar(idArea);
+        Solicitud solicitud = this.repositorioSolicitudes.buscar(idSolicitud);
         //RECUPERO EL MIEMBRO
-        Usuario unUsuario = repositorioUsuarios.buscar(Integer.valueOf(request.session().attribute("id")) );
-        String queryParaBuscarDedeOtroId = "SELECT e FROM " + unUsuario.getClass() + " WHERE id_="+unUsuario.getId();
-        Miembro unMiembro = repositorioMiembros.buscar(queryParaBuscarDedeOtroId);
+        //Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));
 
         //LO DESVINCULAMES
-        area.desvincularMiembro(unMiembro);
+        solicitud.setEstado(SolicitudEstado.DESVINCULADO);
 
-        response.redirect("/organiazciones");
+        repositorioSolicitudes.actualizar(solicitud);
+        //area.desvincularMiembro(unMiembro);
+
+        response.redirect("/organizaciones");
         return response;
     }
 

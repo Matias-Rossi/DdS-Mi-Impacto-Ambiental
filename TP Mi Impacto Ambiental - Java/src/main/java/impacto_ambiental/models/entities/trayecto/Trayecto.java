@@ -21,7 +21,7 @@ public class Trayecto extends EntidadPersistente {
 
     @Column(name = "hc")
     private double hc;
-    @ManyToOne()
+    @ManyToOne() @Setter
     @JoinColumn(name = "miembro_id", referencedColumnName = "id")
     private Miembro miembro;
 
@@ -31,8 +31,8 @@ public class Trayecto extends EntidadPersistente {
     private Integer semestre;
     @Column(name = "diasAlMes") @Setter
     private  Integer diasAlMes;
-    @Column(name = "descripcion") @Setter
-    private String descripcion;
+    @Column(name = "descripcion") @Setter @Getter
+    public String descripcion;
 //    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 //    @Setter
 //    @JoinTable(name = "trayectos_organizaciones",
@@ -83,6 +83,10 @@ public class Trayecto extends EntidadPersistente {
         this.descripcion = descripcion;
         this.organizacionesxtrayectos = organizaciones.stream().map(e->new TrayectosPorOrganizaciones(e,this)).collect(Collectors.toList());
         this.diasAlMes = diasAlMes;
+    }
+
+    public void setOrganizaciones(List<Organizacion> orgs){
+        this.organizacionesxtrayectos = orgs.stream().map(e->new TrayectosPorOrganizaciones(e,this)).collect(Collectors.toList());
     }
 
     public Tramo aniadirNuevoTramo(Ubicacion salida, Ubicacion llegada, Transporte transporte){

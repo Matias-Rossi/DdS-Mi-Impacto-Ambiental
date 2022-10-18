@@ -89,27 +89,27 @@ public class Router {
 
 
             Spark.get("", organizacionController::mostrarPropias, engine);
-            Spark.post("/:id/desvincularse", organizacionController::desvincularseOrganizacion);
+            Spark.post("/desvincularse/", organizacionController::desvincularseOrganizacion);
             Spark.get("/vincularse", organizacionController::pantallaVincularse, engine);
-            Spark.post ("/vincularse", organizacionController::vincularseOrganizacion);
+            Spark.post ("/vincularse/", organizacionController::vincularseOrganizacion);
         });
-       /* // ### Trayectos ###
+       // ### Trayectos ###
         Spark.path("/trayectos", () -> {
             Spark.get("", trayectosController::mostrarPropios, engine);
-            Spark.post ("/:id/add", trayectosController::addTrayecto);
-            Spark.post("/:id/delete", trayectosController::deleteTrayecto);
+            Spark.post ("/", trayectosController::guardar);
+            // Spark.post("/:id/delete", trayectosController::deleteTrayecto);
         });
         // ### Tramos ###
 
         Spark.path("/trayectos/:id/tramos", () -> {
-            Spark.get("", tramosController::mostrarTodos, engine);
-            Spark.get("/new", tramosController::pantallaNewTramo, engine);
-            Spark.post("/new", tramosController::newTramo);
-            Spark.get("/:id", tramosController::mostrar, engine);
-            Spark.get("/:id/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
+            Spark.get("", tramosController::mostrarPropios, engine);
+            //Spark.get("/new", tramosController::pantallaNewTramo, engine);
+            //Spark.post("/new", tramosController::newTramo);
+            //Spark.get("/:id", tramosController::mostrar, engine);
+            //Spark.get("/:id/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
             Spark.post("/:id/edit", tramosController::modificar);       //lo que realmente lo edita
         });
-/*
+
 /*
 
         Spark.path("/perfil", () -> {

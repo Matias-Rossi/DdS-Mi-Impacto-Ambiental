@@ -35,7 +35,7 @@ public class Solicitud extends EntidadPersistente {
     public SolicitudEstado getEstado() {
         return estado;
     }
-    void setEstado(SolicitudEstado estado) {
+    public void setEstado(SolicitudEstado estado) {
         this.estado = estado;
     }
 

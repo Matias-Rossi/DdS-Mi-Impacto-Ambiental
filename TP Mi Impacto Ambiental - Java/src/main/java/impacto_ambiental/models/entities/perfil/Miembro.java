@@ -114,6 +114,11 @@ public class Miembro extends EntidadPersistente {
         return nuevoTrayecto;
     }
 
+    public Trayecto agregarTrayecto(Trayecto nuevoTrayecto) {
+        trayectos.add(nuevoTrayecto);
+        return nuevoTrayecto;
+    }
+
     public void agregarHC(HChistorico hc){
         hcsHistoricos.add(hc);
     }

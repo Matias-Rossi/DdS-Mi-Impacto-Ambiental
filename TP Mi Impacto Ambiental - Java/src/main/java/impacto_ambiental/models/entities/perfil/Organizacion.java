@@ -23,16 +23,18 @@ public class Organizacion extends EntidadPersistente {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     Usuario usuario;
 
-    @Transient
+    @OneToMany(mappedBy="organizacion",cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     List<HChistorico> HChistoricos = new ArrayList<HChistorico>();
 
     @Getter
     @ManyToOne
     @JoinColumn(name = "municipio_id", referencedColumnName = "id")
     private MunicipiosODepartamentos municipioODepartamento;
+
     @Getter
     @OneToMany(mappedBy = "organizacion",cascade = javax.persistence.CascadeType.ALL,fetch = javax.persistence.FetchType.LAZY)
     public List<ActividadBase> actividadesCargadas= new ArrayList<ActividadBase>();
+
     @Getter
     @Column(name = "razon_social",unique = true)
     private String razonSocial;
@@ -46,9 +48,11 @@ public class Organizacion extends EntidadPersistente {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "clasificaciones_id", referencedColumnName = "id")
     private Clasificacion clasificacion;
+
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     private Ubicacion ubicacion;
+
     @Transient
     private Importador moduloImportador;
 
