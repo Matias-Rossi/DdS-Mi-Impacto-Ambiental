@@ -286,7 +286,7 @@
                                 <label for="paradaInicio" class="form-label textoInputs">Parada inicio</label>
                                 <select name="paradaSalidaId" class="form-select form-select-custom" id="paradaInicio" required>
                                     <option selected disabled value="">-- Seleccionar parada inicio --</option>
-                                    {{#each paradaSalidaId}}
+                                    {{#each paradas}}
                                     <option value="{{id}}">{{parada.linea.tipotransporte.subtipotransporte.subTipo}} - {{parada.linea.nombre}} - {{parada}} </option>
                                     {{/each}}
                                 </select>
