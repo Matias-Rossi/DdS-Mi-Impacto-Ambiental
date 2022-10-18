@@ -9,10 +9,12 @@ import javax.persistence.*;
 @Table(name = "solicitudes")
 public class Solicitud extends EntidadPersistente {
 
+    @Getter
     @Enumerated(EnumType.STRING)
     @Column(name = "estado")
     private SolicitudEstado estado;
 
+    @Getter
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "miembro_id", referencedColumnName = "id")
     private Miembro miembro;

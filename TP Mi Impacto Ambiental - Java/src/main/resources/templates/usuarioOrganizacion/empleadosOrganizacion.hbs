@@ -1,0 +1,64 @@
+{{#partial "contenidoNav" }}
+    <a href="/organizacion/areas" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Areas
+    </a >
+
+    <a href="/organizacion/empleados" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Empleados
+    </a >
+    <a href="/organizacion/calcularHC" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Calculadora HC
+    </a >
+    <a href="/organizacion/cargaDeReportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Carga de Reportes
+    </a >
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <li id="drop1"><a class="drop-item-custom"  href="/logout">Cerrar sesion</a></li>
+        </ul>
+    </div>
+{{/partial}}
+
+{{#partial "contenido" }}
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <ul class="list-group" id="boxTrayectos">
+
+                        <li class="list-group-item d-flex justify-content-between align-items-start align-middle texto" >
+                            <div class="ms-2 me-auto">
+                                <a  class="listStyle" href="/organizacion/empleados/actuales" >Empleados Actuales: {{ cantEmpleados }} </a>
+                            </div>
+
+
+
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start align-middle texto" >
+                            <div class="ms-2 me-auto">
+                                <a  class="listStyle" href="/organizacion/empleados/pendientes" >Solicitudes Pendientes: {{ cantPendientes }} </a>
+                            </div>
+
+
+
+                        </li>
+
+
+
+                    </ul>
+
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-custom" href="/organizacion/areas" style="margin-top:20px ;">Volver</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+{{/partial}}
+{{> base.hbs }}

@@ -16,6 +16,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+//TODO Varios arreglos pendientes
 
 public final class ApachePOI implements Importador {
   static DataFormatter formatter = new DataFormatter();
@@ -126,6 +127,7 @@ public final class ApachePOI implements Importador {
         }else
           actividadCargada = new ActividadBase(valorTipoActividad, valorTipoConsumo, anio, mes, valor);
 
+        actividadCargada.setOrganizacion(organizacion);
 
         listaDeCargas.add(actividadCargada);
 

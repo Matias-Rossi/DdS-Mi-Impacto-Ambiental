@@ -29,8 +29,11 @@ public class Miembro extends EntidadPersistente {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
 
+    @Getter
     @Column(name = "nombre")
     private String nombre;
+
+    @Getter
     @Column(name = "apellido")
     private String apellido;
     @Enumerated(EnumType.STRING)

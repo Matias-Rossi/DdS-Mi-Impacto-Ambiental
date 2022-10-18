@@ -1,0 +1,25 @@
+{{#partial "contenidoNav" }}
+    <a href="organizacion/areas" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Areas
+    </a >
+
+    <a href="organizacion/empleados" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Empleados
+    </a >
+    <a href="organizacion/calcularHC" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Calculadora HC
+    </a >
+    <a href="organizacion/cargaDeReportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Carga de Reportes
+    </a >
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <li id="drop1"><a class="drop-item-custom"  href="/logout">Cerrar sesion</a></li>
+        </ul>
+    </div>
+{{/partial}}
+{{> homeBase.hbs }}

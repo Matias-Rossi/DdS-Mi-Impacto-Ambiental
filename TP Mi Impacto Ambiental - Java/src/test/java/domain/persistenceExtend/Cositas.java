@@ -12,25 +12,6 @@ import impacto_ambiental.models.repositorios.*;
 import org.junit.jupiter.api.Test;
 
 public class Cositas {
-
-    @Test
-    public void unaProbinciaBSASYMunicipio(){
-        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
-
-        Provincia BuenosAiresTest = new Provincia(NombreProvincia.BUENOS_AIRES);
-        MunicipiosODepartamentos BragadoTest = BuenosAiresTest.crearMunicipio("Bragado");
-        
-        Ubicacion ubicacionTest = new Ubicacion(
-                BragadoTest,
-                "Bragado",
-                "C1234",
-                "calle falsa",
-                123
-        );
-        repositorioProvincias.agregar(BuenosAiresTest);
-    }
-
-
     @Test
     public void miembroConOrganizacionesYAreas() {
         RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
@@ -59,11 +40,16 @@ public class Cositas {
         Organizacion organizacionPrueba = new Organizacion(null,ubicacionTest,"PRUEBAORG",Tipo.EMPRESA,clasificacion1,unUsuario);
         //Organizacion organizacionPrueba2 = repositorioOrganizaciones.buscar(2);
 
-        Miembro miembro = new Miembro("prueba","prueba",TipoDocumento.DNI,"38455",ubicacionTest,"qwe@123","qwe",unUsuarioMIEMBRO    );
+        Miembro miembro = new Miembro("Ricardo","Fort",TipoDocumento.DNI,"38455",ubicacionTest,"qwe@123","qwe",unUsuarioMIEMBRO);
+
+        Usuario unUsuario2 = new Usuario(rolMiem,"qwe@234","prueba@456");
+        Miembro miembro2 = new Miembro("Tom","Soiffer",TipoDocumento.DNI,"3845455",ubicacionTest,"qwe@234","qwe",unUsuario2);
+
 
         Area area1 = organizacionPrueba.darAltaArea("RRHH");
         //Area area2 = organizacionPrueba2.darAltaArea("RRHH");
         Solicitud solicitudAArea1 = miembro.darseAltaEnOrganizacion(area1);
+        Solicitud solicitud = miembro2.darseAltaEnOrganizacion(area1);
         //Solicitud solicitudAArea2 = miembro.darseAltaEnOrganizacion(area2);
         area1.gestionarMiembrosPendientes(solicitudAArea1,SolicitudEstado.ACEPTADA);
         //area2.gestionarMiembrosPendientes(solicitudAArea2,SolicitudEstado.ACEPTADA);

@@ -5,6 +5,7 @@ import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
 import impacto_ambiental.models.entities.ubicacion.SectorTerritorial;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
+import lombok.Getter;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,7 +14,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 @Table(name = "usuarios")
 public class Usuario extends EntidadPersistente {
 
-    @ManyToOne
+    @ManyToOne @Getter
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     private Rol rol;
     @Column(name = "usuario")

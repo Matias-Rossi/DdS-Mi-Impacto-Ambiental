@@ -2,6 +2,7 @@ package impacto_ambiental.server;
 
 import impacto_ambiental.controllers.*;
 import impacto_ambiental.controllers.helpers.PermisoHelper;
+import impacto_ambiental.controllers.helpers.UsuarioLogueadoHelper;
 import impacto_ambiental.models.entities.usuario.Accion;
 import impacto_ambiental.models.entities.usuario.Alcance;
 import impacto_ambiental.models.entities.usuario.Objeto;
@@ -36,6 +37,11 @@ public class Router {
         LoginController loginController = new LoginController();
         HomeController homeController = new HomeController();
         OrganizacionController organizacionController = new OrganizacionController();
+        HomeOrganizacionController homeOrganizacionController = new HomeOrganizacionController();
+        AreasOrganizacionController areasOrganizacionController = new AreasOrganizacionController();
+        GestorAreaController gestorAreaController = new GestorAreaController();
+        EmpleadosController empleadosController = new EmpleadosController();
+        CargaReportesController cargaReportesController = new CargaReportesController();
        // Spark.staticFiles.location("/public");
 
         // ### Miembro ###
@@ -113,6 +119,33 @@ public class Router {
             //Spark.get("/:idTramo/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
             Spark.post("/:id/edit", tramosController::modificar);       //lo que realmente lo edita
         });
+
+        Spark.path("/organizacion", () -> {
+             Spark.get("", homeOrganizacionController::pantallaDeHome, engine);
+        });
+
+        Spark.path("/organizacion/areas", () -> {
+            Spark.get("", areasOrganizacionController::mostrarPropias, engine);
+            Spark.get("/:id", gestorAreaController::mostrar, engine);
+            Spark.post("", areasOrganizacionController::guardar);
+            Spark.post("/:id/delete", areasOrganizacionController::borrar);
+        });
+
+        Spark.path("/organizacion/empleados", () -> {
+            Spark.get("", empleadosController::elegirPantalla, engine);
+           Spark.get("/actuales", empleadosController::mostrarEmpleadosActuales, engine);
+           Spark.get("/pendientes", empleadosController::mostrarEmpleadosPendientes, engine);
+            //TODO si, seguramente haya q cambiarlos a los siguientes
+           Spark.post("/aceptar", empleadosController::aceptarEmpleado);
+           Spark.post("/rechazar", empleadosController::rechazarEmpleado);
+        });
+
+        Spark.path("/organizacion/cargaDeReportes", () -> {
+            Spark.get("", cargaReportesController::mostrarVista, engine);
+            Spark.post("", "multipart/form-data", cargaReportesController::cargar);
+            Spark.get("/mostrarInfo", cargaReportesController::mostrarResultados, engine);
+        });
+
 
 /*
 

@@ -26,6 +26,7 @@ public class Area extends EntidadPersistente {
     @Transient
     private List<Miembro> miembrosPendientes = new ArrayList<>();
 */
+    @Getter
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "area")
     private  List<Solicitud> solicitudes = new ArrayList<>();
 

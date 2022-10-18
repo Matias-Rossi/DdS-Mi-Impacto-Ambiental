@@ -8,6 +8,7 @@ import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
 import impacto_ambiental.models.entities.usuario.Usuario;
+import lombok.Setter;
 import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Table(name = "organizaciones")
 public class Organizacion extends EntidadPersistente {
 
-    @OneToOne(cascade = javax.persistence.CascadeType.ALL)
+    @OneToOne(cascade = javax.persistence.CascadeType.ALL) @Getter
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     Usuario usuario;
 
@@ -42,6 +43,7 @@ public class Organizacion extends EntidadPersistente {
     @Column(name = "tipo")
     private Tipo tipo;
 
+    @Getter
     @OneToMany(mappedBy = "organizacion", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Area> areas= new ArrayList<Area>();
 
@@ -53,6 +55,7 @@ public class Organizacion extends EntidadPersistente {
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     private Ubicacion ubicacion;
 
+    @Setter
     @Transient
     private Importador moduloImportador;
 

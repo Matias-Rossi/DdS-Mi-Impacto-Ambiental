@@ -17,7 +17,7 @@ import java.util.Set;
 public class Rol extends EntidadPersistente {
 
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) @Getter
     @Column(name = "tipo")
     private TipoUsuario tipo;
 

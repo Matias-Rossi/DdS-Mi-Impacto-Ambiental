@@ -26,19 +26,25 @@ public class ActividadBase extends EntidadPersistente {
   private double pesoTotalTransportado;
   @Embedded
   private VaraianzaLogistica varianzaDistanciaYPeso;
-  @ManyToOne
+  @ManyToOne @Setter
   @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
   private Organizacion organizacion;
   @Enumerated(EnumType.STRING)
   @Column(name = "tipo_actividad")
+  @Getter
   private TipoActividadDA tipoActividadDA;
   @Enumerated(EnumType.STRING)
   @Column(name = "tipo_consumo")
+  @Getter
   private TipoConsumoDA consumo;
   @Column(name = "valor_da")
   private double valorDA;
+
+  @Getter
   @Column(name = "anio")
   private Integer anio;
+
+  @Getter
   @Column(name = "mes")
   private Integer mes;
 

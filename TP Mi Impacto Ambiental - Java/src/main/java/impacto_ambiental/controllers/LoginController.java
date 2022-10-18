@@ -24,6 +24,12 @@ public class LoginController {
             if(usuario != null) {
                 request.session(true);
                 request.session().attribute("id", usuario.getId());
+                switch(usuario.getRol().getTipoUsuario()) {
+                    case AGENTE -> response.redirect("/"); //TODO
+                    case MIEMBRO -> response.redirect("/home");
+                    case ORGANIZACION -> response.redirect("/organizacion");
+                    case ADMINISTRADOR -> response.redirect("/a"); //TODO
+                }
                 response.redirect("/home");
             }
             else {
