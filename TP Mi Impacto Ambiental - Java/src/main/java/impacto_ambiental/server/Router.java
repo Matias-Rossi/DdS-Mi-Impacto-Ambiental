@@ -101,12 +101,16 @@ public class Router {
         });
         // ### Tramos ###
 
-        Spark.path("/trayectos/:id/tramos", () -> {
+        Spark.path("/trayectos/:idTrayecto/tramos", () -> {
             Spark.get("", tramosController::mostrarPropios, engine);
-            //Spark.get("/new", tramosController::pantallaNewTramo, engine);
-            //Spark.post("/new", tramosController::newTramo);
-            //Spark.get("/:id", tramosController::mostrar, engine);
-            //Spark.get("/:id/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
+            Spark.get("/new", tramosController::pantallaNewTramo, engine);
+            Spark.post("/new/particular", tramosController::cargarParticular);
+            Spark.post("/new/transporte-contratado", tramosController::cargarContratado);
+            Spark.post("/new/transporte-publico", tramosController::cargarPublico);
+            Spark.post("/new/bicicleta-o-similares", tramosController::cargarbicicleta);
+            Spark.post("/new/a-pie", tramosController::cargarpie);
+            //Spark.get("/:idTramo", tramosController::mostrar, engine);
+            //Spark.get("/:idTramo/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
             Spark.post("/:id/edit", tramosController::modificar);       //lo que realmente lo edita
         });
 

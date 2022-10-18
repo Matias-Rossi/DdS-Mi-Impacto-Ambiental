@@ -43,7 +43,7 @@ public class Tramo implements ActividadesEmisorasCO2 {
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
-        this.distancia = transporte.calcularDistancia(partida, llegada); ;
+        //this.distancia = transporte.calcularDistancia(partida, llegada); ;
         this.diasAlMes = diasAlMes;
     }
 

@@ -18,15 +18,16 @@ public class RepositorioTramos extends Repositorio<Tramo> {
     super(Tramo.class);
   }
 
-  public List<Tramo> listarTramosDeTrayecto(Integer idTrayecto) {
-    CriteriaBuilder criteriaBuilder = criteriaBuilder();
-
+  public List<Tramo> listarTramosDeTrayecto(Integer idTrayecto) {/*
     EntityManager em = EntityManagerHelper.getEntityManager();
-    Query query = em.createQuery("SELECT tram FROM Trayecto tray JOIN tray.tramo_id i WHERE i.trayecto_id=?1", Tramo.class);
-    query.setParameter(1, idTrayecto);
-    //TODO Probar si funciona
-
-    //Ejecución de la búsqueda
-    return query.getResultList();
+    CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+    CriteriaQuery<Tramo> query = criteriaBuilder.createQuery(Tramo.class);
+    Root<Tramo> raiz = query.from(Tramo.class);
+    Join<Tramo, Trayecto> join = raiz.join("trayectos");
+    Predicate predicado = criteriaBuilder.equal(join.get("id"), idTrayecto);
+    query.where(predicado);
+    BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
+    return (List<Tramo>) buscarLista(busqueda);*/
+    return null;
   }
 }

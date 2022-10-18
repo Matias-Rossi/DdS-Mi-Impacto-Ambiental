@@ -8,13 +8,14 @@ import javax.persistence.*;
 @Entity
 @DiscriminatorValue("TransportePublico")
 public class TransportePublico extends Transporte {
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "linea_id", referencedColumnName = "id")
     private Linea linea;
 
     public TransportePublico(SubTipoTransporte subTipoTransporte, Linea linea, CalculadorDeDistancia calculadorAdapter,double consumoXKm){
         super(consumoXKm,calculadorAdapter,subTipoTransporte);
         this.linea = linea;
+        linea.agregarTransporte(this);
     }
 
     public TransportePublico() {

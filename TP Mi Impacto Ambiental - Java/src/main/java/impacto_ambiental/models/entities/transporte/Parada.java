@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "paradas")
 public class Parada extends EntidadPersistente {
+    @Getter
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "linea_id", referencedColumnName = "id")
     private Linea linea;
@@ -30,6 +31,7 @@ public class Parada extends EntidadPersistente {
         this.index = index;
         this.distanciaASiguiente = distanciaASiguiente;
         this.linea = linea;
+        this.linea.agregarParada(this);
     }
 
     public Parada() {

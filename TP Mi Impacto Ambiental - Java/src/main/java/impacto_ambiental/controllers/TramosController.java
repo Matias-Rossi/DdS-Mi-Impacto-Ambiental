@@ -1,12 +1,13 @@
 package impacto_ambiental.controllers;
 
 import impacto_ambiental.models.entities.perfil.Organizacion;
+import impacto_ambiental.models.entities.perfil.Tipo;
+import impacto_ambiental.models.entities.transporte.*;
 import impacto_ambiental.models.entities.trayecto.Tramo;
 import impacto_ambiental.models.entities.trayecto.Trayecto;
+import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
-import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
-import impacto_ambiental.models.repositorios.RepositorioTramos;
-import impacto_ambiental.models.repositorios.RepositorioTrayectos;
+import impacto_ambiental.models.repositorios.*;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -25,12 +26,21 @@ public class TramosController {
 
   //Mostrar todos
   public ModelAndView mostrarPropios(Request request, Response response) {
+
+
+    RepositorioTrayectos repositorioTrayectos = new RepositorioTrayectos();
+
+
     String idTrayecto = request.params("idTrayecto");
-    List<Tramo> tramosBuscados = repTramos.listarTramosDeTrayecto(Integer.valueOf(idTrayecto));
+
+    List<Tramo> tramosBuscados = repositorioTrayectos.buscar(Integer.valueOf(idTrayecto)).getTramos();
+
+
 
     return new ModelAndView(new HashMap<String, Object>(){{
-      put("", tramosBuscados); //TODO Agregar la key
-    }}, ".hbs"); //TODO Implementar .hbs
+      put("idTrayecto",idTrayecto);
+      put("tramos", tramosBuscados); //TODO Agregar la key
+    }}, "/trayectos/tramos/tramos.hbs"); //TODO Implementar .hbs
   }
 
 
@@ -42,6 +52,32 @@ public class TramosController {
     return new ModelAndView(new HashMap<String, Object>(){{
       put("", tramoBuscado); //TODO Agregar el key
     }}, ".hbs"); //TODO Implementar .hbs
+  }
+
+  public ModelAndView pantallaNewTramo(Request request, Response response) {
+
+    RepositorioSubTipoTransportes repositorioSubTipoTransportes = new RepositorioSubTipoTransportes();
+    RepositorioParadas repositorioParadas = new RepositorioParadas();
+    RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new RepositorioMunicipiosODepartamentos();
+
+    List<SubTipoTransporte> subtipos = repositorioSubTipoTransportes.buscarTodos();
+    System.out.println("despues  del id subtipos");
+
+
+    List<MunicipiosODepartamentos> municipiosODepartamentosBuscados = repositorioMunicipiosODepartamentos.buscarTodos();
+    List<SubTipoTransporte> particulares = subtipos.stream().filter(a->a.getTipo().equals(TipoTransporte.TIPO_PARTICULAR)).collect(Collectors.toList());
+    List<SubTipoTransporte> contratados = subtipos.stream().filter(a->a.getTipo().equals(TipoTransporte.TIPO_CONTRATADO)).collect(Collectors.toList());
+    List<SubTipoTransporte> publicos = subtipos.stream().filter(a->a.getTipo().equals(TipoTransporte.TIPO_PUBLICO)).collect(Collectors.toList());
+    List<Parada> paradas = repositorioParadas.buscarTodos();
+
+
+    return new ModelAndView(new HashMap<String, Object>(){{
+      put("idTrayecto",request.params("idTrayecto"));
+      put("municipiosODepartamentos", municipiosODepartamentosBuscados);
+      put("particulares",particulares);
+      put("contratados",contratados);
+      put("paradas",paradas);
+    }}, "/trayectos/tramos/tramoNew.hbs"); //TODO Implementar .hbs
   }
 
   public ModelAndView vistaEditar(Request request, Response response) {
@@ -87,8 +123,163 @@ public class TramosController {
     //trayectoAModificar.aniadirNuevoTramo(salida, llegada, transporte);
 
     repTrayectos.actualizar(trayectoAModificar);
-    response.redirect("/tramos"); //TODO Revisar si la url de redirección es correcta
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
     return response;
+  }
+
+  public Response cargarParticular(Request request, Response response) {
+
+    String imprimir = request.params("idSubTipo");
+    System.out.println(imprimir);
+
+    RepositorioSubTipoTransportes repositorioSubTipoTransporte = new RepositorioSubTipoTransportes();
+    RepositorioTransportes repositorioTransportes = new RepositorioTransportes();
+    RepositorioTrayectos repTrayectos = new RepositorioTrayectos();
+
+
+    Integer subtipo =Integer.valueOf(imprimir);
+    TipoCombustible combustible =TipoCombustible.valueOf(request.params("tipoCombustible"));
+
+    System.out.println(subtipo);
+    System.out.println(combustible);
+
+    Transporte transporte = repositorioTransportes.encontrar(subtipo,combustible);
+
+    System.out.println("2");
+
+    Ubicacion salida = this.obtenerSalidaUbicacion(request);
+    Ubicacion llegada = this.obtenerLlegadaUbicacion(request);
+
+    System.out.println("1");
+
+    String idTrayecto = request.params("idTrayecto");
+    Trayecto trayectoAModificar = repTrayectos.buscar(Integer.valueOf(idTrayecto));
+
+    trayectoAModificar.aniadirNuevoTramo(salida,llegada,transporte);
+
+    repTrayectos.actualizar(trayectoAModificar);
+
+
+
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
+
+  public Response cargarContratado(Request request, Response response) {
+
+    RepositorioSubTipoTransportes repositorioSubTipoTransporte = new RepositorioSubTipoTransportes();
+    RepositorioTransportes repositorioTransportes = new RepositorioTransportes();
+    RepositorioTrayectos repTrayectos = new RepositorioTrayectos();
+
+    Transporte transporte = repositorioTransportes.encontrar(Integer.valueOf(request.params("idSubTipo")));
+    Ubicacion salida = this.obtenerSalidaUbicacion(request);
+    Ubicacion llegada = this.obtenerLlegadaUbicacion(request);
+
+
+    String idTrayecto = request.params("idTrayecto");
+    Trayecto trayectoAModificar = repTrayectos.buscar(Integer.valueOf(idTrayecto));
+    trayectoAModificar.aniadirNuevoTramo(salida,llegada,transporte);
+    repTrayectos.actualizar(trayectoAModificar);
+
+
+
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
+
+  public Response cargarPublico(Request request, Response response) {
+
+    RepositorioSubTipoTransportes repositorioSubTipoTransporte = new RepositorioSubTipoTransportes();
+    RepositorioTransportes repositorioTransportes = new RepositorioTransportes();
+    RepositorioTrayectos repTrayectos = new RepositorioTrayectos();
+    RepositorioParadas repositorioParadas = new RepositorioParadas();
+    RepositorioUbicaciones repositorioUbicaciones = new RepositorioUbicaciones();
+
+    Integer paradaSalidaId = Integer.valueOf(request.params("paradaSalidaId"));
+    Integer paradaLlegadaId = Integer.valueOf(request.params("paradaLlegadaId"));
+
+    Parada paradaSalida = repositorioParadas.buscar(paradaSalidaId);
+    Parada paradaLlegada = repositorioParadas.buscar(paradaLlegadaId);
+
+   Ubicacion salida = paradaSalida.getUbicacion();
+    Ubicacion llegada = paradaLlegada.getUbicacion();
+
+    Transporte transporte = paradaSalida.getLinea().getTransporte();
+
+    String idTrayecto = request.params("idTrayecto");
+    Trayecto trayectoAModificar = repTrayectos.buscar(Integer.valueOf(idTrayecto));
+    trayectoAModificar.aniadirNuevoTramo(salida,llegada,transporte);
+    repTrayectos.actualizar(trayectoAModificar);
+
+
+
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
+  public Response cargarbicicleta(Request request, Response response) {
+
+    RepositorioSubTipoTransportes repositorioSubTipoTransporte = new RepositorioSubTipoTransportes();
+    RepositorioTransportes repositorioTransportes = new RepositorioTransportes();
+    RepositorioTrayectos repTrayectos = new RepositorioTrayectos();
+    RepositorioParadas repositorioParadas = new RepositorioParadas();
+    RepositorioUbicaciones repositorioUbicaciones = new RepositorioUbicaciones();
+
+    Transporte transporte = repositorioTransportes.buscar(2);
+    Ubicacion salida = this.obtenerSalidaUbicacion(request);
+    Ubicacion llegada = this.obtenerLlegadaUbicacion(request);
+
+    String idTrayecto = request.params("idTrayecto");
+    Trayecto trayectoAModificar = repTrayectos.buscar(Integer.valueOf(idTrayecto));
+    trayectoAModificar.aniadirNuevoTramo(salida,llegada,transporte);
+    repTrayectos.actualizar(trayectoAModificar);
+
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
+
+  public Response cargarpie(Request request, Response response) {
+
+    RepositorioSubTipoTransportes repositorioSubTipoTransporte = new RepositorioSubTipoTransportes();
+    RepositorioTransportes repositorioTransportes = new RepositorioTransportes();
+    RepositorioTrayectos repTrayectos = new RepositorioTrayectos();
+    RepositorioParadas repositorioParadas = new RepositorioParadas();
+    RepositorioUbicaciones repositorioUbicaciones = new RepositorioUbicaciones();
+
+    Transporte transporte = repositorioTransportes.buscar(1);
+    Ubicacion salida = this.obtenerSalidaUbicacion(request);
+    Ubicacion llegada = this.obtenerLlegadaUbicacion(request);
+
+    String idTrayecto = request.params("idTrayecto");
+    Trayecto trayectoAModificar = repTrayectos.buscar(Integer.valueOf(idTrayecto));
+    trayectoAModificar.aniadirNuevoTramo(salida,llegada,transporte);
+    repTrayectos.actualizar(trayectoAModificar);
+
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
+
+
+
+  private Ubicacion obtenerSalidaUbicacion(Request request){
+    RepositorioMunicipiosODepartamentos repositorioMoD = new RepositorioMunicipiosODepartamentos();
+    String direccion = request.queryParams("calle");
+    Integer numeracion = Integer.valueOf(request.queryParams("numeracion"));
+    String codigoPostal = request.queryParams("codPostal");
+    MunicipiosODepartamentos municipio = repositorioMoD.buscar(Integer.parseInt(request.queryParams("municipio")));;
+    String localidad = request.queryParams("localidad");
+
+    return new Ubicacion(municipio,localidad,codigoPostal,direccion,numeracion);
+  }
+
+  private Ubicacion obtenerLlegadaUbicacion(Request request){
+    RepositorioMunicipiosODepartamentos repositorioMoD = new RepositorioMunicipiosODepartamentos();
+    String direccion = request.queryParams("calle2");
+    Integer numeracion = Integer.valueOf(request.queryParams("numeracion2"));
+    String codigoPostal = request.queryParams("codPostal2");
+    MunicipiosODepartamentos municipio = repositorioMoD.buscar(Integer.parseInt(request.queryParams("municipio2")));;
+    String localidad = request.queryParams("localidad2");
+
+    return new Ubicacion(municipio,localidad,codigoPostal,direccion,numeracion);
   }
 
 

@@ -26,20 +26,20 @@
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <ul class="list-group" id="boxTrayectos">
                         <label name="trayecto" class="form-label texto" style="font-size: 24px !important; padding:0px !important;"
-                            id="nombreDelTrayecto">{{trayecto}}</label>
+                                id="nombreDelTrayecto">Trayecto {{idTrayecto}}</label>
                             {{#each tramos}}
                         <li class="list-group-item d-flex justify-content-between align-items-start align-middle texto">
                             <div class="ms-2 me-auto">
-                                <div class="listStyle" href="/trayectos/{{trayecto.id}}/tramos/{{id}}">{{this}}</div>
+                                <div class="listStyle" href="/trayectos/{{idTrayecto}}/tramos/{{id}}">Tramo {{id}}</div>
                             </div>
-                            <a class="material-symbols-outlined edit" href="/trayectos/{{trayecto.id}}/tramos/{{id}}/edit">edit</a>
-                            <a class="material-symbols-outlined delete" href="/trayectos/{{trayecto.id}}/tramos/{{id}}/delete">delete</a>
+                            <a class="material-symbols-outlined edit" href="/trayectos/{{idTrayecto}}/tramos/{{id}}/edit">edit</a>
+                            <a class="material-symbols-outlined delete" href="/trayectos/{{idTrayecto}}/tramos/{{id}}/delete">delete</a>
                         </li>
                         {{/each}}
                     </ul>
                     <div class="d-flex justify-content-center">
-                        <span class="material-symbols-outlined" style="margin-top:20px; cursor: pointer;"
-                            href="/trayectos/{{trayecto.id}}/tramos/new">add_circle</span>
+                        <a class="material-symbols-outlined" style="margin-top:20px; cursor: pointer;"
+                            href="/trayectos/{{idTrayecto}}/tramos/new">add_circle</a>
                     </div>
                 </div>
             </form>

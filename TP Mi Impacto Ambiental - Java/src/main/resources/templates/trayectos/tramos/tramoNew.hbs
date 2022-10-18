@@ -1,0 +1,510 @@
+{{#partial "contenidoNav" }}
+<a href="/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+    Organizaciones
+</a>
+
+<a href="/trayectos" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+    Trayectos
+</a>
+<div class="dropdown">
+    <button class="nav-drop-custom" data-bs-toggle="dropdown" aria-expanded="false" id="miPerfil">
+        Mi perfil
+    </button>
+    <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom">
+        <li id="drop1"><a class="drop-item-custom" href="/perfil">Mis datos</a></li>
+        <li id="drop1"><a class="drop-item-custom" href="/solicitudes">Solicitudes</a></li>
+        <li id="drop1"><a class="drop-item-custom" href="/logout">Cerrar sesion</a></li>
+    </ul>
+</div>
+{{/partial}}
+
+{{#partial "contenido" }}
+
+<div class="d-flex flex-column" id="content-wrap">
+    <div class=" d-flex align-self-center conteinerRegistro">
+        <main>
+            <div class="form-check" style="padding: 0px !important; margin:20px !important;">
+                <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12 texto "
+                        style="font-size: 24px !important; padding:0px !important; margin: 0px !important;"
+                        id="nombreDelTrayecto">
+                        {{trayecto.descripcion}}
+                    </div>
+                </div>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <input class="form-check-input" type="radio" name="flexRadioTramo" id="flexRadioTipoDeVehiculo"
+                            onclick="mostrarFormulario(formularioTipoDeVehiculo)">
+                        <label class="form-check-label textoInputs" for="flexRadioTipoDeVehiculo"
+                            style="font-size: 20px;">Vehiculo particular</label>
+                    </div>
+                </div>
+                <div class="formulariosTransporte" id="formularioTipoDeVehiculo" style="display: none;">
+                    <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/particular">
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                            <div class="col-md-12">
+                                <label for="tipoDeVehiculo" class="form-label textoInputs">Tipo de vehiculo</label>
+                                <select name="idSubTipo" class="form-select form-select-custom" id="tipoDeVehiculo"
+                                    required>
+                                    <option selected disabled value="">-- Seleccionar tipo de vehiculo --</option>
+                                    {{#each particulares}}
+                                        <option value="{{id}}">{{subTipo}}</option>
+                                            {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                            <div class="col-md-12">
+                                <label for="tipoDeCombustible" class="form-label textoInputs">Tipo de
+                                    combustible</label>
+                                <select name="tipoCombustible" class="form-select form-select-custom"
+                                    id="tipoDeCombustible" required>
+                                    <option selected disabled value="">-- Seleccionar tipo de combustible --</option>
+                                    <option value="GNC">GNC</option>
+                                    <option value="NAFTA">NAFTA</option>
+                                    <option value="ELECTRICO">ELECTRICO</option>
+                                    <option value="GASOIL">GASOIL</option>
+
+
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <label class="form-label textoInputs" style="font-size:18px; ">Direccion de
+                                salida</label>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="inputCalle" class="form-label textoInputs">Direccion</label>
+                                    <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
+                                        value="" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
+                                    <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
+                                    <input name="codPostal" type="number" class="form-control" id="inputCP"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>
+                                    <select name="municipio" class="form-select form-select-custom" id="selectMunicipio"
+                                        required>
+                                        <option selected disabled value="">Elegir...</option>
+                                        {{#each municipiosODepartamentos}}
+                                        <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLocalidad" class="form-label textoInputs">Localidad</label>
+                                    <input name="localidad" type="text" class="form-control" id="inputLocalidad"
+                                        placeholder="" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <label class="form-label textoInputs" style="font-size:18px; ">Direccion de
+                                llegada</label>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="inputCalle2" class="form-label textoInputs">Direccion</label>
+                                    <input name="calle2" type="text" class="form-control" id="inputCalle2"
+                                        placeholder="" value="" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputNumeracion2" class="form-label textoInputs">Numeracion</label>
+                                    <input name="numeracion2" type="number" class="form-control" id="inputNumeracion2"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label for="inputCP2" class="form-label textoInputs">Codigo postal</label>
+                                    <input name="codPostal2" type="number" class="form-control" id="inputCP2"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="selectMunicipio2" class="form-label textoInputs">Municipio</label>
+                                    <select name="municipio2" class="form-select form-select-custom"
+                                        id="selectMunicipio2" required>
+                                        <option selected disabled value="">Elegir...</option>
+                                        {{#each municipiosODepartamentos}}
+                                        <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLocalidad2" class="form-label textoInputs">Localidad</label>
+                                    <input name="localidad2" type="text" class="form-control" id="inputLocalidad2"
+                                        placeholder="" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+                            <button class=" btn-custom " type="submit" id="idRegistrarse">Añadir tramo</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <input class="form-check-input" type="radio" name="flexRadioTramo"
+                            id="flexRadioServicioContratado" onclick="mostrarFormulario(formularioServicioContratado)">
+                        <label class="form-check-label textoInputs" for="flexRadioServicioContratado"
+                            style="font-size: 20px;">Servicio contratado</label>
+                    </div>
+                </div>
+                <div class="formulariosTransporte" id="formularioServicioContratado" style="display: none;">
+                    <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/transporte-contratado">
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                            <div class="col-md-12">
+                                <label for="servicioContratado" class="form-label textoInputs">Servicio
+                                    contratado</label>
+                                <select name="idSubTipo" class="form-select form-select-custom" id="servicioContratado"
+                                    required>
+                                    <option selected disabled value="">-- Seleccionar servicio contratado --
+                                    </option>
+                                    {{#each contratados}}
+                                    <option value="{{id}}">{{subTipo}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <label class="form-label textoInputs" style="font-size:18px; ">Direccion de
+                                salida</label>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="inputCalle" class="form-label textoInputs">Direccion</label>
+                                    <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
+                                        value="" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
+                                    <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
+                                    <input name="codPostal" type="number" class="form-control" id="inputCP"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>
+                                    <select name="municipio" class="form-select form-select-custom" id="selectMunicipio"
+                                        required>
+                                        <option selected disabled value="">Elegir...</option>
+                                        {{#each municipiosODepartamentos}}
+                                        <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLocalidad" class="form-label textoInputs">Localidad</label>
+                                    <input name="localidad" type="text" class="form-control" id="inputLocalidad"
+                                        placeholder="" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <label class="form-label textoInputs" style="font-size:18px; ">Direccion de
+                                llegada</label>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="inputCalle2" class="form-label textoInputs">Direccion</label>
+                                    <input name="calle2" type="text" class="form-control" id="inputCalle2"
+                                        placeholder="" value="" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputNumeracion2" class="form-label textoInputs">Numeracion</label>
+                                    <input name="numeracion2" type="number" class="form-control" id="inputNumeracion2"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label for="inputCP2" class="form-label textoInputs">Codigo postal</label>
+                                    <input name="codPostal2" type="number" class="form-control" id="inputCP2"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="selectMunicipio2" class="form-label textoInputs">Municipio</label>
+                                    <select name="municipio2" class="form-select form-select-custom"
+                                        id="selectMunicipio2" required>
+                                        <option selected disabled value="">Elegir...</option>
+                                        {{#each municipiosODepartamentos}}
+                                        <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLocalidad2" class="form-label textoInputs">Localidad</label>
+                                    <input name="localidad2" type="text" class="form-control" id="inputLocalidad2"
+                                        placeholder="" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+                            <button class=" btn-custom " type="submit" id="idRegistrarse">Añadir tramo</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <input class="form-check-input" type="radio" name="flexRadioTramo"
+                            id="flexRadioTransportePublico" onclick="mostrarFormulario(formularioTransportePublico)">
+                        <label class="form-check-label textoInputs" for="flexRadioTransportePublico"
+                            style="font-size: 20px;">Transporte publico</label>
+                    </div>
+                </div>
+                <div class="formulariosTransporte" id="formularioTransportePublico" style="display: none;">
+
+                    <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/transporte-publico">
+
+
+
+
+
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                            <div class="col-md-12">
+                                <label for="paradaInicio" class="form-label textoInputs">Parada inicio</label>
+                                <select name="paradaSalidaId" class="form-select form-select-custom" id="paradaInicio" required>
+                                    <option selected disabled value="">-- Seleccionar parada inicio --</option>
+                                    {{#each paradaSalidaId}}
+                                    <option value="{{id}}">{{parada.linea.tipotransporte.subtipotransporte.subTipo}} - {{parada.linea.nombre}} - {{parada}} </option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                            <div class="col-md-12">
+                        <label for="paradaFin" class="form-label textoInputs">Parada fin</label>
+                        <select name="paradaLlegadaId" class="form-select form-select-custom" id="paradaFin" required>
+                            <option selected disabled value="">-- Seleccionar parada fin --</option>
+                            {{#each paradas}}
+                                <option value="{{id}}">{{linea.transporte.subTipoTransporte.subTipo}} - {{linea.nombre}} - {{index}} </option>
+                            {{/each}}
+                        </select>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+                            <button class=" btn-custom " type="submit" id="idRegistrarse">Añadir
+                                tramo</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <input class="form-check-input" type="radio" name="flexRadioTramo"
+                            id="flexRadioBicicletaOSimilares"
+                            onclick="mostrarFormulario(formularioBicicletaOSimilares)">
+                        <label class="form-check-label textoInputs" for="flexRadioBicicletaOSimilares"
+                            style="font-size: 20px;">Bicicleta o similares</label>
+                    </div>
+                </div>
+                <div class="formulariosTransporte" id="formularioBicicletaOSimilares" style="display: none;">
+                    <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/bicicleta-o-similares">
+                        <div>
+                            <label class="form-label textoInputs" style="font-size:18px; ">Direccion de
+                                salida</label>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="inputCalle" class="form-label textoInputs">Direccion</label>
+                                    <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
+                                        value="" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
+                                    <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
+                                    <input name="codPostal" type="number" class="form-control" id="inputCP"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>
+                                    <select name="municipio" class="form-select form-select-custom" id="selectMunicipio"
+                                        required>
+                                        <option selected disabled value="">Elegir...</option>
+                                        {{#each municipiosODepartamentos}}
+                                        <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLocalidad" class="form-label textoInputs">Localidad</label>
+                                    <input name="localidad" type="text" class="form-control" id="inputLocalidad"
+                                        placeholder="" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <label class="form-label textoInputs" style="font-size:18px; ">Direccion de
+                                llegada</label>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="inputCalle2" class="form-label textoInputs">Direccion</label>
+                                    <input name="calle2" type="text" class="form-control" id="inputCalle2"
+                                        placeholder="" value="" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputNumeracion2" class="form-label textoInputs">Numeracion</label>
+                                    <input name="numeracion2" type="number" class="form-control" id="inputNumeracion2"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label for="inputCP2" class="form-label textoInputs">Codigo postal</label>
+                                    <input name="codPostal2" type="number" class="form-control" id="inputCP2"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="selectMunicipio2" class="form-label textoInputs">Municipio</label>
+                                    <select name="municipio2" class="form-select form-select-custom"
+                                        id="selectMunicipio2" required>
+                                        <option selected disabled value="">Elegir...</option>
+                                        {{#each municipiosODepartamentos}}
+                                        <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLocalidad2" class="form-label textoInputs">Localidad</label>
+                                    <input name="localidad2" type="text" class="form-control" id="inputLocalidad2"
+                                        placeholder="" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+                            <button class=" btn-custom " type="submit" id="idRegistrarse">Añadir tramo</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+
+                        <input class="form-check-input" type="radio" name="flexRadioTramo" id="flexRadioAPie"
+                            onclick="mostrarFormulario(formularioAPie)">
+                        <label class="form-check-label textoInputs" for="flexRadioAPie" style="font-size: 20px;">A
+                            pie</label>
+                    </div>
+                </div>
+                <div class="formulariosTransporte" id="formularioAPie" style="display: none;">
+                    <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/a-pie">
+                        <div>
+                            <label class="form-label textoInputs" style="font-size:18px; ">Direccion de
+                                salida</label>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="inputCalle" class="form-label textoInputs">Direccion</label>
+                                    <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
+                                        value="" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
+                                    <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
+                                    <input name="codPostal" type="number" class="form-control" id="inputCP"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>
+                                    <select name="municipio" class="form-select form-select-custom" id="selectMunicipio"
+                                        required>
+                                        <option selected disabled value="">Elegir...</option>
+                                        {{#each municipiosODepartamentos}}
+                                        <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLocalidad" class="form-label textoInputs">Localidad</label>
+                                    <input name="localidad" type="text" class="form-control" id="inputLocalidad"
+                                        placeholder="" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div>
+                            <label class="form-label textoInputs" style="font-size:18px; ">Direccion de
+                                llegada</label>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="inputCalle2" class="form-label textoInputs">Direccion</label>
+                                    <input name="calle2" type="text" class="form-control" id="inputCalle2"
+                                        placeholder="" value="" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputNumeracion2" class="form-label textoInputs">Numeracion</label>
+                                    <input name="numeracion2" type="number" class="form-control" id="inputNumeracion2"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <label for="inputCP2" class="form-label textoInputs">Codigo postal</label>
+                                    <input name="codPostal2" type="number" class="form-control" id="inputCP2"
+                                        placeholder="" value="" min="0" required>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="selectMunicipio2" class="form-label textoInputs">Municipio</label>
+                                    <select name="municipio2" class="form-select form-select-custom"
+                                        id="selectMunicipio2" required>
+                                        <option selected disabled value="">Elegir...</option>
+                                        {{#each municipiosODepartamentos}}
+                                        <option value="{{id}}">{{municipioOLocalidad}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLocalidad2" class="form-label textoInputs">Localidad</label>
+                                    <input name="localidad2" type="text" class="form-control" id="inputLocalidad2"
+                                        placeholder="" value="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+                            <button class=" btn-custom " type="submit" id="idRegistrarse">Añadir tramo</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+{{/partial}}
+{{> base.hbs }}
