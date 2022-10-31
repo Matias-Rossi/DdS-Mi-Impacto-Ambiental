@@ -44,7 +44,7 @@ public class TrayectosController {
     return new ModelAndView(new HashMap<String, Object>(){{
       put("trayectos", trayectos);
       put("areas", areas);
-    }}, "trayectos/Trayectos.hbs"); //TODO Implementar este .hbs, ya existe el .html
+    }}, "trayectos/trayectos.hbs"); //TODO Implementar este .hbs, ya existe el .html
   }
 
   //Spark.post ("/:id/add", trayectosController::addTrayecto);
