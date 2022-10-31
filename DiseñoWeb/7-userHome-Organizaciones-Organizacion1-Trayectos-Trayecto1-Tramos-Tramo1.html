@@ -72,11 +72,12 @@
                                     <select name="idSubTipo" class="form-select form-select-custom" id="tipoDeVehiculo" required>
                                         <option selected disabled value="">-- Seleccionar tipo de vehiculo --</option>
                                         {{#each idSubTipo}}
-                                        <option value{{id}}>{{name}}</option>
+                                        <option value="{{id}}">{{name}}</option>
                                         {{/each}}
                                     </select>
                                 </div>
                             </div>
+
                             <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                                 <div class="col-md-12">
                                     <label for="tipoDeCombustible" class="form-label textoInputs">Tipo de
@@ -84,7 +85,7 @@
                                     <select name="tipoCombustible" class="form-select form-select-custom" id="tipoDeCombustible" required>
                                         <option selected disabled value="">-- Seleccionar tipo de combustible --</option>
                                         {{#each tipoCombustible}}
-                                        <option value{{id}}>{{name}}</option>
+                                        <option value="{{id}}">{{name / {{id}} }}</option>
                                         {{/each}}
                                     </select>
                                 </div>

@@ -129,30 +129,27 @@ public class TramosController {
 
   public Response cargarParticular(Request request, Response response) {
 
-    String imprimir = request.params("idSubTipo");
-    System.out.println(imprimir);
-
     RepositorioSubTipoTransportes repositorioSubTipoTransporte = new RepositorioSubTipoTransportes();
     RepositorioTransportes repositorioTransportes = new RepositorioTransportes();
     RepositorioTrayectos repTrayectos = new RepositorioTrayectos();
 
 
-    Integer subtipo =Integer.valueOf(imprimir);
-    TipoCombustible combustible =TipoCombustible.valueOf(request.params("tipoCombustible"));
+    Integer subtipo = Integer.valueOf( request.queryParams("idSubTipo"));
+    TipoCombustible combustible =TipoCombustible.valueOf(request.queryParams("tipoCombustible"));
 
     System.out.println(subtipo);
     System.out.println(combustible);
 
     Transporte transporte = repositorioTransportes.encontrar(subtipo,combustible);
 
-    System.out.println("2");
+    System.out.println("Lo encontre 2");
 
     Ubicacion salida = this.obtenerSalidaUbicacion(request);
     Ubicacion llegada = this.obtenerLlegadaUbicacion(request);
 
-    System.out.println("1");
+    System.out.println("imprimiendo  1");
 
-    String idTrayecto = request.params("idTrayecto");
+    String idTrayecto = request.queryParams("idTrayecto");
     Trayecto trayectoAModificar = repTrayectos.buscar(Integer.valueOf(idTrayecto));
 
     trayectoAModificar.aniadirNuevoTramo(salida,llegada,transporte);
@@ -171,12 +168,12 @@ public class TramosController {
     RepositorioTransportes repositorioTransportes = new RepositorioTransportes();
     RepositorioTrayectos repTrayectos = new RepositorioTrayectos();
 
-    Transporte transporte = repositorioTransportes.encontrar(Integer.valueOf(request.params("idSubTipo")));
+    Transporte transporte = repositorioTransportes.encontrar(Integer.valueOf(request.queryParams("idSubTipo")));
     Ubicacion salida = this.obtenerSalidaUbicacion(request);
     Ubicacion llegada = this.obtenerLlegadaUbicacion(request);
 
 
-    String idTrayecto = request.params("idTrayecto");
+    String idTrayecto = request.queryParams("idTrayecto");
     Trayecto trayectoAModificar = repTrayectos.buscar(Integer.valueOf(idTrayecto));
     trayectoAModificar.aniadirNuevoTramo(salida,llegada,transporte);
     repTrayectos.actualizar(trayectoAModificar);
@@ -195,8 +192,8 @@ public class TramosController {
     RepositorioParadas repositorioParadas = new RepositorioParadas();
     RepositorioUbicaciones repositorioUbicaciones = new RepositorioUbicaciones();
 
-    Integer paradaSalidaId = Integer.valueOf(request.params("paradaSalidaId"));
-    Integer paradaLlegadaId = Integer.valueOf(request.params("paradaLlegadaId"));
+    Integer paradaSalidaId = Integer.valueOf(request.queryParams("paradaSalidaId"));
+    Integer paradaLlegadaId = Integer.valueOf(request.queryParams("paradaLlegadaId"));
 
     Parada paradaSalida = repositorioParadas.buscar(paradaSalidaId);
     Parada paradaLlegada = repositorioParadas.buscar(paradaLlegadaId);
@@ -249,7 +246,7 @@ public class TramosController {
     Ubicacion salida = this.obtenerSalidaUbicacion(request);
     Ubicacion llegada = this.obtenerLlegadaUbicacion(request);
 
-    String idTrayecto = request.params("idTrayecto");
+    String idTrayecto = request.queryParams("idTrayecto");
     Trayecto trayectoAModificar = repTrayectos.buscar(Integer.valueOf(idTrayecto));
     trayectoAModificar.aniadirNuevoTramo(salida,llegada,transporte);
     repTrayectos.actualizar(trayectoAModificar);

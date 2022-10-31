@@ -22,6 +22,11 @@ public class TestRepositorioProvincias {
     }
 
     @Test
+    public void kaka(){
+
+    }
+
+    @Test
     public void testUsuario(){
         String query = "from " + Usuario.class.getName() + " WHERE usuario = 'admin@gmail.com' AND contrasenia='1234'";
 
