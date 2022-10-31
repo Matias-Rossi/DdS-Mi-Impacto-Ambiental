@@ -1,12 +1,18 @@
 package domain.persistenceExtend.repositorios;
 
+import impacto_ambiental.db.BusquedaConPredicado;
 import impacto_ambiental.db.EntityManagerHelper;
 import impacto_ambiental.models.entities.perfil.Area;
 import impacto_ambiental.models.entities.perfil.Solicitud;
+import impacto_ambiental.models.entities.transporte.Transporte;
 import impacto_ambiental.models.entities.usuario.Usuario;
 import impacto_ambiental.models.repositorios.RepositorioSolicitudes;
 import org.junit.jupiter.api.Test;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,11 +25,6 @@ public class TestRepositorioProvincias {
         List<Solicitud> solicitudes = repositorioSolicitudes.buscarSolicitudesAceptadasPorIDMiembro(1);
 
         List<Area> areas = (List<Area>) solicitudes.stream().map(Solicitud::getArea).toList();
-    }
-
-    @Test
-    public void kaka(){
-
     }
 
     @Test
