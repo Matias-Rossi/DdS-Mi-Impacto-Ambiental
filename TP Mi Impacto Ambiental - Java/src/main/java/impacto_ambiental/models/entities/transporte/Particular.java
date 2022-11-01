@@ -32,12 +32,7 @@ public class Particular extends Transporte {
 
 
     public TipoConsumoDA tipoConsumoDA(){
-        if(this.subTipoTransporte.getNombre() == "AUTO"){
-            if(this.combustible == TipoCombustible.ELECTRICO) return TipoConsumoDA.AUTO_ELECTRICO;
-            if(this.combustible == TipoCombustible.GASOIL) return TipoConsumoDA.AUTO_GASOIL;
-            if(this.combustible == TipoCombustible.GNC) return TipoConsumoDA.AUTO_GNC;
-            if(this.combustible == TipoCombustible.NAFTA) return TipoConsumoDA.AUTO_NAFTA;
-        }
+        System.out.println("LO BUSCO CON "+this.subTipoTransporte.getNombre()+this.combustible);
         if(this.subTipoTransporte.getNombre() == "CAMIONETA"){
             if(this.combustible == TipoCombustible.ELECTRICO) return TipoConsumoDA.CAMIONETA_ELECTRICO;
             if(this.combustible == TipoCombustible.GASOIL) return TipoConsumoDA.CAMIONETA_GASOIL;
@@ -50,7 +45,10 @@ public class Particular extends Transporte {
             if(this.combustible == TipoCombustible.GNC) return TipoConsumoDA.MOTO_GNC;
             if(this.combustible == TipoCombustible.NAFTA) return TipoConsumoDA.MOTO_NAFTA;
         }
-        return null;
+        if(this.combustible == TipoCombustible.ELECTRICO) return TipoConsumoDA.AUTO_ELECTRICO;
+        if(this.combustible == TipoCombustible.GASOIL) return TipoConsumoDA.AUTO_GASOIL;
+        if(this.combustible == TipoCombustible.GNC) return TipoConsumoDA.AUTO_GNC;
+       return TipoConsumoDA.AUTO_NAFTA;
     }
     /*public TipoTransporte decirTipoTransporte(){
         return TipoTransporte.TIPO_PARTICULAR;

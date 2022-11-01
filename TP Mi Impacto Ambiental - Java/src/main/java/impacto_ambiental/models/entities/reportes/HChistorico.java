@@ -34,6 +34,7 @@ public class HChistorico extends EntidadPersistente {
     @Getter
     @Column(name = "huella_de_carbono")
     Double huellaDeCarbono;
+    @Getter
     @ManyToOne
     @JoinColumn(name = "organizacion_id", referencedColumnName = "id")
     Organizacion organizacion;

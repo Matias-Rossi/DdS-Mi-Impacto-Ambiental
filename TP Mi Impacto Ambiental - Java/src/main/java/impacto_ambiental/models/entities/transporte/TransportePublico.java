@@ -29,16 +29,13 @@ public class TransportePublico extends Transporte {
         return TipoActividadDA.TRANSPORTE_PUBLICO;
     }
     public TipoConsumoDA tipoConsumoDA(){
-        if(this.subTipoTransporte.getNombre() == "COLECTIVO"){
-            return TipoConsumoDA.COLECTIVO_BASE;
-        }
         if(this.subTipoTransporte.getNombre() == "SUBTE"){
             return TipoConsumoDA.SUBTE_BASE;
         }
         if(this.subTipoTransporte.getNombre() == "TREN") {
             return TipoConsumoDA.TREN_BASE;
         }
-        return null;
+        return TipoConsumoDA.COLECTIVO_BASE;
     }
 
 }

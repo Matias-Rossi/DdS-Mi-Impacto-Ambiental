@@ -29,6 +29,7 @@ public final class CalculadorDeHC {
         RepositorioFactorDeEmision repositorioFactorDeEmision = new RepositorioFactorDeEmision();
         //FactorDeEmision factor =(FactorDeEmision) EntityManagerHelper.createQuery("from FactorDeEmision where tipoConsumo = '"+consumo+"' and tipoActividad = '"+actividad+"'");
         FactorDeEmision factor = repositorioFactorDeEmision.buscarSegunDatoDeActividad(datoDeActividad);
+        System.out.println("LLEGUE ACAAAA");System.out.println("LLEGUE ACAAAA");
         return factor;
     }
     /*

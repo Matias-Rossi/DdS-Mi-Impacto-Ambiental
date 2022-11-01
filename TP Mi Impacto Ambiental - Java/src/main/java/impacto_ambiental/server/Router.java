@@ -42,6 +42,8 @@ public class Router {
         GestorAreaController gestorAreaController = new GestorAreaController();
         EmpleadosController empleadosController = new EmpleadosController();
         CargaReportesController cargaReportesController = new CargaReportesController();
+        CalcularHcController calcularHCController = new CalcularHcController();
+
        // Spark.staticFiles.location("/public");
 
         // ### Miembro ###
@@ -67,6 +69,13 @@ public class Router {
 
         Spark.path("/home", () -> {
             Spark.get("", homeController::homeUser, engine);
+        });
+
+        // ### Calcular HC ###
+        Spark.path("/calcularhc", () -> {
+            Spark.post("", calcularHCController::calcularHc);
+            Spark.get("", calcularHCController::mostrarHC, engine);
+
         });
 
         Spark.path("/organizaciones", () -> {

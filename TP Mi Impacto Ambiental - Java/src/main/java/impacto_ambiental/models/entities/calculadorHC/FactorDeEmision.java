@@ -1,6 +1,7 @@
 package impacto_ambiental.models.entities.calculadorHC;
 
 import impacto_ambiental.models.entities.EntidadPersistente;
+import lombok.Getter;
 
 import javax.persistence.*;
 
@@ -9,9 +10,11 @@ import javax.persistence.*;
 public class FactorDeEmision extends EntidadPersistente {
   @Transient
   private CalculadorDeHC calculadorDeHC;
+
   @Enumerated(EnumType.STRING)
   @Column(name = "tipoActividad")
   private TipoActividadDA tipoActividad;
+
   @Enumerated(EnumType.STRING)
   @Column(name = "tipoConsumo")
   private TipoConsumoDA tipoConsumo;
@@ -27,7 +30,7 @@ public class FactorDeEmision extends EntidadPersistente {
   }
 
   public FactorDeEmision() {
-
+    this.calculadorDeHC = CalculadorDeHC.getInstance();
   }
 
   public TipoActividadDA getTipoActividad() {

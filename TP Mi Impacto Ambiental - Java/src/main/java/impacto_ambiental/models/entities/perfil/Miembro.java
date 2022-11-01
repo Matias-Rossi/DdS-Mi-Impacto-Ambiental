@@ -60,6 +60,8 @@ public class Miembro extends EntidadPersistente {
     )
     private List<Tramo> tramosCompartidosAAceptar = new ArrayList<Tramo>();
 
+
+
     public Miembro(String nombre, String apellido, TipoDocumento tipoDocumento, String numeroDocumento,Ubicacion ubicacion,String mail,String usuario,Usuario usuario1) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -89,11 +91,22 @@ public class Miembro extends EntidadPersistente {
     public void calcularHC(Organizacion organizacion){
         trayectos.stream().forEach(e->e.calcularHC(organizacion));
     }
-    public double calcularHCPorcentual(Integer anio,Integer mes,Area area){
-//        return (this.calcularHC(this.decirOrganizacion(area))/this.decirOrganizacion(area).calcularHC(anio,mes))*100;
-        //TODO
-        return 0.0;
+    public double calcularHCPorcentual(Organizacion organizacion){
+        return (calcularHcPorOrg(organizacion)/organizacion.calcularHcTotal())*100;
     }
+    public double calcularHCTotal(){
+        return this.hcsHistoricos.stream().mapToDouble(e->e.getHuellaDeCarbono()).sum();
+    }
+
+    public void calcularHcTodo(){
+        System.out.println("Calculando HC de ");
+        trayectos.stream().forEach(e->e.calcularHC());
+    }
+
+    public double calcularHcPorOrg(Organizacion organizacion){
+        return this.hcsHistoricos.stream().filter(e->e.getOrganizacion().equals(organizacion)).mapToDouble(e->e.getHuellaDeCarbono()).sum();
+    }
+
 
     public Organizacion decirOrganizacion(Area area){
         return area.getOrganizacion(); //TODO consultar si es necesario que el miembro diga su organizacion, si lo evitamos mejoramos el encapsulamiento

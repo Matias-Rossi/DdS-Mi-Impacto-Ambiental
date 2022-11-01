@@ -99,6 +99,10 @@ public class Organizacion extends EntidadPersistente {
         this.calcularHCConsumos();
         this.calcularHCViajes();
     }
+
+    public double calcularHcTotal(){
+        return this.HChistoricos.stream().mapToDouble(historico -> historico.getHuellaDeCarbono()).sum();
+    }
     private void calcularHCConsumos(){
         actividadesCargadas.stream().forEach(e->e.calcularHC());
     }

@@ -1,6 +1,6 @@
 package impacto_ambiental.models.entities.trayecto;
 
-import impacto_ambiental.models.entities.calculadorHC.ActividadesEmisorasCO2;
+import impacto_ambiental.models.entities.calculadorHC.*;
 import impacto_ambiental.models.entities.perfil.Miembro;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.reportes.Periodo;
@@ -10,9 +10,6 @@ import impacto_ambiental.models.entities.transporte.Transporte;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
 import lombok.Setter;
-import impacto_ambiental.models.entities.calculadorHC.CalculadorDeHC;
-import impacto_ambiental.models.entities.calculadorHC.DatoDeActividad;
-import impacto_ambiental.models.entities.calculadorHC.FactorDeEmision;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -45,6 +42,7 @@ public class Tramo implements ActividadesEmisorasCO2 {
         this.medioDeTransporte = transporte;
         //this.distancia = transporte.calcularDistancia(partida, llegada); ;
         this.diasAlMes = diasAlMes;
+        this.hcXIntegrantes = -1;
     }
 
     @Getter @Setter
@@ -79,7 +77,8 @@ public class Tramo implements ActividadesEmisorasCO2 {
     private FactorDeEmision factorDeEmision;
 
     public double calcularHC(Integer size, Integer mesInicio, Integer mesFin, Integer anio, Organizacion org,Miembro miembro) {
-        if(Objects.isNull(this.hcXIntegrantes)) this.cargarHc();
+
+        if(this.hcXIntegrantes<0) this.cargarHc();
 
 
         double hcXorgXpart = this.hcXIntegrantes/size;
@@ -99,6 +98,7 @@ public class Tramo implements ActividadesEmisorasCO2 {
 
 
     private void cargarHc(){
+
         if(this.factorDeEmision==null) actualizarFE();
         this.hcXIntegrantes = CalculadorDeHC.getInstance().calcularHC( this.factorDeEmision,this.valorDA() )/this.integrantes*this.diasAlMes ;
     }
@@ -110,6 +110,7 @@ public class Tramo implements ActividadesEmisorasCO2 {
 
     private void actualizarFE(){
         this.factorDeEmision = CalculadorDeHC.getInstance().devolverFactorDeEmision(this.generarDatoDeActividad());
+
     }
 
     public void compartirTramo(Miembro miembro){
@@ -128,6 +129,14 @@ public class Tramo implements ActividadesEmisorasCO2 {
         return this.distancia * this.medioDeTransporte.getConsumoXKm();
     }
     public DatoDeActividad generarDatoDeActividad() {
-        return new DatoDeActividad(this.medioDeTransporte.tipoActividadDA(), this.medioDeTransporte.tipoConsumoDA(), this.valorDA());
+        TipoActividadDA transporte = this.medioDeTransporte.tipoActividadDA();
+        TipoConsumoDA consumo = this.medioDeTransporte.tipoConsumoDA();
+        Double valor = this.valorDA();
+
+        System.out.println(transporte);
+        System.out.println(consumo);
+        System.out.println(valor);
+
+        return new DatoDeActividad(transporte, consumo, this.valorDA());
     }
 }

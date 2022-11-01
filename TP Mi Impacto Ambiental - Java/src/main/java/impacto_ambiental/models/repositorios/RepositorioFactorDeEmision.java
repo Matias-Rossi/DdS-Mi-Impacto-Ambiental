@@ -10,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 public class RepositorioFactorDeEmision extends Repositorio<FactorDeEmision> {
   public RepositorioFactorDeEmision() {
@@ -31,7 +32,11 @@ public class RepositorioFactorDeEmision extends Repositorio<FactorDeEmision> {
       //Ejecución de la búsqueda
       BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
       //System.out.println(busqueda.getCritero() == null? "null": "noNull");
-      return buscar(busqueda);
+      //FactorDeEmision factorDeEmision = buscar(busqueda);
+      FactorDeEmision factor = buscarTodos().stream().filter(f -> f.getTipoActividad() == datoDeActividad.getTipoActividad() && f.getTipoConsumo() == datoDeActividad.getTipoConsumo()).findFirst().get();
+
+      return factor;
+      //TODO RE MAL
 
     } catch (NoResultException nre) {
       System.out.println("No se encontró el Factor de Emisión según el Dato de Actividad brindado");

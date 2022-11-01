@@ -22,10 +22,14 @@
 
 {{#partial "contenido" }}
 
+
+
 <div class="d-flex flex-column" id="content-wrap">
     <div class=" d-flex align-self-center conteinerRegistro">
         <main>
             <div class="form-check" style="padding: 0px !important; margin:20px !important;">
+
+
                 <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="col-md-12 texto "
                         style="font-size: 24px !important; padding:0px !important; margin: 0px !important;"
@@ -33,6 +37,10 @@
                         {{trayecto.descripcion}}
                     </div>
                 </div>
+
+
+                {{! -------Vehiculo Particular------- }}
+
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="col-md-12">
                         <input class="form-check-input" type="radio" name="flexRadioTramo" id="flexRadioTipoDeVehiculo"
@@ -43,7 +51,6 @@
                 </div>
                 <div class="formulariosTransporte" id="formularioTipoDeVehiculo" style="display: none;">
                     <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/particular">
-                        <input name="idTrayecto" value="{{idTrayecto}}">
                         <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                             <div class="col-md-12">
                                 <label for="tipoDeVehiculo" class="form-label textoInputs">Tipo de vehiculo</label>
@@ -56,19 +63,6 @@
                                 </select>
                             </div>
                         </div>
-
-                        <!--
-                            <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>
-                            <select name="municipio" class="form-select form-select-custom"
-                                    id="selectMunicipio" required>
-                                <option selected disabled value="">Elegir...</option>
-                                {{#each municipiosODepartamentos}}
-                                <option value="{{id}}">{{municipioOLocalidad}}</option>
-                                {{/each}}
-                            </select>
-                            -->
-
-
 
 
 
@@ -173,6 +167,8 @@
                     </form>
                 </div>
 
+               {{! -------Servicio Contratado------- }}
+
 
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="col-md-12">
@@ -184,6 +180,7 @@
                 </div>
                 <div class="formulariosTransporte" id="formularioServicioContratado" style="display: none;">
                     <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/transporte-contratado">
+
                         <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                             <div class="col-md-12">
                                 <label for="servicioContratado" class="form-label textoInputs">Servicio
@@ -284,6 +281,8 @@
                 </div>
 
 
+                {{! -------Transporte Publico------- }}
+
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="col-md-12">
                         <input class="form-check-input" type="radio" name="flexRadioTramo"
@@ -295,11 +294,6 @@
                 <div class="formulariosTransporte" id="formularioTransportePublico" style="display: none;">
 
                     <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/transporte-publico">
-
-
-
-
-
                         <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                             <div class="col-md-12">
                                 <label for="paradaInicio" class="form-label textoInputs">Parada inicio</label>
@@ -330,6 +324,7 @@
                     </form>
                 </div>
 
+                {{! -------Bicicleta o similares------- }}
 
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="col-md-12">
@@ -425,6 +420,8 @@
                         </div>
                     </form>
                 </div>
+
+                        {{! -------A Pie------- }}
 
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="col-md-12">

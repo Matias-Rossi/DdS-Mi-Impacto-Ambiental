@@ -1,5 +1,8 @@
 package domain.persistenceExtend;
 
+import impacto_ambiental.models.entities.calculadorHC.FactorDeEmision;
+import impacto_ambiental.models.entities.calculadorHC.TipoActividadDA;
+import impacto_ambiental.models.entities.calculadorHC.TipoConsumoDA;
 import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
 import impacto_ambiental.models.entities.ubicacion.NombreProvincia;
@@ -12,6 +15,21 @@ import impacto_ambiental.models.repositorios.*;
 import org.junit.jupiter.api.Test;
 
 public class Cositas {
+
+    @Test
+    public void fdeemision(){
+        RepositorioFactorDeEmision repositorio = new RepositorioFactorDeEmision();
+        //generar lista con todos los TipoActividadDA y TipoConsumoDA
+
+        for (TipoActividadDA tipoActividadDA : TipoActividadDA.values()) {
+            for (TipoConsumoDA tipoConsumoDA : TipoConsumoDA.values()) {
+                FactorDeEmision factorDeEmision = new FactorDeEmision(tipoActividadDA, tipoConsumoDA, 0.5);
+                repositorio.agregar(factorDeEmision);
+            }
+        }
+
+    }
+
     @Test
     public void miembroConOrganizacionesYAreas() {
         RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
