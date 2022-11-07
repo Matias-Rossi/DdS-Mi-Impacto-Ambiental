@@ -28,7 +28,7 @@ public class LoginController {
                     case AGENTE -> response.redirect("/"); //TODO
                     case MIEMBRO -> response.redirect("/home");
                     case ORGANIZACION -> response.redirect("/organizacion");
-                    case ADMINISTRADOR -> response.redirect("/a"); //TODO
+                    case ADMINISTRADOR -> response.redirect("/admin"); //TODO
                 }
                 response.redirect("/home");
             }

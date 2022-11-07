@@ -21,7 +21,18 @@ public class Init {
         inicializarClasificacion();
         inicializarProvincias();
         datosParaCrearTrayectos();
+        crearAdmin();
         System.out.println(" ##### Inicialización finalizada correctamente ##### ");
+    }
+
+    static void crearAdmin() {
+        RepositorioRoles repositorioRoles = new RepositorioRoles();
+        RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
+
+        Rol rolAdmin = repositorioRoles.obtenerRol("ADMINISTRADOR");
+
+        Usuario admin = new Usuario(rolAdmin, "admin", "admin");
+        repositorioUsuarios.agregar(admin);
     }
 
     static void inicializarRoles(){

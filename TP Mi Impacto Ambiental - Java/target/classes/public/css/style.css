@@ -403,6 +403,17 @@ color: #006241;
   'opsz' 48
 
 }
-
-
+.inline {
+    display: inline;
+}
+.submit-como-a {
+    border: none;
+    background: none;
+}
+.submit-como-a:focus {
+    outline: none;
+}
+.submit-como-a:hover {
+    border: none;
+}
 

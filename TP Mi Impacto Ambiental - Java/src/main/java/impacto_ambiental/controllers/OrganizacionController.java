@@ -3,6 +3,9 @@ package impacto_ambiental.controllers;
 
 
 import impacto_ambiental.models.entities.perfil.*;
+import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
+import impacto_ambiental.models.entities.ubicacion.Ubicacion;
+import impacto_ambiental.models.entities.usuario.Rol;
 import impacto_ambiental.models.entities.usuario.Usuario;
 import impacto_ambiental.models.repositorios.*;
 import spark.ModelAndView;
@@ -96,4 +99,59 @@ public class OrganizacionController {
         return response;
     }
 
+    public ModelAndView mostrarPantallaAdministrador(Request request, Response response) {
+        List<Organizacion> organizaciones = repositorioOrganizaciones.buscarTodos();
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("organizaciones", organizaciones);
+        }}, "/admin/gestionOrganizaciones.hbs");
+    }
+
+    public Response crear(Request request, Response response) {
+        RepositorioRoles repositorioRoles = new RepositorioRoles();
+        RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
+
+
+        //Datos para el Usuario
+        Rol rol = repositorioRoles.obtenerRol(request.queryParams("tipoUsuario"));
+        String email = request.queryParams("email");
+        String password = request.queryParams("password");
+
+        //Comprobación si usuario existe
+        Boolean existeUsuario = repositorioUsuarios.existeUsuario(email); //TODO arreglar. (Es igual a SignUpController)
+        if(existeUsuario) {
+            response.body("Ya existe el usuario");
+            response.redirect("/gestionar-organizaciones");
+            return response;
+        }
+
+        Usuario usuario = new Usuario(rol, email, password);
+
+        //Creación de organización
+        //Datos para la Organizacion
+        String razonSocial = request.queryParams("razonSocial");
+        Tipo tipo = Tipo.valueOf(request.queryParams("tipo"));
+        String inputClasificacion = request.queryParams("clasificacion");
+        Clasificacion clasificacion = repositorioClasificacion.buscar(Integer.parseInt(inputClasificacion));
+        Ubicacion ubicacion = obtenerUbicacion(request);
+
+        Organizacion organizacion = new Organizacion(null, ubicacion, razonSocial, tipo, clasificacion, usuario);
+        repositorioOrganizaciones.agregar(organizacion);
+
+        response.redirect("/gestionar-organizaciones");
+        response.body("Organizacion creada");
+
+        return response;
+    }
+
+    private Ubicacion obtenerUbicacion(Request request){
+        RepositorioMunicipiosODepartamentos repositorioMoD = new RepositorioMunicipiosODepartamentos(); //TODO La vista no muestra municipios
+        String direccion = request.queryParams("calle");
+        Integer numeracion = Integer.valueOf(request.queryParams("numeracion"));
+        String codigoPostal = request.queryParams("codPostal");
+        MunicipiosODepartamentos municipio = repositorioMoD.buscar(Integer.parseInt(request.queryParams("municipio")));;
+        String localidad = request.queryParams("localidad");
+
+        return new Ubicacion(municipio,localidad,codigoPostal,direccion,numeracion);
+    }
 }

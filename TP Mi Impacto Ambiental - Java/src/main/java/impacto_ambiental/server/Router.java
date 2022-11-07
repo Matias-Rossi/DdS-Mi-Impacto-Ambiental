@@ -43,6 +43,7 @@ public class Router {
         EmpleadosController empleadosController = new EmpleadosController();
         CargaReportesController cargaReportesController = new CargaReportesController();
         CalcularHcController calcularHCController = new CalcularHcController();
+        HomeAdminController homeAdminController = new HomeAdminController();
 
        // Spark.staticFiles.location("/public");
 
@@ -153,6 +154,20 @@ public class Router {
             Spark.get("", cargaReportesController::mostrarVista, engine);
             Spark.post("", "multipart/form-data", cargaReportesController::cargar);
             Spark.get("/mostrarInfo", cargaReportesController::mostrarResultados, engine);
+        });
+
+        //* ADMINISTRADOR *//
+
+        Spark.path("/admin", ()-> {
+            Spark.get("", homeAdminController::home, engine);
+        });
+
+        Spark.path("/gestionar-organizaciones", () -> {
+            Spark.get("", organizacionController::mostrarPantallaAdministrador, engine);
+            //Spark.get("/:id", organizacionController::editar, engine); //TODO Edicion de organizaciones desde panel admin
+            Spark.post("/crear", signUpController::signUpOrganizacion);
+            //Spark.post("/:id/guardar", organizacionController::guardar);
+            //Spark.post("/:id/delete", organizacionController::eliminar);
         });
 
 
