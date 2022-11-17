@@ -186,27 +186,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.2.0</version>
-        <configuration>
-          <configLocation>google_checks.xml</configLocation>
-          <violationSeverity>warning</violationSeverity>
-          <violationIgnore>
-            MissingJavadocMethod,
-            MissingJavadocPackage,
-            MissingJavadocType,
-            NonEmptyAtclauseDescription,
-            JavadocParagraph,
-            SummaryJavadoc
-          </violationIgnore>
-        </configuration>
-        <executions>
-          <execution>
-            <id>Validar Formateo</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>com.github.spotbugs</groupId>
