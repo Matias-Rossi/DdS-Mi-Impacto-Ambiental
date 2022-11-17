@@ -13,6 +13,7 @@
   <url>https://github.com/dds-utn</url>
 
   <properties>
+    <java.version>8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
