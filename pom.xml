@@ -189,17 +189,9 @@
       </plugin>
       <plugin>
         <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
+        <artifactId>spotbugs</artifactId>
         <version>4.2.0</version>
-        <executions>
-          <execution>
-            <id>Validar Code Smells</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
+        <type>pom</type>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
