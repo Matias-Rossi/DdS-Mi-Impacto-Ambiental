@@ -1,5 +1,3 @@
-package impacto_ambiental.server;
-
 import spark.Spark;
 import spark.debug.DebugScreen;
 
