@@ -155,7 +155,11 @@
       <artifactId>backport-util-concurrent</artifactId>
       <version>3.1</version>
     </dependency>
-
+    <dependency>
+      <groupId>com.sparkjava</groupId>
+      <artifactId>spark-core</artifactId>
+      <version>2.9.4</version>
+    </dependency>
     <dependency>
       <groupId>com.sparkjava</groupId>
       <artifactId>spark-template-handlebars</artifactId>
@@ -166,11 +170,7 @@
       <artifactId>spark-debug-tools</artifactId>
       <version>0.5</version>
     </dependency>
-    <dependency>
-      <groupId>com.sparkjava</groupId>
-      <artifactId>spark-core</artifactId>
-      <version>2.9.4</version>
-    </dependency>
+
     <!-- https://mvnrepository.com/artifact/com.github.jknack/handlebars -->
     <dependency>
       <groupId>com.github.jknack</groupId>
