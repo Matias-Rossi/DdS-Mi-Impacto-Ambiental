@@ -1,3 +1,4 @@
+import impacto_ambiental.server.Router;
 import spark.Spark;
 import spark.debug.DebugScreen;
 
@@ -8,8 +9,10 @@ import static spark.Spark.*;
 public class Main  {
 
 	public static void main(String[] args) {
+		//Spark.staticFiles.externalLocation("upload");
 		port(getHerokuAssignedPort());
-		get("/hello", (req, res) -> "Hello Heroku World");
+		Router.init();
+		DebugScreen.enableDebugScreen();
 	}
 
 	static int getHerokuAssignedPort() {
