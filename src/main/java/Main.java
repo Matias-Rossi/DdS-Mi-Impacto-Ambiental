@@ -8,7 +8,10 @@ public class Main  {
 
 	public static void main(String[] args) {
 		//Spark.staticFiles.externalLocation("upload");
-		port(getHerokuAssignedPort());
+		//EN LOCAL
+		port(9000);
+		//EN HOST
+		//port(getHerokuAssignedPort());
 		Router.init();
 		DebugScreen.enableDebugScreen();
 	}
