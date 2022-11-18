@@ -286,7 +286,8 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>Main</mainClass>
+              <addClasspath>true</addClasspath>
+              <mainClass>fully.qualified.MainClass</mainClass>
             </manifest>
           </archive>
         </configuration>
