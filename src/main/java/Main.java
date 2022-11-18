@@ -2,7 +2,6 @@ import impacto_ambiental.server.Router;
 import spark.Spark;
 import spark.debug.DebugScreen;
 
-import java.io.File;
 
 import static spark.Spark.*;
 
@@ -22,4 +21,5 @@ public class Main  {
 		}
 		return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
 	}
+
 }
