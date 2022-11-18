@@ -7,7 +7,7 @@ import java.io.File;
 
 import static spark.Spark.*;
 
-public class Server {
+public class Main  {
 
 	public static void main(String[] args) {
 		port(getHerokuAssignedPort());
