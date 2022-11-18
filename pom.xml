@@ -266,11 +266,11 @@
         <configuration>
           <jdkVersion>18.0.1</jdkVersion>
           <!-- Use your own application name -->
-          <appName>spark-heroku-example</appName>
+          <appName>miimpactoambiental-dds</appName>
           <processTypes>
             <!-- Tell Heroku how to launch your application -->
             <!-- You might have to remove the ./ in front   -->
-            <web>java -jar ./target/my-app-1.0-jar-with-dependencies.jar</web>
+            <web>java -jar target/my-app-1.0-jar-with-dependencies.jar</web>
           </processTypes>
         </configuration>
       </plugin>
