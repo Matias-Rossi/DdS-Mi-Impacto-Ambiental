@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ar.edu.utn.frba.dds</groupId>
-  <artifactId>ejercicio</artifactId>
+  <artifactId>miimpactoambiental-dds</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <name>TP DdS Grupo 6</name>
@@ -216,6 +216,9 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.22.2</version>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -299,7 +302,7 @@
           <processTypes>
             <!-- Tell Heroku how to launch your application -->
             <!-- You might have to remove the ./ in front   -->
-            <web>java -jar ./target/chatappdataserver-1.0-SNAPSHOT-jar-with-dependencies.jar</web>
+            <web>java -jar ./target/miimpactoambiental-dds-1.0-SNAPSHOT-jar-with-dependencies.jar</web>
           </processTypes>
         </configuration>
       </plugin>
