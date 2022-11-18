@@ -1,5 +1,4 @@
 import impacto_ambiental.server.Router;
-import spark.Spark;
 import spark.debug.DebugScreen;
 
 

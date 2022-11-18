@@ -287,7 +287,7 @@
           <archive>
             <manifest>
               <addClasspath>true</addClasspath>
-              <mainClass>fully.qualified.MainClass</mainClass>
+              <mainClass>fully.qualified.Main</mainClass>
             </manifest>
           </archive>
         </configuration>
