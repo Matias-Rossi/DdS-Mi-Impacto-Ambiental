@@ -10,6 +10,7 @@ public class Main  {
 	public static void main(String[] args) {
 		//Spark.staticFiles.externalLocation("upload");
 		port(getHerokuAssignedPort());
+		get("/", (req, res) -> "Hello Heroku World");
 		Router.init();
 		DebugScreen.enableDebugScreen();
 	}
