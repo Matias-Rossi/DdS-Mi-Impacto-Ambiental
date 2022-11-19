@@ -1,8 +1,12 @@
 package impacto_ambiental.db;
 
+import impacto_ambiental.models.entities.perfil.Organizacion;
+
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class Repositorio<T> {
@@ -23,6 +27,18 @@ public class Repositorio<T> {
   public T buscar(int id) {
     return EntityManagerHelper.getEntityManager().find(tipo, id);
   }
+  public T buscarPorId(int id) {
+    CriteriaBuilder criteriaBuilder = criteriaBuilder();
+    CriteriaQuery<T> query = criteriaBuilder.createQuery(this.tipo);
+    Root<T> raiz = query.from(this.tipo);
+
+    Predicate predicado = criteriaBuilder.equal(raiz.get("id"), id);
+    query.where(predicado);
+    BusquedaConPredicado busqueda = new BusquedaConPredicado(null, query);
+
+    return buscar(busqueda);
+  }
+
 
   public T buscar(BusquedaConPredicado busq) {
     return (T) EntityManagerHelper.getEntityManager().createQuery(busq.getCritero()).getSingleResult();
@@ -33,6 +49,7 @@ public class Repositorio<T> {
     Query query = EntityManagerHelper.getEntityManager().createQuery(sentencia);
     return (T) query.getSingleResult();
   }
+
 
   public T buscarLista(BusquedaConPredicado busq) {
     return (T) EntityManagerHelper.getEntityManager().createQuery(busq.getCritero()).getResultList();

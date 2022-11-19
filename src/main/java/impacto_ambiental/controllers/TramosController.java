@@ -258,6 +258,18 @@ public class TramosController {
   }
 
 
+  public ModelAndView pantallaCompartirTramo(Request request, Response response) {
+
+    String idTramo = request.params("idTramo");
+
+    Tramo tramoBuscado = repTramos.buscar(idTramo);
+
+
+    return new ModelAndView(new HashMap<String, Object>(){{
+      put("", tramoBuscado); //TODO Agregar el key
+    }}, "tramoCompartido.hbs"); //TODO Implementar .hbs
+  }
+
 
   private Ubicacion obtenerSalidaUbicacion(Request request){
     RepositorioMunicipiosODepartamentos repositorioMoD = new RepositorioMunicipiosODepartamentos();
@@ -303,5 +315,6 @@ public class TramosController {
     //TODO Como tratamos Factor de Emision?
      */
   }
+
 
 }

@@ -29,6 +29,7 @@ public class Usuario extends EntidadPersistente {
 
     @ManyToOne
     @JoinColumn(name = "sectorActual_id", referencedColumnName = "id")
+    @Getter
     private SectorTerritorial sectorTerritorial;
 
 

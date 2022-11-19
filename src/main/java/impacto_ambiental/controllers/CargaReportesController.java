@@ -2,6 +2,7 @@ package impacto_ambiental.controllers;
 
 import impacto_ambiental.models.entities.importadorExcel.ActividadBase;
 import impacto_ambiental.models.entities.importadorExcel.ApachePOI;
+import impacto_ambiental.models.entities.importadorExcel.CargarMediciones;
 import impacto_ambiental.models.entities.perfil.Importador;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
@@ -62,10 +63,9 @@ public class CargaReportesController {
     Importador importador = new ApachePOI();
     Organizacion unaOrganizacion = obtenerOrganizacionSegunIDUsuario(request);
     unaOrganizacion.setModuloImportador(importador);
-    unaOrganizacion.cargarMediciones(tempFile.toString());
-
-    repositorioOrganizaciones.actualizar(unaOrganizacion);
-
+    CargarMediciones carga = new CargarMediciones(tempFile.toString(),unaOrganizacion);
+    Thread cargaDeMedicion = new Thread(carga,"cargaAsinc");
+    cargaDeMedicion.start();
 
     response.redirect("/organizacion/cargaDeReportes");
     return response;
@@ -73,10 +73,7 @@ public class CargaReportesController {
 
   public ModelAndView mostrarResultados(Request request, Response response) {
 
-
-
     return new ModelAndView(new HashMap<String, Object>() {{
-
     }}, "usuarioOrganizacion/.hbs"); //TODO
   }
   private Organizacion obtenerOrganizacionSegunIDUsuario(Request request) {

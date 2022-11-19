@@ -24,25 +24,23 @@
 <div class="d-flex flex-column" id="content-wrap">
     <div class=" d-flex align-self-center conteinerRegistro">
         <main>
-            <form>
+            <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/{{id}}/compartir-tramo">
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
-                    <ul class="list-group" id="boxTrayectos">
-                        <label name="trayecto" class="form-label texto" style="font-size: 24px !important; padding:0px !important;"
-                                id="nombreDelTrayecto">Trayecto {{idTrayecto}}</label>
-                            {{#each tramos}}
-                        <li class="list-group-item d-flex justify-content-between align-items-start align-middle texto">
-                            <div class="ms-2 me-auto">
-                                <div class="listStyle" href="/trayectos/{{idTrayecto}}/tramos/{{id}}">Tramo {{id}}</div>
-                            </div>
-                            <a class="material-symbols-outlined edit" href="/trayectos/{{idTrayecto}}/tramos/{{id}}/compartir-tramo">person_add</a>
-                            <a class="material-symbols-outlined delete" href="/trayectos/{{idTrayecto}}/tramos/{{id}}/delete">delete</a>
-                        </li>
-                        {{/each}}
-                    </ul>
-                    <div class="d-flex justify-content-center">
-                        <a class="material-symbols-outlined" style="margin-top:20px; cursor: pointer;"
-                            href="/trayectos/{{idTrayecto}}/tramos/new">add_circle</a>
+                    <label name="tramo" class="form-label texto" style="font-size: 24px !important; padding:0px !important;" id="nombreDelTramo">Tramo {{idTramo}}</label>
+                    <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                        <div class="col-md-12">
+                            <label for="miembro" class="form-label textoInputs">Miembro</label>
+                            <select name="idMiembro" class="form-select form-select-custom" id="miembro" required>
+                                <option selected disabled value="">-- Seleccionar Miembro --</option>
+                                {{#each miembro}}
+                                <option value="{{id}}">{{usuario}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
                     </div>
+                </div>
+                <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
+                    <button class=" btn-custom " type="submit" id="idAniadir">Añadir</button>
                 </div>
             </form>
         </main>

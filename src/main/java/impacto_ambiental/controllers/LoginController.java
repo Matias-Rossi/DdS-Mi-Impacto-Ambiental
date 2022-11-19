@@ -25,7 +25,7 @@ public class LoginController {
                 request.session(true);
                 request.session().attribute("id", usuario.getId());
                 switch(usuario.getRol().getTipoUsuario()) {
-                    case AGENTE -> response.redirect("/"); //TODO
+                    case AGENTE -> response.redirect("/agenteSectorial/sector");
                     case MIEMBRO -> response.redirect("/home");
                     case ORGANIZACION -> response.redirect("/organizacion");
                     case ADMINISTRADOR -> response.redirect("/admin"); //TODO

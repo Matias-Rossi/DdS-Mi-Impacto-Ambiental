@@ -1,0 +1,36 @@
+{{#partial "contenidoNav" }}
+    <a href="/agenteSectorial/sector" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Sector
+    </a >
+    <a href="/agenteSectorial/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Organizaciones
+    </a >
+
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <li id="drop1"><a class="drop-item-custom"  href="/solicitudes">Solicitudes</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+{{#partial "contenido"}}
+<div class="d-flex flex-column" id="content-wrap">
+    <div class=" d-flex align-self-center conteinerRegistro">
+        <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax;">
+            <div class="col-md-12">
+                <h3>El HC total de {{sector}} es</h3>
+                <h1>{{hc}}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/partial}}
+{{> base.hbs }}

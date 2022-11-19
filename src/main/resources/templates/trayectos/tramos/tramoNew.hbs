@@ -294,13 +294,40 @@
                 <div class="formulariosTransporte" id="formularioTransportePublico" style="display: none;">
 
                     <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/new/transporte-publico">
+
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                            <div class="col-md-12">
+                                <label for="tipoTransporte" class="form-label textoInputs">Transporte</label>
+                                <select name="transporteID" class="form-select form-select-custom" id="tipoTransporte" required>
+                                    <option selected disabled value="">-- Seleccionar Transporte --</option>
+                                    {{#each paradas}}
+                                    <option value="{{linea.tipotransporte.subtipotransporte.id}}"> Transporte {{linea.tipotransporte.subtipotransporte.id}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                            <div class="col-md-12">
+                                <label for="linea" class="form-label textoInputs">Linea</label>
+                                <select name="lineaID" class="form-select form-select-custom" id="linea" required>
+                                    <option selected disabled value="">-- Seleccionar Linea --</option>
+                                    {{#each paradas}}
+                                    <option value="{{linea.id}}"> Linea {{linea.id}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                            
+                            
+                            
                         <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                             <div class="col-md-12">
                                 <label for="paradaInicio" class="form-label textoInputs">Parada inicio</label>
                                 <select name="paradaSalidaId" class="form-select form-select-custom" id="paradaInicio" required>
                                     <option selected disabled value="">-- Seleccionar parada inicio --</option>
                                     {{#each paradas}}
-                                    <option value="{{id}}"> Transporte {{linea.tipotransporte.subtipotransporte.id}} - Linea {{linea.id}} - Parada {{index}} </option>
+                                    <option value="{{id}}"> Parada {{index}} </option>
                                     {{/each}}
                                 </select>
                             </div>

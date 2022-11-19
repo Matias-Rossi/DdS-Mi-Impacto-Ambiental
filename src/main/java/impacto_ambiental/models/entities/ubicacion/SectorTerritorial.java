@@ -1,7 +1,9 @@
 package impacto_ambiental.models.entities.ubicacion;
 
 import impacto_ambiental.models.entities.EntidadPersistente;
+import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.usuario.Usuario;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ public abstract class SectorTerritorial extends EntidadPersistente {
     @Column
     String discriminador;
 
+    @Getter
     @Column(name = "sector")
     String sector;
     @OneToMany(mappedBy = "sectorTerritorialSolicitado", cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
@@ -27,6 +30,14 @@ public abstract class SectorTerritorial extends EntidadPersistente {
 
     public SectorTerritorial() {
 
+    }
+
+    public List<Organizacion> getOrganizaciones() {
+        return new ArrayList<Organizacion>();
+    }
+
+    public double calcularHC() {
+        return 0;
     }
 
     public void solicitarUnirse(Usuario usuario){

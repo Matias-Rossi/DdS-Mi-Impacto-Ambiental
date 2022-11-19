@@ -2,6 +2,7 @@ package impacto_ambiental.models.repositorios;
 
 import impacto_ambiental.db.BusquedaConPredicado;
 import impacto_ambiental.db.Repositorio;
+import impacto_ambiental.models.entities.reportes.HChistorico;
 import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
 import impacto_ambiental.models.entities.ubicacion.SectorTerritorial;
 
@@ -29,4 +30,5 @@ public class RepositorioSectoresTerritoriales extends Repositorio<SectorTerritor
         //Ejecución de la búsqueda
         return buscar(busqueda);
     }
+
 }

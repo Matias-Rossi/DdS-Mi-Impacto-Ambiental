@@ -17,7 +17,6 @@ import java.util.stream.Collectors;
 @DiscriminatorValue("Municipio")
 public class MunicipiosODepartamentos extends SectorTerritorial {
 
-    @Getter
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,mappedBy = "municipioODepartamento")
     List<Organizacion> organizaciones = new ArrayList<Organizacion>();
 
@@ -44,8 +43,12 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
         this.provincia=provincia;
         this.municipioOLocalidad=municipioOLocalidad;
     }
-    public void calcularHC(){
-        organizaciones.stream().forEach(e->e.calcularHC());
+
+    @Override
+    public double calcularHC(){
+        return organizaciones.stream().mapToDouble(e->
+                e.calcularHcTotal()
+        ).sum();
     }
 
     public NombreProvincia getProvincia() {
@@ -59,4 +62,8 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
         this.organizaciones.add(unaOrganizacion);
     }
 
+    @Override
+    public List<Organizacion> getOrganizaciones() {
+        return organizaciones;
+    }
 }

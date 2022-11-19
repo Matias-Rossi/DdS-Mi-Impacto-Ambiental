@@ -4,11 +4,8 @@ import impacto_ambiental.models.entities.perfil.Clasificacion;
 import impacto_ambiental.models.entities.servicios.geodds.ServicioGeoDds;
 import impacto_ambiental.models.entities.servicios.geodds.entidades.Municipio;
 import impacto_ambiental.models.entities.transporte.*;
-import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
-import impacto_ambiental.models.entities.ubicacion.NombreProvincia;
-import impacto_ambiental.models.entities.ubicacion.Ubicacion;
+import impacto_ambiental.models.entities.ubicacion.*;
 import impacto_ambiental.models.entities.usuario.*;
-import impacto_ambiental.models.entities.ubicacion.Provincia;
 import impacto_ambiental.models.repositorios.*;
 
 import java.io.IOException;
@@ -16,13 +13,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Init {
-    /*
+
     static public void main(String[] args) throws IOException {
-        inicializarRoles();
-        inicializarClasificacion();
-        inicializarProvincias();
-        datosParaCrearTrayectos();
-        crearAdmin();
+        //inicializarRoles();
+        //inicializarClasificacion();
+        //inicializarProvincias();
+        //datosParaCrearTrayectos();
+        //crearAdmin();
+        inicializarAgenteSectorial();
         System.out.println(" ##### Inicialización finalizada correctamente ##### ");
     }
 
@@ -196,5 +194,15 @@ public class Init {
         System.out.println("Provincias y municipios inicializados");
     }
 
-*/
+    static void inicializarAgenteSectorial() {
+        RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
+        RepositorioRoles repositorioRoles = new RepositorioRoles();
+        MunicipiosODepartamentos municipio = new RepositorioMunicipiosODepartamentos().buscar(18);
+        Rol rol = repositorioRoles.obtenerRol("AGENTE");
+        Usuario agenteSectorial = new Usuario(rol, "agenteSectorial", "agenteSectorial");
+        agenteSectorial.agregarSector(municipio);
+        repositorioUsuarios.agregar(agenteSectorial);
+    }
+
+
 }

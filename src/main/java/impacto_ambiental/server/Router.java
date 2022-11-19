@@ -44,6 +44,7 @@ public class Router {
         CargaReportesController cargaReportesController = new CargaReportesController();
         CalcularHcController calcularHCController = new CalcularHcController();
         HomeAdminController homeAdminController = new HomeAdminController();
+        AgenteSectorialController agenteSectorialController = new AgenteSectorialController();
 
        // Spark.staticFiles.location("/public");
 
@@ -120,6 +121,8 @@ public class Router {
         Spark.path("/trayectos/:idTrayecto/tramos", () -> {
             Spark.get("", tramosController::mostrarPropios, engine);
             Spark.get("/new", tramosController::pantallaNewTramo, engine);
+            //Spark.get("/:id/compartir-tramo", tramosController::pantallaCompartirTramo, engine);
+            //Spark.post("/:id/compartir-tramo", tramosController::comprartirTramo);
             Spark.post("/new/particular", tramosController::cargarParticular);
             Spark.post("/new/transporte-contratado", tramosController::cargarContratado);
             Spark.post("/new/transporte-publico", tramosController::cargarPublico);
@@ -170,7 +173,18 @@ public class Router {
             //Spark.post("/:id/delete", organizacionController::eliminar);
         });
 
+        Spark.path("/agenteSectorial", () -> {
+            Spark.get("/sector", agenteSectorialController::mostrarSector, engine);
+            Spark.get("/organizaciones", agenteSectorialController::mostrarOrganizaciones, engine);
+            Spark.get("/organizaciones/:id", agenteSectorialController::detalleOrganizacion, engine);
+        });
 
+ //_______________________APIS
+/*
+        Spark.path("/api/", () -> {
+            Spark.get("transportePublico/id/lineas", transportePublicoController::lineasDeTransporte , new JsonTransformer() );
+        } );
+*/
 /*
 
         Spark.path("/perfil", () -> {

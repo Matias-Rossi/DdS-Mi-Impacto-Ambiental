@@ -294,3 +294,23 @@ function mostrarFormulario(id) {
   }
 }
 
+//__________ JS CARGA DE TRAMOTRASPORTE PUBLICO
+/*
+function getLinea(tipoTransporte){
+
+}
+
+const tipoTransporte = document.getElementById("tipoTransporte")
+
+tipoTransporte.addEventListener('change', (event) => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "/");
+  xhr.send();
+  xhr.responseType = "json";
+
+  const lineas = document.getElementById('linea');
+  lineas.valu ;
+  resultado.textContent = `Te gusta el sabor ${event.target.value}`;
+});
+
+*/

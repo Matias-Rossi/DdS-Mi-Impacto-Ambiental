@@ -1,5 +1,6 @@
 package impacto_ambiental.models.entities.ubicacion;
 
+import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.reportes.HChistorico;
 import impacto_ambiental.models.repositorios.RepositorioMunicipiosODepartamentos;
 import lombok.Getter;
@@ -38,12 +39,21 @@ public class Provincia extends SectorTerritorial {
         this.nombreProvincia = nombreProvincia;
     }
 
+    @Override
+    public double calcularHC(){
 
-    public void calcularHC(Integer anio, Integer mes){
-        municipiosODepartamentos.stream().forEach(e->e.calcularHC());
+        return municipiosODepartamentos.stream().mapToDouble(e->e.calcularHC()).sum();
+
     }
 
     public List<HChistorico> getHChistoricos(){
         return municipiosODepartamentos.stream().map(e->e.getHcHistoricos()).flatMap(e->e.stream()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Organizacion> getOrganizaciones() {
+        List<Organizacion> organizaciones = new ArrayList<>();
+        this.municipiosODepartamentos.forEach(_mun -> organizaciones.addAll(_mun.organizaciones));
+        return organizaciones;
     }
 }
