@@ -28,6 +28,7 @@
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
 
                     <ul class="list-group" id="boxTrayectos">
+                        <h3>Mis organizaciones y áreas</h3>
                         {{#each solicitudes}}
                             <form method="POST" action="/organizaciones/desvincularse/" onsubmit="return confirm('Realmente deseas desvincularte de {{ area.organizacion.razonSocial }} - {{ area.nombre }}?')">
                                 <input name="solicitud" value="{{id}}" type="hidden">

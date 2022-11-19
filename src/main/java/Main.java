@@ -1,3 +1,5 @@
+package main.java;
+
 import impacto_ambiental.server.Router;
 import spark.debug.DebugScreen;
 

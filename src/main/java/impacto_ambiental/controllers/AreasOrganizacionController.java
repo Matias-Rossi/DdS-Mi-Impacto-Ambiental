@@ -21,6 +21,7 @@ public class AreasOrganizacionController {
 
     return new ModelAndView(new HashMap<String, Object>(){{
       put("areas", areas);
+      put("nombreOrganizacion", unaOrganizacion.getRazonSocial());
     }}, "usuarioOrganizacion/areasOrganizacion.hbs");
   }
   

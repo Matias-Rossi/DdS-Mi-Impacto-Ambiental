@@ -207,6 +207,12 @@
       <version>2.3</version>
       <type>maven-plugin</type>
     </dependency>
+      <dependency>
+          <groupId>com.sparkjava</groupId>
+          <artifactId>spark-core</artifactId>
+          <version>2.9.4</version>
+          <scope>compile</scope>
+      </dependency>
 
   </dependencies>
 
