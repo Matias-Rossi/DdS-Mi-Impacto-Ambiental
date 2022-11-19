@@ -47,7 +47,7 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
     @Override
     public double calcularHC(){
         return organizaciones.stream().mapToDouble(e->
-                e.calcularHcTotal()
+                e.getHCTotal()
         ).sum();
     }
 

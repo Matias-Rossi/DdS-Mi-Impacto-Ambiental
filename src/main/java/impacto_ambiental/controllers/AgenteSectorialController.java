@@ -45,7 +45,7 @@ public class AgenteSectorialController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("razonSocial", org.getRazonSocial());
-            put("hcTotal", org.calcularHcTotal());
+            put("hcTotal", org.getHCTotal());
         }}, "/agenteSectorial/detalleOrganizacion.hbs");
     }
 
