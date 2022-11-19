@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 public class Init {
 
     static public void main(String[] args) throws IOException {
-        //inicializarRoles();
-        //inicializarClasificacion();
-        //inicializarProvincias();
-        //datosParaCrearTrayectos();
-        //crearAdmin();
+        inicializarRoles();
+        inicializarClasificacion();
+        inicializarProvincias();
+        datosParaCrearTrayectos();
+        crearAdmin();
         inicializarAgenteSectorial();
         System.out.println(" ##### Inicialización finalizada correctamente ##### ");
     }
