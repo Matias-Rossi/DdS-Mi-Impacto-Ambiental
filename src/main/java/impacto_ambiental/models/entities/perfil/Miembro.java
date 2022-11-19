@@ -7,12 +7,10 @@ import impacto_ambiental.models.entities.trayecto.Trayecto;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
 import impacto_ambiental.models.entities.usuario.Usuario;
-import retrofit2.http.GET;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "miembros")
@@ -92,7 +90,7 @@ public class Miembro extends EntidadPersistente {
         trayectos.stream().forEach(e->e.calcularHC(organizacion));
     }
     public double calcularHCPorcentual(Organizacion organizacion){
-        return (calcularHcPorOrg(organizacion)/organizacion.calcularHcTotal())*100;
+        return (calcularHcPorOrg(organizacion)/organizacion.getHCTotal())*100;
     }
     public double calcularHCTotal(){
         return this.hcsHistoricos.stream().mapToDouble(e->e.getHuellaDeCarbono()).sum();

@@ -9,12 +9,10 @@ import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import lombok.Getter;
 import impacto_ambiental.models.entities.usuario.Usuario;
 import lombok.Setter;
-import org.hibernate.annotations.IndexColumn;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "organizaciones")
@@ -100,9 +98,6 @@ public class Organizacion extends EntidadPersistente {
         this.calcularHCViajes();
     }
 
-    public double calcularHcTotal(){
-        return this.HChistoricos.stream().mapToDouble(historico -> historico.getHuellaDeCarbono()).sum();
-    }
     private void calcularHCConsumos(){
         actividadesCargadas.stream().forEach(e->e.calcularHC());
     }
