@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Init {
-
+/*
     static public void main(String[] args) throws IOException {
         inicializarRoles();
         inicializarClasificacion();
@@ -204,5 +204,5 @@ public class Init {
         repositorioUsuarios.agregar(agenteSectorial);
     }
 
-
+*/
 }
