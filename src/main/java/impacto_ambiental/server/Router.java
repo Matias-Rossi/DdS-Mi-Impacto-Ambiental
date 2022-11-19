@@ -2,7 +2,6 @@ package impacto_ambiental.server;
 
 import impacto_ambiental.controllers.*;
 import impacto_ambiental.controllers.helpers.PermisoHelper;
-import impacto_ambiental.controllers.helpers.UsuarioLogueadoHelper;
 import impacto_ambiental.models.entities.usuario.Accion;
 import impacto_ambiental.models.entities.usuario.Alcance;
 import impacto_ambiental.models.entities.usuario.Objeto;
@@ -75,8 +74,8 @@ public class Router {
 
         // ### Calcular HC ###
         Spark.path("/calcularhc", () -> {
-            Spark.post("", calcularHCController::calcularHc);
-            Spark.get("", calcularHCController::mostrarHC, engine);
+            Spark.post("", calcularHCController::calcularHcMiembro);
+            Spark.get("", calcularHCController::mostrarHCMiembro, engine);
 
         });
 
@@ -157,6 +156,11 @@ public class Router {
             Spark.get("", cargaReportesController::mostrarVista, engine);
             Spark.post("", "multipart/form-data", cargaReportesController::cargar);
             Spark.get("/mostrarInfo", cargaReportesController::mostrarResultados, engine);
+        });
+
+        Spark.path("/organizacion/calcularHC", () -> {
+            Spark.post("", calcularHCController::calcularHcOrganizacion);
+            Spark.get("", calcularHCController::mostrarHcOrganizacion, engine);
         });
 
         //* ADMINISTRADOR *//

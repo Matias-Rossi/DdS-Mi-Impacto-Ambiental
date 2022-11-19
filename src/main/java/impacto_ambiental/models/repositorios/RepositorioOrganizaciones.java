@@ -1,7 +1,6 @@
 package impacto_ambiental.models.repositorios;
 
 import impacto_ambiental.db.BusquedaConPredicado;
-import impacto_ambiental.db.EntityManagerHelper;
 import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.db.Repositorio;
@@ -42,7 +41,7 @@ public class RepositorioOrganizaciones extends Repositorio<Organizacion> {
     return solicitudes;
   }
 
-  public Organizacion obtenerOrganizacionSegunIDUsuario(Request request) {
+  public Organizacion obtenerOrganizacionSegunRequest(Request request) {
     return this.buscarPorIDUsuario(request.session().attribute("id"));
   }
 
