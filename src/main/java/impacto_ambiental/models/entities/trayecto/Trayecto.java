@@ -40,6 +40,7 @@ public class Trayecto extends EntidadPersistente {
 //            inverseJoinColumns = @JoinColumn(name = "organizacion_id"))
 //    private List<Organizacion> organizaciones = new ArrayList<>();
 
+    @Getter
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "trayecto")
     List<TrayectosPorOrganizaciones> organizacionesxtrayectos = new ArrayList<>();
     @Getter

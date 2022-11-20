@@ -258,16 +258,36 @@ public class TramosController {
   }
 
 
-  public ModelAndView pantallaCompartirTramo(Request request, Response response) {
+  public Response compartirCon(Request request, Response response) {
+
+    RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
+    RepositorioTramos repositorioTramos = new RepositorioTramos();
 
     String idTramo = request.params("idTramo");
+    String idMiembro = request.params("idMiembro");
 
-    Tramo tramoBuscado = repTramos.buscar(idTramo);
+    Miembro miembro = repositorioMiembros.buscar(Integer.valueOf(idMiembro));
+    Tramo tramo = repositorioTramos.buscar(Integer.valueOf(idTramo));
 
+    tramo.compartirTramo(miembro);
+
+    repositorioMiembros.actualizar(miembro);
+
+
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
+
+  public ModelAndView pantallaCompartirTramo(Request request, Response response) {
+
+    RepositorioTrayerctos repTrayectos = new RepositorioTrayectos();
+    String idTrayecto = request.params("idTrayecto");
+    Trayecto trayecto = repTrayectos.buscar(Integer.valueOf(idTrayecto));
+    List<Miembro> miembros = trayecto.getOrganizacionesxtrayectos.stream().flatMap(ot -> ot.getOrganizacion().getMiembros().stream()).collect(Collectors.toList());
 
     return new ModelAndView(new HashMap<String, Object>(){{
-      put("", tramoBuscado); //TODO Agregar el key
-    }}, "tramoCompartido.hbs"); //TODO Implementar .hbs
+      put("miembros", miembros); //TODO Agregar el key
+    }}, ".hbs"); //TODO Implementar .hbs
   }
 
 

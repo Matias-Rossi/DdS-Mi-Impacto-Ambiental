@@ -85,8 +85,10 @@ public class Tramo implements ActividadesEmisorasCO2 {
 
 
         for(;mesInicio<=mesFin;mesInicio++){
-            Integer month = mesInicio;
-            new HChistorico(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), anio, Periodo.getPeriodo(month), hcXorgXpart,org,miembro);
+            System.out.println("mes: "+mesInicio);
+            System.out.println("mes: "+mesFin);
+
+            new HChistorico(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), anio, Periodo.getPeriodo(mesInicio), hcXorgXpart,org,miembro);
         }
 /*
         if(mes.equals(0)) return this.generarReporte(organizacion, Periodo.Anual,HCxMes*6,anio);
