@@ -1,1 +1,1 @@
-web: java -jar target/miimpactoambientaldds-1.0-SNAPSHOT.jar
+web: java -jar target/miimpactoambientaldds-1.0-SNAPSHOT-jar-with-dependencies.jar
