@@ -19,6 +19,7 @@ public class ValidadorContrasenia {
   );
 
   //TODO Para fines de testing (desp sacar)
+  /*
   public static void main(String[] args) throws IOException {
     System.out.print("Ingrese una contrasenia: ");
     BufferedReader lector = new BufferedReader(new InputStreamReader(System.in));
@@ -33,7 +34,7 @@ public class ValidadorContrasenia {
     }
         
   }
-
+*/
   public boolean validar(String contrasenia, ValidadorCriterio criterio){
     final boolean resultadoValidaciones = criterio.validar(contrasenia);
 

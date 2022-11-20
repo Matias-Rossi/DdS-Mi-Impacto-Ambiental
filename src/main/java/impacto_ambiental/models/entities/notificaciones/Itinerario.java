@@ -9,6 +9,7 @@ import static org.quartz.CronScheduleBuilder.*;
 
 public class Itinerario {
 
+  /*
   public static void main(String args[]) throws SchedulerException {
     SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
 
@@ -52,6 +53,6 @@ public class Itinerario {
   }
 
 
-
+*/
 
 }
