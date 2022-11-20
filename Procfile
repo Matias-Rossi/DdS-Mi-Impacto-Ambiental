@@ -1,1 +1,1 @@
-web: java -cp target/classes;target/dependency/* main.java.Main
+web: java -jar target/miimpactoambientaldds-1.0-SNAPSHOT.jar
