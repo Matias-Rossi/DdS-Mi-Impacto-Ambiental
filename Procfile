@@ -1,1 +1,1 @@
-web: java -cp "target/dependency/*":target/classes Main
+web: java $JAVA_OPTS -jar target/miimpactoambientaldds-1.0-SNAPSHOT-jar-with-dependencies.jar
