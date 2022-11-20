@@ -58,6 +58,17 @@ public class Area extends EntidadPersistente {
         this.solicitudes.add(solicitud);
     }
 
+    public List<Miembro> getMiembros(){
+        System.out.println("solicitudes");
+        List<Solicitud> solis = solicitudes.stream().filter(sol->sol.getEstado().equals(SolicitudEstado.ACEPTADA)).collect(Collectors.toList());
+        solis.forEach(sol->sol.imprimir());
+
+        List<Miembro> miembros = solis.stream().map(sol->sol.getMiembro()).collect(Collectors.toList());
+        System.out.println("miembros");
+        System.out.println(miembros);
+        return miembros;
+    }
+
     public double calcularHCporMiembro(Integer anio,Integer mes){
 //        return this.calcularHC(anio,mes)/this.miembrosActuales().size();
 //        TODO

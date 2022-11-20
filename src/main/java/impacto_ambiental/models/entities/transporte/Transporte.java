@@ -45,11 +45,15 @@ public abstract class Transporte extends EntidadPersistente {
         this.consumoXKm = consumoXKm;
     }
     public double calcularDistancia(Ubicacion inicio, Ubicacion fin){
+        return inicio.getNumeracion()*7;
+        /*
         try {
             return this.calculadorAdapter.calcularDistancia(inicio, fin);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return 0;
+
+         */
     }
 }

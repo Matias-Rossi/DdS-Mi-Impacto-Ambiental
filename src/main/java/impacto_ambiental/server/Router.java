@@ -44,6 +44,8 @@ public class Router {
         CalcularHcController calcularHCController = new CalcularHcController();
         HomeAdminController homeAdminController = new HomeAdminController();
         AgenteSectorialController agenteSectorialController = new AgenteSectorialController();
+        SolicitudesCompartirTramoController solicitudesCompartirTramoController = new SolicitudesCompartirTramoController();
+
 
        // Spark.staticFiles.location("/public");
 
@@ -64,7 +66,7 @@ public class Router {
         Spark.path("/signup", () -> {
             Spark.get("", signUpController::pantallaDeSignUp, engine);
             Spark.post("/miembro", signUpController::signUpMiembro);
-            Spark.post("/organizacion", signUpController::signUpOrganizacion);
+            Spark.post("/homeorg", signUpController::signUpOrganizacion);
             Spark.post("/agente_sectorial", signUpController::signUpAgenteSectorial);
         });
 
@@ -120,8 +122,8 @@ public class Router {
         Spark.path("/trayectos/:idTrayecto/tramos", () -> {
             Spark.get("", tramosController::mostrarPropios, engine);
             Spark.get("/new", tramosController::pantallaNewTramo, engine);
-            //Spark.get("/:id/compartir-tramo", tramosController::pantallaCompartirTramo, engine);
-            //Spark.post("/:id/compartir-tramo", tramosController::comprartirTramo);
+            Spark.get("/:idTramo/compartir-tramo", tramosController::pantallaCompartirTramo, engine);
+            Spark.post("/:idTramo/compartir-tramo", tramosController::compartirCon);
             Spark.post("/new/particular", tramosController::cargarParticular);
             Spark.post("/new/transporte-contratado", tramosController::cargarContratado);
             Spark.post("/new/transporte-publico", tramosController::cargarPublico);
@@ -129,21 +131,32 @@ public class Router {
             Spark.post("/new/a-pie", tramosController::cargarpie);
             //Spark.get("/:idTramo", tramosController::mostrar, engine);
             //Spark.get("/:idTramo/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
-            Spark.post("/:id/edit", tramosController::modificar);       //lo que realmente lo edita
+            Spark.post("/:idTramo/edit", tramosController::modificar);       //lo que realmente lo edita
         });
 
-        Spark.path("/organizacion", () -> {
+
+        // ### Solicitudes ###
+        Spark.path("/solicitudes", () -> {
+            Spark.get("", solicitudesCompartirTramoController::mostrar, engine);
+            Spark.post("", solicitudesCompartirTramoController::respuestaTramo);
+        });
+
+
+
+        // ### Organizacion ###
+
+        Spark.path("/homeorg", () -> {
              Spark.get("", homeOrganizacionController::pantallaDeHome, engine);
         });
 
-        Spark.path("/organizacion/areas", () -> {
+        Spark.path("/areas", () -> {
             Spark.get("", areasOrganizacionController::mostrarPropias, engine);
             Spark.get("/:id", gestorAreaController::mostrar, engine);
             Spark.post("", areasOrganizacionController::guardar);
             Spark.post("/:id/delete", areasOrganizacionController::borrar);
         });
 
-        Spark.path("/organizacion/empleados", () -> {
+        Spark.path("/empleados", () -> {
             Spark.get("", empleadosController::elegirPantalla, engine);
            Spark.get("/actuales", empleadosController::mostrarEmpleadosActuales, engine);
            Spark.get("/pendientes", empleadosController::mostrarEmpleadosPendientes, engine);
@@ -152,16 +165,18 @@ public class Router {
            Spark.post("/rechazar", empleadosController::rechazarEmpleado);
         });
 
-        Spark.path("/organizacion/cargaDeReportes", () -> {
+        Spark.path("/cargaDeReportes", () -> {
             Spark.get("", cargaReportesController::mostrarVista, engine);
             Spark.post("", "multipart/form-data", cargaReportesController::cargar);
             Spark.get("/mostrarInfo", cargaReportesController::mostrarResultados, engine);
         });
 
-        Spark.path("/organizacion/calcularHC", () -> {
+        Spark.path("/calcularHCOrg", () -> {
             Spark.post("", calcularHCController::calcularHcOrganizacion);
             Spark.get("", calcularHCController::mostrarHcOrganizacion, engine);
         });
+
+        // ### Fin Organizacion ###
 
         //* ADMINISTRADOR *//
 

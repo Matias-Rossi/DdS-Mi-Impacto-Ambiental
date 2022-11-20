@@ -27,7 +27,7 @@ public class LoginController {
                 switch(usuario.getRol().getTipoUsuario()) {
                     case AGENTE -> response.redirect("/agenteSectorial/sector");
                     case MIEMBRO -> response.redirect("/home");
-                    case ORGANIZACION -> response.redirect("/organizacion");
+                    case ORGANIZACION -> response.redirect("/homeorg");
                     case ADMINISTRADOR -> response.redirect("/admin"); //TODO
                 }
                 response.redirect("/home");

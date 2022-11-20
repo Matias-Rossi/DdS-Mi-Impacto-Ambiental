@@ -23,9 +23,10 @@ public class Miembro extends EntidadPersistente {
     @JoinColumn(name = "ubicacion_id", referencedColumnName = "id")
     private Ubicacion ubicacion;
 
+    @Getter
     @OneToOne(cascade = javax.persistence.CascadeType.ALL)
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
-    private Usuario usuario;
+    public Usuario usuario;
 
     @Getter
     @Column(name = "nombre")

@@ -64,9 +64,13 @@ public class Trayecto extends EntidadPersistente {
 
     public void calcularHC(Organizacion organizacion)
     {
-        TrayectosPorOrganizaciones trayectosPorOrganizaciones = this.organizacionesxtrayectos.stream().filter(t -> t.getOrganizacion().equals(organizacion)).collect(Collectors.toList()).get(0);
+        List<TrayectosPorOrganizaciones> organizacionesxtrayectos = this.organizacionesxtrayectos.stream().filter(t -> t.getOrganizacion().equals(organizacion)).collect(Collectors.toList());
+        if(organizacionesxtrayectos.size() == 0){
+            return;
+        }
+        TrayectosPorOrganizaciones trayectosPorOrganizaciones = organizacionesxtrayectos.get(0);
         if(Objects.isNull(trayectosPorOrganizaciones.getHc())) {
-            double hcxOrg = tramos.stream().map(e->e.calcularHC(this.organizacionesxtrayectos.size(),(this.semestre-1)*6,this.semestre*6,this.anio,trayectosPorOrganizaciones.getOrganizacion(),this.miembro)).collect(Collectors.toList()).stream().reduce(0.0, (a, b) ->a+b);
+            double hcxOrg = tramos.stream().map(e->e.calcularHC(this.organizacionesxtrayectos.size(),this.semestre,this.anio,trayectosPorOrganizaciones.getOrganizacion(),this.miembro)).collect(Collectors.toList()).stream().reduce(0.0, (a, b) ->a+b);
             trayectosPorOrganizaciones.setHc(hcxOrg);
         }
     }

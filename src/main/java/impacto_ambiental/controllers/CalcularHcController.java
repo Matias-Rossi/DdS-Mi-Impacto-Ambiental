@@ -29,6 +29,11 @@ public class CalcularHcController {
         List<OrgPorcentaje> porcentajes = organizacions.stream().map(org->new OrgPorcentaje(org,unMiembro.calcularHCPorcentual(org))).collect(Collectors.toList());
         Double hc = unMiembro.calcularHCTotal();
 
+        for (Integer i = 0;i<porcentajes.size();i++){
+            System.out.println(porcentajes.get(i).getPorcentaje());
+            System.out.println(porcentajes.get(i).getOrganizacion().getRazonSocial());
+        }
+
 
         return new ModelAndView(new HashMap<String, Object>() {{
             put("hc",hc);
@@ -49,9 +54,10 @@ public class CalcularHcController {
     public Response calcularHcOrganizacion(Request request, Response response) {
         RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
         Organizacion organizacion = repositorioOrganizaciones.buscarPorIDUsuario(request.session().attribute("id"));
-        organizacion.getHCTotal();
+        organizacion.calcularHC();
+        repositorioOrganizaciones.actualizar(organizacion);
         //No está desnormalizado, pa que el post? no sé
-        response.redirect("/organizacion/calcularHC");
+        response.redirect("/calcularHCOrg");
         return response;
     }
 

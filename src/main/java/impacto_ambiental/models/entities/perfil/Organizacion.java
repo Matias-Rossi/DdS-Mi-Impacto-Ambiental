@@ -12,7 +12,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "organizaciones")
@@ -87,6 +89,13 @@ public class Organizacion extends EntidadPersistente {
         Area nuevaArea = new Area(nombreArea, this );
         this.areas.add(nuevaArea);
         return nuevaArea;
+    }
+
+    public List<Miembro> getMiembros(){
+        List<Miembro> miembros =areas.stream().map(area->area.getMiembros()).flatMap(Collection::stream).collect(Collectors.toList());
+        System.out.println("miembros");
+        System.out.println(miembros);
+        return miembros;
     }
 
     public void agregarReporte(HChistorico HChistorico){
