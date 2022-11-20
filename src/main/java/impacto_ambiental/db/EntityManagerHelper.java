@@ -26,6 +26,9 @@ public class EntityManagerHelper {
             }
           EntityManager em = threadLocal.get();
           if(em == null || !em.isOpen()) {
+              if(null == emf){
+                  emf = Persistence.createEntityManagerFactory("db");
+              }
             em = emf.createEntityManager();
             threadLocal.set(em);
           }
