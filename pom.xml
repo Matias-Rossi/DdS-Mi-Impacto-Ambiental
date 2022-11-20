@@ -292,7 +292,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>Main</mainClass>
+              <mainClass>Main.class</mainClass>
             </manifest>
           </archive>
         </configuration>
