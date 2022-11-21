@@ -4,6 +4,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReporteHistorico {
     @Getter
@@ -27,9 +28,14 @@ public class ReporteHistorico {
     }
 
     private void reportar(Periodo periodo, Integer anio, Double hc){
-        ReporteMensual reporte = reportesMensuales.stream().filter(e->e.getAnio().equals(anio)).filter(e->e.getPeriodo().equals(periodo)).findAny().orElse(nuevoReporteMensual(periodo,anio));
-        reporte.sumar(hc);
+        List<ReporteMensual> posibles = reportesMensuales.stream().filter(e->e.getAnio().equals(anio)).filter(e->e.getPeriodo().equals(periodo)).collect(Collectors.toList());
+        if(posibles.size()>0){
+            posibles.get(0).sumar(hc);
+            return;
+        }
+        nuevoReporteMensual(periodo,anio).sumar(hc);
     }
+
 
     private ReporteMensual nuevoReporteMensual(Periodo periodo, Integer anio){
         ReporteMensual reporte = new ReporteMensual(periodo,anio);
