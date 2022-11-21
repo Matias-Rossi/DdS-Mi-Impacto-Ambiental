@@ -40,6 +40,7 @@ public class Parada extends EntidadPersistente {
     }
 
     public Parada(String nombre, Ubicacion ubicacion, int index, float distanciaASiguiente, float distanciaAAnterior, Linea linea) {
+        this.nombre = nombre;
         this.ubicacion = ubicacion;
         this.index = index;
         this.distanciaASiguiente = distanciaASiguiente;

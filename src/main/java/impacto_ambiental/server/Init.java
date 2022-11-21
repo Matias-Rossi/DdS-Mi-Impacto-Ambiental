@@ -18,14 +18,14 @@ import java.util.stream.Collectors;
 public class Init {
 
     static public void main(String[] args) throws IOException {
-        //inicializarRoles();
-        //inicializarClasificacion();
-        //inicializarProvincias();
-        //crearOrganizacionYMiembro();
-        //datosParaCrearTrayectos();
-        //crearAdmin();
-        //inicializarAgenteSectorial();
-        //inicializarFactorDeEmision();
+        inicializarRoles();
+        inicializarClasificacion();
+        inicializarProvincias();
+        crearOrganizacionYMiembro();
+        datosParaCrearTrayectos();
+        crearAdmin();
+        inicializarAgenteSectorial();
+        inicializarFactorDeEmision();
 
         System.out.println(" ##### Inicialización finalizada correctamente ##### ");
         System.exit(0);
@@ -82,7 +82,8 @@ public class Init {
         SubTipoTransporte particular2 = new SubTipoTransporte(TipoTransporte.TIPO_PARTICULAR,"PARTICULAR2");
         SubTipoTransporte publico1 = new SubTipoTransporte(TipoTransporte.TIPO_PUBLICO,"PUBLICO1");
         SubTipoTransporte publico2 = new SubTipoTransporte(TipoTransporte.TIPO_PUBLICO,"PUBLICO2");
-
+        SubTipoTransporte subte = new SubTipoTransporte(TipoTransporte.TIPO_PUBLICO, "Subte");
+        SubTipoTransporte colectivo = new SubTipoTransporte(TipoTransporte.TIPO_PUBLICO, "Colectivo");
 
         Transporte tPie = new ServicioEcologico(pie,null,5);
         Transporte tBici = new ServicioEcologico(bici,null,10);
@@ -128,19 +129,30 @@ public class Init {
         );
 
 
-
-
         Linea linea1 = new Linea("linea1");
         Linea linea2 =  new Linea("linea2");
+        Linea lineaB = new Linea("Linea B");
+        Linea lineaC = new Linea("Linea C");
+        Linea linea78 = new Linea("78");
 
         Parada parada1 = new Parada(ubicacion1,1,10,10,linea1);
         Parada parada2 = new Parada(ubicacion2,2,10,10,linea1);
         Parada parada3 = new Parada(ubicacion3,1,10,10,linea2);
         Parada parada4 = new Parada(ubicacion4,2,10,10,linea2);
-
+        Parada lacrozeB = new Parada("Federico Lacroze", ubicacion1, 1, 15, 15, lineaB);
+        Parada medrano = new Parada("Medrano", ubicacion2, 2, 15, 15, lineaB);
+        Parada constitucion = new Parada("Constitucion", ubicacion3, 1, 50, 50, lineaC);
+        Parada retiro = new Parada("Retiro", ubicacion4, 2, 50, 50, lineaC);
+        Parada lacroze78 = new Parada("Federico Lacroze", ubicacion1, 1, 15, 15, linea78);
+        Parada sl = new Parada("Solano Lopez", ubicacion3, 2, 15, 15, linea78);
 
         Transporte tPublico1 = new TransportePublico(publico1,linea1, null, 20);
         Transporte tPublico2 = new TransportePublico(publico2,linea2, null, 20);
+
+        Transporte tp_b = new TransportePublico(subte, lineaB, null, 5);
+        Transporte tp_c = new TransportePublico(subte, lineaC, null, 5);
+        Transporte tp_78 = new TransportePublico(colectivo, linea78, null, 15);
+
 
         RepositorioTransportes repoTrans = new RepositorioTransportes();
         repoTrans.agregar(tContratado);
@@ -150,9 +162,11 @@ public class Init {
         repoTrans.agregar(tParticularelectrico);
         repoTrans.agregar(tPie);
         repoTrans.agregar(tBici);
-        repoTrans.agregar(tPublico1);
-        repoTrans.agregar(tPublico2);
-
+        //repoTrans.agregar(tPublico1);
+        //repoTrans.agregar(tPublico2);
+        repoTrans.agregar(tp_b);
+        repoTrans.agregar(tp_c);
+        repoTrans.agregar(tp_78);
     }
 
 
