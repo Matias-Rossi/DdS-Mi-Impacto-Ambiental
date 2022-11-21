@@ -27,6 +27,15 @@
     <div class="d-flex flex-column" id="content-wrap">
         <div class=" d-flex align-self-center conteinerRegistro">
             <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="d-flex justify-content-around">
+                        <h3 class="textoIngreso">Composicion de HC de {{nombre}}</h3>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                <canvas id="graph"></canvas>
+                </div>
 
                 {{! -------1/8------- }}
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
@@ -37,7 +46,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_FIJA}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_FIJA}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -56,7 +65,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_MOVIL}}hc </span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_MOVIL}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒 </span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -74,7 +83,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -92,7 +101,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -111,7 +120,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -132,7 +141,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -150,7 +159,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_CONTRATADO}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_CONTRATADO}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -169,7 +178,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_ECOLOGICO}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_ECOLOGICO}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -178,7 +187,6 @@
                         </div>
                     </div>
                 </div>
-
             </main>
         </div>
     </div>
@@ -186,8 +194,10 @@
 {{/partial}}
 
 {{#partial "js"}}
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        var graph = document.getElementById('graph');
+
 
 
         const labels = [
@@ -195,26 +205,35 @@
             'COMBUSTION_MOVIL',
             'ELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA',
             'LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS',
-            '',
-            '',
-            '',
-            '']
+            'TRANSPORTE_PUBLICO',
+            'TRANSPORTE_PARTICULAR',
+            'SERVICIO_CONTRATADO',
+            'SERVICIO_ECOLOGICO']
+
+        const colors = ['rgb(22,62,46)', 'rgb(29,84,61)', 'rgb(36,105,77)', 'rgb(43,127,92)','rgb(56,170,123)','rgb(63,192,139)','rgb(83,200,152)','rgb(104,207,165)'];
 
         const data = {
             labels: labels,
             datasets: [{
-                data: [{{reporte.tipoDeActividadCOMBUSTION_FIJA}},
-                    {{reporte.tipoDeActividadCOMBUSTION_MOVIL}},
-                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
-                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
-                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
-                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
-                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
-                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
-                ]
+                data: [{{reporte.tipoDeActividadCOMBUSTION_FIJA}} ,
+                    {{reporte.tipoDeActividadCOMBUSTION_MOVIL}} ,
+                    {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}} ,
+                    {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}} ,
+                    {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}} ,
+                    {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}} ,
+                    {{reporte.tipoDeActividadSERVICIO_CONTRATADO}} ,
+                    {{reporte.tipoDeActividadSERVICIO_ECOLOGICO}}
+                ],
+                backgroundColor: colors
             }]
         }
 
+        const config = {
+            type: 'pie',
+            data: data,
+        };
+
+        var composicionChart = new Chart(graph, config);
 
     </script>
 {{/partial}}

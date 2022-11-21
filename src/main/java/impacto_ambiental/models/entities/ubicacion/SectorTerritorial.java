@@ -63,4 +63,6 @@ public abstract class SectorTerritorial extends EntidadPersistente {
 
     public Double hcPorClas(Clasificacion clasificacion) {return null;}
 
+    public String nombreSector(){return null;}
+
 }

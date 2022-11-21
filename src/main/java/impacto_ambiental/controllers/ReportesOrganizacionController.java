@@ -21,6 +21,7 @@ public class ReportesOrganizacionController {
     RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
     int id = request.session().attribute("id");
     Organizacion organizacion = repositorioOrganizaciones.buscarPorIDUsuario(id);
+    String nombre = organizacion.getRazonSocial();
 
 
 
@@ -29,6 +30,7 @@ public class ReportesOrganizacionController {
 
 
     return new ModelAndView(new HashMap<String, Object>(){{
+      put("nombre",nombre);
       put("reporte", reporte);
     }}, "usuarioOrganizacion/Reportes/organizacionComposicionHC.hbs");
   }
@@ -37,12 +39,14 @@ public class ReportesOrganizacionController {
     RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
     int id = request.session().attribute("id");
     Organizacion organizacion = repositorioOrganizaciones.buscarPorIDUsuario(id);
+    String nombre = organizacion.getRazonSocial();
 
 
     ReporteHistorico reporte = GeneradorDeReportes.getInstance().EvolucionDeHCTotalDeUnaOrganizacion(organizacion);
     reporte.ordenar();
 
     return new ModelAndView(new HashMap<String, Object>(){{
+      put("nombre",nombre);
       put("reporte", reporte);
     }}, "usuarioOrganizacion/Reportes/organizacionHCHistorico.hbs");
   }

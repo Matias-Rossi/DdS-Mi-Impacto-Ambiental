@@ -78,4 +78,8 @@ public class Provincia extends SectorTerritorial {
                 e.hcPorClas(clasificacion)
         ).sum();
     }
+    @Override
+    public String nombreSector(){
+        return this.nombreProvincia.toString();
+    }
 }

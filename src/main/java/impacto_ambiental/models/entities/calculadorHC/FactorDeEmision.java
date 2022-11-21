@@ -11,15 +11,18 @@ public class FactorDeEmision extends EntidadPersistente {
   @Transient
   private CalculadorDeHC calculadorDeHC;
 
+  @Getter
   @Enumerated(EnumType.STRING)
   @Column(name = "tipoActividad")
-  private TipoActividadDA tipoActividad;
+  public TipoActividadDA tipoActividad;
 
+  @Getter
   @Enumerated(EnumType.STRING)
   @Column(name = "tipoConsumo")
-  private TipoConsumoDA tipoConsumo;
+  public TipoConsumoDA tipoConsumo;
+  @Getter
   @Column(name = "factor")
-  private double factorEmision;
+  public double factorEmision;
 
 
   public FactorDeEmision(TipoActividadDA tipoDeActividad, TipoConsumoDA tipoDeConsumo, double factorEmision) {

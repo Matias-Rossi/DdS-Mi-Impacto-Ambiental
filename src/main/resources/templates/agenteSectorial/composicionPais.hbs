@@ -1,32 +1,14 @@
 {{#partial "botonHome" }}
-    <a href="/homeOrg" class="navbar-brand ms-5  me-auto">
+    <a href="/agenteSectorial" class="navbar-brand ms-5  me-auto">
         <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
              height="49" id="logo">
     </a>
 {{/partial}}
-
 {{#partial "contenidoNav" }}
-
-
-    <a href="areas" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
-        Areas
+    <a href="/agenteSectorial/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Organizaciones
     </a >
 
-    <a href="empleados" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
-        Empleados
-    </a >
-    <a href="calcularHCOrg" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
-        Calculadora HC
-    </a >
-    <a href="cargaDeReportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
-        Carga de Reportes
-    </a >
-    <a href="/reportes" class="nav-link-custom" style="margin: 0px 10px;" id="reportes">
-        Reportes
-    </a >
-    <a href="/contactos" class="nav-link-custom" style="margin: 0px 10px;" id="contactos">
-        Contactos
-    </a >
     <div class="dropdown">
         <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
             Mi perfil
@@ -45,10 +27,9 @@
     <div class="d-flex flex-column" id="content-wrap">
         <div class=" d-flex align-self-center conteinerRegistro">
             <main>
-
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="d-flex justify-content-around">
-                        <h3 class="textoIngreso">Composicion de HC de {{nombre}}</h3>
+                        <h3 class="textoIngreso">Composicion de HC a nivel pais discriminando provincias</h3>
                     </div>
                 </div>
 
@@ -65,7 +46,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_FIJA}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_FIJA}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -84,7 +65,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_MOVIL}}hc </span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadCOMBUSTION_MOVIL}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒 </span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -102,7 +83,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -120,7 +101,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -139,7 +120,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -160,7 +141,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -178,7 +159,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_CONTRATADO}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_CONTRATADO}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -197,7 +178,7 @@
                     </div>
                     <div class="col-md-2">
                         <div class="d-flex justify-content-center">
-                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_ECOLOGICO}}hc</span>
+                            <span class="listStyle"> {{reporte.tipoDeActividadSERVICIO_ECOLOGICO}}𝒌𝒈𝑪𝑶𝟐𝒆𝒒</span>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -206,13 +187,11 @@
                         </div>
                     </div>
                 </div>
-
             </main>
         </div>
     </div>
 
 {{/partial}}
-
 
 {{#partial "js"}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -236,13 +215,13 @@
         const data = {
             labels: labels,
             datasets: [{
-                data: [{{reporte.tipoDeActividadCOMBUSTION_FIJA}},
-                    {{reporte.tipoDeActividadCOMBUSTION_MOVIL}},
-                    {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}},
-                    {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}},
-                    {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}},
-                    {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}},
-                    {{reporte.tipoDeActividadSERVICIO_CONTRATADO}},
+                data: [{{reporte.tipoDeActividadCOMBUSTION_FIJA}} ,
+                    {{reporte.tipoDeActividadCOMBUSTION_MOVIL}} ,
+                    {{reporte.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA}} ,
+                    {{reporte.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS}} ,
+                    {{reporte.tipoDeActividadTRANSPORTE_PUBLICO}} ,
+                    {{reporte.tipoDeActividadTRANSPORTE_PARTICULAR}} ,
+                    {{reporte.tipoDeActividadSERVICIO_CONTRATADO}} ,
                     {{reporte.tipoDeActividadSERVICIO_ECOLOGICO}}
                 ],
                 backgroundColor: colors
@@ -258,6 +237,5 @@
 
     </script>
 {{/partial}}
-
 
 {{> base.hbs }}

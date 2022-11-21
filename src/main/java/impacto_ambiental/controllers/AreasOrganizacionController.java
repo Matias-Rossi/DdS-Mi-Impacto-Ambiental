@@ -39,7 +39,7 @@ public class AreasOrganizacionController {
     //repositorioOrganizaciones.actualizar(unaOrganizacion);
     System.out.println("Area agregada");
 
-    response.redirect("/organizacion/areas");
+    response.redirect("/areas");
     return response;
   }
 

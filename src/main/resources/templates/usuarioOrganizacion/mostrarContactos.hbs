@@ -1,0 +1,118 @@
+{{#partial "botonHome" }}
+    <a href="/homeOrg" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+
+
+{{#partial "contenidoNav" }}
+    <a href="/areas" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Areas
+    </a >
+
+    <a href="/empleados" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Empleados
+    </a >
+    <a href="/calcularHCOrg" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Calculadora HC
+    </a >
+    <a href="/cargaDeReportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Carga de Reportes
+    </a >
+    <a href="/reportes" class="nav-link-custom" style="margin: 0px 10px;" id="reportes">
+        Reportes
+    </a >
+    <a href="/contactos" class="nav-link-custom" style="margin: 0px 10px;" id="contactos">
+        Contactos
+    </a >
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+{{#partial "contenido" }}
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="list-group" id="boxTrayectos">
+                        <ol class="list-group" id="boxTrayectos">
+                        {{#each contactos}}
+                            <form class="was-validated" novalidate method="POST" action="/contactos/{{id}}/delete">
+                                <li class="list-group-item d-flex justify-content-between align-items-start align-middle texto">
+                                    <div class="col-md-4">
+                                        <span class="listStyle" style="font-size: 15px !important"> {{telefono}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="listStyle" style="font-size: 15px !important"> {{email}}</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <span class="listStyle" style="font-size: 15px !important"> {{preferenciasContacto}}</span>
+                                    </div>
+                                    <button class="material-symbols-outlined delete btn-nohover"  type="submit">delete</button>
+                                </li>
+                            </form>
+                        {{/each}}
+                        </ol>
+                        <div class="d-flex justify-content-center">
+                    <span class="material-symbols-outlined" style="margin-top:20px; cursor: pointer;"
+                          data-bs-toggle="modal" data-bs-target="#agregarContacto">add_circle</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal agregarContacto -->
+    <div class="modal fade" id="agregarContacto" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <main>
+                        <form class="was-validated" method="POST" action="/contactos/" novalidate>
+
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <h3 class="textoIngreso">Agregar Contacto </h3>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <label for="telefono" class="form-label textoInputs">Telefono</label>
+                                    <input name="telefono" type="text" class="form-control" id="telefono" placeholder="" value="" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label textoInputs">Email</label>
+                                    <input name="email" type="text" class="form-control" id="enail" placeholder="" value="" required>
+                                </div>
+                                <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
+                                    <button class=" btn-custom " type="submit" id="idRegistrarse">Aceptar</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Fin Modal agregarContacto -->
+
+
+
+
+
+
+
+{{/partial}}
+
+{{> base.hbs }}

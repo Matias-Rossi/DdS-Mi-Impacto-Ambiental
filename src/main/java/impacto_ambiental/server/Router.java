@@ -2,6 +2,7 @@ package impacto_ambiental.server;
 
 import impacto_ambiental.controllers.*;
 import impacto_ambiental.controllers.helpers.PermisoHelper;
+import impacto_ambiental.models.entities.notificaciones.Contacto;
 import impacto_ambiental.models.entities.usuario.Accion;
 import impacto_ambiental.models.entities.usuario.Alcance;
 import impacto_ambiental.models.entities.usuario.Objeto;
@@ -30,6 +31,8 @@ public class Router {
 
 
     private static void configure() {
+        FactoresDeEmisionController factoresDeEmisionController = new FactoresDeEmisionController();
+        ContactoController contactoController = new ContactoController();
         TrayectosController trayectosController = new TrayectosController();
         TramosController tramosController = new TramosController();
         SignUpController signUpController = new SignUpController();
@@ -49,6 +52,8 @@ public class Router {
         ForbiddenController forbiddenController = new ForbiddenController();
         TransportesController transportesController = new TransportesController();
         GeoController geoController = new GeoController();
+
+
 
 
        // Spark.staticFiles.location("/public");
@@ -136,6 +141,28 @@ public class Router {
             Spark.get("", trayectosController::mostrarPropios, engine);
             Spark.post ("/", trayectosController::guardar);
             Spark.post("/:idTrayecto/delete", trayectosController::eliminar);
+        });
+
+        // ### Contacots ###
+        Spark.path("/contactos", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.get("", contactoController::mostrarPropios, engine);
+            Spark.post ("/", contactoController::cargarContacto);
+            Spark.post("/:idContacto/delete", contactoController::eliminarContacto);
         });
 
         // ### Tramos ###
@@ -321,8 +348,40 @@ public class Router {
         //* ADMINISTRADOR *//
 
         Spark.path("/admin", ()-> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.get("", homeAdminController::home, engine);
         });
+        Spark.path("/factoresDeEmision",()->{
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.get("", factoresDeEmisionController::mostrarFactoresDeEmision,engine);
+            Spark.post("/:idFactorDeEmision", factoresDeEmisionController::modificarFactor);
+        });
+
+
 
         Spark.path("/gestionar-organizaciones", () -> {
             Spark.before("", ((request, response) -> {
@@ -376,6 +435,10 @@ public class Router {
             Spark.get("/hcClasificaciones/:idClasificacion", agenteSectorialController::hcClasificacion, engine);
             Spark.get("/organizaciones", agenteSectorialController::mostrarOrganizaciones, engine);
             Spark.get("/organizaciones/:id", agenteSectorialController::detalleOrganizacion, engine);
+
+            Spark.get("/HCNacional", agenteSectorialController::selectProvincias,engine);
+            Spark.post("/HCNacional", agenteSectorialController::solicitarProvincias);
+            Spark.get("/HCNacional/ComposicionHC", agenteSectorialController::hcNacional,engine);
         });
 
         /***** JSONs - AJAX *****/

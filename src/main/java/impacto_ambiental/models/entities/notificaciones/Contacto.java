@@ -17,15 +17,15 @@ public class Contacto extends EntidadPersistente {
   @Getter
   @Enumerated(EnumType.STRING)
   @Column(name = "preferencia")
-  PreferenciasContacto preferenciasContacto;
+  public PreferenciasContacto preferenciasContacto;
 
   @Getter
   @Column(name = "telefono")
-  private String telefono;
+  public String telefono;
 
   @Getter
   @Column(name = "email")
-  private String email;
+  public String email;
 
   public Contacto(String telefono, String email, Organizacion organizacion) {
     this.organizacion= organizacion;

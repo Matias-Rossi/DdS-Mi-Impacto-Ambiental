@@ -1,0 +1,174 @@
+{{#partial "botonHome" }}
+    <a href="/agenteSectorial" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+
+{{#partial "contenidoNav" }}
+    <a href="/agenteSectorial/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Organizaciones
+    </a >
+
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+{{#partial "contenido" }}
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="list-group" id="boxTrayectos">
+
+                        <form class="was-validated" method="POST" action="/agenteSectorial/HCNacional" novalidate>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <h3 class="textoIngreso">Seleccionar Provincias </h3>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="BUENOS_AIRES" name="BUENOS_AIRES" value="1" />
+                                    <label class="form-check-label textoInputs" for="BUENOS_AIRES">Buenos Aires</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="CIUDAD_DE_BUENOS_AIRES" name="CIUDAD_DE_BUENOS_AIRES" value="1" />
+                                    <label class="form-check-label textoInputs" for="CIUDAD_DE_BUENOS_AIRES">Ciudad de Buenos Aires </label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="CORDOBA" name="CORDOBA" value="1" />
+                                    <label class="form-check-label textoInputs" for="CORDOBA">Cordoba</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="CATAMARCA" name="CATAMARCA" value="1" />
+                                    <label class="form-check-label textoInputs" for="CATAMARCA">Catamarca</label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="CHACO" name="CHACO" value="1" />
+                                    <label class="form-check-label textoInputs" for="CHACO">CHACO</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+                            <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="checkbox" id="" name="" value="1" />
+                                    <label class="form-check-label textoInputs" for=""></label>
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex justify-content-center" style="margin: 10px 0px 20px 0px;">
+                                <a href="/HCNacional/ComposicionHC" class="btn-custom" type="submit" id="idRegistrarse">Aceptar</a>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+
+{{/partial}}
+{{> base.hbs }}

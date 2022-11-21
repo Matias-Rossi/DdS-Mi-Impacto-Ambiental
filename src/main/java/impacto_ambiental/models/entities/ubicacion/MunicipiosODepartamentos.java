@@ -82,4 +82,8 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
     public Double hcPorClas(Clasificacion clasificacion){
         return organizaciones.stream().filter(org->org.getClasificacion().equals(clasificacion)).mapToDouble(e->e.getHCTotal()).sum();
     }
+    @Override
+    public String nombreSector(){
+        return this.municipioOLocalidad;
+    }
 }

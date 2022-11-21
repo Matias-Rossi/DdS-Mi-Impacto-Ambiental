@@ -16,18 +16,18 @@
     <a href="/calcularhc" class="nav-link-custom" style="margin: 0px 10px;" id="calcularhc">
         Calcular HC
     </a >
-            <div class="dropdown">
-                <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
-                    Mi perfil
-                </button>
-                <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
-                    <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
-                    <li id="drop1"><a class="drop-item-custom"  href="/solicitudes">Solicitudes</a></li>
-                    <form  method="POST" action="/logout" novalidate>
-                        <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
-                    </form>
-                </ul>
-            </div>
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <li id="drop1"><a class="drop-item-custom"  href="/solicitudes">Solicitudes</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
 {{/partial}}
 
 
@@ -45,17 +45,17 @@
                 </div>
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div name="hCMiembro" class="col-md-12">
-                        <h3  class="textoIngreso " style="text-align: center;">{{hc}}</h3>
+                        <h3  class="textoIngreso " style="text-align: center;">{{hc}} 𝒌𝒈𝑪𝑶𝟐𝒆𝒒</h3>
 
                     </div>
                 </div>
                 {{#each porcentajes }}
                     <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                         <div name="organizacion" class="col-md-9">
-                            <span class="listStyle">{{ organizacion.razonSocial }}</span>
+                            <h3 class="listStyle">{{ organizacion.razonSocial }}</h3>
                         </div>
                         <div name="HC" class="col-md-3">
-                            <span class="listStyle">{{porcentalje}}%</span>
+                            <h3 class="listStyle">{{porcentalje}}%</h3>
                         </div>
                     </div>
                 {{/each}}

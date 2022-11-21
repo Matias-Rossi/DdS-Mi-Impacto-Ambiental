@@ -38,6 +38,8 @@ public class OrganizacionController {
 
         List<Area> areas = solicitudes.stream().map(solicitud -> solicitud.getArea()).collect(Collectors.toList());
 
+        List<AreaHc> areasHc = solicitudes.stream().map(sols->new AreaHc(sols)).collect(Collectors.toList());
+
 
 //
 //        List<Organizacion> organizacionesDeMiembro =   unMiembro.getSolicitudes().stream()
@@ -46,7 +48,7 @@ public class OrganizacionController {
 
 
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("solicitudes",solicitudes );
+            put("areasHc",areasHc );
         }}, "/organizaciones/organizaciones.hbs");
 
     }

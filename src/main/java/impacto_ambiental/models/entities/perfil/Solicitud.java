@@ -18,7 +18,7 @@ public class Solicitud extends EntidadPersistente {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "miembro_id", referencedColumnName = "id")
     private Miembro miembro;
-
+    @Getter
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "area_id", referencedColumnName = "id")
     private Area area;

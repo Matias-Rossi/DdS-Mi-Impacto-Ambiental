@@ -24,6 +24,9 @@
     <a href="/reportes" class="nav-link-custom" style="margin: 0px 10px;" id="reportes">
         Reportes
     </a >
+    <a href="/contactos" class="nav-link-custom" style="margin: 0px 10px;" id="contactos">
+        Contactos
+    </a >
     <div class="dropdown">
         <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
             Mi perfil
@@ -42,6 +45,19 @@
     <div class="d-flex flex-column" id="content-wrap">
         <div class=" d-flex align-self-center conteinerRegistro">
             <main>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="d-flex justify-content-around">
+                        <h3 class="textoIngreso">Historico de HC{{nombre}}</h3>
+                    </div>
+                </div>
+
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <canvas id="graph"></canvas>
+                    </div>
+                </div>
+
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="list-group" id="boxTrayectos">
                         {{#each reporte.reportesMensuales}}
@@ -66,4 +82,46 @@
     </div>
 
 {{/partial}}
+
+
+
+
+{{#partial "js"}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var graph = document.getElementById('graph');
+
+
+
+        const labels = [
+            {{#each reporte.reportesMensuales}}
+                '{{periodo}} - {{anio}}',
+            {{/each}}
+        ]
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: "Hc total por mes",
+                data: [
+                    {{#each reporte.reportesMensuales}}
+                        {{hc}},
+                    {{/each}}
+                ],
+                backgroundColor: 'rgb(36,105,77)'
+
+
+            }]
+        }
+
+        const config = {
+            type: 'bar',
+            data: data,
+        };
+
+        var historicoChart = new Chart(graph, config);
+
+    </script>
+{{/partial}}
+
 {{> base.hbs }}

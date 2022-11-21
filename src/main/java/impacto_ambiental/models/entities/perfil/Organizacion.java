@@ -120,7 +120,7 @@ public class Organizacion extends EntidadPersistente {
     }
 
     public void agregarContacto(String telefono, String email){
-        Contacto nuevoContacto = new Contacto(telefono, email,null);
+        Contacto nuevoContacto = new Contacto(telefono, email,this);
         this.contactos.add(nuevoContacto);
     }
 
