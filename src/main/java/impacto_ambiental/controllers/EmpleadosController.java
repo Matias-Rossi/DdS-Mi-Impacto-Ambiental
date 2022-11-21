@@ -38,6 +38,17 @@ public class EmpleadosController {
     }}, "usuarioOrganizacion/empleadosPendientes.hbs");
   }
 
+  public Response desvincular(Request request, Response response) {
+    String idSolicitud = request.params("idSolicitud");
+    RepositorioSolicitudes solicitudes= new RepositorioSolicitudes();
+    Solicitud sol = solicitudes.buscarPorId(Integer.valueOf(idSolicitud));
+    sol.setEstado(SolicitudEstado.DESVINCULADO);
+
+    solicitudes.actualizar(sol);
+    response.redirect("/empleadosActuales");
+    return response;
+  }
+
   public Response aceptarEmpleado(Request request, Response response) {
     int idSolicitud = Integer.parseInt(request.queryParams("id"));
     Solicitud solicitud = repositorioSolicitudes.buscar(idSolicitud);

@@ -43,7 +43,12 @@ public class AreasOrganizacionController {
   }
 
   public Response borrar(Request request, Response response) {
-    //TODO pendiente de implementación
+    RepositorioAreas repositorioAreas = new RepositorioAreas();
+    String idArea = request.params("idArea");
+
+    Area area =repositorioAreas.buscar(idArea);
+    repositorioAreas.remover(area);
+    response.redirect("/organizacion/areas");
     return response;
   }
 

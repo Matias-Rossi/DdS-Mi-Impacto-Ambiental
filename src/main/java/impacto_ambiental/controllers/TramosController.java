@@ -284,6 +284,24 @@ public class TramosController {
     response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
     return response;
   }
+  public Response eliminar(Request request, Response response) {
+
+
+    RepositorioTramos repositorioTramos = new RepositorioTramos();
+
+
+
+    String idTramo = request.params("idTramo");
+    String idTrayecto = request.params("idTrayecto");
+
+    Tramo tramo = repositorioTramos.buscar(Integer.valueOf(idTramo));
+
+    repositorioTramos.remover(tramo);
+
+
+    response.redirect("/trayectos/:"+idTrayecto); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
 
   public ModelAndView pantallaCompartirTramo(Request request, Response response) {
 

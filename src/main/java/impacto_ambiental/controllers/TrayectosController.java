@@ -102,6 +102,18 @@ public class TrayectosController {
     return response;
   }
 
+  public Response eliminar(Request request, Response response) {
+    RepositorioTrayectos repositorioTrayectos = new RepositorioTrayectos();
+
+
+    Trayecto trayecto = repositorioTrayectos.buscar(request.params("idTrayecto"));
+
+    repositorioTrayectos.remover(trayecto);
+
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
+
   private void asignarParametros(Trayecto trayecto, Request request) {
     //TODO ¿Los tramos se tratan directamente desde TramosController? zi
     Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));

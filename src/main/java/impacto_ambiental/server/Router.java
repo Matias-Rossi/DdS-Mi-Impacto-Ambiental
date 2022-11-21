@@ -133,7 +133,7 @@ public class Router {
 
             Spark.get("", trayectosController::mostrarPropios, engine);
             Spark.post ("/", trayectosController::guardar);
-            // Spark.post("/:id/delete", trayectosController::deleteTrayecto);
+            Spark.post("/:id/delete", trayectosController::eliminar);
         });
 
         // ### Tramos ###
@@ -162,6 +162,7 @@ public class Router {
             Spark.post("/new/transporte-publico", tramosController::cargarPublico);
             Spark.post("/new/bicicleta-o-similares", tramosController::cargarbicicleta);
             Spark.post("/new/a-pie", tramosController::cargarpie);
+            Spark.post("/:idTramo/delete", tramosController::eliminar);
             //Spark.get("/:idTramo", tramosController::mostrar, engine);
             //Spark.get("/:idTramo/edit", tramosController::editar, engine); //solo te lleva a la pantalla de edit
             Spark.post("/:idTramo/edit", tramosController::modificar);       //lo que realmente lo edita
@@ -226,9 +227,9 @@ public class Router {
             }));
 
             Spark.get("", areasOrganizacionController::mostrarPropias, engine);
-            Spark.get("/:id", gestorAreaController::mostrar, engine);
+            Spark.get("/:idArea", gestorAreaController::mostrar, engine);
             Spark.post("", areasOrganizacionController::guardar);
-            Spark.post("/:id/delete", areasOrganizacionController::borrar);
+            Spark.post("/:idArea/delete", areasOrganizacionController::borrar);
         });
 
         Spark.path("/empleados", () -> {
@@ -248,6 +249,7 @@ public class Router {
 
             Spark.get("", empleadosController::elegirPantalla, engine);
            Spark.get("/actuales", empleadosController::mostrarEmpleadosActuales, engine);
+            Spark.post("/actuales/:idSolicitud/desvincular", empleadosController::desvincular);
            Spark.get("/pendientes", empleadosController::mostrarEmpleadosPendientes, engine);
             //TODO si, seguramente haya q cambiarlos a los siguientes
            Spark.post("/aceptar", empleadosController::aceptarEmpleado);
