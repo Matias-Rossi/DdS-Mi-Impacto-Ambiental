@@ -134,7 +134,7 @@ public class Router {
 
             Spark.get("", trayectosController::mostrarPropios, engine);
             Spark.post ("/", trayectosController::guardar);
-            Spark.post("/:id/delete", trayectosController::eliminar);
+            Spark.post("/:idTrayecto/delete", trayectosController::eliminar);
         });
 
         // ### Tramos ###

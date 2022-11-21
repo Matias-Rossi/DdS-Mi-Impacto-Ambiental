@@ -1,3 +1,11 @@
+{{#partial "botonHome" }}
+    <a href="/home" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+
+
 {{#partial "contenidoNav" }}
 <a href="/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
     Organizaciones
@@ -27,13 +35,14 @@
             <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                 <ol class="list-group" id="boxTrayectos">
                     {{#each trayectos}}
+                    <form class="was-validated" novalidate method="POST" action="/trayectos/{{id}}/delete">
                     <li class="list-group-item d-flex justify-content-between align-items-start align-middle texto">
                         <div class="ms-2 me-auto">
                             <a class="listStyle" href="/trayectos/{{id}}/tramos"> {{descripcion}}</a>
                         </div>
-
-                        <a class="material-symbols-outlined delete" href="/trayectos/{{id}}/delete">delete</a>
+                        <button class="material-symbols-outlined delete btn-nohover"  type="submit">delete</button>
                     </li>
+                        </form>
                     {{/each}}
                 </ol>
                 <div class="d-flex justify-content-center">

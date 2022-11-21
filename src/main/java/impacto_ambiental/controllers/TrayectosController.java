@@ -106,7 +106,7 @@ public class TrayectosController {
     RepositorioTrayectos repositorioTrayectos = new RepositorioTrayectos();
 
 
-    Trayecto trayecto = repositorioTrayectos.buscar(request.params("idTrayecto"));
+    Trayecto trayecto = repositorioTrayectos.buscarPorId(Integer.valueOf(request.params("idTrayecto")));
 
     repositorioTrayectos.remover(trayecto);
 

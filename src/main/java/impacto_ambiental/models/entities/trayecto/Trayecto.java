@@ -44,6 +44,7 @@ public class Trayecto extends EntidadPersistente {
     @Getter
     @OneToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY,mappedBy = "trayecto")
     List<TrayectosPorOrganizaciones> organizacionesxtrayectos = new ArrayList<>();
+    @Setter
     @Getter
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinTable(name = "trayectos_tramos",
@@ -112,5 +113,8 @@ public class Trayecto extends EntidadPersistente {
             distanciaTotal += tramo.getDistancia();
         }
         return distanciaTotal;
+    }
+    public void eliminarTramo(Tramo tramo){
+        tramos.remove(tramo);
     }
 }

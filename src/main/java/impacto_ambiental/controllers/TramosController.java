@@ -288,18 +288,20 @@ public class TramosController {
 
 
     RepositorioTramos repositorioTramos = new RepositorioTramos();
-
+    RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
+    RepositorioTrayectos repositorioTrayectos = new RepositorioTrayectos();
 
 
     String idTramo = request.params("idTramo");
     String idTrayecto = request.params("idTrayecto");
 
+    Trayecto trayecto = repositorioTrayectos.buscar(Integer.valueOf(idTrayecto));
     Tramo tramo = repositorioTramos.buscar(Integer.valueOf(idTramo));
+    trayecto.eliminarTramo(tramo);
 
-    repositorioTramos.remover(tramo);
+    repositorioTrayectos.actualizar(trayecto);
 
-
-    response.redirect("/trayectos/:"+idTrayecto); //TODO Revisar si la url de redirección es correcta
+    response.redirect("/trayectos/"+idTrayecto+"/tramos"); //TODO Revisar si la url de redirección es correcta
     return response;
   }
 

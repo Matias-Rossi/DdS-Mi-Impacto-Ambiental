@@ -224,6 +224,21 @@ label:focus,
 	text-align: center;
 	font-size:20px !important;
 }
+.btn-nohover {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	outline: inherit;"
+}
+.btn-nohover:hover,
+.btn-nohover:focus {
+	background: none !important;
+	border: none !important;
+	outline: none !important;
+	box-shadow: none !important;
+}
 .btn-custom-modal {
 	background-color:#006241 !important;
 	color:#f2f0eb !important;

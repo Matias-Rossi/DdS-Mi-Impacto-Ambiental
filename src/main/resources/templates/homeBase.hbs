@@ -29,10 +29,8 @@
 <body>
 <nav class="navbar fixed-top" style="background-color:#006241;">
     <div class="container-fluid">
-        <a href="/home" class="navbar-brand ms-5 me-auto">
-            <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
-                 height="49"id="logo">
-        </a>
+        {{#block "botonHome" }}
+        {{/block}}
            {{#block "contenidoNav"}}
            {{/block}}
     </div>
