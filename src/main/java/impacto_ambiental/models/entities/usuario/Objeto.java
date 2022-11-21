@@ -4,6 +4,9 @@ public enum Objeto {
     MIEMBRO,
     ORGANIZACION,
     MUNICIPIO_O_DEPARTAMENTO,
+    ADMIN,
     TRAYECTO,
-    TRAMO
+    TRAMO,
+    SOLICITUD_COMPARTIR_TRAMO,
+    AREA
 }

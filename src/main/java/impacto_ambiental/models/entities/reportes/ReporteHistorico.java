@@ -4,13 +4,14 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReporteHistorico {
     @Getter
-    List<ReporteMensual> reportesMensuales= new ArrayList<ReporteMensual>();
+    public List<ReporteMensual> reportesMensuales= new ArrayList<ReporteMensual>();
 
     public void agregarHc(HChistorico hc){
-         Double huella = hc.getHuellaDeCarbono();
+         Double huella = GeneradorDeReportes.round(hc.getHuellaDeCarbono());
          Integer anio = hc.getAnio();
          Periodo periodo = hc.getPeriodo();
 
@@ -27,8 +28,21 @@ public class ReporteHistorico {
     }
 
     private void reportar(Periodo periodo, Integer anio, Double hc){
-        ReporteMensual reporte = reportesMensuales.stream().filter(e->e.getAnio().equals(anio)).filter(e->e.getPeriodo().equals(periodo)).findAny().orElse(nuevoReporteMensual(periodo,anio));
-        reporte.sumar(hc);
+        List<ReporteMensual> posibles = reportesMensuales.stream().filter(e->e.getAnio().equals(anio)).filter(e->e.getPeriodo().equals(periodo)).collect(Collectors.toList());
+        if(posibles.size()>0){
+            posibles.get(0).sumar(hc);
+            return;
+        }
+        nuevoReporteMensual(periodo,anio).sumar(hc);
+    }
+
+    public void ordenar(){
+        reportesMensuales.sort((e1,e2)->{
+            if(e1.getAnio().equals(e2.getAnio())){
+                return e1.getPeriodo().ordinal()-e2.getPeriodo().ordinal();
+            }
+            return e1.getAnio()-e2.getAnio();
+        });
     }
 
     private ReporteMensual nuevoReporteMensual(Periodo periodo, Integer anio){

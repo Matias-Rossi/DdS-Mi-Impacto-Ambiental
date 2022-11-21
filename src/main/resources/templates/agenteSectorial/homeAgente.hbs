@@ -1,7 +1,4 @@
 {{#partial "contenidoNav" }}
-    <a href="/agenteSectorial/sector" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
-        Sector
-    </a >
     <a href="/agenteSectorial/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
         Organizaciones
     </a >
@@ -12,7 +9,6 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
             <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
-            <li id="drop1"><a class="drop-item-custom"  href="/solicitudes">Solicitudes</a></li>
             <form  method="POST" action="/logout" novalidate>
                 <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
             </form>
@@ -20,17 +16,49 @@
     </div>
 {{/partial}}
 
-{{#partial "contenido"}}
-<div class="d-flex flex-column" id="content-wrap">
-    <div class=" d-flex align-self-center conteinerRegistro">
-        <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax;">
-            <div class="col-md-12">
-                <h3>El HC total de {{sector}} es</h3>
-                <h1>{{hc}}</h1>
-            </div>
+{{#partial "contenido" }}
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class=" btn-custom" href="/agenteSectorial/HCHistorico">HC Historico</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class="btn-custom"href="/agenteSectorial/HCTotal">HC Total</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class=" btn-custom "href="/agenteSectorial/composicionHC">Composicion HC</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class=" btn-custom "href="/agenteSectorial/hcClasificaciones">HC por clasificacion de ORG</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class=" btn-custom "href="/agenteSectorial/reportesOrganizacion">HC de Organizacion</a>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
-</div>
 
 {{/partial}}
 {{> base.hbs }}

@@ -67,7 +67,7 @@ public class CargaReportesController {
     Thread cargaDeMedicion = new Thread(carga,"cargaAsinc");
     cargaDeMedicion.start();
 
-    response.redirect("/organizacion/cargaDeReportes");
+    response.redirect("/cargaDeReportes");
     return response;
   }
 

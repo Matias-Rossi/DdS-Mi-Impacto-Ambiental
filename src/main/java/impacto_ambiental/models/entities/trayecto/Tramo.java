@@ -40,7 +40,7 @@ public class Tramo implements ActividadesEmisorasCO2 {
         this.partida = partida;
         this.llegada = llegada;
         this.medioDeTransporte = transporte;
-        //this.distancia = transporte.calcularDistancia(partida, llegada); ;
+        this.distancia = transporte.calcularDistancia(partida, llegada); ;
         this.diasAlMes = diasAlMes;
         this.hcXIntegrantes = -1;
     }
@@ -76,17 +76,20 @@ public class Tramo implements ActividadesEmisorasCO2 {
     @JoinColumn(name = "factorDeEmision_id", referencedColumnName = "id")
     private FactorDeEmision factorDeEmision;
 
-    public double calcularHC(Integer size, Integer mesInicio, Integer mesFin, Integer anio, Organizacion org,Miembro miembro) {
+    public double calcularHC(Integer size, Integer semestre, Integer anio, Organizacion org,Miembro miembro) {
 
         if(this.hcXIntegrantes<0) this.cargarHc();
 
 
         double hcXorgXpart = this.hcXIntegrantes/size;
 
+        Integer mesInicio=1;
 
-        for(;mesInicio<=mesFin;mesInicio++){
-            Integer month = mesInicio;
-            new HChistorico(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), anio, Periodo.getPeriodo(month), hcXorgXpart,org,miembro);
+        if(semestre.equals(0)) mesInicio=7;
+
+        for(Integer i=0;i<6;i++){
+            new HChistorico(this.factorDeEmision.getTipoActividad(), this.factorDeEmision.getTipoConsumo(), anio, Periodo.getPeriodo(mesInicio), hcXorgXpart,org,miembro);
+            mesInicio++;
         }
 /*
         if(mes.equals(0)) return this.generarReporte(organizacion, Periodo.Anual,HCxMes*6,anio);

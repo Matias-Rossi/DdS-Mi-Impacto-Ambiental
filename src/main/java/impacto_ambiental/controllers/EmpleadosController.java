@@ -44,7 +44,7 @@ public class EmpleadosController {
     solicitud.setEstado(SolicitudEstado.ACEPTADA);
     repositorioSolicitudes.actualizar(solicitud);
 
-    response.redirect("/organizacion/empleados/pendientes");
+    response.redirect("/empleados/pendientes");
     return response;
   }
 
@@ -54,7 +54,7 @@ public class EmpleadosController {
     solicitud.setEstado(SolicitudEstado.RECHAZADA);
     repositorioSolicitudes.actualizar(solicitud);
 
-    response.redirect("/organizacion/empleados/pendientes");
+    response.redirect("/empleados/pendientes");
     return response;
   }
 
