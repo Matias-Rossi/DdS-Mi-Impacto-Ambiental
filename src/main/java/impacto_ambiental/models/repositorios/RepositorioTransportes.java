@@ -2,8 +2,11 @@ package impacto_ambiental.models.repositorios;
 
 import impacto_ambiental.db.BusquedaConPredicado;
 import impacto_ambiental.db.Repositorio;
+import impacto_ambiental.models.entities.transporte.Linea;
 import impacto_ambiental.models.entities.transporte.TipoCombustible;
 import impacto_ambiental.models.entities.transporte.Transporte;
+import impacto_ambiental.models.entities.transporte.TransportePublico;
+import org.hibernate.Criteria;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -39,4 +42,5 @@ public class RepositorioTransportes extends Repositorio<Transporte> {
 
         return (Transporte) buscar(busqueda);
     }
+
 }

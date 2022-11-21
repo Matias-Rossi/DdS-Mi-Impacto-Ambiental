@@ -40,6 +40,7 @@ public class Solicitud extends EntidadPersistente {
     public void setEstado(SolicitudEstado estado) {
         this.estado = estado;
     }
+    public  void imprimir(){System.out.println(estado);}
 
 
     public Solicitud(){}

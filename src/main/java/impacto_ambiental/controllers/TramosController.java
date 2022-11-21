@@ -1,5 +1,6 @@
 package impacto_ambiental.controllers;
 
+import impacto_ambiental.models.entities.perfil.Miembro;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.perfil.Tipo;
 import impacto_ambiental.models.entities.transporte.*;
@@ -12,9 +13,7 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TramosController {
@@ -31,15 +30,21 @@ public class TramosController {
     RepositorioTrayectos repositorioTrayectos = new RepositorioTrayectos();
 
 
-    String idTrayecto = request.params("idTrayecto");
+    String idTrayecto = request.params("idtrayecto");
+    System.out.println("######### ID: " + Integer.valueOf(idTrayecto));
 
-    List<Tramo> tramosBuscados = repositorioTrayectos.buscar(Integer.valueOf(idTrayecto)).getTramos();
-
+    Trayecto trayecto = repositorioTrayectos.buscarPorId(Integer.valueOf(idTrayecto));
+    System.out.println("$$$$$$$ ID: " + trayecto.getId());
+    List<Tramo> tramosBuscados = trayecto.getTramos();
+    List<Tramo> pasarTramos = new ArrayList<>();
+    if(!tramosBuscados.equals(null)) {
+      pasarTramos.addAll(tramosBuscados);
+    }
 
 
     return new ModelAndView(new HashMap<String, Object>(){{
       put("idTrayecto",idTrayecto);
-      put("tramos", tramosBuscados); //TODO Agregar la key
+      put("tramos", pasarTramos); //TODO Agregar la key
     }}, "/trayectos/tramos/tramos.hbs"); //TODO Implementar .hbs
   }
 
@@ -258,16 +263,51 @@ public class TramosController {
   }
 
 
-  public ModelAndView pantallaCompartirTramo(Request request, Response response) {
+  public Response compartirCon(Request request, Response response) {
+
+    RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
+    RepositorioTramos repositorioTramos = new RepositorioTramos();
+
+
 
     String idTramo = request.params("idTramo");
+    String idMiembro = request.queryParams("idMiembro");
+    Miembro miembro = repositorioMiembros.buscarPorId(Integer.valueOf(idMiembro));
 
-    Tramo tramoBuscado = repTramos.buscar(idTramo);
+    Tramo tramo = repositorioTramos.buscar(Integer.valueOf(idTramo));
+
+    tramo.compartirTramo(miembro);
+
+    repositorioMiembros.actualizar(miembro);
+
+
+    response.redirect("/trayectos"); //TODO Revisar si la url de redirección es correcta
+    return response;
+  }
+
+  public ModelAndView pantallaCompartirTramo(Request request, Response response) {
+
+    RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
+    RepositorioTrayectos repTrayectos = new RepositorioTrayectos();
+    String idTrayecto = request.params("idTrayecto");
+    String idTramo = request.params("idTramo");
+    System.out.println("ID TRAYECTO");
+    System.out.println(idTrayecto);
+    Trayecto trayecto = repTrayectos.buscar(Integer.valueOf(idTrayecto));
+
+    Miembro unMiembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));
+
+    Set<Miembro> miembros = trayecto.getOrganizacionesxtrayectos().stream().map(ot -> ot.getOrganizacion().getMiembros()).flatMap(Collection::stream).collect(Collectors.toSet());
+
+    miembros.remove(unMiembro);
+
 
 
     return new ModelAndView(new HashMap<String, Object>(){{
-      put("", tramoBuscado); //TODO Agregar el key
-    }}, "tramoCompartido.hbs"); //TODO Implementar .hbs
+      put("miembros", miembros);
+      put("idTrayecto",idTrayecto);
+      put("idTramo",idTramo);//TODO Agregar el key
+    }}, "trayectos/tramos/tramoCompartido.hbs");
   }
 
 

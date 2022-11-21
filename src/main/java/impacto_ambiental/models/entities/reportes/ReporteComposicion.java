@@ -2,24 +2,77 @@ package impacto_ambiental.models.entities.reportes;
 
 import lombok.Getter;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class ReporteComposicion {
 
     @Getter
-    Double tipoDeActividadCOMBUSTION_FIJA=0.0;
+    public Double tipoDeActividadCOMBUSTION_FIJA=0.0;
     @Getter
-    Double tipoDeActividadCOMBUSTION_MOVIL=0.0;
+    public Double porcentajetipoDeActividadCOMBUSTION_FIJA;
+
     @Getter
-    Double tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA=0.0;
+    public Double tipoDeActividadCOMBUSTION_MOVIL=0.0;
     @Getter
-    Double tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS=0.0;
+    public Double porcentajetipoDeActividadCOMBUSTION_MOVIL;
+
     @Getter
-    Double tipoDeActividadTRANSPORTE_PUBLICO=0.0;
+    public Double tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA=0.0;
     @Getter
-    Double tipoDeActividadTRANSPORTE_PARTICULAR=0.0;
+    public Double porcentajetipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA;
+
     @Getter
-    Double tipoDeActividadSERVICIO_CONTRATADO=0.0;
+    public Double tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS=0.0;
     @Getter
-    Double tipoDeActividadSERVICIO_ECOLOGICO=0.0;
+    public Double porcentajetipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
+
+    @Getter
+    public Double tipoDeActividadTRANSPORTE_PUBLICO=0.0;
+    @Getter
+    public Double porcentajetipoDeActividadTRANSPORTE_PUBLICO;
+
+    @Getter
+    public Double tipoDeActividadTRANSPORTE_PARTICULAR=0.0;
+    @Getter
+    public Double porcentajetipoDeActividadTRANSPORTE_PARTICULAR;
+
+    @Getter
+    public Double tipoDeActividadSERVICIO_CONTRATADO=0.0;
+    @Getter
+    public Double porcentajetipoDeActividadSERVICIO_CONTRATADO;
+
+    @Getter
+    public Double tipoDeActividadSERVICIO_ECOLOGICO=0.0;
+    @Getter
+    public Double porcentajetipoDeActividadSERVICIO_ECOLOGICO;
+
+    public void calcularPorcentajes(){
+        Double hcTotal = tipoDeActividadSERVICIO_ECOLOGICO+tipoDeActividadSERVICIO_CONTRATADO+tipoDeActividadCOMBUSTION_FIJA+tipoDeActividadCOMBUSTION_MOVIL+tipoDeActividadTRANSPORTE_PARTICULAR+tipoDeActividadTRANSPORTE_PUBLICO+tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA+tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
+        this.porcentajetipoDeActividadSERVICIO_ECOLOGICO=GeneradorDeReportes.round((this.tipoDeActividadSERVICIO_ECOLOGICO/hcTotal)*100);
+        this.porcentajetipoDeActividadSERVICIO_CONTRATADO=GeneradorDeReportes.round((this.tipoDeActividadSERVICIO_CONTRATADO/hcTotal)*100);
+        this.porcentajetipoDeActividadCOMBUSTION_FIJA=GeneradorDeReportes.round((this.tipoDeActividadCOMBUSTION_FIJA/hcTotal)*100);
+        this.porcentajetipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS=GeneradorDeReportes.round((this.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS/hcTotal)*100);
+        this.porcentajetipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA=GeneradorDeReportes.round((this.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA/hcTotal)*100);
+        this.porcentajetipoDeActividadCOMBUSTION_MOVIL=GeneradorDeReportes.round((this.tipoDeActividadCOMBUSTION_MOVIL/hcTotal)*100);
+        this.porcentajetipoDeActividadTRANSPORTE_PUBLICO=GeneradorDeReportes.round((this.tipoDeActividadTRANSPORTE_PUBLICO/hcTotal)*100);
+        this.porcentajetipoDeActividadTRANSPORTE_PARTICULAR=GeneradorDeReportes.round((this.tipoDeActividadTRANSPORTE_PARTICULAR/hcTotal)*100);
+
+        this.tipoDeActividadCOMBUSTION_FIJA=GeneradorDeReportes.round(this.tipoDeActividadCOMBUSTION_FIJA);
+        this.tipoDeActividadCOMBUSTION_MOVIL=GeneradorDeReportes.round(this.tipoDeActividadCOMBUSTION_MOVIL);
+        this.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA=GeneradorDeReportes.round(this.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA);
+        this.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS=GeneradorDeReportes.round(this.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS);
+        this.tipoDeActividadTRANSPORTE_PUBLICO=GeneradorDeReportes.round(this.tipoDeActividadTRANSPORTE_PUBLICO);
+        this.tipoDeActividadTRANSPORTE_PARTICULAR=GeneradorDeReportes.round(this.tipoDeActividadTRANSPORTE_PARTICULAR);
+        this.tipoDeActividadSERVICIO_CONTRATADO=GeneradorDeReportes.round(this.tipoDeActividadSERVICIO_CONTRATADO);
+        this.tipoDeActividadSERVICIO_ECOLOGICO=GeneradorDeReportes.round(this.tipoDeActividadSERVICIO_ECOLOGICO);
+
+    }
+
+
+
+
+
     public ReporteComposicion() {
     }
     public void sumarTipoDeActividadCOMBUSTION_FIJA(Double valor){

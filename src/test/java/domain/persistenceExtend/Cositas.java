@@ -18,6 +18,7 @@ public class Cositas {
 
     @Test
     public void fdeemision(){
+        //Implementado en Init.java
         RepositorioFactorDeEmision repositorio = new RepositorioFactorDeEmision();
         //generar lista con todos los TipoActividadDA y TipoConsumoDA
 
@@ -27,11 +28,12 @@ public class Cositas {
                 repositorio.agregar(factorDeEmision);
             }
         }
-
     }
+
 
     @Test
     public void miembroConOrganizacionesYAreas() {
+        //Implementado en Init.java
         RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
         RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
         RepositorioAreas repositorioAreas = new RepositorioAreas();

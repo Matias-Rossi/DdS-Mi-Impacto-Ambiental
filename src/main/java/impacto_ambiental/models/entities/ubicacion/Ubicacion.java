@@ -43,4 +43,7 @@ public class Ubicacion extends EntidadPersistente {
 
     }
 
+    public String print() {
+        return String.format("%s - %s - %s - %s - %d", this.nombreProvincia.toString(), this.municipalidad.getMunicipioOLocalidad(), this.localidad, this.calle, this.numeracion);
+    }
 }

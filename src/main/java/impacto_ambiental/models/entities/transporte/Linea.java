@@ -12,8 +12,12 @@ import java.util.List;
 @Entity
 @Table(name = "lineas")
 public class Linea extends EntidadPersistente {
+
+    @Getter
     @Column(name = "nombre")
     private String nombre;
+
+    @Getter
     @OneToMany(mappedBy = "linea",cascade = javax.persistence.CascadeType.ALL,fetch = javax.persistence.FetchType.LAZY)
     private List<Parada> paradas=new ArrayList<>();
 

@@ -4,7 +4,10 @@ import impacto_ambiental.models.entities.perfil.Clasificacion;
 import impacto_ambiental.models.entities.perfil.Importador;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.perfil.Tipo;
+import impacto_ambiental.models.entities.reportes.GeneradorDeReportes;
 import impacto_ambiental.models.entities.reportes.HChistorico;
+import impacto_ambiental.models.entities.reportes.ReporteComposicion;
+import impacto_ambiental.models.entities.reportes.ReporteHistorico;
 import lombok.Getter;
 
 
@@ -65,5 +68,18 @@ public class MunicipiosODepartamentos extends SectorTerritorial {
     @Override
     public List<Organizacion> getOrganizaciones() {
         return organizaciones;
+    }
+
+    @Override
+    public ReporteComposicion composicionDeHc(){
+        return GeneradorDeReportes.getInstance().composicionDeaHCTotalDeUnDeterminadoSectorTerritorial(this);
+    }
+    @Override
+    public ReporteHistorico historicoHc(){
+        return GeneradorDeReportes.getInstance().EvolucionDeHCTotalDeUnDeterminadoSectorTerritorial(this);
+    }
+    @Override
+    public Double hcPorClas(Clasificacion clasificacion){
+        return organizaciones.stream().filter(org->org.getClasificacion().equals(clasificacion)).mapToDouble(e->e.getHCTotal()).sum();
     }
 }

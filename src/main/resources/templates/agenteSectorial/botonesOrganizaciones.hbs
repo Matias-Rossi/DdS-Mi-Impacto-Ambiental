@@ -1,0 +1,43 @@
+{{#partial "contenidoNav" }}
+    <a href="/agenteSectorial/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Organizaciones
+    </a >
+
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+{{#partial "contenido" }}
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class=" btn-custom" href="/agenteSectorial/reportesOrganizacion/{{id}}/hcHistorico">HC Historico</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                            <a class=" btn-custom "href="/agenteSectorial/reportesOrganizacion/{{id}}/hcComposicion">Composicion HC</a>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+{{/partial}}
+{{> base.hbs }}
