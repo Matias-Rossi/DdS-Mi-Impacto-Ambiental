@@ -1,6 +1,7 @@
 package impacto_ambiental.models.entities.importadorExcel;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.EntidadPersistente;
+import impacto_ambiental.models.entities.perfil.Tipo;
 import impacto_ambiental.models.entities.reportes.HChistorico;
 import impacto_ambiental.models.entities.reportes.Periodo;
 import lombok.Getter;
@@ -61,9 +62,10 @@ public class ActividadBase extends EntidadPersistente {
     this.anio = anio;
     this.mes = mes;
     this.valorDA = valorDA;
+    this.hc = -1;
   }
   public ActividadBase(TipoActividadDA actividad, TipoConsumoDA consumo, Integer anio, Integer mes,double  valorDA){
-    this.inicializador(tipoActividadDA,consumo,anio,mes,valorDA);
+    this.inicializador(actividad,consumo,anio,mes,valorDA);
   }
   public ActividadBase(TipoActividadDA tipoActividad, TipoConsumoDA tipoTransporteUtilizado, Integer anio, Integer mes, double distanciaMediaRecorrida, double pesoTotalTransportado, VaraianzaLogistica varianzaLogistica,TipoProductoTransportado tipoProductoTransportado){
     this.inicializador(tipoActividad,tipoTransporteUtilizado,anio,mes, distanciaMediaRecorrida * pesoTotalTransportado * varianzaLogistica.getVaraianzaLogistica());
@@ -86,7 +88,7 @@ public class ActividadBase extends EntidadPersistente {
   }
 
   public void calcularHC(){
-    if(Objects.isNull(this.hc)) this.cargarHc();
+    if(this.hc<0) this.cargarHc();
 //
 //
 //    if(!this.delAnio(anio))
@@ -108,8 +110,7 @@ public class ActividadBase extends EntidadPersistente {
 
   public void cargarHc(){
 
-    if(this.factorDeEmision == null)
-      actualizarFE();
+    if(this.factorDeEmision == null) actualizarFE();
 
     this.hc = CalculadorDeHC.getInstance().calcularHC(this.factorDeEmision,this.valorDA);
 

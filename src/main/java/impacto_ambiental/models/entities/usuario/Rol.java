@@ -42,6 +42,7 @@ public class Rol extends EntidadPersistente {
     }
 
     public Boolean tenesTodosLosPermisos(Permiso ... permisos) {
+        if(tipo.equals(TipoUsuario.ADMINISTRADOR)) return true;
         return Arrays.stream(permisos).allMatch(this::tenesPermiso);
     }
 

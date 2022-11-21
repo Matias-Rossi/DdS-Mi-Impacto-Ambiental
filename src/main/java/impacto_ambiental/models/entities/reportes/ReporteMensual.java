@@ -4,11 +4,11 @@ import lombok.Getter;
 
 public class ReporteMensual {
     @Getter
-    Periodo periodo;
+    public Periodo periodo;
     @Getter
-    Integer anio;
+    public Integer anio;
     @Getter
-    Double hc;
+    public Double hc;
     public ReporteMensual(Periodo periodo, Integer anio) {
         this.periodo = periodo;
         this.anio = anio;

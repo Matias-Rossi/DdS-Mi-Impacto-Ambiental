@@ -25,25 +25,25 @@
 <div class="d-flex flex-column" id="content-wrap">
     <div class=" d-flex align-self-center conteinerRegistro">
         <main>
-            <form class="was-validated" novalidate method="POST" action="/solicitudes/">
+            <form class="was-validated" novalidate method="POST" action="/solicitudes">
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <label name="tramoCompartido" class="form-label texto" style="font-size: 24px !important; padding:0px !important;" id="nombreDelTramo">Tramo Compartido</label>
                     <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                         <div class="col-md-6">
                             <label for="trayectos" class="form-label textoInputs">Mis Trayectos</label>
-                            <select name="misTrayectos" class="form-select form-select-custom" id="trayectos" required>
+                            <select name="idTrayecto" class="form-select form-select-custom" id="trayectos" required>
                                 <option selected disabled value="">-- Elegir Trayecto --</option>
                                 {{#each trayectos}}
-                                <option value="{{id}}">{{trayecto}}</option>
+                                <option value="{{id}}">{{descripcion}}</option>
                                 {{/each}}
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="trayectos" class="form-label textoInputs">Tramos Compartidos</label>
-                            <select name="misTramos" class="form-select form-select-custom" id="tramos" required>
+                            <select name="idTramo" class="form-select form-select-custom" id="tramos" required>
                                 <option selected disabled value="">-- Elegir Tramo --</option>
                                 {{#each tramos}}
-                                <option value="{{id}}">{{tramo}}</option>
+                                <option value="{{id}}">Tramo {{id}}</option>
                                 {{/each}}
                             </select>
                         </div>

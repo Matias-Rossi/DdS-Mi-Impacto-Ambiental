@@ -1,10 +1,22 @@
-{{#partial contenido}}
+{{#partial "contenidoNav" }}
+
+
+    <a href="login" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Iniciar sesión
+    </a >
+{{/partial}}
+
+{{#partial "contenido"}}
     <div class="d-flex flex-column" id="content-wrap">
         <div class=" d-flex align-self-center conteinerRegistro">
             
              <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
-                <a class="texto" style="font-size: 40px;">NO TENES ACCESO WACHIN</a>
+                <h1>Acceso denegado</h1>
+                 <p>Usted no tiene permiso para acceder a esta página</p>
+                 <a href="login">Inicie sesión aquí</a>
+                 <p style="color: gray;">Error 403</p>
             </div>
-            </div>
-            </div>
-    {{/partial}}
+        </div>
+    </div>
+{{/partial}}
+{{> base.hbs }}

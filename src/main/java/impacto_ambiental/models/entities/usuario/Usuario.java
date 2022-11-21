@@ -17,8 +17,9 @@ public class Usuario extends EntidadPersistente {
     @ManyToOne @Getter
     @JoinColumn(name = "rol_id", referencedColumnName = "id")
     private Rol rol;
+    @Getter
     @Column(name = "usuario")
-    private String usuario;
+    public String usuario;
 
     @Column(name = "contrasenia")
     private String contrasenia;

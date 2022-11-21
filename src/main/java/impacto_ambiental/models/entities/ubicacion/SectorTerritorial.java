@@ -1,7 +1,11 @@
 package impacto_ambiental.models.entities.ubicacion;
 
 import impacto_ambiental.models.entities.EntidadPersistente;
+import impacto_ambiental.models.entities.perfil.Clasificacion;
 import impacto_ambiental.models.entities.perfil.Organizacion;
+import impacto_ambiental.models.entities.reportes.GeneradorDeReportes;
+import impacto_ambiental.models.entities.reportes.ReporteComposicion;
+import impacto_ambiental.models.entities.reportes.ReporteHistorico;
 import impacto_ambiental.models.entities.usuario.Usuario;
 import lombok.Getter;
 
@@ -48,5 +52,15 @@ public abstract class SectorTerritorial extends EntidadPersistente {
         solicitudes.remove(usuario);
         usuario.agregarSector(this);
     }
+
+    public ReporteComposicion composicionDeHc(){
+        return null;
+    }
+
+    public ReporteHistorico historicoHc(){
+        return null;
+    }
+
+    public Double hcPorClas(Clasificacion clasificacion) {return null;}
 
 }

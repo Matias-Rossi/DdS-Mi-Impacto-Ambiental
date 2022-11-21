@@ -12,7 +12,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "organizaciones")
@@ -36,7 +38,7 @@ public class Organizacion extends EntidadPersistente {
 
     @Getter
     @Column(name = "razon_social",unique = true)
-    private String razonSocial;
+    public String razonSocial;
 
     @Column(name = "tipo")
     private Tipo tipo;
@@ -45,6 +47,7 @@ public class Organizacion extends EntidadPersistente {
     @OneToMany(mappedBy = "organizacion", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Area> areas= new ArrayList<Area>();
 
+    @Getter
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "clasificaciones_id", referencedColumnName = "id")
     private Clasificacion clasificacion;
@@ -64,7 +67,7 @@ public class Organizacion extends EntidadPersistente {
     public Organizacion(){
     }
 
-    public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion,Usuario usuario) {
+    public Organizacion(Importador moduloImportador, Ubicacion ubicacion, String razonSocial, Tipo tipo, Clasificacion clasificacion, Usuario usuario) {
         this.ubicacion=ubicacion;
         this.razonSocial=razonSocial;
         this.tipo=tipo;
@@ -74,7 +77,7 @@ public class Organizacion extends EntidadPersistente {
         this.usuario=usuario;
         this.municipioODepartamento.agregarOrganizacion(this);
     }
-    public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion) {
+    public Organizacion(Importador moduloImportador, Ubicacion ubicacion, String razonSocial, Tipo tipo, Clasificacion clasificacion) {
         this.ubicacion=ubicacion;
         this.razonSocial=razonSocial;
         this.tipo=tipo;
@@ -87,6 +90,13 @@ public class Organizacion extends EntidadPersistente {
         Area nuevaArea = new Area(nombreArea, this );
         this.areas.add(nuevaArea);
         return nuevaArea;
+    }
+
+    public List<Miembro> getMiembros(){
+        List<Miembro> miembros =areas.stream().map(area->area.getMiembros()).flatMap(Collection::stream).collect(Collectors.toList());
+        System.out.println("miembros");
+        System.out.println(miembros);
+        return miembros;
     }
 
     public void agregarReporte(HChistorico HChistorico){
@@ -121,6 +131,11 @@ public class Organizacion extends EntidadPersistente {
 
     public List<HChistorico> getHChistoricos() {
         return HChistoricos;
+    }
+
+    public Double getHcDeArea(Area area){
+        List<HChistorico> filtrado = getHChistoricos().stream().filter(h->h.getArea().equals(area)).collect(Collectors.toList());
+        return filtrado.stream().mapToDouble(h->h.getHuellaDeCarbono()).sum();
     }
 
 }

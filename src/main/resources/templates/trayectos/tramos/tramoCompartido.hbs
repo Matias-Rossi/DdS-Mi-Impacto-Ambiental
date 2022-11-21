@@ -24,21 +24,22 @@
 <div class="d-flex flex-column" id="content-wrap">
     <div class=" d-flex align-self-center conteinerRegistro">
         <main>
-            <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/{{id}}/compartir-tramo">
+            <form class="was-validated" novalidate method="POST" action="/trayectos/{{idTrayecto}}/tramos/{{idTramo}}/compartir-tramo">
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <label name="tramo" class="form-label texto" style="font-size: 24px !important; padding:0px !important;" id="nombreDelTramo">Tramo {{idTramo}}</label>
+                </div>
                     <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                         <div class="col-md-12">
                             <label for="miembro" class="form-label textoInputs">Miembro</label>
                             <select name="idMiembro" class="form-select form-select-custom" id="miembro" required>
                                 <option selected disabled value="">-- Seleccionar Miembro --</option>
-                                {{#each miembro}}
-                                <option value="{{id}}">{{usuario}}</option>
+                                {{#each miembros}}
+                                <option value="{{id}}">{{usuario.usuario}}</option>
                                 {{/each}}
                             </select>
                         </div>
                     </div>
-                </div>
+
                 <div class="d-flex justify-content-center" style="margin: 20px 0px 20px 0px;">
                     <button class=" btn-custom " type="submit" id="idAniadir">Añadir</button>
                 </div>

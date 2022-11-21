@@ -7,6 +7,8 @@ import impacto_ambiental.models.entities.ubicacion.Provincia;
 import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
 import impacto_ambiental.models.repositorios.RepositorioProvincias;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +40,9 @@ public final class GeneradorDeReportes {
     public ReporteComposicion composicionDeaHCTotalDeUnDeterminadoSectorTerritorial(MunicipiosODepartamentos municipio){
         return this.generarReporteComposicion(municipio.getHcHistoricos());
     }
+    public ReporteComposicion composicionDeaHCTotalDeUnDeterminadoSectorTerritorial(Provincia provincia){
+        return this.generarReporteComposicion(provincia.getHcHistoricos());
+    }
     public ReporteComposicion composicionDeaHCTotalANivelPais(List<Provincia> provincias){
         RepositorioProvincias repositorio = new RepositorioProvincias();
         return this.generarReporteComposicion(
@@ -62,10 +67,24 @@ public final class GeneradorDeReportes {
         return reporte;
         }
 
+    public ReporteHistorico EvolucionDeHCTotalDeUnDeterminadoSectorTerritorial(Provincia provincia){
+        ReporteHistorico reporte = new ReporteHistorico();
+        provincia.getHcHistoricos().forEach(e->reporte.agregarHc(e));
+        return reporte;
+    }
+
     public ReporteHistorico EvolucionDeHCTotalDeUnaOrganizacion(Organizacion organizacion){
         ReporteHistorico reporte = new ReporteHistorico();
         organizacion.getHChistoricos().forEach(e->reporte.agregarHc(e));
         return reporte;
+    }
+
+    public static double round(double value) {
+        if (1 < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(1, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 

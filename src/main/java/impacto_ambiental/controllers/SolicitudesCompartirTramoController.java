@@ -30,7 +30,7 @@ public class SolicitudesCompartirTramoController {
         return new ModelAndView(new HashMap<String, Object>(){{
             put("tramos", tramos);
             put("trayectos",trayectos);//TODO Agregar el key
-        }}, ".hbs"); //TODO Implementar .hbs
+        }}, "solicitudes/usuarioSolicitudes.hbs"); //TODO Implementar .hbs
     }
 
     public Response respuestaTramo(Request request, Response response) {
@@ -38,19 +38,19 @@ public class SolicitudesCompartirTramoController {
         RepositorioTramos repositorioTramos = new RepositorioTramos();
         RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
 
-        String idTramo = request.params("idTramo");
-        String idTrayecto = request.params("idTrayecto");
-        Boolean respuesta = Boolean.parseBoolean(request.params("respuesta"));
+        String idTramo = request.queryParams("idTramo");
+        String idTrayecto = request.queryParams("idTrayecto");
+        //Boolean respuesta = Boolean.parseBoolean(request.params("respuesta"));
 
         Tramo tramo = repositorioTramos.buscarPorId(Integer.valueOf(idTramo));
         Trayecto trayecto = repositorioTrayectos.buscarPorId(Integer.valueOf(idTrayecto));
         Miembro miembro = repositorioMiembros.buscarPorIDUsuario(request.session().attribute("id"));
 
 
-        miembro.gestionarTramosCompartidos(tramo,trayecto,respuesta);
+        miembro.gestionarTramosCompartidos(tramo,trayecto,true);
         repositorioMiembros.actualizar(miembro);
 
-        response.redirect(""); //TODO Revisar si la url de redirección es correcta
+        response.redirect("/home"); //TODO Revisar si la url de redirección es correcta
         return response;
     }
 

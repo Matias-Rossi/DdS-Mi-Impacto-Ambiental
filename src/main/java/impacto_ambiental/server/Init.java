@@ -1,6 +1,9 @@
 package impacto_ambiental.server;
 
-import impacto_ambiental.models.entities.perfil.Clasificacion;
+import impacto_ambiental.models.entities.calculadorHC.FactorDeEmision;
+import impacto_ambiental.models.entities.calculadorHC.TipoActividadDA;
+import impacto_ambiental.models.entities.calculadorHC.TipoConsumoDA;
+import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.servicios.geodds.ServicioGeoDds;
 import impacto_ambiental.models.entities.servicios.geodds.entidades.Municipio;
 import impacto_ambiental.models.entities.transporte.*;
@@ -15,13 +18,17 @@ import java.util.stream.Collectors;
 public class Init {
 /*
     static public void main(String[] args) throws IOException {
-        inicializarRoles();
-        inicializarClasificacion();
-        inicializarProvincias();
-        datosParaCrearTrayectos();
-        crearAdmin();
-        inicializarAgenteSectorial();
+        //inicializarRoles();
+        //inicializarClasificacion();
+        //inicializarProvincias();
+        //crearOrganizacionYMiembro();
+        //datosParaCrearTrayectos();
+        //crearAdmin();
+        //inicializarAgenteSectorial();
+        //inicializarFactorDeEmision();
+
         System.out.println(" ##### Inicialización finalizada correctamente ##### ");
+        System.exit(0);
     }
 
     static void crearAdmin() {
@@ -38,15 +45,30 @@ public class Init {
         RepositorioRoles repo = new RepositorioRoles();
 
         System.out.println("### Inicializando roles de usuarios ###");
-        Rol rol = new Rol(TipoUsuario.MIEMBRO);
-        new Permiso(Alcance.PROPIOS, Accion.TOTAL,Objeto.ORGANIZACION,rol);
-        repo.agregar(rol);
-        Rol rol2 = new Rol(TipoUsuario.ORGANIZACION);
-        repo.agregar(rol2);
-        Rol rol3 = new Rol(TipoUsuario.AGENTE);
-        repo.agregar(rol3);
-        Rol rol4 = new Rol(TipoUsuario.ADMINISTRADOR);
-        repo.agregar(rol4);
+
+        //Miembro
+        Rol rolMiembro = new Rol(TipoUsuario.MIEMBRO);
+        Permiso permisoMiembro = new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MIEMBRO);
+        rolMiembro.agregarPermiso(permisoMiembro);
+        repo.agregar(rolMiembro);
+
+        //Organizacion
+        Rol rolOrganizacion = new Rol(TipoUsuario.ORGANIZACION);
+        Permiso permisoOrganizacion = new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION);
+        rolOrganizacion.agregarPermiso(permisoOrganizacion);
+        repo.agregar(rolOrganizacion);
+
+        //Agente
+        Rol rolAgente = new Rol(TipoUsuario.AGENTE);
+        Permiso permisoAgente = new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MUNICIPIO_O_DEPARTAMENTO);
+        rolAgente.agregarPermiso(permisoAgente);
+        repo.agregar(rolAgente);
+
+        //Admin
+        Rol rolAdministrador = new Rol(TipoUsuario.ADMINISTRADOR);
+        Permiso permisoAdmin = new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN);
+        rolAdministrador.agregarPermiso(permisoAdmin);
+        repo.agregar(rolAdministrador);
 
         System.out.println("Roles de usuarios inicializados");
     }
@@ -62,10 +84,6 @@ public class Init {
         SubTipoTransporte publico2 = new SubTipoTransporte(TipoTransporte.TIPO_PUBLICO,"PUBLICO2");
 
 
-
-
-
-
         Transporte tPie = new ServicioEcologico(pie,null,5);
         Transporte tBici = new ServicioEcologico(bici,null,10);
 
@@ -78,7 +96,7 @@ public class Init {
         RepositorioMunicipiosODepartamentos repo = new RepositorioMunicipiosODepartamentos();
 
 
-        MunicipiosODepartamentos BragadoTest = repo.buscar(13);
+        MunicipiosODepartamentos BragadoTest = repo.buscar(18);
 
         Ubicacion ubicacion1 = new Ubicacion(
                 BragadoTest,
@@ -138,21 +156,59 @@ public class Init {
     }
 
 
-
-
-
     static void inicializarClasificacion() {
         RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
 
         System.out.println("### Inicializando clasificacion de organizaciones ###");
-        Clasificacion clasificacion1 = new Clasificacion("Escuela");
-        repositorioClasificacion.agregar(clasificacion1);
-        Clasificacion clasificacion2 = new Clasificacion("Ministerio");
-        repositorioClasificacion.agregar(clasificacion2);
-        Clasificacion clasificacion3 = new Clasificacion("Universidad");
-        repositorioClasificacion.agregar(clasificacion3);
+        Clasificacion escuela = new Clasificacion("Escuela");
+        repositorioClasificacion.agregar(escuela);
+        Clasificacion ministerio = new Clasificacion("Ministerio");
+        repositorioClasificacion.agregar(ministerio);
+        Clasificacion universidad = new Clasificacion("Universidad");
+        repositorioClasificacion.agregar(universidad);
         System.out.println("Inicializada clasificación de organizaciones");
         //TODO ¿Hay más?
+    }
+
+    static void crearOrganizacionYMiembro() {
+        RepositorioRoles repositorioRoles = new RepositorioRoles();
+        RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
+        RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
+        RepositorioMiembros repositorioMiembros = new RepositorioMiembros();
+
+        MunicipiosODepartamentos Bragado = new RepositorioMunicipiosODepartamentos().buscar(18);
+        Ubicacion ubicacion = new Ubicacion(
+            Bragado,
+            "Bragado",
+            "C1234",
+            "calle falsa",
+            123
+        );
+
+        //Miembro en organización
+        Rol rolMiembro = repositorioRoles.obtenerRol("MIEMBRO");
+        Usuario usuarioMiembro = new Usuario(rolMiembro, "miembro1", "miembro1");
+        Miembro miembro = new Miembro("Martin", "Martinez", TipoDocumento.DNI, "12345678", ubicacion, "miembro1", "miembro1", usuarioMiembro);
+
+        //Organizacion
+        Rol rolOrganizacion = repositorioRoles.obtenerRol("ORGANIZACION");
+        Usuario usuarioOrganizacion = new Usuario(rolOrganizacion, "organizacion", "organizacion");
+        Clasificacion universidad = new RepositorioClasificacion().buscar(3);
+        Organizacion organizacion = new Organizacion(null, ubicacion, "Universidad Tecnologica Nacional", Tipo.INSTITUCION, universidad, usuarioOrganizacion);
+        organizacion.darAltaArea("Sistemas");
+        Area sistemas = organizacion.getAreas().get(0);
+        Solicitud solicitud = miembro.darseAltaEnOrganizacion(sistemas);
+        sistemas.gestionarMiembrosPendientes(solicitud, SolicitudEstado.ACEPTADA);
+
+        //Miembro fuera de organización
+        Usuario usuarioMiembroIndependiente = new Usuario(rolMiembro, "miembro2", "miembro2");
+        Miembro miembroIndependiente = new Miembro("Rodrigo", "Rodriguez", TipoDocumento.DNI, "87654321", ubicacion, "miembro2", "miembro2", usuarioMiembroIndependiente);
+
+        //Persistencia
+        repositorioOrganizaciones.agregar(organizacion);
+        repositorioMiembros.agregar(miembro);
+        repositorioMiembros.agregar(miembroIndependiente);
+
     }
 
     static void inicializarProvincias() throws IOException{
@@ -194,6 +250,18 @@ public class Init {
         System.out.println("Provincias y municipios inicializados");
     }
 
+    static void inicializarFactorDeEmision() {
+        RepositorioFactorDeEmision repositorio = new RepositorioFactorDeEmision();
+        //generar lista con todos los TipoActividadDA y TipoConsumoDA
+
+        for (TipoActividadDA tipoActividadDA : TipoActividadDA.values()) {
+            for (TipoConsumoDA tipoConsumoDA : TipoConsumoDA.values()) {
+                FactorDeEmision factorDeEmision = new FactorDeEmision(tipoActividadDA, tipoConsumoDA, 0.5);
+                repositorio.agregar(factorDeEmision);
+            }
+        }
+    }
+
     static void inicializarAgenteSectorial() {
         RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
         RepositorioRoles repositorioRoles = new RepositorioRoles();
@@ -203,6 +271,5 @@ public class Init {
         agenteSectorial.agregarSector(municipio);
         repositorioUsuarios.agregar(agenteSectorial);
     }
-
 */
 }

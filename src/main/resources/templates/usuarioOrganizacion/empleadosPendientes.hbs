@@ -1,16 +1,19 @@
 {{#partial "contenidoNav" }}
-    <a href="/organizacion/areas" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+    <a href="/areas" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
         Areas
     </a >
 
-    <a href="/organizacion/empleados" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+    <a href="/empleados" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
         Empleados
     </a >
-    <a href="/organizacion/calcularHC" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+    <a href="/calcularHCOrg" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
         Calculadora HC
     </a >
-    <a href="/organizacion/cargaDeReportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+    <a href="/cargaDeReportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
         Carga de Reportes
+    </a >
+    <a href="/reportes" class="nav-link-custom" style="margin: 0px 10px;" id="reportes">
+        Reportes
     </a >
     <div class="dropdown">
         <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
@@ -37,13 +40,13 @@
                             <div class="ms-8 me-auto">
                                 <a  class="listStyle"  > {{ miembro.nombre }} {{ miembro.apellido }} </a>
                             </div>
-                            <form method="POST" action="/organizacion/empleados/aceptar">
+                            <form method="POST" action="/empleados/aceptar">
                                 <div class="ms-2 me-auto">
                                     <input name="id" value="{{id}}" type="hidden">
                                 </div>
                                 <button class="material-symbols-outlined done"style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;"  type="submit" >done</button>
                             </form>
-                            <form method="POST" action="/organizacion/empleados/rechazar">
+                            <form method="POST" action="/empleados/rechazar">
                                 <div class="ms-2 me-auto">
                                     <input name="id" value="{{id}}" type="hidden">
                                 </div>
@@ -55,7 +58,7 @@
                     </ul>
 
                     <div class="d-flex justify-content-center">
-                        <a class="btn btn-custom" href="/organizacion/empleados" style="margin-top:20px ;">Volver</a>
+                        <a class="btn btn-custom" href="/empleados" style="margin-top:20px ;">Volver</a>
                     </div>
                 </div>
             </main>
