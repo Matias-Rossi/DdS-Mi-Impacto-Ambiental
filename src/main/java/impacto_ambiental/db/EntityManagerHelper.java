@@ -17,7 +17,6 @@ public class EntityManagerHelper {
         static {
           try {
               PersistenceProvider provider = new HibernatePersistenceProvider();
-
             emf = provider.createEntityManagerFactory("db", null);
             threadLocal = new ThreadLocal<>();
           } catch (Exception e) {
@@ -32,7 +31,8 @@ public class EntityManagerHelper {
           EntityManager em = threadLocal.get();
           if(em == null || !em.isOpen()) {
               if(null == emf){
-                  emf = Persistence.createEntityManagerFactory("db");
+                  PersistenceProvider provider = new HibernatePersistenceProvider();
+                  emf = provider.createEntityManagerFactory("db", null);
               }
             em = emf.createEntityManager();
             threadLocal.set(em);
