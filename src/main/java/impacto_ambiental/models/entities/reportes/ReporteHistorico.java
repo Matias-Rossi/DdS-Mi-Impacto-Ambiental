@@ -36,6 +36,14 @@ public class ReporteHistorico {
         nuevoReporteMensual(periodo,anio).sumar(hc);
     }
 
+    public void ordenar(){
+        reportesMensuales.sort((e1,e2)->{
+            if(e1.getAnio().equals(e2.getAnio())){
+                return e1.getPeriodo().ordinal()-e2.getPeriodo().ordinal();
+            }
+            return e1.getAnio()-e2.getAnio();
+        });
+    }
 
     private ReporteMensual nuevoReporteMensual(Periodo periodo, Integer anio){
         ReporteMensual reporte = new ReporteMensual(periodo,anio);

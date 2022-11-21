@@ -104,6 +104,7 @@ public class AgenteSectorialController {
         final SectorTerritorial sector = getSector(request);
 
         ReporteHistorico reporte = sector.historicoHc();
+        reporte.ordernar();
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("reporte", reporte);
