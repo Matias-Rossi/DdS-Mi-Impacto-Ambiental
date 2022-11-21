@@ -91,6 +91,9 @@ public class AgenteSectorialController {
 
         ReporteComposicion reporte = sector.composicionDeHc();
         reporte.calcularPorcentajes();
+        System.out.println("aaaaaaaaaa  tipoDeActividadSERVICIO_CONTRATADO");
+        System.out.println(reporte.porcentajetipoDeActividadCOMBUSTION_MOVIL);
+
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("reporte", reporte);
