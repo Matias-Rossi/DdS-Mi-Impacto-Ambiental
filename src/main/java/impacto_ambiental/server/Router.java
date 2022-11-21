@@ -81,9 +81,10 @@ public class Router {
 
         // ### Miembro ###
         Spark.path("/home", () -> {
+
             Spark.get("", homeController::homeUser, engine);
         });
-
+        //## USURIO
         // ### Calcular HC ###
         Spark.path("/calcularhc", () -> {
             Spark.post("", calcularHCController::calcularHcMiembro);
