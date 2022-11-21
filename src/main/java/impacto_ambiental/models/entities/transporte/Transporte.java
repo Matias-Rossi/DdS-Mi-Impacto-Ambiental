@@ -26,6 +26,7 @@ public abstract class Transporte extends EntidadPersistente {
         }
     }
 
+    @Getter
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "subtipo_id", referencedColumnName = "id")
     protected SubTipoTransporte subTipoTransporte;

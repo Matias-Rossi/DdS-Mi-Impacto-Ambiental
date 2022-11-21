@@ -11,7 +11,7 @@ public class ReporteHistorico {
     public List<ReporteMensual> reportesMensuales= new ArrayList<ReporteMensual>();
 
     public void agregarHc(HChistorico hc){
-         Double huella = hc.getHuellaDeCarbono();
+         Double huella = GeneradorDeReportes.round(hc.getHuellaDeCarbono());
          Integer anio = hc.getAnio();
          Periodo periodo = hc.getPeriodo();
 

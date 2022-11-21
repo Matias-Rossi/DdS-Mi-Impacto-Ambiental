@@ -3,12 +3,12 @@ package impacto_ambiental.models.entities.perfil;
 import lombok.Getter;
 
 public class AreaHc {
-    AreaHc(Area area, Double hc){
+    public AreaHc(Area area, Double hc){
         this.area= area;
         this.hc=hc;
     }
     @Getter
-    Area area;
+    public Area area;
     @Getter
-    Double hc;
+    public Double hc;
 }

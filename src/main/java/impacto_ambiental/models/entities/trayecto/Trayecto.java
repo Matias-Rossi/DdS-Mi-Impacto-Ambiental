@@ -1,5 +1,6 @@
 package impacto_ambiental.models.entities.trayecto;
 
+import impacto_ambiental.models.entities.perfil.Area;
 import impacto_ambiental.models.entities.perfil.Miembro;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.EntidadPersistente;

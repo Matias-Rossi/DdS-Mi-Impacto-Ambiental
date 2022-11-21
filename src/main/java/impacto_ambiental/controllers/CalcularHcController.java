@@ -1,9 +1,7 @@
 package impacto_ambiental.controllers;
 
-import impacto_ambiental.models.entities.perfil.Miembro;
-import impacto_ambiental.models.entities.perfil.OrgPorcentaje;
-import impacto_ambiental.models.entities.perfil.Organizacion;
-import impacto_ambiental.models.entities.perfil.Solicitud;
+import impacto_ambiental.models.entities.perfil.*;
+import impacto_ambiental.models.entities.reportes.GeneradorDeReportes;
 import impacto_ambiental.models.repositorios.RepositorioMiembros;
 import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
 import impacto_ambiental.models.repositorios.RepositorioSolicitudes;
@@ -36,7 +34,7 @@ public class CalcularHcController {
 
 
         return new ModelAndView(new HashMap<String, Object>() {{
-            put("hc",hc);
+            put("hc",GeneradorDeReportes.round(hc));
             put("porcentajes", porcentajes);
         }}, "calcularHCUser.hbs"); //TODO
     }
@@ -63,10 +61,15 @@ public class CalcularHcController {
 
     public ModelAndView mostrarHcOrganizacion(Request request, Response response) {
         Organizacion organizacion = new RepositorioOrganizaciones().obtenerOrganizacionSegunRequest(request);
+
+        List<AreaHc> areashc = organizacion.getAreas().stream().map(ar->new AreaHc(ar,ar.calcularHCporMiembro())).collect(Collectors.toList());
+
+
         double hc = organizacion.getHCTotal();
 
         return new ModelAndView(new HashMap<String, Object>() {{
-            put("hc",hc);
+            put("hc", GeneradorDeReportes.round(hc));
+            put("areashc",areashc);
         }}, "usuarioOrganizacion/calcularHCOrganizacion.hbs"); //TODO
     }
 

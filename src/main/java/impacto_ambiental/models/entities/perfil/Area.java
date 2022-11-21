@@ -1,6 +1,7 @@
 package impacto_ambiental.models.entities.perfil;
 
 import impacto_ambiental.models.entities.EntidadPersistente;
+import impacto_ambiental.models.entities.reportes.GeneradorDeReportes;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -69,10 +70,12 @@ public class Area extends EntidadPersistente {
         return miembros;
     }
 
-    public double calcularHCporMiembro(Integer anio,Integer mes){
-//        return this.calcularHC(anio,mes)/this.miembrosActuales().size();
-//        TODO
-        return 0.0;
+    public Boolean tieneMiembro(Miembro miembro){
+        return miembrosActuales().stream().anyMatch(sol->sol.getMiembro().equals(miembro));
+    }
+
+    public double calcularHCporMiembro(){
+        return GeneradorDeReportes.round(this.organizacion.getHcDeArea(this)/miembrosActuales().size());
     }
 
     private List<Solicitud> miembrosActuales(){

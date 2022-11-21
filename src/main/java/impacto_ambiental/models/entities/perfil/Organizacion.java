@@ -38,7 +38,7 @@ public class Organizacion extends EntidadPersistente {
 
     @Getter
     @Column(name = "razon_social",unique = true)
-    private String razonSocial;
+    public String razonSocial;
 
     @Column(name = "tipo")
     private Tipo tipo;
@@ -67,7 +67,7 @@ public class Organizacion extends EntidadPersistente {
     public Organizacion(){
     }
 
-    public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion,Usuario usuario) {
+    public Organizacion(Importador moduloImportador, Ubicacion ubicacion, String razonSocial, Tipo tipo, Clasificacion clasificacion, Usuario usuario) {
         this.ubicacion=ubicacion;
         this.razonSocial=razonSocial;
         this.tipo=tipo;
@@ -77,7 +77,7 @@ public class Organizacion extends EntidadPersistente {
         this.usuario=usuario;
         this.municipioODepartamento.agregarOrganizacion(this);
     }
-    public Organizacion(Importador moduloImportador, Ubicacion ubicacion,String razonSocial,Tipo tipo,Clasificacion clasificacion) {
+    public Organizacion(Importador moduloImportador, Ubicacion ubicacion, String razonSocial, Tipo tipo, Clasificacion clasificacion) {
         this.ubicacion=ubicacion;
         this.razonSocial=razonSocial;
         this.tipo=tipo;
@@ -131,6 +131,11 @@ public class Organizacion extends EntidadPersistente {
 
     public List<HChistorico> getHChistoricos() {
         return HChistoricos;
+    }
+
+    public Double getHcDeArea(Area area){
+        List<HChistorico> filtrado = getHChistoricos().stream().filter(h->h.getArea().equals(area)).collect(Collectors.toList());
+        return filtrado.stream().mapToDouble(h->h.getHuellaDeCarbono()).sum();
     }
 
 }

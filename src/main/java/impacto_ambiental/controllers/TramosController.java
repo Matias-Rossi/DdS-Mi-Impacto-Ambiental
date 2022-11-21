@@ -30,9 +30,12 @@ public class TramosController {
     RepositorioTrayectos repositorioTrayectos = new RepositorioTrayectos();
 
 
-    String idTrayecto = request.params("idTrayecto");
+    String idTrayecto = request.params("idtrayecto");
+    System.out.println("######### ID: " + Integer.valueOf(idTrayecto));
 
-    List<Tramo> tramosBuscados = repositorioTrayectos.buscar(Integer.valueOf(idTrayecto)).getTramos();
+    Trayecto trayecto = repositorioTrayectos.buscarPorId(Integer.valueOf(idTrayecto));
+    System.out.println("$$$$$$$ ID: " + trayecto.getId());
+    List<Tramo> tramosBuscados = trayecto.getTramos();
     List<Tramo> pasarTramos = new ArrayList<>();
     if(!tramosBuscados.equals(null)) {
       pasarTramos.addAll(tramosBuscados);

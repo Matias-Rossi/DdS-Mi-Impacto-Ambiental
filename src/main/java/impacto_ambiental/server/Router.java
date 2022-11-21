@@ -42,10 +42,12 @@ public class Router {
         EmpleadosController empleadosController = new EmpleadosController();
         CargaReportesController cargaReportesController = new CargaReportesController();
         CalcularHcController calcularHCController = new CalcularHcController();
+        ReportesOrganizacionController reportesOrganizacionController = new ReportesOrganizacionController();
         HomeAdminController homeAdminController = new HomeAdminController();
         AgenteSectorialController agenteSectorialController = new AgenteSectorialController();
         SolicitudesCompartirTramoController solicitudesCompartirTramoController = new SolicitudesCompartirTramoController();
         ForbiddenController forbiddenController = new ForbiddenController();
+        TransportesController transportesController = new TransportesController();
 
 
        // Spark.staticFiles.location("/public");
@@ -72,7 +74,7 @@ public class Router {
             Spark.post("/agente_sectorial", signUpController::signUpAgenteSectorial);
         });
 
-        Spark.path("/login", () -> {
+        Spark.path("/forbidden", () -> {
             Spark.get("", forbiddenController::mostrarForbidden, engine);
         });
 
@@ -252,6 +254,25 @@ public class Router {
            Spark.post("/rechazar", empleadosController::rechazarEmpleado);
         });
 
+        Spark.path("/reportes", ()-> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.get("",reportesOrganizacionController::pantallaReportesOrganizacion,engine);
+            Spark.get("/composicion",reportesOrganizacionController::hcComposicion,engine);
+            Spark.get("/historico",reportesOrganizacionController::hcHistorico,engine);
+
+        });
+
         Spark.path("/cargaDeReportes", () -> {
             Spark.before("", ((request, response) -> {
                 if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
@@ -340,10 +361,23 @@ public class Router {
             Spark.get("/HCTotal", agenteSectorialController::hctotal, engine);
             Spark.get("/HCHistorico", agenteSectorialController::hcHistorico, engine);
             Spark.get("/composicionHC", agenteSectorialController::hcComposicion, engine);
+
+
+            Spark.get("/reportesOrganizacion", agenteSectorialController::desplegarOrganizaciones, engine);
+            Spark.get("/reportesOrganizacion/:idOrganizacion", agenteSectorialController::botonesOrganizaciones, engine);
+            Spark.get("/reportesOrganizacion/:idOrganizacion/hcHistorico", agenteSectorialController::historicoOrganizacion, engine);
+            Spark.get("/reportesOrganizacion/:idOrganizacion/hcComposicion", agenteSectorialController::composicionOrganizacion, engine);
+
             Spark.get("/hcClasificaciones", agenteSectorialController::clasOrg, engine);
             Spark.get("/hcClasificaciones/:idClasificacion", agenteSectorialController::hcClasificacion, engine);
             Spark.get("/organizaciones", agenteSectorialController::mostrarOrganizaciones, engine);
             Spark.get("/organizaciones/:id", agenteSectorialController::detalleOrganizacion, engine);
+        });
+
+        /*** Transportes ***/
+        Spark.path("/transportes", ()-> {
+            Spark.get("/:subtipo", transportesController::lineasSegunTransporte);
+            Spark.get("/:subtipo/:idLinea", transportesController::paradasSegunLinea);
         });
 
 

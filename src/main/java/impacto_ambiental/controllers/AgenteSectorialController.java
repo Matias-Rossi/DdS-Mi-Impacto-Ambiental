@@ -2,6 +2,7 @@ package impacto_ambiental.controllers;
 
 import impacto_ambiental.models.entities.perfil.Area;
 import impacto_ambiental.models.entities.perfil.Clasificacion;
+import impacto_ambiental.models.entities.perfil.OrgHc;
 import impacto_ambiental.models.entities.perfil.Organizacion;
 import impacto_ambiental.models.entities.reportes.GeneradorDeReportes;
 import impacto_ambiental.models.entities.reportes.ReporteComposicion;
@@ -16,6 +17,7 @@ import spark.Response;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AgenteSectorialController {
 
@@ -27,11 +29,62 @@ public class AgenteSectorialController {
 
     public ModelAndView hctotal(Request request, Response response) {
         final SectorTerritorial sector = getSector(request);
+        Double hcTotal = GeneradorDeReportes.round(sector.calcularHC());
+        List<OrgHc> hcxorg = sector.getOrganizaciones().stream().map(org->new OrgHc(hcTotal,org)).collect(Collectors.toList());
+
         return new ModelAndView(new HashMap<String, Object>(){{
-            put("hc", sector.calcularHC());
+            put("hc", hcTotal);
             put("sector", sector.getSector());
+            put("hcxorg",hcxorg);
         }}, "/agenteSectorial/agenteHCTotal.hbs");
     }
+
+    public ModelAndView desplegarOrganizaciones(Request request, Response response) {
+        final SectorTerritorial sector = getSector(request);
+        List<Organizacion> organizaciones = sector.getOrganizaciones();
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("organizaciones", organizaciones);
+        }}, "/agenteSectorial/organizacionesSeleccionar.hbs");
+    }
+    public ModelAndView botonesOrganizaciones(Request request, Response response) {
+        String idOrganizacion = request.params("idOrganizacion");
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("id", idOrganizacion);
+        }}, "/agenteSectorial/botonesOrganizaciones.hbs");
+    }
+
+
+
+    public ModelAndView composicionOrganizacion(Request request, Response response) {
+        RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
+        int id = Integer.valueOf(request.params("idOrganizacion"));
+        Organizacion organizacion = repositorioOrganizaciones.buscarPorId(id);
+
+
+
+        ReporteComposicion reporte = GeneradorDeReportes.getInstance().composicionDeHCDeUnaOrganizacion(organizacion);
+        reporte.calcularPorcentajes();
+
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("reporte", reporte);
+        }}, "/agenteSectorial/composicionOrganizacion.hbs");
+    }
+
+    public ModelAndView historicoOrganizacion(Request request, Response response) {
+        RepositorioOrganizaciones repositorioOrganizaciones = new RepositorioOrganizaciones();
+        int id = Integer.valueOf(request.params("idOrganizacion"));
+        Organizacion organizacion = repositorioOrganizaciones.buscarPorId(id);
+
+
+        ReporteHistorico reporte = GeneradorDeReportes.getInstance().EvolucionDeHCTotalDeUnaOrganizacion(organizacion);
+        reporte.ordenar();
+
+        return new ModelAndView(new HashMap<String, Object>(){{
+            put("reporte", reporte);
+        }}, "agenteSectorial/historicoOrganizacion.hbs");
+    }
+
 
     public ModelAndView mostrarOrganizaciones(Request request, Response response) {
         final SectorTerritorial sector = getSector(request);
@@ -97,18 +150,18 @@ public class AgenteSectorialController {
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("reporte", reporte);
-        }}, "/agenteSectorial/agenteComposicionHc.hbs");
+        }}, "/agenteSectorial/agenteComposicionHC.hbs");
     }
 
     public ModelAndView hcHistorico(Request request, Response response) {
         final SectorTerritorial sector = getSector(request);
 
         ReporteHistorico reporte = sector.historicoHc();
-        reporte.ordernar();
+        reporte.ordenar();
 
         return new ModelAndView(new HashMap<String, Object>(){{
             put("reporte", reporte);
-        }}, "/agenteSectorial/agenteHcHistorico.hbs");
+        }}, "/agenteSectorial/agenteHCHistorico.hbs");
     }
 
     private SectorTerritorial getSector(Request request) {

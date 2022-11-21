@@ -295,7 +295,18 @@ function mostrarFormulario(id) {
 }
 
 //__________ JS CARGA DE TRAMOTRASPORTE PUBLICO
+
 /*
+
+TOM!: anda al router y mirate las del final. fijate transportesController::lineasSegunTransporte.
+El primero te devuelve para un subtipo particular, todas sus lineas (asi si pones subte, te da todas las lineas de subte)
+El segundo, paradasSegunLinea, obviamente te devuelve las paradas. Si tienen nombre te dice el nombre, y si no te
+formatea lindo la ubicacion. (todo esto ya anda)
+
+dentro de SPARK.UTILS, en LineaJson y ParadaJson, tenés la data que trae cada cosa. tengo sueño, son las 3:45
+Pedro me tiene secuestrado ayuda
+
+
 function getLinea(tipoTransporte){
 
 }
@@ -304,12 +315,18 @@ const tipoTransporte = document.getElementById("tipoTransporte")
 
 tipoTransporte.addEventListener('change', (event) => {
   const xhr = new XMLHttpRequest();
-  xhr.open("GET", "/");
+  xhr.open("GET", `/transportes/$tipoTransporte`);
+
+  xhr.onload = function() {
+    const obj = JSON.parse(this.responseText);
+
+  }
+
   xhr.send();
   xhr.responseType = "json";
 
-  const lineas = document.getElementById('linea');
-  lineas.valu ;
+  const opcionesLineas = document.getElementById('linea');
+  //lineas.valu ;
   resultado.textContent = `Te gusta el sabor ${event.target.value}`;
 });
 

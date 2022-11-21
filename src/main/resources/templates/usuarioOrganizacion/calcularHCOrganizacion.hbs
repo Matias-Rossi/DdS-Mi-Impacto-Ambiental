@@ -12,6 +12,9 @@
     <a href="/cargaDeReportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
         Carga de Reportes
     </a >
+    <a href="/reportes" class="nav-link-custom" style="margin: 0px 10px;" id="reportes">
+        Reportes
+    </a >
     <div class="dropdown">
         <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
             Mi perfil
@@ -44,13 +47,13 @@
 
                     </div>
                 </div>
-                {{#each hcxarea }}
+                {{#each areashc }}
                     <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                         <div name="area" class="col-md-9">
                             <span class="listStyle">{{ area.nombre }}</span>
                         </div>
                         <div name="HC" class="col-md-3">
-                            <span class="listStyle">{{hc}}%</span>
+                            <span class="listStyle">{{hc}}</span>
                         </div>
                     </div>
                 {{/each}}

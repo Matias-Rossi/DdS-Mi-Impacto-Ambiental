@@ -7,6 +7,8 @@ import impacto_ambiental.models.entities.ubicacion.Provincia;
 import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
 import impacto_ambiental.models.repositorios.RepositorioProvincias;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -75,6 +77,14 @@ public final class GeneradorDeReportes {
         ReporteHistorico reporte = new ReporteHistorico();
         organizacion.getHChistoricos().forEach(e->reporte.agregarHc(e));
         return reporte;
+    }
+
+    public static double round(double value) {
+        if (1 < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(1, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
 
