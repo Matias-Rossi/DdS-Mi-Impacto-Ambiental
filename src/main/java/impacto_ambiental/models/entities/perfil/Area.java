@@ -18,6 +18,8 @@ public class Area extends EntidadPersistente {
     @Column(name = "nombre")
     public String nombre;
 
+    @Setter
+    @Getter
     @ManyToOne()
     @JoinColumn(name = "organizaciones_id", referencedColumnName = "id")
     private Organizacion organizacion;
@@ -78,7 +80,7 @@ public class Area extends EntidadPersistente {
         return GeneradorDeReportes.round(this.organizacion.getHcDeArea(this)/miembrosActuales().size());
     }
 
-    private List<Solicitud> miembrosActuales(){
+    public List<Solicitud> miembrosActuales(){
         return this.solicitudes.stream().filter(solicitud -> solicitud.getEstado() == SolicitudEstado.ACEPTADA).collect(Collectors.toList());
     }
     public void calcularHC(){

@@ -48,6 +48,7 @@ public class Router {
         SolicitudesCompartirTramoController solicitudesCompartirTramoController = new SolicitudesCompartirTramoController();
         ForbiddenController forbiddenController = new ForbiddenController();
         TransportesController transportesController = new TransportesController();
+        GeoController geoController = new GeoController();
 
 
        // Spark.staticFiles.location("/public");
@@ -377,11 +378,18 @@ public class Router {
             Spark.get("/organizaciones/:id", agenteSectorialController::detalleOrganizacion, engine);
         });
 
-        /*** Transportes ***/
+        /***** JSONs - AJAX *****/
+        /* Transportes */
         Spark.path("/transportes", ()-> {
             Spark.get("/:subtipo", transportesController::lineasSegunTransporte);
             Spark.get("/:subtipo/:idLinea", transportesController::paradasSegunLinea);
         });
+
+        /* Municipios */
+        Spark.path("/geo", ()->{
+            Spark.get("/:idProvincia", geoController::municipiosSegunProvincia);
+        });
+
 
 
         //* Fin Agente Sectorial *//

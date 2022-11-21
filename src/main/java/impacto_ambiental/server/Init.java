@@ -180,6 +180,11 @@ public class Init {
         repositorioClasificacion.agregar(ministerio);
         Clasificacion universidad = new Clasificacion("Universidad");
         repositorioClasificacion.agregar(universidad);
+        Clasificacion primario = new Clasificacion("Sector primario");
+        repositorioClasificacion.agregar(primario);
+        Clasificacion secundario = new Clasificacion("Sector secundario");
+        repositorioClasificacion.agregar(secundario);
+
         System.out.println("Inicializada clasificación de organizaciones");
         //TODO ¿Hay más?
     }
@@ -204,9 +209,14 @@ public class Init {
         Usuario usuarioMiembro = new Usuario(rolMiembro, "miembro1", "miembro1");
         Miembro miembro = new Miembro("Martin", "Martinez", TipoDocumento.DNI, "12345678", ubicacion, "miembro1", "miembro1", usuarioMiembro);
 
+        //Miembro laSerenisima
+        Usuario usuarioMiembroLS = new Usuario(rolMiembro, "miembro3", "miembro3");
+        Miembro miembroLS = new Miembro("Ramiro", "Ramirez", TipoDocumento.DNI, "13245678", ubicacion, "miembro3", "miembro3", usuarioMiembroLS);
+
+
         //Organizacion
         Rol rolOrganizacion = repositorioRoles.obtenerRol("ORGANIZACION");
-        Usuario usuarioOrganizacion = new Usuario(rolOrganizacion, "organizacion", "organizacion");
+        Usuario usuarioOrganizacion = new Usuario(rolOrganizacion, "organizacion1", "organizacion1");
         Clasificacion universidad = new RepositorioClasificacion().buscar(3);
         Organizacion organizacion = new Organizacion(null, ubicacion, "Universidad Tecnologica Nacional", Tipo.INSTITUCION, universidad, usuarioOrganizacion);
         organizacion.darAltaArea("Sistemas");
@@ -214,14 +224,27 @@ public class Init {
         Solicitud solicitud = miembro.darseAltaEnOrganizacion(sistemas);
         sistemas.gestionarMiembrosPendientes(solicitud, SolicitudEstado.ACEPTADA);
 
+
+        //Organizacion2
+        Usuario usuarioOrganizacion2 = new Usuario(rolOrganizacion, "orgnaizacion2", "organizacion2");
+        Clasificacion secundaria = new RepositorioClasificacion().buscar(5);
+        Organizacion organizacion2 = new Organizacion(null, ubicacion, "La Serenisima", Tipo.EMPRESA, secundaria, usuarioOrganizacion2);
+        organizacion2.darAltaArea("Recursos Humanos");
+        organizacion2.darAltaArea("Sistemas");
+        Area rrhh = organizacion2.getAreas().get(1);
+        Solicitud sol2 = miembroLS.darseAltaEnOrganizacion(rrhh);
+        rrhh.gestionarMiembrosPendientes(sol2, SolicitudEstado.ACEPTADA);
+
         //Miembro fuera de organización
         Usuario usuarioMiembroIndependiente = new Usuario(rolMiembro, "miembro2", "miembro2");
         Miembro miembroIndependiente = new Miembro("Rodrigo", "Rodriguez", TipoDocumento.DNI, "87654321", ubicacion, "miembro2", "miembro2", usuarioMiembroIndependiente);
 
         //Persistencia
         repositorioOrganizaciones.agregar(organizacion);
+        repositorioOrganizaciones.agregar(organizacion2);
         repositorioMiembros.agregar(miembro);
         repositorioMiembros.agregar(miembroIndependiente);
+        repositorioMiembros.agregar(miembroLS);
 
     }
 

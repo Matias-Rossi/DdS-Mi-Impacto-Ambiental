@@ -184,4 +184,39 @@
     </div>
 
 {{/partial}}
+
+{{#partial "js"}}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
+    <script>
+
+
+        const labels = [
+            'COMBUSTION_FIJA',
+            'COMBUSTION_MOVIL',
+            'ELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA',
+            'LOGISTICA_DE_PRODUCTOS_Y_RESIDUOS',
+            '',
+            '',
+            '',
+            '']
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                data: [{{reporte.tipoDeActividadCOMBUSTION_FIJA}},
+                    {{reporte.tipoDeActividadCOMBUSTION_MOVIL}},
+                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
+                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
+                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
+                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
+                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
+                    {{reporte.tipoDeActividadCOMBUSTION_FIJA}},
+                ]
+            }]
+        }
+
+
+    </script>
+{{/partial}}
+
 {{> base.hbs }}

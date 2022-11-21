@@ -2,6 +2,7 @@ package impacto_ambiental.controllers;
 
 import impacto_ambiental.models.entities.perfil.Area;
 import impacto_ambiental.models.entities.perfil.Organizacion;
+import impacto_ambiental.models.entities.perfil.SolicitudEstado;
 import impacto_ambiental.models.repositorios.RepositorioAreas;
 import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
 import spark.ModelAndView;
@@ -46,9 +47,11 @@ public class AreasOrganizacionController {
     RepositorioAreas repositorioAreas = new RepositorioAreas();
     String idArea = request.params("idArea");
 
-    Area area =repositorioAreas.buscar(idArea);
-    repositorioAreas.remover(area);
-    response.redirect("/organizacion/areas");
+    Area area =repositorioAreas.buscarPorId(Integer.valueOf(idArea));
+    area.miembrosActuales().forEach(a->a.setEstado(SolicitudEstado.DESVINCULADO));
+    area.setOrganizacion(null);
+    repositorioAreas.actualizar(area);
+    response.redirect("/areas");
     return response;
   }
 
