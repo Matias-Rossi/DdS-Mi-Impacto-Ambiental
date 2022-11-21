@@ -7,6 +7,8 @@
 
 {{#partial "contenido" }}
 
+
+
       <div class="d-flex flex-column" id="content-wrap">
           <div class=" d-flex align-self-center conteinerRegistro">
               <main>
@@ -97,32 +99,26 @@
                                           placeholder="" value="" min="0" required>
                                   </div>
                               </div>
+
                               <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
-                                  <div class="col-md-6">
-                                      <label for="inputCalle" class="form-label textoInputs">Direccion</label>
-                                      <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
-                                          value="" required>
-                                  </div>
-                                  <div class="col-md-3">
-                                      <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
-                                      <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
-                                          placeholder="" value="" min="0" required>
-                                  </div>
-                                  <div class="col-md-3">
-                                      <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
-                                      <input name="codPostal" type="number" class="form-control" id="inputCP"
-                                          placeholder="" value="" min="0" required>
+                                  <div class="col-md-12">
+                                      <label for="selectProvincia" class="form-label textoInputs">Provincia</label>
+                                      <select name="provincia" class="form-select form-select-custom selectProvincia" id="selectProvincia"
+                                              required>
+                                          <option selected disabled value="">Elegir...</option>
+                                          {{#each provincias}}
+                                              <option value="{{id}}">{{nombreProvincia}}</option>
+                                          {{/each}}
+                                      </select>
                                   </div>
                               </div>
                               <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                                   <div class="col-md-6">
                                       <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>
-                                      <select name="municipio" class="form-select form-select-custom" id="selectMunicipio"
+                                      <select name="municipio" class="form-select form-select-custom selectMunicipio" id="selectMunicipio"
                                           required>
-                                          <option selected disabled value="">Elegir...</option>
-                                          {{#each municipiosODepartamentos}}
-                                            <option value="{{id}}">{{municipioOLocalidad}}</option>
-                                            {{/each}}
+                                          <option selected disabled value="">-- Seleccionar municipio --</option>
+
                                       </select>
                                   </div>
 
@@ -130,6 +126,23 @@
                                       <label for="inputLocalidad" class="form-label textoInputs">Localidad</label>
                                       <input name="localidad" type="text" class="form-control" id="inputLocalidad"
                                           placeholder="" value="" required>
+                                  </div>
+                              </div>
+                              <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                  <div class="col-md-6">
+                                      <label for="inputCalle" class="form-label textoInputs">Direccion</label>
+                                      <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
+                                             value="" required>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
+                                      <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
+                                             placeholder="" value="" min="0" required>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
+                                      <input name="codPostal" type="number" class="form-control" id="inputCP"
+                                             placeholder="" value="" min="0" required>
                                   </div>
                               </div>
                               <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
@@ -223,23 +236,7 @@
                                   </div>
                               </div>
 
-                              <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax; ">
-                                  <div class="col-md-6">
-                                      <label for="inputCalle" class="form-label textoInputs">Direccion</label>
-                                      <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
-                                             value="" required>
-                                  </div>
-                                  <div class="col-md-3">
-                                      <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
-                                      <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
-                                             placeholder="" value="" min="0" required>
-                                  </div>
-                                  <div class="col-md-3">
-                                      <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
-                                      <input name="codPostal" type="number" class="form-control" id="inputCP"
-                                             placeholder="" value="" min="0" required>
-                                  </div>
-                              </div>
+
                               <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax; ">
                                   <div class="col-md-6">
                                       <label for="tipo" class="form-label textoInputs">Tipo</label>
@@ -266,12 +263,23 @@
 
                               </div>
                               </div>
-    
+                              <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                                  <div class="col-md-12">
+                                      <label for="selectProvincia" class="form-label textoInputs">Provincia</label>
+                                      <select name="provincia" class="form-select form-select-custom selectProvincia" id="selectProvincia"
+                                              required>
+                                          <option selected disabled value="">Elegir...</option>
+                                          {{#each provincias}}
+                                              <option value="{{id}}">{{nombreProvincia}}</option>
+                                          {{/each}}
+                                      </select>
+                                  </div>
+                              </div>
 
                               <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                                   <div class="col-md-6">
                                       <label for="selectMunicipio" class="form-label textoInputs">Municipio</label>
-                                      <select name="municipio" class="form-select form-select-custom" id="selectMunicipio"
+                                      <select name="municipio" class="form-select form-select-custom selectMunicipio" id="selectMunicipio"
                                               required>
                                           <option selected disabled value="">Elegir...</option>
                                           {{#each municipiosODepartamentos}}
@@ -284,6 +292,23 @@
                                       <label for="inputLocalidad" class="form-label textoInputs">Localidad</label>
                                       <input name="localidad" type="text" class="form-control" id="inputLocalidad"
                                              placeholder="" value="" required>
+                                  </div>
+                              </div>
+                              <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax; ">
+                                  <div class="col-md-6">
+                                      <label for="inputCalle" class="form-label textoInputs">Direccion</label>
+                                      <input name="calle" type="text" class="form-control" id="inputCalle" placeholder=""
+                                             value="" required>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label for="inputNumeracion" class="form-label textoInputs">Numeracion</label>
+                                      <input name="numeracion" type="number" class="form-control" id="inputNumeracion"
+                                             placeholder="" value="" min="0" required>
+                                  </div>
+                                  <div class="col-md-3">
+                                      <label for="inputCP" class="form-label textoInputs">Codigo postal</label>
+                                      <input name="codPostal" type="number" class="form-control" id="inputCP"
+                                             placeholder="" value="" min="0" required>
                                   </div>
                               </div>
                               <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
@@ -456,6 +481,7 @@
       </div>
       <!--Fin Modal Agente Sectorial -->
 
+      <script src="/js/municipiosXprovincia.js"></script>
 
 {{/partial}}
 {{> base.hbs }}

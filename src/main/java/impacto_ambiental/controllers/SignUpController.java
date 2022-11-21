@@ -3,6 +3,7 @@ package impacto_ambiental.controllers;
 import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.security.password.ValidadorContrasenia;
 import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
+import impacto_ambiental.models.entities.ubicacion.Provincia;
 import impacto_ambiental.models.entities.ubicacion.SectorTerritorial;
 import impacto_ambiental.models.entities.ubicacion.Ubicacion;
 import impacto_ambiental.models.entities.usuario.Rol;
@@ -22,15 +23,18 @@ public class SignUpController {
     private RepositorioMunicipiosODepartamentos repositorioMunicipiosODepartamentos = new RepositorioMunicipiosODepartamentos();
     private  RepositorioSectoresTerritoriales repositorioSectoresTerritoriales = new RepositorioSectoresTerritoriales();
     private  RepositorioClasificacion repositorioClasificacion = new RepositorioClasificacion();
+    private RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
 
     public ModelAndView pantallaDeSignUp(Request request, Response response) {
         //return new ModelAndView(null, "signUp.hbs");
         List<MunicipiosODepartamentos> municipiosODepartamentosBuscados = this.repositorioMunicipiosODepartamentos.buscarTodos();
         List<SectorTerritorial> sectoresTerritoriales = this.repositorioSectoresTerritoriales.buscarTodos();
         List<Clasificacion> clasificaciones = this.repositorioClasificacion.buscarTodos();
+        List<Provincia> provincias = repositorioProvincias.buscarTodos();
 
        return new ModelAndView(new HashMap<String, Object>(){{
             put("municipiosODepartamentos", municipiosODepartamentosBuscados); //TODO Agregar el key
+           put("provincias", provincias);
            put("sectoresTerritoriales", sectoresTerritoriales);
            put("clasificaciones", clasificaciones);
        }}, "signUp.hbs"); //TODO Implementar este .hbs, ya existe el .html

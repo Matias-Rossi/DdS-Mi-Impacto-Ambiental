@@ -76,11 +76,13 @@ public class TramosController {
     List<Parada> paradas = repositorioParadas.buscarTodos();
 
 
+
     return new ModelAndView(new HashMap<String, Object>(){{
       put("idTrayecto",request.params("idTrayecto"));
       put("municipiosODepartamentos", municipiosODepartamentosBuscados);
       put("particulares",particulares);
       put("contratados",contratados);
+      put("transportesPublicos", publicos);
       put("paradas",paradas);
     }}, "/trayectos/tramos/tramoNew.hbs"); //TODO Implementar .hbs
   }

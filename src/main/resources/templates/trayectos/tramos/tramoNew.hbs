@@ -307,8 +307,8 @@
                                 <label for="tipoTransporte" class="form-label textoInputs">Transporte</label>
                                 <select name="transporteID" class="form-select form-select-custom" id="tipoTransporte" required>
                                     <option selected disabled value="">-- Seleccionar Transporte --</option>
-                                    {{#each paradas}}
-                                    <option value="{{linea.tipotransporte.subtipotransporte.id}}"> Transporte {{linea.tipotransporte.subtipotransporte.id}}</option>
+                                    {{#each transportesPublicos}}
+                                    <option value="{{subTipo}}/{{id}}" name="{{subTipo}}">{{subTipo}}</option>
                                     {{/each}}
                                 </select>
                             </div>
@@ -555,6 +555,8 @@
         </main>
     </div>
 </div>
+
+<script src="/js/transportes.js"></script>
 
 {{/partial}}
 {{> base.hbs }}
