@@ -209,6 +209,7 @@ public class Init {
         System.out.println("Provincias y municipios inicializados");
     }
 
+<<<<<<< Updated upstream
     static void inicializarAgenteSectorial() {
         RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
         RepositorioRoles repositorioRoles = new RepositorioRoles();
@@ -219,5 +220,7 @@ public class Init {
         repositorioUsuarios.agregar(agenteSectorial);
     }
 
+=======
+>>>>>>> Stashed changes
 
 }
