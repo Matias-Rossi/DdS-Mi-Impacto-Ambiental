@@ -16,24 +16,21 @@
     </div>
 {{/partial}}
 
-{{#partial "contenido"}}
-<div class="d-flex flex-column" id="content-wrap">
-    <div class=" d-flex align-self-center conteinerRegistro">
-        <div class="row " style="margin:1vmax 1vmax 1vmax 1vmax;">
-            <div class="col-md-12">
-                <ul style="padding: 0px !important;">
-                {{#each organizaciones}}
-                <li class="list-group-item d-flex align-items-start align-middle texto">
-                        <a class="listStyle" href="/agenteSectorial/organizaciones/{{id}}">{{ razonSocial }}</a>
-                </li>
-{{/each }}
+{{#partial "contenido" }}
 
-
-                </ul>
-            </div>
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerRegistro">
+            <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-center">
+                                <span class="listStyle">El HC total de {{sector}} es {{hc}}</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
     </div>
-</div>
 
 {{/partial}}
 {{> base.hbs }}

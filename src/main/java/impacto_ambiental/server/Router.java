@@ -45,11 +45,13 @@ public class Router {
         HomeAdminController homeAdminController = new HomeAdminController();
         AgenteSectorialController agenteSectorialController = new AgenteSectorialController();
         SolicitudesCompartirTramoController solicitudesCompartirTramoController = new SolicitudesCompartirTramoController();
+        ForbiddenController forbiddenController = new ForbiddenController();
 
 
        // Spark.staticFiles.location("/public");
 
-        // ### Miembro ###
+
+
         Spark.path("/", () -> {
             Spark.get("", homeController::pantallaDeHome, engine);
         });
@@ -61,8 +63,8 @@ public class Router {
 
         Spark.path("/logout", () -> {
             Spark.post("", loginController::logout);
-
         });
+
         Spark.path("/signup", () -> {
             Spark.get("", signUpController::pantallaDeSignUp, engine);
             Spark.post("/miembro", signUpController::signUpMiembro);
@@ -70,6 +72,12 @@ public class Router {
             Spark.post("/agente_sectorial", signUpController::signUpAgenteSectorial);
         });
 
+        Spark.path("/login", () -> {
+            Spark.get("", forbiddenController::mostrarForbidden, engine);
+        });
+
+
+        // ### Miembro ###
         Spark.path("/home", () -> {
             Spark.get("", homeController::homeUser, engine);
         });
@@ -82,27 +90,19 @@ public class Router {
         });
 
         Spark.path("/organizaciones", () -> {
-
-
             Spark.before("", ((request, response) -> {
-                System.out.println("ANTES DEL IF");
-
-                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.ORGANIZACION))) {
-                    System.out.println("ENTRA DEL IF");
-                    response.redirect("/prohibido");
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.MIEMBRO))) {
+                    response.redirect("/forbidden");
                     Spark.halt();
                 }
-                System.out.println("SALE DEL IF");
             }));
 
             Spark.before("/*", ((request, response) -> {
-                System.out.println("ANTES DEL IF");
-                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.ORGANIZACION))) {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.MIEMBRO))) {
                     System.out.println("ENTRA DEL IF");
-                    response.redirect("/prohibido");
+                    response.redirect("/forbidden");
                     Spark.halt();
                 }
-                System.out.println("SALE DEL IF");
             }));
 
 
@@ -111,15 +111,46 @@ public class Router {
             Spark.get("/vincularse", organizacionController::pantallaVincularse, engine);
             Spark.post ("/vincularse/", organizacionController::vincularseOrganizacion);
         });
+
        // ### Trayectos ###
         Spark.path("/trayectos", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MIEMBRO))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MIEMBRO))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.get("", trayectosController::mostrarPropios, engine);
             Spark.post ("/", trayectosController::guardar);
             // Spark.post("/:id/delete", trayectosController::deleteTrayecto);
         });
-        // ### Tramos ###
 
+        // ### Tramos ###
         Spark.path("/trayectos/:idTrayecto/tramos", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MIEMBRO))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MIEMBRO))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.get("", tramosController::mostrarPropios, engine);
             Spark.get("/new", tramosController::pantallaNewTramo, engine);
             Spark.get("/:idTramo/compartir-tramo", tramosController::pantallaCompartirTramo, engine);
@@ -137,6 +168,20 @@ public class Router {
 
         // ### Solicitudes ###
         Spark.path("/solicitudes", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.MIEMBRO))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.MIEMBRO))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.get("", solicitudesCompartirTramoController::mostrar, engine);
             Spark.post("", solicitudesCompartirTramoController::respuestaTramo);
         });
@@ -144,12 +189,40 @@ public class Router {
 
 
         // ### Organizacion ###
-
         Spark.path("/homeorg", () -> {
+
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.ORGANIZACION))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.ORGANIZACION))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
              Spark.get("", homeOrganizacionController::pantallaDeHome, engine);
         });
 
         Spark.path("/areas", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.get("", areasOrganizacionController::mostrarPropias, engine);
             Spark.get("/:id", gestorAreaController::mostrar, engine);
             Spark.post("", areasOrganizacionController::guardar);
@@ -157,6 +230,20 @@ public class Router {
         });
 
         Spark.path("/empleados", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.get("", empleadosController::elegirPantalla, engine);
            Spark.get("/actuales", empleadosController::mostrarEmpleadosActuales, engine);
            Spark.get("/pendientes", empleadosController::mostrarEmpleadosPendientes, engine);
@@ -166,12 +253,40 @@ public class Router {
         });
 
         Spark.path("/cargaDeReportes", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.get("", cargaReportesController::mostrarVista, engine);
             Spark.post("", "multipart/form-data", cargaReportesController::cargar);
             Spark.get("/mostrarInfo", cargaReportesController::mostrarResultados, engine);
         });
 
         Spark.path("/calcularHCOrg", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.post("", calcularHCController::calcularHcOrganizacion);
             Spark.get("", calcularHCController::mostrarHcOrganizacion, engine);
         });
@@ -185,19 +300,54 @@ public class Router {
         });
 
         Spark.path("/gestionar-organizaciones", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.get("", organizacionController::mostrarPantallaAdministrador, engine);
             //Spark.get("/:id", organizacionController::editar, engine); //TODO Edicion de organizaciones desde panel admin
             Spark.post("/crear", signUpController::signUpOrganizacion);
             //Spark.post("/:id/guardar", organizacionController::guardar);
             //Spark.post("/:id/delete", organizacionController::eliminar);
         });
+        //* Fin ADMINISTRADOR *//
 
+        //* Agente Sectorial *//
         Spark.path("/agenteSectorial", () -> {
-            Spark.get("/sector", agenteSectorialController::mostrarSector, engine);
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MUNICIPIO_O_DEPARTAMENTO))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MUNICIPIO_O_DEPARTAMENTO))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.get("", agenteSectorialController::pantallaAgenteSectorial, engine);
+            Spark.get("/HCTotal", agenteSectorialController::hctotal, engine);
+            Spark.get("/HCHistorico", agenteSectorialController::hcHistorico, engine);
+            Spark.get("/composicionHC", agenteSectorialController::hcComposicion, engine);
+            Spark.get("/hcClasificaciones", agenteSectorialController::clasOrg, engine);
+            Spark.get("/hcClasificaciones/:idClasificacion", agenteSectorialController::hcClasificacion, engine);
             Spark.get("/organizaciones", agenteSectorialController::mostrarOrganizaciones, engine);
             Spark.get("/organizaciones/:id", agenteSectorialController::detalleOrganizacion, engine);
         });
 
+
+        //* Fin Agente Sectorial *//
  //_______________________APIS
 /*
         Spark.path("/api/", () -> {
@@ -239,7 +389,7 @@ public class Router {
             Spark.post("", tramosController::guardar);
         });
 
-        Spark.get("/prohibido", loginController::prohibido, engine);
+        Spark.get("/login", loginController::prohibido, engine);
 
 
         // ## Organizacion ##
@@ -256,14 +406,14 @@ public class Router {
 
             Spark.before("", ((request, response) -> {
                 if(!PermisoHelper.usuarioTienePermisos(request, Permiso.VER_SERVICIOS)) {
-                    response.redirect("/prohibido");
+                    response.redirect("/forbidden");
                     Spark.halt();
                 }
             }));
 
             Spark.before("/*", ((request, response) -> {
                 if(!PermisoHelper.usuarioTienePermisos(request, Permiso.VER_SERVICIOS)) {
-                    response.redirect("/prohibido");
+                    response.redirect("/forbidden");
                     Spark.halt();
                 }
             }));

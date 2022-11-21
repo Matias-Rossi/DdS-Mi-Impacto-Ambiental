@@ -38,6 +38,9 @@ public final class GeneradorDeReportes {
     public ReporteComposicion composicionDeaHCTotalDeUnDeterminadoSectorTerritorial(MunicipiosODepartamentos municipio){
         return this.generarReporteComposicion(municipio.getHcHistoricos());
     }
+    public ReporteComposicion composicionDeaHCTotalDeUnDeterminadoSectorTerritorial(Provincia provincia){
+        return this.generarReporteComposicion(provincia.getHcHistoricos());
+    }
     public ReporteComposicion composicionDeaHCTotalANivelPais(List<Provincia> provincias){
         RepositorioProvincias repositorio = new RepositorioProvincias();
         return this.generarReporteComposicion(
@@ -61,6 +64,12 @@ public final class GeneradorDeReportes {
         municipio.getHcHistoricos().forEach(e->reporte.agregarHc(e));
         return reporte;
         }
+
+    public ReporteHistorico EvolucionDeHCTotalDeUnDeterminadoSectorTerritorial(Provincia provincia){
+        ReporteHistorico reporte = new ReporteHistorico();
+        provincia.getHcHistoricos().forEach(e->reporte.agregarHc(e));
+        return reporte;
+    }
 
     public ReporteHistorico EvolucionDeHCTotalDeUnaOrganizacion(Organizacion organizacion){
         ReporteHistorico reporte = new ReporteHistorico();

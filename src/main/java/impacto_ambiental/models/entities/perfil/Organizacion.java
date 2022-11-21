@@ -47,6 +47,7 @@ public class Organizacion extends EntidadPersistente {
     @OneToMany(mappedBy = "organizacion", cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     private List<Area> areas= new ArrayList<Area>();
 
+    @Getter
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     @JoinColumn(name = "clasificaciones_id", referencedColumnName = "id")
     private Clasificacion clasificacion;

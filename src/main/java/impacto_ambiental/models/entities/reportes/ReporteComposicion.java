@@ -5,21 +5,59 @@ import lombok.Getter;
 public class ReporteComposicion {
 
     @Getter
-    Double tipoDeActividadCOMBUSTION_FIJA=0.0;
+    public Double tipoDeActividadCOMBUSTION_FIJA=0.0;
     @Getter
-    Double tipoDeActividadCOMBUSTION_MOVIL=0.0;
+    public Double porcentajetipoDeActividadCOMBUSTION_FIJA;
+
     @Getter
-    Double tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA=0.0;
+    public Double tipoDeActividadCOMBUSTION_MOVIL=0.0;
     @Getter
-    Double tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS=0.0;
+    public Double porcentajetipoDeActividadCOMBUSTION_MOVIL;
+
     @Getter
-    Double tipoDeActividadTRANSPORTE_PUBLICO=0.0;
+    public Double tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA=0.0;
     @Getter
-    Double tipoDeActividadTRANSPORTE_PARTICULAR=0.0;
+    public Double porcentajetipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA;
+
     @Getter
-    Double tipoDeActividadSERVICIO_CONTRATADO=0.0;
+    public Double tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS=0.0;
     @Getter
-    Double tipoDeActividadSERVICIO_ECOLOGICO=0.0;
+    public Double porcentajetipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
+
+    @Getter
+    public Double tipoDeActividadTRANSPORTE_PUBLICO=0.0;
+    @Getter
+    public Double porcentajetipoDeActividadTRANSPORTE_PUBLICO;
+
+    @Getter
+    public Double tipoDeActividadTRANSPORTE_PARTICULAR=0.0;
+    @Getter
+    public Double porcentajetipoDeActividadTRANSPORTE_PARTICULAR;
+
+    @Getter
+    public Double tipoDeActividadSERVICIO_CONTRATADO=0.0;
+    @Getter
+    public Double porcentajetipoDeActividadSERVICIO_CONTRATADO;
+
+    @Getter
+    public Double tipoDeActividadSERVICIO_ECOLOGICO=0.0;
+    @Getter
+    public Double porcentajetipoDeActividadSERVICIO_ECOLOGICO;
+
+    public void calcularPorcentajes(){
+        Double hcTotal = tipoDeActividadSERVICIO_ECOLOGICO+tipoDeActividadSERVICIO_CONTRATADO+tipoDeActividadCOMBUSTION_FIJA+tipoDeActividadCOMBUSTION_MOVIL+tipoDeActividadTRANSPORTE_PARTICULAR+tipoDeActividadTRANSPORTE_PUBLICO+tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA+tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
+        this.porcentajetipoDeActividadSERVICIO_ECOLOGICO=(this.tipoDeActividadSERVICIO_ECOLOGICO/hcTotal)*100;
+        this.porcentajetipoDeActividadSERVICIO_CONTRATADO=(this.tipoDeActividadSERVICIO_CONTRATADO/hcTotal)*100;
+        this.porcentajetipoDeActividadCOMBUSTION_FIJA=(this.tipoDeActividadCOMBUSTION_FIJA/hcTotal)*100;
+        this.porcentajetipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS=(this.tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS/hcTotal)*100;
+        this.porcentajetipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA=(this.tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA/hcTotal)*100;
+        this.porcentajetipoDeActividadCOMBUSTION_MOVIL=(this.tipoDeActividadCOMBUSTION_MOVIL/hcTotal)*100;
+        this.porcentajetipoDeActividadTRANSPORTE_PUBLICO=(this.tipoDeActividadTRANSPORTE_PUBLICO/hcTotal)*100;
+        this.porcentajetipoDeActividadTRANSPORTE_PARTICULAR=(this.tipoDeActividadTRANSPORTE_PARTICULAR/hcTotal)*100;
+
+    }
+
+
     public ReporteComposicion() {
     }
     public void sumarTipoDeActividadCOMBUSTION_FIJA(Double valor){

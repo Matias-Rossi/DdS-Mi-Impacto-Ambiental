@@ -1,9 +1,12 @@
 package impacto_ambiental.db;
 
+import org.hibernate.jpa.HibernatePersistenceProvider;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.spi.PersistenceProvider;
 import java.util.List;
 
 public class EntityManagerHelper {
@@ -13,7 +16,9 @@ public class EntityManagerHelper {
 
         static {
           try {
-            emf = Persistence.createEntityManagerFactory("db");
+              PersistenceProvider provider = new HibernatePersistenceProvider();
+            emf = provider.createEntityManagerFactory("db", null);
+            //emf = Persistence.createEntityManagerFactory("db");
             threadLocal = new ThreadLocal<>();
           } catch (Exception e) {
             e.printStackTrace();

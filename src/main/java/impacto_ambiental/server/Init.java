@@ -38,15 +38,30 @@ public class Init {
         RepositorioRoles repo = new RepositorioRoles();
 
         System.out.println("### Inicializando roles de usuarios ###");
-        Rol rol = new Rol(TipoUsuario.MIEMBRO);
-        new Permiso(Alcance.PROPIOS, Accion.TOTAL,Objeto.ORGANIZACION,rol);
-        repo.agregar(rol);
-        Rol rol2 = new Rol(TipoUsuario.ORGANIZACION);
-        repo.agregar(rol2);
-        Rol rol3 = new Rol(TipoUsuario.AGENTE);
-        repo.agregar(rol3);
-        Rol rol4 = new Rol(TipoUsuario.ADMINISTRADOR);
-        repo.agregar(rol4);
+
+        //Miembro
+        Rol rolMiembro = new Rol(TipoUsuario.MIEMBRO);
+        Permiso permisoMiembro = new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MIEMBRO);
+        rolMiembro.agregarPermiso(permisoMiembro);
+        repo.agregar(rolMiembro);
+
+        //Organizacion
+        Rol rolOrganizacion = new Rol(TipoUsuario.ORGANIZACION);
+        Permiso permisoOrganizacion = new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ORGANIZACION);
+        rolOrganizacion.agregarPermiso(permisoOrganizacion);
+        repo.agregar(rolOrganizacion);
+
+        //Agente
+        Rol rolAgente = new Rol(TipoUsuario.AGENTE);
+        Permiso permisoAgente = new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.MUNICIPIO_O_DEPARTAMENTO);
+        rolAgente.agregarPermiso(permisoAgente);
+        repo.agregar(rolAgente);
+
+        //Admin
+        Rol rolAdministrador = new Rol(TipoUsuario.ADMINISTRADOR);
+        Permiso permisoAdmin = new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN);
+        rolAdministrador.agregarPermiso(permisoAdmin);
+        repo.agregar(rolAdministrador);
 
         System.out.println("Roles de usuarios inicializados");
     }

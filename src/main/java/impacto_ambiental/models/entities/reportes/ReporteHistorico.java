@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ReporteHistorico {
     @Getter
-    List<ReporteMensual> reportesMensuales= new ArrayList<ReporteMensual>();
+    public List<ReporteMensual> reportesMensuales= new ArrayList<ReporteMensual>();
 
     public void agregarHc(HChistorico hc){
          Double huella = hc.getHuellaDeCarbono();
