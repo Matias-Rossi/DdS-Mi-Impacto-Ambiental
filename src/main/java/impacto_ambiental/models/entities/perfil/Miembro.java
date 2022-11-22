@@ -97,9 +97,13 @@ public class Miembro extends EntidadPersistente {
         return (calcularHcPorOrg(organizacion)/organizacion.getHCTotal())*100;
     }
     public double calcularHCTotal(){
+        /*
         DoubleStream huellas = this.hcsHistoricos.stream().mapToDouble(e->e.getHuellaDeCarbono());
         if(huellas.boxed().collect(Collectors.toList()).size()==0) return 0.0;
         return huellas.sum();
+
+         */
+        return this.hcsHistoricos.stream().mapToDouble(e->e.getHuellaDeCarbono()).sum();
     }
 
     public void calcularHcTodo(){
