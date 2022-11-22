@@ -11,7 +11,8 @@ tipoTransporte.addEventListener('change', (event) => {
   //console.log(tipoTransporte.value + ": " + tipoTransporte.value.split("/")[0] + " / " +tipoTransporte.value.split("/")[1]  );
   //xhr.open("GET", "https://miimpactoambiental-dds.herokuapp.com/transportes/"+ event.value );
 
-  xhr.open("GET", "http://localhost:9000/transportes/"+ tipoTransporte.value.split("/")[0] );
+  //xhr.open("GET", "http://localhost:9000/transportes/"+ tipoTransporte.value.split("/")[0] );
+  xhr.open("GET", "https://miimpactoambiental-dds.herokuapp.com/transportes/"+ tipoTransporte.value.split("/")[0] );
   xhr.send();
   xhr.responseType = "json";
   xhr.addEventListener("load", transferComplete);
@@ -43,7 +44,8 @@ const lineaSeleccionada = document.getElementById('linea');
 
   lineaSeleccionada.addEventListener('change', (event) => {
 
-    xhr.open("GET", "http://localhost:9000/transportes/"+ tipoTransporte.value.split("/")[0]+"/"+lineaSeleccionada.value );
+    //xhr.open("GET", "http://localhost:9000/transportes/"+ tipoTransporte.value.split("/")[0]+"/"+lineaSeleccionada.value );
+    xhr.open("GET", "https://miimpactoambiental-dds.herokuapp.com/transportes/"+ tipoTransporte.value.split("/")[0]+"/"+lineaSeleccionada.value );
     xhr.send();
     xhr.responseType = "json";
     xhr.addEventListener("load", transferComplete);

@@ -10,7 +10,8 @@ selectoresProvincias.forEach(selectorProvincia => {
     selectorProvincia.addEventListener('change', (event) => {
         console.log("actualizando municipios");
 
-        xhr.open("GET", "http://localhost:9000/geo/"+ selectorProvincia.value );
+        //xhr.open("GET", "http://localhost:9000/geo/"+ selectorProvincia.value );
+        xhr.open("GET", "https://miimpactoambiental-dds.herokuapp.com/geo/"+ selectorProvincia.value );
         xhr.send();
         xhr.responseType = "json";
         xhr.addEventListener("load", transferComplete);
