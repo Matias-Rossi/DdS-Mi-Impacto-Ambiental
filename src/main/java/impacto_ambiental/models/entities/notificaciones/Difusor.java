@@ -51,7 +51,7 @@ public class Difusor {
     */
     //FIN USO PRUEBA
 
-    difundirNotificacion(new Notificacion("Mi Impacto Ambiental - Actualización de Guía de Recomendaciones", "<Enlace al contenido>"));
+    difundirNotificacion(new Notificacion("Mi Impacto Ambiental - Actualización de Guía de Recomendaciones", "https://miimpactoambiental-dds.herokuapp.com/recomendaciones"));
   }
 
 }

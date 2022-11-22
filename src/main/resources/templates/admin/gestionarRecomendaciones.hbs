@@ -1,0 +1,42 @@
+{{#partial "botonHome" }}
+    <a href="/admin" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+{{#partial "contenidoNav" }}
+
+    <a href="/gestionar-transportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Transportes
+    </a>
+
+    <a href="/factoresDeEmision" class="nav-link-custom" style="margin: 0px 10px;" id="factores">
+        Factores de emisión
+    </a>
+
+
+
+    <div class="dropdown">
+        <button class="nav-drop-custom" data-bs-toggle="dropdown" aria-expanded="false" id="trayectos">
+            Gestionar cuentas
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom">
+            <li id="drop1"><a class="drop-item-custom" href="/gestionar-usuarios">Usuarios</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/gestionar-organizaciones">Organizaciones</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/gestionar-agentesSectoriales">Agentes sectoriales</a></li>
+        </ul>
+    </div>
+
+    <div class="dropdown">
+        <button class="nav-drop-custom" data-bs-toggle="dropdown" aria-expanded="false" id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom">
+            <li id="drop1"><a class="drop-item-custom" href="/perfil">Mis datos</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+{{> base.hbs }}

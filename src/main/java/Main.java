@@ -1,8 +1,12 @@
 package main.java;
 
+import impacto_ambiental.models.entities.notificaciones.Itinerario;
 import impacto_ambiental.server.Router;
+import org.quartz.SchedulerException;
 import spark.debug.DebugScreen;
 
+
+import java.util.ArrayList;
 
 import static spark.Spark.*;
 
@@ -16,6 +20,7 @@ public class Main  {
 		//port(getHerokuAssignedPort());
 		Router.init();
 		DebugScreen.enableDebugScreen();
+		crearHiloCrono();
 	}
 
 	static int getHerokuAssignedPort() {
@@ -24,6 +29,13 @@ public class Main  {
 			return Integer.parseInt(processBuilder.environment().get("PORT"));
 		}
 		return 4567; //return default port if heroku-port isn't set (i.e. on localhost)
+	}
+
+	static void crearHiloCrono() {
+		Thread t = null;
+		t = new Thread(new Itinerario());
+		t.start();
+
 	}
 
 }

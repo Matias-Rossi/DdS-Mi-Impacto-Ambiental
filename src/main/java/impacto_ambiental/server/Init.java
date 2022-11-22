@@ -3,6 +3,7 @@ package impacto_ambiental.server;
 import impacto_ambiental.models.entities.calculadorHC.FactorDeEmision;
 import impacto_ambiental.models.entities.calculadorHC.TipoActividadDA;
 import impacto_ambiental.models.entities.calculadorHC.TipoConsumoDA;
+import impacto_ambiental.models.entities.notificaciones.Recomendacion;
 import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.servicios.geodds.ServicioGeoDds;
 import impacto_ambiental.models.entities.servicios.geodds.entidades.Municipio;
@@ -32,6 +33,9 @@ public class Init {
     }
 
     static void crearAdmin() {
+        RepositorioRecomendaciones repositorioRecomendaciones = new RepositorioRecomendaciones();
+        Recomendacion recomendacion= new Recomendacion("TITULO","SUBTITULO","TEXTO");
+        repositorioRecomendaciones.agregar(recomendacion);
         RepositorioRoles repositorioRoles = new RepositorioRoles();
         RepositorioUsuarios repositorioUsuarios = new RepositorioUsuarios();
 

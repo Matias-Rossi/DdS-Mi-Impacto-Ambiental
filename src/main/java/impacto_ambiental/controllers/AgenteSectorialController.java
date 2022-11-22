@@ -178,9 +178,12 @@ public class AgenteSectorialController {
     }
 
     public ModelAndView selectProvincias(Request request, Response response) {
-        
+        RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
+
+        List<Provincia> provincias = repositorioProvincias.buscarTodos();
 
         return new ModelAndView(new HashMap<String, Object>(){{
+            put("provincias", provincias);
         }}, "/agenteSectorial/seleccionarProvincias.hbs");
     }
 
@@ -195,31 +198,12 @@ public class AgenteSectorialController {
         RepositorioProvincias repositorioProvincias = new RepositorioProvincias();
         List<Provincia> provincias = new ArrayList<>();
 
+        String queryParam = request.queryParams("id");
+        List<String> ids = List.of(queryParam.split(","));
 
-        if(request.queryParams("BUENOS_AIRES")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.BUENOS_AIRES));
-        if(request.queryParams("CIUDAD_DE_BUENOS_AIRES")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.CIUDAD_DE_BUENOS_AIRES));
-        if(request.queryParams("CORDOBA")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.CORDOBA));
-        if(request.queryParams("CATAMARCA")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.CATAMARCA));
-        if(request.queryParams("CHACO")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.CHACO));
-        if(request.queryParams("CHUBUT")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.CHUBUT));
-        if(request.queryParams("CORRIENTES")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.CORRIENTES));
-        if(request.queryParams("ENTRE_RIOS")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.ENTRE_RIOS));
-        if(request.queryParams("FORMOSA")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.FORMOSA));
-        if(request.queryParams("JUJUY")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.JUJUY));
-        if(request.queryParams("LA_PAMPA")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.LA_PAMPA));
-        if(request.queryParams("LA_RIOJA")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.LA_RIOJA));
-        if(request.queryParams("MENDOZA")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.MENDOZA));
-        if(request.queryParams("MISIONES")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.MISIONES));
-        if(request.queryParams("NEUQUEN")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.NEUQUEN));
-        if(request.queryParams("RIO_NEGRO")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.RIO_NEGRO));
-        if(request.queryParams("SALTA")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.SALTA));
-        if(request.queryParams("SAN_JUAN")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.SAN_JUAN));
-        if(request.queryParams("SAN_LUIS")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.SAN_LUIS));
-        if(request.queryParams("SANTA_CRUZ")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.SANTA_CRUZ));
-        if(request.queryParams("SANTA_FE")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.SANTA_FE));
-        if(request.queryParams("SANTIAGO_DEL_ESTERO")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.SANTIAGO_DEL_ESTERO));
-        if(request.queryParams("TIERRA_DEL_FUEGO")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.TIERRA_DEL_FUEGO));
-        if(request.queryParams("TUCUMAN")!=null) provincias.add(repositorioProvincias.getProvincia(NombreProvincia.TUCUMAN));
+        ids.forEach(id -> {
+            provincias.add(repositorioProvincias.buscarPorId(Integer.parseInt(id)));
+        });
 
         ReporteComposicion reporte = GeneradorDeReportes.getInstance().composicionDeaHCTotalANivelPais(provincias);
 

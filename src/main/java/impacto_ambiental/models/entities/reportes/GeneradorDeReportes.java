@@ -45,11 +45,7 @@ public final class GeneradorDeReportes {
     }
     public ReporteComposicion composicionDeaHCTotalANivelPais(List<Provincia> provincias){
         RepositorioProvincias repositorio = new RepositorioProvincias();
-        return this.generarReporteComposicion(
-                repositorio.getProvinciasMenos(provincias).stream().map(
-                        e->e.getHChistoricos()).flatMap(Collection::stream).collect(Collectors.toList()
-                )
-        );
+        return this.generarReporteComposicion(provincias.stream().map(prov->prov.getHcHistoricos()).flatMap(Collection::stream).collect(Collectors.toList()));
     }
 
     private ReporteComposicion generarReporteComposicion(List<HChistorico> historicos){

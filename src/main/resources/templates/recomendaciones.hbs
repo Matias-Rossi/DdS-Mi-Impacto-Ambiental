@@ -1,0 +1,56 @@
+{{#partial "botonHome" }}
+    <a href="/home" class="navbar-brand ms-5  me-auto">
+        <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
+             height="49" id="logo">
+    </a>
+{{/partial}}
+
+{{#partial "contenidoNav" }}
+    <a href="/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
+        Organizaciones
+    </a >
+
+    <a href="/trayectos" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
+        Trayectos
+    </a >
+    <a href="/calcularhc" class="nav-link-custom" style="margin: 0px 10px;" id="calcularhc">
+        Calcular HC
+    </a >
+    <div class="dropdown">
+        <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
+            Mi perfil
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
+            <li id="drop1"><a class="drop-item-custom"  href="/solicitudes">Solicitudes</a></li>
+            <form  method="POST" action="/logout" novalidate>
+                <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
+            </form>
+        </ul>
+    </div>
+{{/partial}}
+
+
+
+{{#partial "contenido" }}
+
+
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class="d-flex align-self-center conteinerIngreso">
+            <main>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <div class="d-flex justify-content-around">
+                        <h3 class="textoIngreso">¡Hola! La recomendacion de <br>esta semana es:</h3>
+                    </div>
+                </div>
+                <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
+                    <h1  class="textoIngreso " style="text-align: left;">{{titulo}}</h1>
+                    <h2  class="textoIngreso " style="text-align: left;">{{subtitulo}}</h2>
+                    <h3  class="textoIngreso " style="text-align: left;">{{texto}}</h3>
+                </div>
+            </main>
+        </div>
+    </div>
+
+{{/partial}}
+{{> base.hbs }}

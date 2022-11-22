@@ -30,7 +30,8 @@ public class Router {
     }
 
 
-    private static void configure() {
+    private static void configure(){
+        recomendacionesController recomendacionesController = new recomendacionesController();
         FactoresDeEmisionController factoresDeEmisionController = new FactoresDeEmisionController();
         ContactoController contactoController = new ContactoController();
         TrayectosController trayectosController = new TrayectosController();
@@ -63,6 +64,8 @@ public class Router {
         Spark.path("/", () -> {
             Spark.get("", homeController::pantallaDeHome, engine);
         });
+
+        Spark.get("/recomendaciones",recomendacionesController::recomendacionesView,engine);
 
         Spark.path("/login", () -> {
             Spark.get("", loginController::pantallaDeLogin, engine);
