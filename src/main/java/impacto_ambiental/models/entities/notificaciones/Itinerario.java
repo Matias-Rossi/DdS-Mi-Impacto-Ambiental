@@ -11,8 +11,7 @@ public class Itinerario implements Runnable {
 
   public void run() {
     SchedulerFactory schedFact = new org.quartz.impl.StdSchedulerFactory();
-
-
+    
     Scheduler sched = null;
     try {
       sched = schedFact.getScheduler();
@@ -60,8 +59,5 @@ public class Itinerario implements Runnable {
     }
     System.out.println("Apagando...");
   }
-
-
-*/
 
 }
