@@ -72,6 +72,12 @@
       <artifactId>hibernate-commons-annotations</artifactId>
       <version>4.0.4.Final</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.javassist/javassist -->
+    <dependency>
+      <groupId>org.javassist</groupId>
+      <artifactId>javassist</artifactId>
+      <version>3.29.2-GA</version>
+    </dependency>
     <dependency>
       <groupId>javax.transaction</groupId>
       <artifactId>jta</artifactId>
@@ -213,12 +219,6 @@
       <version>2.3</version>
       <type>maven-plugin</type>
     </dependency>
-      <dependency>
-          <groupId>com.sparkjava</groupId>
-          <artifactId>spark-core</artifactId>
-          <version>2.9.4</version>
-          <scope>compile</scope>
-      </dependency>
 
   </dependencies>
 
@@ -298,10 +298,22 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>Main</mainClass>
+              <mainClass>main.java.Main</mainClass>
             </manifest>
           </archive>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>package</phase>
+            <goals><goal>copy-dependencies</goal></goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>com.heroku.sdk</groupId>

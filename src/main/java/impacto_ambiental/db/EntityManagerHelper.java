@@ -18,7 +18,6 @@ public class EntityManagerHelper {
           try {
               PersistenceProvider provider = new HibernatePersistenceProvider();
             emf = provider.createEntityManagerFactory("db", null);
-            //emf = Persistence.createEntityManagerFactory("db");
             threadLocal = new ThreadLocal<>();
           } catch (Exception e) {
             e.printStackTrace();
@@ -26,8 +25,15 @@ public class EntityManagerHelper {
         }
 
         public static EntityManager getEntityManager() {
+            if(null == threadLocal){
+                threadLocal = new ThreadLocal<>();
+            }
           EntityManager em = threadLocal.get();
           if(em == null || !em.isOpen()) {
+              if(null == emf){
+                  PersistenceProvider provider = new HibernatePersistenceProvider();
+                  emf = provider.createEntityManagerFactory("db", null);
+              }
             em = emf.createEntityManager();
             threadLocal.set(em);
           }

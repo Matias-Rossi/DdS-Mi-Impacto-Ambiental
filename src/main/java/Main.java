@@ -15,9 +15,9 @@ public class Main  {
 	public static void main(String[] args) {
 		//Spark.staticFiles.externalLocation("upload");
 		//EN LOCAL
-		port(9000);
+		//port(9000);
 		//EN HOST
-		//port(getHerokuAssignedPort());
+		port(getHerokuAssignedPort());
 		Router.init();
 		//DebugScreen.enableDebugScreen();
 		//crearHiloCrono();
