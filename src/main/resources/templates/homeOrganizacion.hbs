@@ -1,5 +1,5 @@
 {{#partial "botonHome" }}
-    <a href="/homeOrg" class="navbar-brand ms-5  me-auto">
+    <a href="/homeorg" class="navbar-brand ms-5  me-auto">
         <img src="https://raw.githubusercontent.com/ITantucci/ImagenesDDS/main/Logo.png" alt="Logo" width="30"
              height="49" id="logo">
     </a>
@@ -7,27 +7,20 @@
 
 {{#partial "contenidoNav" }}
 
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/areas">Areas</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/empleados">Empleados</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/calcularHCOrg">Calculadora HC</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/cargaDeReportes">Carga de Reportes</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/reportes">Reportes</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/contactos">Contactos</a></li>
 
-    <a href="areas" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
-        Areas
-    </a >
-
-    <a href="empleados" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
-        Empleados
-    </a >
-    <a href="calcularHCOrg" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
-        Calculadora HC
-    </a >
-    <a href="cargaDeReportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
-        Carga de Reportes
-    </a >
-    <a href="/reportes" class="nav-link-custom" style="margin: 0px 10px;" id="reportes">
-        Reportes
-    </a >
-
-    <a href="/contactos" class="nav-link-custom" style="margin: 0px 10px;" id="contactos">
-        Contactos
-    </a >
+        </ul>
+    </div>
     <div class="dropdown">
         <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
             Mi perfil

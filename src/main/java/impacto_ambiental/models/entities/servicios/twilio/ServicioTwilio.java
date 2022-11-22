@@ -45,15 +45,17 @@ public class ServicioTwilio implements GestorNotificaciones {
 
 
   public Boolean enviarWhatsapp(String telefono, String mensaje) {
+    System.out.println("##### Enviando SMS a " + telefono);
     Message message = Message.creator(
             //TODO actualmente envía SMS, para enviar WhatsApp agregar "whatsapp:" antes del número
             new com.twilio.type.PhoneNumber("" + telefono),
-            new com.twilio.type.PhoneNumber("+17406392786"),
+            new com.twilio.type.PhoneNumber("+12057510367"),
             mensaje)
         .create();
     return message.getErrorCode() == null;
   }
   public Boolean enviarEmail(String destinatario, String asunto, String contenido) {
+    System.out.println("##### Enviando mail a " + destinatario);
     Email from = new Email(EMAIL_FROM);
     String subject = asunto;
     Email to = new Email(destinatario);

@@ -5,9 +5,15 @@
     </a>
 {{/partial}}
 {{#partial "contenidoNav" }}
-    <a href="/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
-        Organizaciones
-    </a >
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/agenteSectorial/organizaciones">Organizaciones</a></li>
+
+        </ul>
+    </div>
 
     <div class="dropdown">
         <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">

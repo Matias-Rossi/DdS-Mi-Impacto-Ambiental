@@ -79,9 +79,9 @@ public class Tramo implements ActividadesEmisorasCO2 {
     public double calcularHC(Integer size, Integer semestre, Integer anio, Organizacion org,Miembro miembro) {
 
         if(this.hcXIntegrantes<0) this.cargarHc();
+        double hcXorgXpart=0;
+        if (size!=0) hcXorgXpart = this.hcXIntegrantes/size;
 
-
-        double hcXorgXpart = this.hcXIntegrantes/size;
 
         Integer mesInicio=1;
 
@@ -103,7 +103,8 @@ public class Tramo implements ActividadesEmisorasCO2 {
     private void cargarHc(){
 
         if(this.factorDeEmision==null) actualizarFE();
-        this.hcXIntegrantes = CalculadorDeHC.getInstance().calcularHC( this.factorDeEmision,this.valorDA() )/this.integrantes*this.diasAlMes ;
+        this.hcXIntegrantes = 0;
+        if(this.integrantes*this.diasAlMes!=0) this.hcXIntegrantes = CalculadorDeHC.getInstance().calcularHC( this.factorDeEmision,this.valorDA() )/this.integrantes*this.diasAlMes ;
     }
 
     private double generarReporte(Organizacion organizacion,Periodo mes,double hc,Integer anio){

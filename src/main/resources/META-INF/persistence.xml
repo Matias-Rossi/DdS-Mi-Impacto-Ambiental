@@ -23,6 +23,7 @@
             <property name="hibernate.connection.password" value="tb6e11wbypntx43l"/>
              -->
 
+            <property name="hibernate.cache.use_second_level_cache" value="false"/> <!-- Agregado recién-->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments" value="true"/>

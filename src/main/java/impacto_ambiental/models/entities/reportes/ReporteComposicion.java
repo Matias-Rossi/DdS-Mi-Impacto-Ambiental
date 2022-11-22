@@ -48,7 +48,10 @@ public class ReporteComposicion {
     public Double porcentajetipoDeActividadSERVICIO_ECOLOGICO;
 
     public void calcularPorcentajes(){
+
+
         Double hcTotal = tipoDeActividadSERVICIO_ECOLOGICO+tipoDeActividadSERVICIO_CONTRATADO+tipoDeActividadCOMBUSTION_FIJA+tipoDeActividadCOMBUSTION_MOVIL+tipoDeActividadTRANSPORTE_PARTICULAR+tipoDeActividadTRANSPORTE_PUBLICO+tipoDeActividadELECTRICIDAD_ADQUIRIDA_Y_CONSUMIDA+tipoDeActividadLOGISTICA_DE_PRODUCTOS_Y_RESIDUOS;
+        if(hcTotal==0)return;
         this.porcentajetipoDeActividadSERVICIO_ECOLOGICO=GeneradorDeReportes.round((this.tipoDeActividadSERVICIO_ECOLOGICO/hcTotal)*100);
         this.porcentajetipoDeActividadSERVICIO_CONTRATADO=GeneradorDeReportes.round((this.tipoDeActividadSERVICIO_CONTRATADO/hcTotal)*100);
         this.porcentajetipoDeActividadCOMBUSTION_FIJA=GeneradorDeReportes.round((this.tipoDeActividadCOMBUSTION_FIJA/hcTotal)*100);

@@ -3,6 +3,7 @@ package domain.persistenceExtend;
 import impacto_ambiental.models.entities.calculadorHC.FactorDeEmision;
 import impacto_ambiental.models.entities.calculadorHC.TipoActividadDA;
 import impacto_ambiental.models.entities.calculadorHC.TipoConsumoDA;
+import impacto_ambiental.models.entities.notificaciones.Recomendacion;
 import impacto_ambiental.models.entities.perfil.*;
 import impacto_ambiental.models.entities.ubicacion.MunicipiosODepartamentos;
 import impacto_ambiental.models.entities.ubicacion.NombreProvincia;
@@ -28,6 +29,13 @@ public class Cositas {
                 repositorio.agregar(factorDeEmision);
             }
         }
+    }
+
+    @Test
+    public void cargarReco(){
+        RepositorioRecomendaciones repositorioRecomendaciones = new RepositorioRecomendaciones();
+        Recomendacion recomendacion= new Recomendacion("TITULO","SUBTITULO","TEXTO");
+        repositorioRecomendaciones.agregar(recomendacion);
     }
 
 

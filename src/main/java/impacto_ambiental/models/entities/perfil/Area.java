@@ -77,6 +77,7 @@ public class Area extends EntidadPersistente {
     }
 
     public double calcularHCporMiembro(){
+        if(miembrosActuales().size()==0)return 0.0;
         return GeneradorDeReportes.round(this.organizacion.getHcDeArea(this)/miembrosActuales().size());
     }
 

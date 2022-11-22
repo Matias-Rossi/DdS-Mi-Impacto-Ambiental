@@ -206,6 +206,7 @@ public class AgenteSectorialController {
         });
 
         ReporteComposicion reporte = GeneradorDeReportes.getInstance().composicionDeaHCTotalANivelPais(provincias);
+        reporte.calcularPorcentajes();
 
 
         return new ModelAndView(new HashMap<String, Object>() {{

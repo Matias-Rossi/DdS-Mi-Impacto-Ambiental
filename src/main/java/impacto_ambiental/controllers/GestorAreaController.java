@@ -18,8 +18,8 @@ public class GestorAreaController {
 
   //Mostrar empleados y estado?
   public ModelAndView mostrar(Request request, Response response) {
-    String idArea = request.params("id");
-    Area area = repositorioAreas.buscar(Integer.valueOf(idArea));
+    String idArea = request.params("idArea");
+    Area area = repositorioAreas.buscarPorId(Integer.valueOf(idArea));
 
     String nombre = "";
     List<Solicitud> solicitudes = new ArrayList<Solicitud>();

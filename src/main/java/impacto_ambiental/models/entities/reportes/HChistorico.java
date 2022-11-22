@@ -80,6 +80,11 @@ public class HChistorico extends EntidadPersistente {
     public HChistorico() {
 
     }
+
+    public Boolean comparar(Area area){
+        if(this.area!=null)return this.area.equals(area);
+        return false;
+    }
     public Double getMomento(){
         return this.anio+(Periodo.toInteger(this.periodo) *0.01);
     }

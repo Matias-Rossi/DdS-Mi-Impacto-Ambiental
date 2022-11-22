@@ -19,8 +19,8 @@ public class Main  {
 		//EN HOST
 		//port(getHerokuAssignedPort());
 		Router.init();
-		DebugScreen.enableDebugScreen();
-		crearHiloCrono();
+		//DebugScreen.enableDebugScreen();
+		//crearHiloCrono();
 	}
 
 	static int getHerokuAssignedPort() {

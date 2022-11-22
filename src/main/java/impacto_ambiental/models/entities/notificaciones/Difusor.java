@@ -1,27 +1,23 @@
 package impacto_ambiental.models.entities.notificaciones;
 
 import impacto_ambiental.models.entities.perfil.Organizacion;
+import impacto_ambiental.models.repositorios.RepositorioOrganizaciones;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Difusor {
-  private List<Organizacion> organizaciones = new ArrayList<Organizacion>();
   private GestorNotificaciones gestorNotificaciones;
 
   public Difusor(GestorNotificaciones gestorNotificaciones) {
     this.gestorNotificaciones = gestorNotificaciones;
   }
 
-  public void agregarOrganizacion(Organizacion organizacion) {
-    this.organizaciones.add(organizacion);
-  }
-
   public void difundirNotificacion(Notificacion notificacion) {
+    List<Organizacion> organizaciones = new RepositorioOrganizaciones().buscarTodos();
     System.out.println("Difundiendo notificación a organizaciones...");
-    this.organizaciones.forEach(organizacion -> {
+    organizaciones.forEach(organizacion -> {
       organizacion.getContactos().forEach(contacto -> {
-        System.out.println("Enviando notificacion");
         this.gestorNotificaciones.enviarNotificacion(contacto, notificacion);
       });
     });

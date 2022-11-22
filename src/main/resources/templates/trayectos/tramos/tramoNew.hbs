@@ -6,22 +6,21 @@
 {{/partial}}
 
 {{#partial "contenidoNav" }}
-    <a href="/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
-        Organizaciones
-    </a >
-
-    <a href="/trayectos" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
-        Trayectos
-    </a >
-    <a href="/calcularhc" class="nav-link-custom" style="margin: 0px 10px;" id="calcularhc">
-        Calcular HC
-    </a >
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/organizaciones">Organizaciones</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/trayectos">Trayectos</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/calcularhc">Calcular HC</a></li>
+        </ul>
+    </div>
     <div class="dropdown">
         <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
             Mi perfil
         </button>
         <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
-            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
             <li id="drop1"><a class="drop-item-custom"  href="/solicitudes">Solicitudes</a></li>
             <form  method="POST" action="/logout" novalidate>
                 <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
@@ -31,7 +30,11 @@
 {{/partial}}
 
 {{#partial "contenido" }}
-
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerUbicacion">
+            <h3 class="textoIngreso">Tramo nuevo </h3>
+        </div>
+    </div>
 
 
 <div class="d-flex flex-column" id="content-wrap">

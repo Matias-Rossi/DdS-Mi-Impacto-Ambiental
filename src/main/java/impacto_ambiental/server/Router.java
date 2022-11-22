@@ -79,7 +79,7 @@ public class Router {
         Spark.path("/signup", () -> {
             Spark.get("", signUpController::pantallaDeSignUp, engine);
             Spark.post("/miembro", signUpController::signUpMiembro);
-            Spark.post("/homeorg", signUpController::signUpOrganizacion);
+            Spark.post("/organizacion", signUpController::signUpOrganizacion);
             Spark.post("/agente_sectorial", signUpController::signUpAgenteSectorial);
         });
 
@@ -90,12 +90,41 @@ public class Router {
 
         // ### Miembro ###
         Spark.path("/home", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.MIEMBRO))) {
+                    response.redirect("/login");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.MIEMBRO))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/login");
+                    Spark.halt();
+                }
+            }));
 
             Spark.get("", homeController::homeUser, engine);
         });
         //## USURIO
         // ### Calcular HC ###
         Spark.path("/calcularhc", () -> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.MIEMBRO))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.VER, Objeto.MIEMBRO))) {
+                    System.out.println("ENTRA DEL IF");
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
             Spark.post("", calcularHCController::calcularHcMiembro);
             Spark.get("", calcularHCController::mostrarHCMiembro, engine);
 
@@ -384,6 +413,23 @@ public class Router {
             Spark.post("/:idFactorDeEmision", factoresDeEmisionController::modificarFactor);
         });
 
+        Spark.path("/setRecomendaciones", ()-> {
+            Spark.before("", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+            Spark.before("/*", ((request, response) -> {
+                if(!PermisoHelper.usuarioTienePermisos(request, new Permiso(Alcance.PROPIOS, Accion.TOTAL, Objeto.ADMIN))) {
+                    response.redirect("/forbidden");
+                    Spark.halt();
+                }
+            }));
+
+            Spark.get("", recomendacionesController::pantallaRecomendacion, engine);
+            Spark.post("", recomendacionesController::setRecomendaciones);
+        });
 
 
         Spark.path("/gestionar-organizaciones", () -> {

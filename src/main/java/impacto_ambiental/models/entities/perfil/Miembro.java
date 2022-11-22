@@ -11,6 +11,8 @@ import impacto_ambiental.models.entities.usuario.Usuario;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.DoubleStream;
 
 @Entity
 @Table(name = "miembros")
@@ -91,10 +93,13 @@ public class Miembro extends EntidadPersistente {
         trayectos.stream().forEach(e->e.calcularHC(organizacion));
     }
     public double calcularHCPorcentual(Organizacion organizacion){
+        if(organizacion.getHCTotal()==0)return 0.0;
         return (calcularHcPorOrg(organizacion)/organizacion.getHCTotal())*100;
     }
     public double calcularHCTotal(){
-        return this.hcsHistoricos.stream().mapToDouble(e->e.getHuellaDeCarbono()).sum();
+        DoubleStream huellas = this.hcsHistoricos.stream().mapToDouble(e->e.getHuellaDeCarbono());
+        if(huellas.boxed().collect(Collectors.toList()).size()==0) return 0.0;
+        return huellas.sum();
     }
 
     public void calcularHcTodo(){

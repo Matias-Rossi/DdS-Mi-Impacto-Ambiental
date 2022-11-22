@@ -312,6 +312,14 @@ label:focus,
 	border-radius: 0.7vmax;
 
 }
+.conteinerUbicacion{
+	background-color: white;
+	width:fit-content;
+	height: fit-content;
+	margin: 10px 20px;
+	border-radius: 0.2vmax;
+
+}
 .btn-action-icon{
 	padding: 0px 3px 0px 3px !important;
 	border: 1px solid #CED4DA !important;

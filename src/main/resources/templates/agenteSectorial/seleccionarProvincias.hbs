@@ -6,16 +6,21 @@
 {{/partial}}
 
 {{#partial "contenidoNav" }}
-    <a href="/agenteSectorial/organizaciones" class="nav-link-custom" style="margin: 0px 10px;" id="organizaciones">
-        Organizaciones
-    </a >
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/agenteSectorial/organizaciones">Organizaciones</a></li>
+
+        </ul>
+    </div>
 
     <div class="dropdown">
         <button class="nav-drop-custom"   data-bs-toggle="dropdown"  aria-expanded="false"id="miPerfil">
             Mi perfil
         </button>
         <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
-            <li id="drop1"><a class="drop-item-custom"  href="/perfil">Mis datos</a></li>
             <form  method="POST" action="/logout" novalidate>
                 <li id="drop1"><button class="drop-item-custom"  type="submit" style="background: none;color: inherit;	border: none;padding: 0;cursor: pointer; outline: inherit;" >Cerrar sesion</button></li>
             </form>
@@ -31,7 +36,7 @@
                 <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                     <div class="list-group" id="boxTrayectos">
 
-                        <form class="was-validated" method="POST" action="/agenteSectorial/HCNacional" novalidate>
+                        <div >
                             <div class="row" style="margin:1vmax 1vmax 1vmax 1vmax;">
                                 <h3 class="textoIngreso">Seleccionar Provincias </h3>
                             </div>
@@ -47,15 +52,18 @@
                                 <button class="btn-custom" type="submit" id="hcProvincias">Aceptar</button>
 
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </main>
         </div>
     </div>
 
-    <scipt src="/js/selectorProvincias.js"></scipt>
 
 
+
+{{/partial}}
+{{#partial "js"}}
+    <script src="/js/selectorProvincias.js"></script>
 {{/partial}}
 {{> base.hbs }}

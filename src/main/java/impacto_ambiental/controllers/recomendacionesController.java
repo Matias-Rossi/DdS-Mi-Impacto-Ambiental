@@ -16,15 +16,16 @@ public class recomendacionesController {
     public ModelAndView recomendacionesView(Request request, Response response){
         RepositorioRecomendaciones repositorioRecomendaciones = new RepositorioRecomendaciones();
         Recomendacion recomendacion = repositorioRecomendaciones.buscarPorId(1);
+
         return new ModelAndView(new HashMap<String, Object>(){{
             put("recomendacion",recomendacion);
         }}, "recomendaciones.hbs");
     }
 
-    public ModelAndView pantallRecomendacion(Request request, Response response){
+    public ModelAndView pantallaRecomendacion(Request request, Response response){
 
         return new ModelAndView(new HashMap<String, Object>(){{
-        }}, "recomendacionesCarga.hbs");
+        }}, "admin/gestionarRecomendaciones.hbs");
     }
 
     public Response setRecomendaciones(Request request, Response response){
@@ -38,7 +39,7 @@ public class recomendacionesController {
 
         recomendacion.setTitulo(titulo);
         recomendacion.setSubtitulo(subtitulo);
-        recomendacion.texto(texto);
+        recomendacion.setTexto(texto);
 
         repositorioRecomendaciones.actualizar(recomendacion);
 

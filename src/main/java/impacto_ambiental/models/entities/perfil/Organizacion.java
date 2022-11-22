@@ -134,7 +134,8 @@ public class Organizacion extends EntidadPersistente {
     }
 
     public Double getHcDeArea(Area area){
-        List<HChistorico> filtrado = getHChistoricos().stream().filter(h->h.getArea().equals(area)).collect(Collectors.toList());
+        List<HChistorico> filtrado = getHChistoricos().stream().filter(h->h.comparar(area)).collect(Collectors.toList());
+        if(filtrado.size()==0)return 0.0;
         return filtrado.stream().mapToDouble(h->h.getHuellaDeCarbono()).sum();
     }
 

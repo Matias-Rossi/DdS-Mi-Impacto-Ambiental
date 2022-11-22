@@ -5,13 +5,16 @@
     </a>
 {{/partial}}
 {{#partial "contenidoNav" }}
-    <a href="/gestionar-transportes" class="nav-link-custom" style="margin: 0px 10px;" id="trayectos">
-        Transportes
-    </a>
+    <div class="dropdown">
+        <button class="nav-drop-custom"  style="min-width: 136.8px!important;" data-bs-toggle="dropdown"  aria-expanded="false"id="menu">
+            Menu
+        </button>
+        <ul class="dropdown-menu dropdown-menu-sm-start drop-menu-custom"  >
+            <li id="drop1"><a class="drop-item-custom" href="/factoresDeEmision">Factores de emisión</a></li>
+            <li id="drop1"><a class="drop-item-custom" href="/setRecomendaciones">Establecer Recomendaciones</a></li>
 
-    <a href="/factoresDeEmision" class="nav-link-custom" style="margin: 0px 10px;" id="factores">
-        Factores de emisión
-    </a>
+        </ul>
+    </div>
 
 
 
@@ -40,6 +43,11 @@
 {{/partial}}
 
 {{#partial "contenido" }}
+    <div class="d-flex flex-column" id="content-wrap">
+        <div class=" d-flex align-self-center conteinerUbicacion">
+            <h3 class="textoIngreso" >Gestionar Organizaciones</h3>
+        </div>
+    </div>
     <div class="d-flex flex-column" id="content-wrap">
         <div class=" d-flex align-self-center conteinerRegistro">
             <main>

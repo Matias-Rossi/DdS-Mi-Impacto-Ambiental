@@ -3,18 +3,21 @@
 
 
 
-let primerValorInsertado = false;
-let provinciasActivas = [];
+
 
 const boton = document.getElementById("hcProvincias");
 
-boton.addEventListener("click", genrarReporte );
+boton.addEventListener("click", generarReporte );
 
-function genrarReporte(){
+function generarReporte(){
+    let primerValorInsertado = false;
+    let provinciasActivas = [];
+
     const provinciasSeleccionadas = document.querySelectorAll('input[type="checkbox"]:checked');
 
     let queryParams = "?id="
-    var url = "https://miimpactoambiental-dds.herokuapp.com/HCNacional/ComposicionHC"
+    //var url = "https://miimpactoambiental-dds.herokuapp.com/HCNacional/ComposicionHC"
+    var url = "http://localhost:9000/agenteSectorial/HCNacional/ComposicionHC"
 
     provinciasSeleccionadas.forEach( unaProvincia => {
         if(!primerValorInsertado) {
